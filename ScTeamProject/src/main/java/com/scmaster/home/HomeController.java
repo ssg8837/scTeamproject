@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired SqlSession sqlSession;
 	@Autowired HttpSession httpSession;
@@ -34,7 +33,7 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.GET)
 	public String insertNewAccount(Model model) {
-		return "insertNewAccount";
+		return "home";
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
