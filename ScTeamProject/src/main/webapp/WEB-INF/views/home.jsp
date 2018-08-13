@@ -46,14 +46,21 @@
 			PWD:<input type='password' name='userpwd'>
 			<button type='submit'>로그인</button>
 		</form>
-		<form action='openNewAccount' method='get'>
-			<button type='submit'>회원가입</button>
-		</form>
+			<button type='submit' onclick="location.href='openNewAccount'">회원가입</button>
 	</c:if>
 	<c:if  test='${sessionScope.loginId != null }'>
-		<form action='logout' method='post'>
-			<button type='submit'>로그아웃</button>
-		</form>
+		<c:if test='${babyList !=null }'>
+			<table>
+				<c:forEach var='baby' items='${babyList }'>
+					<tr>
+						<th>${baby.babyName }</th>
+						<td>${baby.babyGender }</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:if>
+		<button type='submit' onclick="location.href='openNewBaby'">아이등록</button>
+		<button type='submit' onclick="location.href='logout'">로그아웃</button>
 	</c:if>
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

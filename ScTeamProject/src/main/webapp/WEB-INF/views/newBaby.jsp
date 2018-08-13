@@ -40,14 +40,20 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-		<form action='insertNewAccount' method='post'>
-			ID:<input type='text' name='userId'><br>
-			PWD:<input type='password' name='userPwd'><br>
-			주소:<input type='text' name='userAddr'><br>
-			이메일:<input type='text' name='userEmail'><br>
-			전화번호:<input type='text' name='userPhone'><br>
-			닉네임:<input type='text' name='userNick'><br>
-			<button type='submit'>회원가입</button>
+		<form action='insertNewBaby' method='post'>
+			아기이름:<input type='text' name='babyName'><br>
+			성별:<select name='babyGender'>
+				<option value='M' selected>남자</option>
+				<option value='F'>여자</option>
+			</select><br>
+			생일:<input type='date' name='babyBirth'><br>
+			혈액형:<select name='babyBlood'>
+				<option value='A' selected>A</option>
+				<option value='B'>B</option>
+				<option value='AB'>AB</option>
+				<option value='O'>O</option>
+			</select><br>
+			<button type='submit'>아기등록</button>
 		</form>
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
