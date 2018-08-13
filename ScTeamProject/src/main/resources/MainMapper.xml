@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.scmaster.mapper.MainMapper">
+
+	<select id="selectUser" resultType="BS_User" parameterType="HashMap"> 
+		SELECT USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK
+		FROM BS_USER
+		WHERE USERID=#{userId} AND USERPWD=#{userPwd}
+	</select>
+	
+	<insert id="insertUser" parameterType="BS_User" >
+		INSERT INTO BS_USER(USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK) 
+		VALUES (BS_USERSEQ.NEXTVAL,
+		'${userType}',
+		'${userId}',
+		'${userPwd}',
+		'${userAddr}',
+		'${userEmail}',
+		'${userPhone}',
+		'${userNick}')
+	</insert>
+	
+	<select id="selectBaby" resultType="BS_Baby" parameterType="Integer"> 
+		SELECT BABYNO,USERNO, BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
+		FROM BS_BABY
+		WHERE BABYNO=#{babyNo}
+	</select>
+	<select id="selectBabyList" resultType="BS_Baby" parameterType="Integer"> 
+		SELECT BABYNO,USERNO,  BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
+		FROM BS_BABY
+		WHERE USERNO=#{userNo}
+	</select>
+	
+	<insert id="insertBaby" parameterType="BS_Baby" >
+		INSERT INTO BS_BABY(BABYNO,USERNO, BABYGENDER, BABYBIRTH, BABYNAME, BABYBLOOD) 
+		VALUES (BS_BABYSEQ.NEXTVAL,
+		'${userNo}',
+		'${babyGender}',
+		TO_DATE('${babyBirth}','YYYY-MM-DD'),
+		'${babyName}',
+		'${babyBlood}')
+	</insert>
+	
+	
+</mapper>
