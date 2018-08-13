@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.scmaster.mapper.DiseaseMapper;
+import com.scmaster.mapper.MainMapper;
+import com.scmaster.vo.BS_Baby;
 import com.scmaster.vo.Disease;
 
 @Controller
@@ -29,14 +31,22 @@ public class VaccineController {
 	
 	@RequestMapping(value = "/vaccineForm", method = RequestMethod.GET)
 	public String vaccineTest1(HttpSession session,Model model){
-		DiseaseMapper mapper = sqlSession.getMapper(DiseaseMapper.class);
-		List<Disease> list = mapper.selectList();
+		DiseaseMapper diseaseMapper = sqlSession.getMapper(DiseaseMapper.class);
+		List<Disease> diseaseList = diseaseMapper.selectList();
 		
-		session.getAttribute("loginId");
+		//Integer.parseInt((String)session.getAttribute("loginNo"));
+		int userno = 1;
+		MainMapper mainMapper = sqlSession.getMapper(MainMapper.class);
+		List<BS_Baby> babyList =  mainMapper.selectBabyList(userno);
 		
-		model.addAttribute("list", list);
+		for(BS_Baby b:babyList) {
+			System.out.println(b);
+		}
 		
-		return "vaccineTest1";
+		model.addAttribute("babyList", babyList);
+		model.addAttribute("diseaseList", diseaseList);
+		
+		return "vaccineForm";
 	}
 	
 }
