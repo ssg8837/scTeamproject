@@ -46,6 +46,9 @@
 			PWD:<input type='password' name='userpwd'>
 			<button type='submit'>로그인</button>
 		</form>
+		<form action='openNewAccount' method='get'>
+			<button type='submit'>회원가입</button>
+		</form>
 	</c:if>
 	<c:if  test='${sessionScope.loginId != null }'>
 		<form action='logout' method='post'>

@@ -8,4 +8,6 @@ public interface MainMapper {
 
 	BS_User selectUser(HashMap<String, String> userMap);
 
+	void insertUser(BS_User user);
+
 }

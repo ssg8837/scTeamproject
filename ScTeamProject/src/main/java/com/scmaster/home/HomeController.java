@@ -35,7 +35,10 @@ public class HomeController {
 		return "newAccount";
 	}
 	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
-	public String insertNewAccount(Model model) {
+	public String insertNewAccount(Model model,BS_User user) {
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+		user.setUserType("n");
+		mapper.insertUser(user);
 		return "home";
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)

@@ -12,4 +12,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE USERID=#{userId} AND USERPWD=#{userPwd}
 	</select>
 	
+	<insert id="insertUser" parameterType="BS_User" >
+		INSERT INTO BS_USER(USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK) 
+		VALUES (BS_USERSEQ.NEXTVAL,
+		'${userType}',
+		'${userId}',
+		'${userPwd}',
+		'${userAddr}',
+		'${userEmail}',
+		'${userPhone}',
+		'${userNick}')
+	</insert>
+	
 </mapper>
