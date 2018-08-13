@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.scmaster.mapper.GrowDefaultMapper">
+
+	<!-- 표준성장도표 값 뿌리기 -->
+	<select id="showDefaultValue">
+	select *
+	from grow_default
+	</select>
+	
+</mapper>
