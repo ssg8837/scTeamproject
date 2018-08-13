@@ -19,6 +19,6 @@ public class HospitalController {
 	@RequestMapping(value = "/hospital_Test", method = RequestMethod.GET)
 	public String hospital_Test(Model model) 
 	{
-		return "home";
+		return "map";
 	}
 }
