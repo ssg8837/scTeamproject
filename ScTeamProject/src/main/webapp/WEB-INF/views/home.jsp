@@ -47,6 +47,11 @@
 			<button type='submit'>로그인</button>
 		</form>
 	</c:if>
+	<c:if  test='${sessionScope.loginId != null }'>
+		<form action='logout' method='post'>
+			<button type='submit'>로그아웃</button>
+		</form>
+	</c:if>
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
