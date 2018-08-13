@@ -9,7 +9,7 @@
 	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
 	    <link href="./resources/css/cover.css" rel="stylesheet">
 	</head>
-	<body>
+	<body style='margin-top:70px;'>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -39,6 +39,15 @@
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
+	
+	<c:if test='${userid==null }'>
+		<form action='login' method='post'>
+			ID:<input type='text' name='userid'><br>
+			PWD:<input type='password' name='userpwd'>
+			<button type='submit'>로그인</button>
+		</form>
+	</c:if>
+	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
 	</body>

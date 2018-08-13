@@ -6,5 +6,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.scmaster.mapper.MainMapper">
 
+	<select id="selectUser" resultType="BS_User" parameterType="HashMap"> 
+		SELECT USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK
+		FROM BS_USER
+		WHERE USERID=#{userId} AND USERPWD=#{userPwd}
+	</select>
 	
 </mapper>
