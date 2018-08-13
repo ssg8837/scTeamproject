@@ -40,7 +40,7 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-	<c:if test='${userid==null }'>
+	<c:if test='${sessionScope.loginId == null }'>
 		<form action='login' method='post'>
 			ID:<input type='text' name='userid'><br>
 			PWD:<input type='password' name='userpwd'>

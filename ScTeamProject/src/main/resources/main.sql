@@ -13,6 +13,7 @@ CREATE TABLE BS_USER (
     USERNICK VARCHAR2(30)
 );
 
+INSERT INTO BS_USER VALUES(0,'n','test','test','testaddr','test@mail.com','000-111-2234', 'tester');
 
 CREATE TABLE BS_BABY
 (
