@@ -2,12 +2,12 @@ package com.scmaster.vo;
 
 public class Grow_Default {
 
-	private String gender;
-	private int age;
-	private int height;
-	private int weight_a;
-	private int head;
-	private int bmi;
+	private String gender;		//성별
+	private int age;			//나이(개월)
+	private int height;			//연령별 표준 신장
+	private int weight_a;		//연령별 표준 체중
+	private int head;			//연령별 표준 머리둘레
+	private int bmi;			//연령별 표준 bmi(2세 이후)
 	
 	public Grow_Default() {
 		super();

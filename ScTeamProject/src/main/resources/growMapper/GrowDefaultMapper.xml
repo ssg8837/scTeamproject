@@ -6,10 +6,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.scmaster.mapper.GrowDefaultMapper">
 
-	<!-- 표준성장도표 값 뿌리기 -->
-	<select id="showDefaultValue">
+	<!-- 표준성장도표 : 여아 -->
+	<select id="showDefaultValueFemale" resultType="Grow_Default">
 	select *
 	from grow_default
+	where gender='F'
+	</select>
+	
+	<!-- 표준성장도표 : 남아 -->
+	<select id="showDefaultValueMale" resultType="Grow_Default">
+	select *
+	from grow_default
+	where gender='M'
 	</select>
 	
 </mapper>
