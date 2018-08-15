@@ -3,15 +3,13 @@
     pageEncoding="UTF-8"%>
 <html>
 	<head>
-		<title>생활 기록</title>
+		<title>Home</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
-	    <link href="./resources/css/fullcalendar.min.css" rel="stylesheet">
-	    <link href="./resources/css/fullcalendar.print.min.css"  rel='stylesheet' media='print' />
-	    <link href="./resources/css/alarm_Calendar.css" rel="stylesheet">
+	    <link href="./resources/css/cover.css" rel="stylesheet">
 	</head>
-	<body style='margin-top:120px;'>
+	<body style='margin-top:70px;'>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -28,7 +26,7 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	        <li><a href="./">메인화면 <span class="sr-only">(current)</span></a></li>
+	        <li><a href="#">메인화면 <span class="sr-only">(current)</span></a></li>
 	        <li><a href="#">성장기록</a></li>
 	        <li class="active"><a href="#">생활기록</a></li>
 	        <li><a href="#">예방접종</a></li>
@@ -41,48 +39,19 @@
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
-		
-  		<div id='calendar'></div>
-  		<div style="margin:auto;  text-align: center;">
-  			<button class='btn btn-primary' type='submit' onclick='location.href="alarm_OpenNewAlarm"'>일정 추가</button>
-		</div>
-		
+	
+		<form action='insertNewAccount' method='post'>
+			
+			아기:<select name=babyNo>
+			<c:forEach var='val' items='${noList }' varStatus='sta'>
+				<option value='${val }'> ${nameList[sta.index] } </option>
+			</c:forEach>
+			</select>
+			<!-- http://jsonobject.tistory.com/181 -->
+			<button class='btn btn-primary' type='submit' style="margin: 0 auto;">알림 등록</button>
+		</form>
+	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
-	    <script src="./resources/js/moment.min.js"></script>
-	    <script src="./resources/js/fullcalendar.min.js"></script>
-	    <script src="./resources/js/locale-all.js"></script>
-	    <script src="./resources/js/ko.js"></script>
-	    <script>
-		var dataset = [
-		    <c:forEach var="item" items="${alarmList}" varStatus="status">
-		            {"id":'<c:out value="${item.id}" />'
-		            ,"title":'<c:out value="${item.title}" />'
-		            ,"start":"<c:out value="${item.start}" />"
-		            }
-		    </c:forEach>
-		];
-
-		$(document).ready(function() {
-		    $('#calendar').fullCalendar({
-		        header: {
-		            left: 'prev,next today',
-		            center: 'title',
-		            right: 'month,basicWeek,basicDay'
-		        },
-		        defaultDate: new Date(),
-		        navLinks: true,
-		        lang : "ko",
-		        editable: false,
-		        eventLimit: true,
-		        events: dataset,
-		        eventClick:function(event) {
-		        	alert(event.id);
-	            }
-
-		    });
-		});
-		
-		</script>
-</body>
+	</body>
 </html>
