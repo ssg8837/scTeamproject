@@ -30,7 +30,7 @@
 	        <li><a href="#">성장기록</a></li>
 	        <li><a href="#">생활기록</a></li>
 	        <li><a href="#">예방접종</a></li>
-	        <li><a href="#">병원찾기</a></li>
+	        <li><a href="hospital_Test">병원찾기</a></li>
 	        <li><a href="#">기상확인</a></li>
 	        <li><a href="#">다이어리</a></li>
 	        <li><a href="#">SNS</a></li>
