@@ -10,13 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.scmaster.mapper.AlarmMapper;
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.vo.BS_Alarm;
 import com.scmaster.vo.BS_Baby;
-import com.scmaster.vo.BS_User;
 
 @Controller
 public class AlarmController {
@@ -72,19 +70,17 @@ public class AlarmController {
 		return "newAlarm";
 	}
 	
-	
-	
 	@RequestMapping(value = "/alarm_insertNewAlarm", method = RequestMethod.POST)
-	public String alarm_insertNewAlarm(Model model,BS_Alarm alarm) {
-
+	public String alarm_insertNewAlarm(Model model, BS_Alarm alarm) 
+	{
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		alarmMapper.insertAlarm(alarm);
 		return alarm_OpenCalendar(model);
 	}
 	
 	@RequestMapping(value = "/alarm_OpenUpdate", method = RequestMethod.POST)
-	public String alarm_OpenUpdate(Model model, String alarmNo) {
-
+	public String alarm_OpenUpdate(Model model, String alarmNo) 
+	{
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		BS_Alarm alarm = alarmMapper.selectAlarm(alarmNo);
 		model.addAttribute("alarm", alarm);
@@ -92,8 +88,8 @@ public class AlarmController {
 	}
 	
 	@RequestMapping(value = "/alarm_UpdateAlarm", method = RequestMethod.POST)
-	public String alarm_UpdateAlarm(Model model,BS_Alarm alarm) {
-
+	public String alarm_UpdateAlarm(Model model, BS_Alarm alarm) 
+	{
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		alarmMapper.updateAlarm(alarm);
 		return alarm_OpenCalendar(model);
