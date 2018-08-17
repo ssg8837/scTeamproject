@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <html>
@@ -56,10 +57,13 @@
 	    <script>
 		var dataset = [
 		    <c:forEach var="item" items="${alarmList}" varStatus="status">
-		            {"id":'<c:out value="${item.id}" />'
-		            ,"title":'<c:out value="${item.title}" />'
-		            ,"start":"<c:out value="${item.start}" />"
+		            {"id":'<c:out value="${item.alarmNo}" />'
+		            ,"title":'<c:out value=" ${item.alarmTitle} [${nameList[status.index]}]" />'
+		            ,"start":"<c:out value="${item.alarmTime}" />"
 		            }
+		            <c:if test='${status.index != fn:length(alarmList)}'>
+		            ,
+		            </c:if>
 		    </c:forEach>
 		];
 

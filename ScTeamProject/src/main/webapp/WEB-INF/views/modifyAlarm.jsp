@@ -14,33 +14,33 @@
 		<div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand" href="#">Brand</a>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Brand</a>
 	    </div>
 	
 	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-	        <li><a href="./">메인화면 <span class="sr-only">(current)</span></a></li>
-	        <li><a href="#">성장기록</a></li>
-	        <li class="active"><a href="#">생활기록</a></li>
-	        <li><a href="#">예방접종</a></li>
-	        <li><a href="#">병원찾기</a></li>
-	        <li><a href="#">기상확인</a></li>
-	        <li><a href="#">다이어리</a></li>
-	        <li><a href="#">SNS</a></li>
-	        <li><a href="#">게시판</a></li>
-	      </ul>	      
-	    </div><!-- /.navbar-collapse -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="./">메인화면 <span class="sr-only">(current)</span></a></li>
+				<li><a href="#">성장기록</a></li>
+				<li class="active"><a href="#">생활기록</a></li>
+				<li><a href="#">예방접종</a></li>
+				<li><a href="#">병원찾기</a></li>
+				<li><a href="#">기상확인</a></li>
+				<li><a href="#">다이어리</a></li>
+				<li><a href="#">SNS</a></li>
+				<li><a href="#">게시판</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-		<form action='insertNewAlarm' method='post'>
+		<form action='updateAlarm' method='post'>
 			
 			<div class='input-group col-xs-4'>
 				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>

@@ -24,7 +24,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="BS_User" type="com.scmaster.vo.BS_User"></typeAlias>
 		<typeAlias alias="BS_Baby" type="com.scmaster.vo.BS_Baby"></typeAlias>
 		<typeAlias alias="BS_Alarm" type="com.scmaster.vo.BS_Alarm"></typeAlias>
-		<typeAlias alias="Ajax_Alarm" type="com.scmaster.vo.Ajax_Alarm"></typeAlias>
 	</typeAliases>
 	<mappers>
 		<mapper resource="MainMapper.xml" />

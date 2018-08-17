@@ -5,16 +5,14 @@ public class BS_Alarm {
 	private int babyNo;
 	private String alarmTitle;
 	private String alarmTime;
-	private String alarmMemo;
 	
 	public BS_Alarm() {
 	}
-	public BS_Alarm(int alarmNo, int babyNo, String alarmTitle, String alarmTime, String alarmMemo) {
+	public BS_Alarm(int alarmNo, int babyNo, String alarmTitle, String alarmTime) {
 		this.alarmNo = alarmNo;
 		this.babyNo = babyNo;
 		this.alarmTitle = alarmTitle;
 		this.alarmTime = alarmTime;
-		this.alarmMemo = alarmMemo;
 	}
 	public int getAlarmNo() {
 		return alarmNo;
@@ -39,12 +37,6 @@ public class BS_Alarm {
 	}
 	public void setAlarmTime(String alarmTime) {
 		this.alarmTime = alarmTime;
-	}
-	public String getAlarmMemo() {
-		return alarmMemo;
-	}
-	public void setAlarmMemo(String alarmMemo) {
-		this.alarmMemo = alarmMemo;
 	}
 
 	

@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectUser" resultType="BS_User" parameterType="HashMap"> 
 		SELECT USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK
 		FROM BS_USER
-		WHERE USERID=#{userId} AND USERPWD=#{userPwd}
+		WHERE USERID=${userId} AND USERPWD=${userPwd}
 	</select>
 	
 	<insert id="insertUser" parameterType="BS_User" >
@@ -27,12 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectBaby" resultType="BS_Baby" parameterType="Integer"> 
 		SELECT BABYNO,USERNO, BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
 		FROM BS_BABY
-		WHERE BABYNO=#{babyNo}
+		WHERE BABYNO=${babyNo}
 	</select>
 	<select id="selectBabyList" resultType="BS_Baby" parameterType="Integer"> 
 		SELECT BABYNO,USERNO,  BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
 		FROM BS_BABY
-		WHERE USERNO=#{userNo}
+		WHERE USERNO=${userNo}
 	</select>
 	
 	<insert id="insertBaby" parameterType="BS_Baby" >
