@@ -11,13 +11,14 @@ public class Hospital {
 	private String time;
 	private String Latitude;
 	private String longitude;
+	private String distance;
 	
 	public Hospital() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Hospital(String hpid, String address, String name, String divNam, String phone, int eryn, String eryynphone,
-			String time, String latitude, String longitude) {
+			String time, String latitude, String longitude, String distance) {
 		super();
 		this.hpid = hpid;
 		this.address = address;
@@ -29,6 +30,7 @@ public class Hospital {
 		this.time = time;
 		Latitude = latitude;
 		this.longitude = longitude;
+		this.distance = distance;
 	}
 
 	public String getHpid() {
@@ -110,12 +112,20 @@ public class Hospital {
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
+	
+	public String getDistance() {
+		return distance;
+	}
+	
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
 
 	@Override
 	public String toString() {
 		return "Hospital [hpid=" + hpid + ", address=" + address + ", name=" + name + ", divNam=" + divNam + ", phone="
 				+ phone + ", eryn=" + eryn + ", eryynphone=" + eryynphone + ", time=" + time + ", Latitude=" + Latitude
-				+ ", longitude=" + longitude + "]";
+				+ ", longitude=" + longitude + ", distance=" + distance + "]";
 	}
 	
 }

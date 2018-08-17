@@ -1,18 +1,11 @@
 package com.scmaster.home;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -35,43 +29,108 @@ public class HospitalController {
 	HttpSession httpSession;
 
 	@RequestMapping(value = "/hospital_Test", method = RequestMethod.GET)
-	public String hospital_Test(Model model) throws Exception {
+	public String hospital_Test(String addr, HttpSession session, Model model) throws Exception {
+		/*address를 받아서 위도, 경도 변환 API 사용 후 위도, 경도로 병원 조회
+		조회한 병원 jsp에 뿌리기*/
+		
+		String lat = "37.491532";
+		String lon = "127.08766";
+		
 		List<Hospital> hspts = new ArrayList<Hospital>();
-		int j = 1;
-		String k = j + "";
-		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncFullDown"); /* URL */
-		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=dBWeSsetEKQH5l9aSW9wYkfPc7JjYZsNg3%2FimojYuBbGY4ktoST1JZU1czNJfm0A42OV8MZm8Df6yRRFTkO32Q%3D%3D"); /* Service Key */
-		urlBuilder.append("&" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /* 공공데이터포털에서 받은 인증키 */
-		urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(k, "UTF-8")); /* 페이지번호 */
-		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /* 한 페이지 결과 수 */
-		URL url = new URL(urlBuilder.toString());
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Content-type", "application/json");
-		
-		System.out.println("Response code: " + conn.getResponseCode());
-		
-		BufferedReader rd;
-		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		} else {
-			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-		}
-		StringBuilder sb = new StringBuilder();
-		String line;
+		Hospital hspt = new Hospital();
+		List<String> time = new ArrayList<String>();
 		StringBuilder t = new StringBuilder();
-		while ((line = rd.readLine()) != null) {
-			//sb.append(line);
+		int totalCount = 10;
+		for (int i = 1; i < /*totalCount*/11; i++) {
+			String api = i + "";
+			if (i==1) {
+				System.out.println("1번토탈카운트 >" +totalCount);
+			}
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			org.w3c.dom.Document doc = dBuilder.parse("http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncFullDown?ServiceKey=dBWeSsetEKQH5l9aSW9wYkfPc7JjYZsNg3%2FimojYuBbGY4ktoST1JZU1czNJfm0A42OV8MZm8Df6yRRFTkO32Q%3D%3D&ServiceKey=-&pageNo="+k+"&numOfRows=10");
+			org.w3c.dom.Document doc = dBuilder.parse("http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncLcinfoInqire?ServiceKey=dBWeSsetEKQH5l9aSW9wYkfPc7JjYZsNg3%2FimojYuBbGY4ktoST1JZU1czNJfm0A42OV8MZm8Df6yRRFTkO32Q%3D%3D&ServiceKey=-"
+					+ "&WGS84_LON=" + lon + "&WGS84_LAT=" + lat + "&pageNo="+api+"&numOfRows=1");
 			
 			doc.getDocumentElement().normalize();
 			
+			if (i ==1) {
+				NodeList nList1 = doc.getElementsByTagName("body");
+				Node nNode1 = nList1.item(0);
+				Element eElement1 = (Element) nNode1;
+				String count = getTagValue("totalCount", eElement1);
+				totalCount = Integer.parseInt(count);
+				System.out.println(totalCount);
+			}
+			
 			NodeList nList = doc.getElementsByTagName("item");
 			
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node nNode = nList.item(i);
+			for (int j = 0; j < nList.getLength(); j++) {
+				Node nNode = nList.item(j);
+				Element eElement = (Element) nNode;
+				String hpid = getTagValue("hpid", eElement);
+				String distance = getTagValue("distance", eElement);
+				String address = getTagValue("dutyAddr", eElement);
+				String name = getTagValue("dutyName", eElement);
+				String divNam = getTagValue("dutyDivName", eElement);
+				String phone = getTagValue("dutyTel1", eElement);
+				String latitude = getTagValue("latitude", eElement);
+				String longitude = getTagValue("longitude", eElement);		
+				
+					String timec = getTagValue("endTime", eElement);
+					String times = getTagValue("startTime", eElement);
+						timec = timec.substring(0, 2) + ":" + timec.substring(2, timec.length());
+						times = times.substring(0, 2) + ":" + times.substring(2, times.length());
+						time.add(times+"~");
+						time.add(timec);
+				
+				for (int k = 0; k < time.size(); k++) {
+					t.append(time.get(k));
+				}
+				
+				Hospital h = new Hospital(hpid, address, name, divNam, phone, 0, "", t.toString(), latitude, longitude, distance);
+				hspt = h;
+				time.clear();
+				t.setLength(0);
+				
+			}
+			hspts.add(hspt);
+		}
+
+		model.addAttribute("hspts", hspts);
+		return "hospital";
+	}
+	@RequestMapping(value = "/hospital_All", method = RequestMethod.GET, produces="applicatoin/text; charset=UTF8")
+	public @ResponseBody String hospital_All() throws Exception{
+		
+		List<Hospital> hspts = new ArrayList<Hospital>();
+		Hospital hspt = new Hospital();
+		List<String> time = new ArrayList<String>();
+		StringBuilder t = new StringBuilder();
+		int totalCount = 10;
+		for (int i = 1; i < /*totalCount*/11; i++) {
+			String api = i + "";
+			if (i==1) {
+				System.out.println("1번토탈카운트 >" +totalCount);
+			}
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			org.w3c.dom.Document doc = dBuilder.parse("http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncFullDown?ServiceKey=dBWeSsetEKQH5l9aSW9wYkfPc7JjYZsNg3%2FimojYuBbGY4ktoST1JZU1czNJfm0A42OV8MZm8Df6yRRFTkO32Q%3D%3D&ServiceKey=-&pageNo="+api+"&numOfRows=1");
+			
+			doc.getDocumentElement().normalize();
+			
+			if (i ==1) {
+				NodeList nList1 = doc.getElementsByTagName("body");
+				Node nNode1 = nList1.item(0);
+				Element eElement1 = (Element) nNode1;
+				String count = getTagValue("totalCount", eElement1);
+				totalCount = Integer.parseInt(count);
+				System.out.println(totalCount);
+			}
+			
+			NodeList nList = doc.getElementsByTagName("item");
+			
+			for (int j = 0; j < nList.getLength(); j++) {
+				Node nNode = nList.item(j);
 				Element eElement = (Element) nNode;
 				String hpid = getTagValue("hpid", eElement);
 				String address = getTagValue("dutyAddr", eElement);
@@ -85,24 +144,14 @@ public class HospitalController {
 				}
 				String latitude = getTagValue("wgs84Lat", eElement);
 				String longitude = getTagValue("wgs84Lon", eElement);
-				List<String> time = new ArrayList<String>();
-				/*int timeNum = 6;
 				
-				if (getTagValue("dutyTime6c", eElement) != null) {
-					timeNum = 7;
-				} if (getTagValue("dutyTime7c", eElement) != null) {
-					timeNum = 8;
-				} if (getTagValue("dutyTime8c", eElement) != null) {
-					timeNum = 9;
-				}*/
-				
-				for (int l = 1; l < 9; l++) {
-					String timec = getTagValue("dutyTime"+l+"c", eElement);
-					String times = getTagValue("dutyTime"+l+"s", eElement);
+				for (int k = 1; k < 9; k++) {
+					String timec = getTagValue("dutyTime"+k+"c", eElement);
+					String times = getTagValue("dutyTime"+k+"s", eElement);
 						if (timec != null && times != null) {
 						timec = timec.substring(0, 2) + ":" + timec.substring(2, timec.length());
 						times = times.substring(0, 2) + ":" + times.substring(2, times.length());
-						switch (l) {
+						switch (k) {
 						case 1:
 							time.add("월 :" + times);
 							time.add("~" + timec + " ");
@@ -141,25 +190,20 @@ public class HospitalController {
 					}
 				}
 				
-				for (int l = 0; l < time.size(); l++) {
-					t.append(time.get(l));
+				for (int k = 0; k < time.size(); k++) {
+					t.append(time.get(k));
 				}
 				
-				Hospital hspt = new Hospital(hpid, address, name, divNam, phone, Integer.parseInt(eryn), eryynphone, t.toString(), latitude, longitude);
+				Hospital h = new Hospital(hpid, address, name, divNam, phone, Integer.parseInt(eryn), eryynphone, t.toString(), latitude, longitude, "");
+				hspt = h;
 				time.clear();
 				t.setLength(0);
-				hspts.add(hspt);
+				
 			}
-		}
-		rd.close();
-		conn.disconnect();
-		
-		for (int i = 0; i < hspts.size(); i++) {
-			System.out.println(i+"번째> "+hspts.get(i));
+			hspts.add(hspt);
 		}
 		
-		model.addAttribute("hospital", hspts.get(0));
-		return "hospital";
+		return hspts.get(0).toString();
 	}
 	
 	private String getTagValue(String string, Element eElement) {
