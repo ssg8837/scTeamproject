@@ -9,19 +9,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectUser" resultType="BS_User" parameterType="HashMap"> 
 		SELECT USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK
 		FROM BS_USER
-		WHERE USERID='#{userId}' AND USERPWD='#{userPwd}'
+		WHERE USERID=#{userId} AND USERPWD=#{userPwd}
 	</select>
 	
 	<insert id="insertUser" parameterType="BS_User" >
 		INSERT INTO BS_USER(USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK) 
 		VALUES (BS_USERSEQ.NEXTVAL,
-		'#{userType}',
-		'#{userId}',
-		'#{userPwd}',
-		'#{userAddr}',
-		'#{userEmail}',
-		'#{userPhone}',
-		'#{userNick}')
+		#{userType},
+		#{userId},
+		#{userPwd},
+		#{userAddr},
+		#{userEmail},
+		#{userPhone},
+		#{userNick})
 	</insert>
 	
 	<select id="selectBaby" resultType="BS_Baby" parameterType="Integer"> 
@@ -38,11 +38,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertBaby" parameterType="BS_Baby" >
 		INSERT INTO BS_BABY(BABYNO,USERNO, BABYGENDER, BABYBIRTH, BABYNAME, BABYBLOOD) 
 		VALUES (BS_BABYSEQ.NEXTVAL,
-		'#{userNo}',
-		'#{babyGender}',
-		TO_DATE('#{babyBirth}','YYYY-MM-DD'),
-		'#{babyName}',
-		'#{babyBlood}')
+		#{userNo},
+		#{babyGender},
+		TO_DATE(#{babyBirth},'YYYY-MM-DD'),
+		#{babyName},
+		#{babyBlood})
 	</insert>
 	
 	

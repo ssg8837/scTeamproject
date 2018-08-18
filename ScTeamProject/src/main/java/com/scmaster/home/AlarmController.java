@@ -78,6 +78,14 @@ public class AlarmController {
 		return alarm_OpenCalendar(model);
 	}
 	
+	@RequestMapping(value = "/alarm_OpenChoose", method = RequestMethod.POST)
+	public String alarm_OpenChoose(Model model, String alarmNo) 
+	{
+		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
+		BS_Alarm alarm = alarmMapper.selectAlarm(alarmNo);
+		model.addAttribute("alarm", alarm);
+		return "alarm_SelectOption";
+	}
 	@RequestMapping(value = "/alarm_OpenUpdate", method = RequestMethod.POST)
 	public String alarm_OpenUpdate(Model model, String alarmNo) 
 	{

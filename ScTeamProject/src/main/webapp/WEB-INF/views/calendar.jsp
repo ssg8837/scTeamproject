@@ -81,7 +81,33 @@
 		        eventLimit: true,
 		        events: dataset,
 		        eventClick:function(event) {
-		        	alert(event.id);
+		        	var alarmNo=event.id;
+		        	var newWin = window.open("about:blank", "chooseWin", "width=500, height=300, scrollbars=no");
+		        	var form = document.createElement("form");     
+
+		        	form.setAttribute("method","post");                    
+		        	form.setAttribute("action","alarm_OpenChoose");        
+
+		        	document.body.appendChild(form);                        
+
+		        	 
+
+		        	//input
+		        	var input_id = document.createElement("input");  
+
+		        	input_id.setAttribute("type", "hidden");                 
+
+		        	input_id.setAttribute("name", "id");                        
+		        	input_id.setAttribute("value", alarmNo);                          
+
+		        	form.appendChild(input_id);
+
+		        	 
+
+		        	//폼전송
+					form.target = "chooseWin";
+					form.submit();
+					//<a href="http://www.example.com/" target="_blank">
 	            }
 
 		    });
