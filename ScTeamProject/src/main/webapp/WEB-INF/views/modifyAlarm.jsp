@@ -40,19 +40,24 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-		<form action='updateAlarm' method='post'>
+		<form action='alarm_UpdateAlarm' method='post'>
 			
 			<div class='input-group col-xs-4'>
 				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
 				
 				<c:forEach var='val' items='${noList }' varStatus='sta'>
+				<c:if test='${val == alarm.babyNo }'>
+					<option value='${val }' selected='selected'> ${nameList[sta.index] } </option>
+				</c:if>
+				<c:if test='${val != alarm.babyNo }'>
 					<option value='${val }'> ${nameList[sta.index] } </option>
+				</c:if>
 				</c:forEach>
 				</select>
 			</div>
 			<div class='input-group col-xs-4'>
 				<span class="input-group-addon">할일</span>
-				<input class="form-control " name="alarmTitle"  type="text">
+				<input class="form-control " name="alarmTitle"  type="text" value='${alarm.alarmTitle }'>
 			</div>
 			<div class="input-group date form_datetime col-xs-4 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">
 			<span class="input-group-addon">일시</span>

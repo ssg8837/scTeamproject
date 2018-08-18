@@ -13,6 +13,9 @@
 	    <link href="./resources/css/alarm_Calendar.css" rel="stylesheet">
 	</head>
 	<body style='margin-top:120px;'>
+	<form class="selectForm" method="post">
+		<input name="alarmNo" id="alarmNo" type="hidden">
+  	</form>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -97,7 +100,7 @@
 
 		        	input_id.setAttribute("type", "hidden");                 
 
-		        	input_id.setAttribute("name", "id");                        
+		        	input_id.setAttribute("name", "alarmNo");                        
 		        	input_id.setAttribute("value", alarmNo);                          
 
 		        	form.appendChild(input_id);

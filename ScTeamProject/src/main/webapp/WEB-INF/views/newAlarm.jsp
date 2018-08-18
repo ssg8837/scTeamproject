@@ -40,7 +40,7 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-		<form action='insertNewAlarm' method='post'>
+		<form action='alarm_insertNewAlarm' method='post'>
 			
 			<div class='input-group col-xs-4'>
 				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>

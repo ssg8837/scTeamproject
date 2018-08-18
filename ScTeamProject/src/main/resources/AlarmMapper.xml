@@ -25,6 +25,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE BS_ALARM SET BABYNO=#{babyNo}, ALARMTITLE=#{alarmTitle},ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI')
 		WHERE ALARMNO = #{alarmNo}
 	</insert>
+	
+	<delete id="deleteAlarm" parameterType="Integer">
+		DELETE FROM BS_ALARM WHERE ALARMNO = #{alarmNo}
+	</delete>
 	 
 	<select id="selectAlarm" parameterType="BS_Alarm" resultType="BS_Alarm">
 		SELECT ALARMNO, BABYNO, ALARMTITLE, ALARMTIME

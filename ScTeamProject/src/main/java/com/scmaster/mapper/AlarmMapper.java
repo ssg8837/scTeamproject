@@ -1,11 +1,7 @@
 package com.scmaster.mapper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import com.scmaster.vo.BS_Alarm;
-import com.scmaster.vo.BS_Baby;
-import com.scmaster.vo.BS_User;
 
 public interface AlarmMapper {
 
@@ -15,6 +11,8 @@ public interface AlarmMapper {
 
 	void updateAlarm(BS_Alarm alarm);
 
-	BS_Alarm selectAlarm(String alarmNo);
+	BS_Alarm selectAlarm(int alarmNo);
+
+	void deleteAlarm(int alarmNo);
 
 }

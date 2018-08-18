@@ -12,25 +12,36 @@
 	<body>
 		<div>이 일정을 수정 혹은 삭제 하시겠습니까?</div>
 		<div style="margin:auto;  text-align: center;">
-			<form class="selectForm" action="alarm_OpenUpdate" method="post">
-				<input type="hidden" value="${alarm.alarmNo }">
-  			<button class='btn btn-primary' type='submit' >일정 수정</button>
-  			</form>
-  			<button class='btn btn-primary' type='submit' onclick='location.href="alarm_OpenNewAlarm"'>일정 삭제</button>
-  			<button class='btn btn-primary' type='submit' onclick='location.href="alarm_OpenNewAlarm"'>취소</button>
+  			<p>일정 : ${alarm.alarmTitle}</p>
+  			<button class='btn btn-primary' type='button' onclick='javascript:goSubmit(${alarm.alarmNo});'>일정 수정</button>
+  			<button class='btn btn-primary' type='button' onclick='javascript:goDelete(${alarm.alarmNo});'>일정 삭제</button>
+  			<button class='btn btn-primary' type='button' onclick='javascript:self.close();'>취소</button>
 		</div>
 		
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
 	    <script>
-	    function goSubmit() {
-	        window.opener.name = "parentPage"; // 부모창의 이름 설정
-	        $('.selectForm').target = "parentPage"; // 타켓을 부모창으로 설정
-	        $('.selectForm').submit();
+	    //selectForm
+	    function goSubmit(alarmNo) 
+	    {
+	    	$( "#alarmNo", opener.document ).val(alarmNo)
+	    	$( ".selectForm", opener.document ).attr("action", "alarm_OpenUpdate");
+	    	$( ".selectForm", opener.document ).submit();
 	        self.close();
 	    }
-	    <!--http://zero-gravity.tistory.com/247-->
+	    function goDelete(alarmNo)
+	    {
+	    	var tof = confirm( '정말 삭제하시겠습니까?' );
+	        if(tof==true)
+	        {
+		    	$( "#alarmNo", opener.document ).val(alarmNo)
+	        	$( ".selectForm", opener.document ).attr("action", "alarm_Delete");
+	        	$( ".selectForm", opener.document ).submit();
+		       	self.close();
+	        }
+	    }
+	    
 	    </script>
 	</body>
 </html>

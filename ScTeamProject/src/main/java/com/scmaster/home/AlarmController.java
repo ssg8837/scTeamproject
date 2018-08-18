@@ -79,7 +79,7 @@ public class AlarmController {
 	}
 	
 	@RequestMapping(value = "/alarm_OpenChoose", method = RequestMethod.POST)
-	public String alarm_OpenChoose(Model model, String alarmNo) 
+	public String alarm_OpenChoose(Model model, int alarmNo) 
 	{
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		BS_Alarm alarm = alarmMapper.selectAlarm(alarmNo);
@@ -87,11 +87,26 @@ public class AlarmController {
 		return "alarm_SelectOption";
 	}
 	@RequestMapping(value = "/alarm_OpenUpdate", method = RequestMethod.POST)
-	public String alarm_OpenUpdate(Model model, String alarmNo) 
+	public String alarm_OpenUpdate(Model model, int alarmNo) 
 	{
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		BS_Alarm alarm = alarmMapper.selectAlarm(alarmNo);
 		model.addAttribute("alarm", alarm);
+		MainMapper mainMapper=sqlSession.getMapper(MainMapper.class);
+		Object loginNo=httpSession.getAttribute("loginNo");
+		ArrayList<Integer> noList= new ArrayList<Integer>();
+		ArrayList<String> nameList= new ArrayList<String>();
+		if(loginNo!=null)
+		{
+			ArrayList<BS_Baby> babyList=mainMapper.selectBabyList((Integer)loginNo);
+			for(BS_Baby item : babyList)	
+			{
+				noList.add(item.getBabyNo());
+				nameList.add(item.getBabyName());
+			}
+		}
+		model.addAttribute("noList", noList);
+		model.addAttribute("nameList", nameList);
 		return "modifyAlarm";
 	}
 	
@@ -100,6 +115,15 @@ public class AlarmController {
 	{
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		alarmMapper.updateAlarm(alarm);
+		return alarm_OpenCalendar(model);
+	}
+	
+	//alarm_Delete
+	@RequestMapping(value = "/alarm_Delete", method = RequestMethod.POST)
+	public String alarm_Delete(Model model, int alarmNo) 
+	{
+		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
+		alarmMapper.deleteAlarm(alarmNo);
 		return alarm_OpenCalendar(model);
 	}
 }
