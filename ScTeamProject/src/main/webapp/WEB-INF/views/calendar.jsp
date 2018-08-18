@@ -56,13 +56,13 @@
 	    <script src="./resources/js/ko.js"></script>
 	    <script>
 		var dataset = [
-		    <c:forEach var="item" items="${alarmList}" varStatus="status">
+			<c:forEach var="item" items="${alarmList}" varStatus="status">
 		            {"id":'<c:out value="${item.alarmNo}" />'
 		            ,"title":'<c:out value=" ${item.alarmTitle} [${nameList[status.index]}]" />'
 		            ,"start":"<c:out value="${item.alarmTime}" />"
 		            }
 		            <c:if test='${status.index != fn:length(alarmList)}'>
-		            ,
+		           	,
 		            </c:if>
 		    </c:forEach>
 		];
