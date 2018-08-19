@@ -42,102 +42,12 @@
 	<div id="map" style="border-top:100px;width:500px;height: 500px"></div>
 	<button onclick="showMarkers()">병원표시</button>&nbsp;<button onclick="hideMarkers()">병원 숨기기</button>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e2f3241393e98d4d475a38553e4f353"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e2f3241393e98d4d475a38553e4f353&libraries=services,clusterer,drawing"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e2f3241393e98d4d475a38553e4f353"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e2f3241393e98d4d475a38553e4f353&libraries=services,clusterer,drawing"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="./resources/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-	
-	mapOption = { 
-	    center: new daum.maps.LatLng(37.511733, 127.059053), // 지도의 중심좌표
-	    level: 3 // 지도의 확대 레벨
-	};
-	
-	var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-	
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new daum.maps.ZoomControl();
-	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-	
-	//지도에 표시된 마커 객체를 가지고 있을 배열입니다
-	var markers = [];
-	
-	//마커 하나를 지도위에 표시합니다 
-	addMarker(new daum.maps.LatLng(37.511733, 127.059053));
-	
-	// 마커를 생성하고 지도위에 표시하는 함수입니다
-	function addMarker(position) {
-	    
-	    // 마커를 생성합니다
-	    var marker = new daum.maps.Marker({
-	        position: position
-	    });
+<script src="./resources/functions/map.js">
 
-	    // 마커가 지도 위에 표시되도록 설정합니다
-	    marker.setMap(map);
-	    
-	    // 생성된 마커를 배열에 추가합니다
-	    markers.push(marker);
-	}
-	
-	//배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-	function setMarkers(map) {
-		for (var i = 0; i < markers.length; i++) {
-			markers[i].setMap(map);
-		}            
-	}
-	
-	//"마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
-	function showMarkers() {
-		setMarkers(map)    
-	}
-	
-	//"마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
-	function hideMarkers() {
-	setMarkers(null);    
-	}
-	
-	var iwContent = '<div style="padding:5px;">병원 위치 정보 테스트<br><a href="http://localhost:8888/home,37.511733,127.059053" style="color:blue" target="_blank">큰지도보기</a> <a href="http://map.daum.net/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-	
-	iwPosition = new daum.maps.LatLng(37.511733, 127.059053); //인포윈도우 표시 위치입니다
-	
-	//인포윈도우를 생성합니다
-	var infowindow = new daum.maps.InfoWindow({
-		position : iwPosition, 
-		content : iwContent 
-	});
-	
-	//마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-	infowindow.open(map, marker); 
-	
-	var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-	 
-	// 버튼을 클릭하면 아래 배열의 좌표들이 모두 보이게 지도 범위를 재설정합니다 
-	var points = [
-	    new daum.maps.LatLng(33.452278, 126.567803),
-	    new daum.maps.LatLng(33.452671, 126.574792),
-	    new daum.maps.LatLng(33.451744, 126.572441)
-	];
-
-	// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
-	var bounds = new daum.maps.LatLngBounds();    
-
-	var i, marker;
-	for (i = 0; i < points.length; i++) {
-	    // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
-	    marker =     new daum.maps.Marker({ position : points[i] });
-	    marker.setMap(map);
-	    
-	    // LatLngBounds 객체에 좌표를 추가합니다
-	    bounds.extend(points[i]);
-	}
-
-	function setBounds() {
-	    // LatLngBounds 객체에 추가된 좌표들을 기준으로 지도의 범위를 재설정합니다
-	    // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
-	    map.setBounds(bounds);
-	}
 </script>
 </body>
 </html>
