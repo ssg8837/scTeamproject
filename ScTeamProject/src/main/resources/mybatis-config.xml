@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="BS_Alarm" type="com.scmaster.vo.BS_Alarm"></typeAlias>
 		<typeAlias alias="Hospital" type="com.scmaster.vo.Hospital"></typeAlias>
 		<typeAlias alias="Grow_Default" type="com.scmaster.vo.Grow_Default"></typeAlias>
+		<typeAlias alias="Disease" type="com.scmaster.vo.Disease"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
@@ -33,5 +34,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="AlarmMapper.xml" />
 		<mapper resource="HospitalMapper.xml" />
 		<mapper resource="growMapper/GrowDefaultMapper.xml" />
+		<mapper resource="DiseaseMapper.xml" />
 	</mappers>
 </configuration>
