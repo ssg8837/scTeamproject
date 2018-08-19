@@ -20,16 +20,16 @@ import com.scmaster.vo.BS_User;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
-	
-	
+public class HomeController 
+{
 	@Autowired SqlSession sqlSession;
 	@Autowired HttpSession httpSession;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model) 
+	{
 		Object loginNo= httpSession.getAttribute("loginNo");
 		if(loginNo!=null)
 		{
@@ -41,28 +41,33 @@ public class HomeController {
 		return "home";
 	}
 	@RequestMapping(value = "/openNewAccount", method = RequestMethod.GET)
-	public String openNewAccount() {
+	public String openNewAccount() 
+	{
 		return "newAccount";
 	}
 	@RequestMapping(value = "/openNewBaby", method = RequestMethod.GET)
-	public String openNewBaby() {
+	public String openNewBaby() 
+	{
 		return "newBaby";
 	}
 	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
-	public String insertNewAccount(Model model,BS_User user) {
+	public String insertNewAccount(Model model,BS_User user) 
+	{
 		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
 		user.setUserType("n");
 		mapper.insertUser(user);
 		return home(model);
 	}
 	@RequestMapping(value = "/insertNewBaby", method = RequestMethod.POST)
-	public String insertNewBaby(Model model,BS_Baby baby) {
+	public String insertNewBaby(Model model,BS_Baby baby) 
+	{
 		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
 		mapper.insertBaby(baby);
 		return home(model);
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(Model model, String userid, String userpwd) {
+	public String login(Model model, String userid, String userpwd) 
+	{
 		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
 		HashMap<String, String> userMap=new HashMap<String,String>();
 		userMap.put("userId", userid);
@@ -76,7 +81,8 @@ public class HomeController {
 		return home(model);
 	}
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(Model model) {
+	public String logout(Model model) 
+	{
 		httpSession.invalidate();
 		return "home";
 	}

@@ -1,0 +1,41 @@
+body{
+	padding-top: 70px;
+}
+
+/* ------------------------------------------------------------------------------------- */
+
+/*중앙 본문 div*/
+.grow_main_content{
+	width: 80%;
+	padding: 1em;
+	
+	float: left;
+	
+	text-align: center;
+}
+/*차트 div*/
+.grow_chart{
+	margin: auto;
+	width: 80%;
+}
+/*차트가 그려지는 곳*/
+canvas {
+	width: 100%;
+	
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------------------------------------- */
+
+.grow_sidebar{
+	width: 10%;
+	float: right;
+}
+
+.grow.chart.button{
+	margin-bottom: 1em;
+}
