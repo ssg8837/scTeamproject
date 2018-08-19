@@ -215,4 +215,9 @@ public class HospitalController {
 			return null;
 		} return nValue.getNodeValue();
 	}
+
+	public String hospital_Test(Model model) 
+	{
+		return "map";
+	}
 }
