@@ -7,6 +7,7 @@
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
+	    <link href="./resources/css/cover.css" rel="stylesheet">
 	</head>
 	<body style='margin-top:70px;'>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -50,6 +51,6 @@
 		</form>
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	    <script src="./resources/js/bootstrap.js"></script>
+	    <script src="./resources/js/bootstrap.min.js"></script>
 	</body>
 </html>
