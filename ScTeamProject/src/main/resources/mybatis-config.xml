@@ -25,10 +25,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="BS_Baby" type="com.scmaster.vo.BS_Baby"></typeAlias>
 		<typeAlias alias="BS_Alarm" type="com.scmaster.vo.BS_Alarm"></typeAlias>
 		<typeAlias alias="Hospital" type="com.scmaster.vo.Hospital"></typeAlias>
+		<typeAlias alias="Grow_Default" type="com.scmaster.vo.Grow_Default"></typeAlias>
 	</typeAliases>
+	
 	<mappers>
 		<mapper resource="MainMapper.xml" />
 		<mapper resource="AlarmMapper.xml" />
 		<mapper resource="HospitalMapper.xml" />
+		<mapper resource="growMapper/GrowDefaultMapper.xml" />
 	</mappers>
 </configuration>

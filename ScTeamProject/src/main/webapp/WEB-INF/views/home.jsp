@@ -27,7 +27,7 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 	        <li class="active"><a href="#">메인화면 <span class="sr-only">(current)</span></a></li>
-	        <li><a href="#">성장기록</a></li>
+	        <li><a href="gotoGrow">성장기록</a></li>
 	        <li><a href="alarm_OpenCalendar">생활기록</a></li>
 	        <li><a href="#">예방접종</a></li>
 	        <li><a href="hospital_Test">병원찾기</a></li>
