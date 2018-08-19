@@ -38,6 +38,11 @@ public class BS_Alarm {
 	public void setAlarmTime(String alarmTime) {
 		this.alarmTime = alarmTime;
 	}
+	@Override
+	public String toString() {
+		return "BS_Alarm [alarmNo=" + alarmNo + ", babyNo=" + babyNo + ", alarmTitle=" + alarmTitle + ", alarmTime="
+				+ alarmTime + "]";
+	}
 
 	
 	

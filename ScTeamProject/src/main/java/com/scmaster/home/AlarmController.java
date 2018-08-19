@@ -113,6 +113,7 @@ public class AlarmController {
 	@RequestMapping(value = "/alarm_UpdateAlarm", method = RequestMethod.POST)
 	public String alarm_UpdateAlarm(Model model, BS_Alarm alarm) 
 	{
+		System.out.println(alarm);
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		alarmMapper.updateAlarm(alarm);
 		return alarm_OpenCalendar(model);

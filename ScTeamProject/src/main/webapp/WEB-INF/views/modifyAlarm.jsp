@@ -41,7 +41,7 @@
 	</nav>
 	
 		<form action='alarm_UpdateAlarm' method='post'>
-			
+			<input type='hidden' name='alarmNo' value='${alarm.alarmNo }'>
 			<div class='input-group col-xs-4'>
 				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
 				
