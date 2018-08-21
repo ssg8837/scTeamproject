@@ -45,5 +45,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{babyBlood})
 	</insert>
 	
+	<select id='countUser' parameterType="String" resultType="Integer">
+		SELECT COUNT(USERID)
+		FROM BS_USER
+		WHERE USERID=#{userId}
+	</select>
+	
 	
 </mapper>

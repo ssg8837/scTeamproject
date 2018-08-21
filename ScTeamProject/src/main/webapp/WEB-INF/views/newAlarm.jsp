@@ -40,7 +40,7 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-		<form action='alarm_insertNewAlarm' method='post'>
+		<form id="alarmform" action='alarm_insertNewAlarm' method='post'>
 			
 			<div class='input-group col-xs-4'>
 				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
@@ -52,26 +52,26 @@
 			</div>
 			<div class='input-group col-xs-4'>
 				<span class="input-group-addon">할일</span>
-				<input class="form-control " name="alarmTitle"  type="text">
+				<input class="form-control " name="alarmTitle" id="alarmTitle" type="text">
 			</div>
 			<div class="input-group date form_datetime col-xs-4 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">
 			<span class="input-group-addon">일시</span>
-                    	<input class="form-control " type="text" name="alarmTime" value="" readonly>
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    	<input class="form-control " type="text" id='nowAlarm' name="alarmTime" value="" readonly>
+                    
 					<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>	
 			</div>
            
 			<!-- http://jsonobject.tistory.com/181 -->
-			<button class='btn btn-primary' type='submit' style="margin: 0 auto;">알림 등록</button>
+			<button class='btn btn-primary' type='button' onclick="javascript:alarm_check();" style="margin: 0 auto;">알림 등록</button>
 		</form>
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
 	    <script src="./resources/js/moment.min.js"></script>
-	    <script src="./resources/js/bootstrap-datetimepicker.js"></script>
-	    <script src="./resources/js/bootstrap-datetimepicker.ko.js"></script>
-	    <script type="text/javascript">
-			$('.form_datetime').datetimepicker({ language : 'ko' });
-	    </script>
+	    <script src="./resources/js/util/bootstrap-datetimepicker.js"></script>
+	    <script src="./resources/js/util/bootstrap-datetimepicker.ko.js"></script>
+	    <script src="./resources/js/util/datetimepicker.js"></script>
+	    <script src="./resources/js/util/check_byte.js"></script>
+	    <script src="./resources/js/alarm/alarm_check.js"></script>
 	</body>
 </html>

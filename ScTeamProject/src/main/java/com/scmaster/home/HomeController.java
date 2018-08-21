@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.vo.BS_Baby;
@@ -35,7 +36,6 @@ public class HomeController
 		{
 			MainMapper mapper= sqlSession.getMapper(MainMapper.class);
 			ArrayList<BS_Baby> babyList= mapper.selectBabyList((Integer)loginNo);
-			System.out.println(babyList);
 			model.addAttribute("babyList", babyList);
 		}
 		return "home";
@@ -50,6 +50,7 @@ public class HomeController
 	{
 		return "newBaby";
 	}
+	/*
 	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
 	public String insertNewAccount(Model model,BS_User user) 
 	{
@@ -58,6 +59,7 @@ public class HomeController
 		mapper.insertUser(user);
 		return home(model);
 	}
+	*/
 	@RequestMapping(value = "/insertNewBaby", method = RequestMethod.POST)
 	public String insertNewBaby(Model model,BS_Baby baby) 
 	{
@@ -65,6 +67,7 @@ public class HomeController
 		mapper.insertBaby(baby);
 		return home(model);
 	}
+	/*
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(Model model, String userid, String userpwd) 
 	{
@@ -80,6 +83,7 @@ public class HomeController
 		}
 		return home(model);
 	}
+	*/
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(Model model) 
 	{
@@ -87,4 +91,33 @@ public class HomeController
 		return "home";
 	}
 	
+	//AJax용 코드
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html;charset=utf8")
+	public @ResponseBody String login( String userid, String userpwd) 
+	{
+		//response.setContentType("text/html;charset=UTF-8");
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+		HashMap<String, String> userMap=new HashMap<String,String>();
+		userMap.put("userId", userid);
+		userMap.put("userPwd",userpwd);
+		BS_User user=mapper.selectUser(userMap);
+		if(user!=null)
+		{
+			httpSession.setAttribute("loginId",user.getUserId());
+			httpSession.setAttribute("loginNo",user.getUserNo());
+			return "로그인 완료되었습니다.";
+		}
+		return "로그인에 실패하였습니다. 아이디나 비밀번호를 확인해주세요.";
+	}
+	
+	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
+	public @ResponseBody String insertNewAccount(BS_User user) 
+	{
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+		if(mapper.countUser(user.getUserId())!=0)
+			return "false";
+		user.setUserType("n");
+		mapper.insertUser(user);
+		return "true";
+	}
 }

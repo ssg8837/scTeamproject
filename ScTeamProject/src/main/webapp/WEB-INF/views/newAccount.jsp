@@ -39,17 +39,17 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-		<form action='insertNewAccount' method='post'>
-			ID:<input type='text' name='userId'><br>
-			PWD:<input type='password' name='userPwd'><br>
-			주소:<input type='text' name='userAddr'><br>
-			이메일:<input type='text' name='userEmail'><br>
-			전화번호:<input type='text' name='userPhone'><br>
-			닉네임:<input type='text' name='userNick'><br>
-			<button type='submit'>회원가입</button>
-		</form>
+			ID:<input type='text' id='userId' name='userId'><br>
+			PWD:<input type='password' id='userPwd' name='userPwd'><br>
+			주소:<input type='text' id='userAddr' name='userAddr'><br>
+			이메일:<input type='text' id='userEmail' name='userEmail'><br>
+			전화번호:<input type='text' id='userPhone' name='userPhone'><br>
+			닉네임:<input type='text' id='userNick' name='userNick'><br>
+			<button type='button' onclick='javascript:insertNewAccount();'>회원가입</button>
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.js"></script>
+	    <script src="./resources/js/util/check_byte.js"></script>
+	    <script src="./resources/js/home/account_check.js"></script>
 	</body>
 </html>

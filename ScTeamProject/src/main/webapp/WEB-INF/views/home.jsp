@@ -41,12 +41,12 @@
 	</nav>
 	
 	<c:if test='${sessionScope.loginId == null }'>
-		<form action='login' method='post'>
-			ID:<input type='text' name='userid'><br>
-			PWD:<input type='password' name='userpwd'>
-			<button type='submit'>로그인</button>
+		<form id='home' action='./' method='get'>
 		</form>
-			<button type='submit' onclick="location.href='openNewAccount'">회원가입</button>
+			ID:<input type='text' id='userid' name='userid'><br>
+			PWD:<input type='password' id='userpwd' name='userpwd'>
+			<button type='button' onclick="javascript:login();">로그인</button>
+			<button type='button' onclick="location.href='openNewAccount'">회원가입</button>
 	</c:if>
 	<c:if  test='${sessionScope.loginId != null }'>
 		<c:if test='${babyList !=null }'>
@@ -65,5 +65,7 @@
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
+	    <script src="./resources/js/util/check_byte.js"></script>
+	    <script src="./resources/js/home/login_check.js"></script>
 	</body>
 </html>

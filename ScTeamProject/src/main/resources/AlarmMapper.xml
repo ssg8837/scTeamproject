@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.scmaster.mapper.AlarmMapper">
 
 	<select id="selectBabyAlarmList" resultType="BS_Alarm" parameterType="Integer"> 
-		SELECT ALARMNO,BABYNO , ALARMTITLE, TO_CHAR(ALARMTIME,'YYYY-MM-DD/HH24:MI:SS') AS "ALARMTIME"
+		SELECT ALARMNO,BABYNO , ALARMTITLE, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME"
 		FROM BS_ALARM
 		WHERE BABYNO=#{babyNo}
 	</select>
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	 
 	<select id="selectAlarm" parameterType="BS_Alarm" resultType="BS_Alarm">
-		SELECT ALARMNO, BABYNO, ALARMTITLE, ALARMTIME
+		SELECT ALARMNO, BABYNO, ALARMTITLE, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME"
 		FROM BS_ALARM
 		WHERE ALARMNO = #{alarmNo}
 	</select>
