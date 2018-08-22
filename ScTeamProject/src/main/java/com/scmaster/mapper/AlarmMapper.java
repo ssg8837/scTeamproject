@@ -15,4 +15,6 @@ public interface AlarmMapper {
 
 	void deleteAlarm(int alarmNo);
 
+	ArrayList<BS_Alarm> selectAlarmList(int loginNo);
+
 }

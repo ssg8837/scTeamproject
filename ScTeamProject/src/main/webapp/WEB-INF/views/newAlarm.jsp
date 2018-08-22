@@ -41,7 +41,7 @@
 	</nav>
 	
 		<form id="alarmform" action='alarm_insertNewAlarm' method='post'>
-			
+			<input type="hidden" value="${sessionScope.loginNo}" id="userNo" name="userNo">
 			<div class='input-group col-xs-4'>
 				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
 				

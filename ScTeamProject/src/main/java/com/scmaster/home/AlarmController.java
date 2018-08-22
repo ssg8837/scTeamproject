@@ -141,6 +141,14 @@ public class AlarmController {
 		return alarm_OpenCalendar();
 	}
 	
+	@RequestMapping(value = "/alarm_load",method = RequestMethod.POST)
+	public @ResponseBody ArrayList<BS_Alarm> alarm_load(int loginNo)
+	{
+		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
+		ArrayList<BS_Alarm> alarmList;
+		alarmList=alarmMapper.selectAlarmList(loginNo);
+		return alarmList;
+	}
 	
 	@RequestMapping(value = "/alarm_calenderLoad",method = RequestMethod.POST, produces = "text/html;charset=utf8")
 	public @ResponseBody String alarm_calenderLoad()

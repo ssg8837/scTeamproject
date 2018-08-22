@@ -7,13 +7,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.scmaster.mapper.AlarmMapper">
 
 	<select id="selectBabyAlarmList" resultType="BS_Alarm" parameterType="Integer"> 
-		SELECT ALARMNO,BABYNO , ALARMTITLE, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME"
+		SELECT ALARMNO,BABYNO , USERNO, ALARMTITLE, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME"
 		FROM BS_ALARM
 		WHERE BABYNO=#{babyNo}
 	</select>
 	
 	<insert id="insertAlarm" parameterType="BS_Alarm" >
-		INSERT INTO BS_ALARM (ALARMNO, BABYNO, ALARMTITLE,ALARMTIME)
+		INSERT INTO BS_ALARM (ALARMNO, BABYNO, USERNO, ALARMTITLE,ALARMTIME)
 		VALUES (BS_ALARMSEQ.NEXTVAL,
 		#{babyNo},
 		#{alarmTitle},
@@ -31,8 +31,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	 
 	<select id="selectAlarm" parameterType="BS_Alarm" resultType="BS_Alarm">
-		SELECT ALARMNO, BABYNO, ALARMTITLE, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME"
+		SELECT ALARMNO, BABYNO, USERNO, ALARMTITLE, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME"
 		FROM BS_ALARM
 		WHERE ALARMNO = #{alarmNo}
+	</select>
+	
+	<select id="selectAlarmList" parameterType="Integer" resultType="BS_Alarm">
+		SELECT ALARMNO, BABYNO, USERNO, ALARMTITLE, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME"
+		FROM BS_ALARM
+		WHERE ((USERNO = #{userNo}) AND (TO_CHAR(ALARMTIME,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')))
 	</select>
 </mapper>
