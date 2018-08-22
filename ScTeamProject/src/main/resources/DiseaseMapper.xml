@@ -10,11 +10,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select 
 			diseasenum,
 			diseasename,
-			vaccintype,
+			vaccinetype,
 			diseasecontent,
-			vaccindate
+			vaccinedate
+		from 
+			disease
+		order by 
+			diseasenum	
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="Disease">
+		select 
+			diseasenum,
+			diseasename,
+			vaccinetype,
+			diseasecontent,
+			vaccinedate
 		from 
 			disease	
+		where
+			diseasenum = #{diseasenum}
 	</select>
 	
 </mapper>

@@ -6,22 +6,66 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-	function selectSubmit(){
-		var searchForm = document.getElementById("searchForm");
-		searchForm.submit();
+	$(function(){
+	
+	$('#firstCity').on('change',function(){
+		var brtcCd = $('#firstCity').val();
+		$.ajax({
+				url:'SearchSecondCity',
+				method:'get',
+				data:{'brtcCd':brtcCd},
+				success:secondCityOutput
+			});
+		
+		});
+	
+	$('#btn').on('click',btnClick);
+	
+	});//$(function
+	
+	function btnClick(){
+		searchHospital(0);
+	};
+	
+	function secondCityOutput(resp){
+		var result = '<option selected disabled="disabled">시/군/구</option>';
+		$.each(resp,function(index,item){
+			result += '<option value="'+item.cityCode+'">'+item.cityName+'</option>';
+		});
+		
+		$('#secondCity').html(result);
+	}//secondCityOutput
+	
+	function hospitalOutput(resp){
+		var result = '<tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr>';
+		$.each(resp.vhList,function(index,item){
+			result += '<tr><td>'+item.orgnm+'</td>';
+			result += '<td>'+item.orgTlno+'</td>';
+			result += '<td>'+item.orgAddr+'</td></tr>';
+		});
+		
+		$('#vaccineHospital').html(result);
+		
+		var paging="";
+		for(var i=0;i<((Number(resp.totalCount)+15-1)/15)-1;i++){
+			paging += '<a href="javascript:searchHospital('+i+')">'+(i+1)+'</a>'+'&nbsp';
+			$('#paging').html(paging);
+		}	
 	}
 	
-	function registerPopup(babyNo,diseaseNum,diseaseName,vaccineType){
-		var url = "registerPopup?babyNo="+babyNo+"&diseaseNum="+diseaseNum+"&diseaseName="+diseaseName+"&vaccineType="+vaccineType;
-		window.open(url, "", "width=400, height=300, left=100, top=50");
+	function searchHospital(p){
+		var brtcCd = $('#firstCity').val();
+		var sggCd = $('#secondCity').val();
+		var page = p+1;
+		
+		$.ajax({
+			url:'Searchhospital',
+			method:'get',
+			data:{'brtcCd':brtcCd, 'sggCd':sggCd, 'page':page},
+			success:hospitalOutput
+		});
 	}
-	
-	function infoPopup(diseaseNum){
-		var url = "diseaseDetail?diseasenum="+diseaseNum;
-		window.open(url, "", "width=400, height=300, left=100, top=50");
-	}
-	
-	
+
 </script>
 
 
@@ -64,44 +108,20 @@
 	</nav>
 	
 	
-	<form id="searchForm" action="vaccineForm" method="get">
-	<select id="babyNo" name="babyNo" onchange="selectSubmit()">
-			<option selected disabled="disabled">아이선택</option>
-			<c:forEach var="baby" items="${babyList}">
-				<option value="${baby.babyNo}" ${baby.babyNo == babyNo ? 'selected' : ''}>${baby.babyName}</option>
-			</c:forEach>
-		</select>
-	</form>
+	<select id="firstCity">
+		<option selected disabled="disabled">시/도</option>
+		<c:forEach var="list" items="${list}">
+			<option value="${list.cityCode}">${list.cityName}</option>
+		</c:forEach>	
+	</select>
 	
-	<a href="vaccineFormForHospital">어린이 국가예방접종 지정 의료기관 조회</a>
-	<table border="1">	
-		<c:forEach var="vaccine" items="${vaccineList}">
-			<tr>
-				<td>
-				<c:if test="${vaccine.vaccineCheck == 'Y'}">
-				<img src="./resources/image/afterVaccine.png">
-				</c:if>
-				<c:if test="${vaccine.vaccineCheck != 'Y'}">		
-				<img src="./resources/image/beforeVaccine.png">
-				</c:if>
-				</td>
-				
-				<td>
-				<a href="javascript:registerPopup(${vaccine.babyNo},${vaccine.diseaseNum},'${vaccine.diseaseName}','${vaccine.vaccineType}')">
-					${vaccine.diseaseName}<br>
-					${vaccine.vaccineType}<br>
-					권장일: ${vaccine.vaccineDate}<br>
-					접종일: ${vaccine.checkDate}<br>
-					국가예방접종
-				</a>
-				</td>
-				
-				<td>
-					<a href="javascript:infoPopup(${vaccine.diseaseNum})">질병상세정보</a>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
+	<select id="secondCity"></select>
+	
+	<input id="btn" type="button" value="검색">
+	
+	<table id="vaccineHospital" border="1"></table>
+	
+	<div id="paging"></div>
 	
 </body>
 </html>

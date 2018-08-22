@@ -3,7 +3,7 @@ package com.scmaster.vo;
 public class Disease {
 	private int diseasenum;
 	private String diseasename;
-	private String vaccintype;
+	private String vaccinetype;
 	private String diseasecontent;
 	private int vaccindate;
 	
@@ -11,11 +11,11 @@ public class Disease {
 		super();
 	}
 
-	public Disease(int diseasenum, String diseasename, String vaccintype, String diseasecontent, int vaccindate) {
+	public Disease(int diseasenum, String diseasename, String vaccinetype, String diseasecontent, int vaccindate) {
 		super();
 		this.diseasenum = diseasenum;
 		this.diseasename = diseasename;
-		this.vaccintype = vaccintype;
+		this.vaccinetype = vaccinetype;
 		this.diseasecontent = diseasecontent;
 		this.vaccindate = vaccindate;
 	}
@@ -36,12 +36,12 @@ public class Disease {
 		this.diseasename = diseasename;
 	}
 
-	public String getVaccintype() {
-		return vaccintype;
+	public String getVaccinetype() {
+		return vaccinetype;
 	}
 
-	public void setVaccintype(String vaccintype) {
-		this.vaccintype = vaccintype;
+	public void setVaccinetype(String vaccinetype) {
+		this.vaccinetype = vaccinetype;
 	}
 
 	public String getDiseasecontent() {
@@ -62,7 +62,7 @@ public class Disease {
 
 	@Override
 	public String toString() {
-		return "Disease [diseasenum=" + diseasenum + ", diseasename=" + diseasename + ", vaccintype=" + vaccintype
+		return "Disease [diseasenum=" + diseasenum + ", diseasename=" + diseasename + ", vaccinetype=" + vaccinetype
 				+ ", diseasecontent=" + diseasecontent + ", vaccindate=" + vaccindate + "]";
 	}
 	
