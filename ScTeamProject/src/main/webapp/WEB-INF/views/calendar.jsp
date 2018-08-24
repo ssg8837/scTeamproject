@@ -16,6 +16,7 @@
 	<form class="selectForm" method="post">
 		<input name="alarmNo" id="alarmNo" type="hidden">
   	</form>
+			<input type="hidden" id="loginNo" name="loginNo" value="${sessionScope.loginNo}">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -41,7 +42,21 @@
 	        <li><a href="#">다이어리</a></li>
 	        <li><a href="#">SNS</a></li>
 	        <li><a href="#">게시판</a></li>
-	      </ul>	      
+	      </ul>	  
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><span class="caret"></span><span id="alarmNum"></span></a>
+	          <ul class="dropdown-menu" role="menu" id="listMenu">
+	          <!--  <li><a href="#">Action</a></li>
+	            <li><a href="#">Another action</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">Separated link</a></li>
+	           -->
+	           
+	          </ul>
+	        </li>
+      	</ul>	         
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
@@ -58,5 +73,6 @@
 	    <script src="./resources/js/alarm/locale-all.js"></script>
 	    <script src="./resources/js/alarm/ko.js"></script>
 	    <script src="./resources/js/alarm/calender.js"></script>
+	    <script src="./resources/js/home/bell.js"></script>
 </body>
 </html>

@@ -23,6 +23,7 @@
 		});
 	})
 	</script>
+	    <script src="./resources/js/home/bell.js"></script>
 </head>
 <body>
 	<div>

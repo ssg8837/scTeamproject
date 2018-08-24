@@ -14,7 +14,7 @@ $(
 					var count=0;
 					var htmlStr="";
 					$.each(data,function(index,item){
-						htmlStr+='<li><a href="#">'+item.alarmTitle+'</a></li>'
+						htmlStr+='<li><a href="#">'+item.alarmTitle+" ["+item.alarmTime+"]"+'</a></li>'
 						count++;
 					});
 					$('#alarmNum').text(count);
