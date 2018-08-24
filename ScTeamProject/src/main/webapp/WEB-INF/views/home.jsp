@@ -32,7 +32,7 @@
 	        <li><a href="vaccineForm">예방접종</a></li>
 	        <li><a href="hospital_Test">병원찾기</a></li>
 	        <li><a href="#">기상확인</a></li>
-	        <li><a href="#">다이어리</a></li>
+	        <li><a href="babyBookForm">다이어리</a></li>
 	        <li><a href="#">SNS</a></li>
 	        <li><a href="#">게시판</a></li>
 	      </ul>	      

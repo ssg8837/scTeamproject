@@ -73,6 +73,10 @@ public class VaccineController {
 			
 			cal.add(Calendar.MONTH, Integer.parseInt(vaccineList3.get(i).getVaccineDate()));
 			vaccineList3.get(i).setVaccineDate(cal.get(Calendar.YEAR)+"년 "+cal.get(Calendar.MONTH)+"월");
+			
+			if(vaccineList3.get(i).getDiseaseName().equals("인플루엔자 (Influenza : Flu)")) {
+				vaccineList3.get(i).setVaccineDate("매년");
+			}
 		}
 		
 		model.addAttribute("babyList", babyList);
@@ -106,15 +110,18 @@ public class VaccineController {
 		return "registerPopup";
 	}
 	
-	//접종등록	
+	//접종등록취소	
 	@RequestMapping(value = "/registerCheck", method = RequestMethod.GET)
-	public @ResponseBody String registerCheck(int babyNo, int diseaseNum,String checkdate, String memo, String vaccineType){
+	public @ResponseBody String registerCheck(int babyNo, int diseaseNum, String vaccineCheck, String checkdate, String memo, String vaccineType){
 	
 		VaccineMapper vaccineMapper = sqlSession.getMapper(VaccineMapper.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("babyNo", babyNo);
 		map.put("diseaseNum", diseaseNum);
-		map.put("checkdate", checkdate.replace("-", ""));
+		map.put("vaccineCheck", vaccineCheck);
+		if(checkdate!=null) {
+			map.put("checkdate", checkdate.replace("-", ""));
+		}
 		map.put("vaccineType", vaccineType);
 		map.put("memo", memo);
 			

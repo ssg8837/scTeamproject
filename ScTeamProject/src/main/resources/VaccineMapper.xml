@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateVaccine" parameterType="map">
 		update vaccine
 		set 
-			vaccinecheck = 'Y',
+			vaccinecheck = #{vaccineCheck},
 			checkdate = to_date(#{checkdate},'yyyymmdd'),
 			memo = #{memo}
 		where
