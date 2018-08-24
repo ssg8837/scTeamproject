@@ -8,6 +8,7 @@
 	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
 	    <link href="./resources/css/cover.css" rel="stylesheet">
+	    <link href="./resources/functions/map.css" rel="stylesheet">
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -39,11 +40,26 @@
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
-	<div id="map" style="border-top:100px;width:500px;height: 500px"></div>
-	<button onclick="showMarkers()">병원표시</button>&nbsp;<button onclick="hideMarkers()">병원 숨기기</button>
+	<div class="map_wrap">
+		<div id="map" style="width:100%;height:100%;overflow:hidden;"></div>
 
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e2f3241393e98d4d475a38553e4f353"></script>
+		<div id="menu_wrap" class="bg_white">
+	        <div class="option">
+	            <div>
+	                <form onsubmit="searchPlaces(); return false;">
+	                    키워드 : <input type="text" placeholder="원하시는 병원의 구주소나 신주소를 입력해주세요" id="keyword" value="삼성동" size="15"> 
+	                    <button type="submit">검색하기</button> 
+	                </form>
+	            </div>
+	        </div>
+	        <hr>
+	        <ul id="placesList"></ul>
+	        <div id="pagination"></div>
+   		</div>
+</div>
+
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e2f3241393e98d4d475a38553e4f353&libraries=services,clusterer,drawing"></script>
+<script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="./resources/js/bootstrap.min.js"></script>
 <script src="./resources/functions/map.js">

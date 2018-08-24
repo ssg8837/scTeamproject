@@ -9,12 +9,61 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	 $(function() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+			$.ajax({
+				url:"hospital_myLocation",
+				type:"get",
+				data:{
+					"lat": position.coords.latitude,
+					"lon" : position.coords.longitude
+				},
+				success:function(data){
+					var result = "";
+					for (var i = 0; i < data.length; i++) {
+						result += "<div>거리 : " + data[i].distance + "km</div>";
+						result += "<div>hpid : " + data[i].hpid + "</div>";
+						result += "<div>주소 : " + data[i].address + "</div>";
+						result += "<div>병원명 : " + data[i].name + "</div>";
+						result += "<div>병원구분 : " + data[i].divNam + "</div>";
+						result += "<div>전화번호 : " + data[i].phone + "</div>";
+						result += "<div>경도 : " + data[i].latitude + "</div>";
+						result += "<div>위도 : " + data[i].longitude + "</div>";
+						result += "<div>운영시간 : " + data[i].time + "</div>";
+						result += "<div>페이지 : " + (i+1) + "</div></br>";
+					}
+					$('.location').html(result);
+				},
+				error:function(request,status,error){
+			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+				}
+				});
+			});
+		}
 		$(".hospital_All").on('click', function() {
 			$.ajax({
 				url:"hospital_All",
 				type:"get",
 				success:function(data){
-					$('.hospitals').html(data);
+					var result = "";
+					for (var i = 0; i < data.length; i++) {
+						result += "<div>hpid : " + data[i].hpid + "</div>";
+						result += "<div>주소 : " + data[i].address + "</div>";
+						result += "<div>병원명 : " + data[i].name + "</div>";
+						result += "<div>병원구분 : " + data[i].divNam + "</div>";
+						result += "<div>전화번호 : " + data[i].phone + "</div>";
+						result += "<div>경도 : " + data[i].latitude + "</div>";
+						result += "<div>위도 : " + data[i].longitude + "</div>";
+						result += "<div>운영시간 : " + data[i].time + "</div>";
+						if (data[i].eryn == 1) {
+							result += "<div>응급실운영여부 : 운영</div>";
+							result += "<div>응급실번호 : " + data[i].eryynphone + "</div>";
+						} if (data[i].eryn != 1) {
+							result += "<div>응급실운영여부 : 미운영</div>";
+						}
+						result += "<div>페이지 : " + (i+1) + "</div></br>";
+					}
+					$('.hospitals').html(result);
 				},
 				error:function(data){
 					alert('컨트롤러 통신 에러');
@@ -25,22 +74,9 @@
 	</script>
 </head>
 <body>
-	<div>
-		<c:forEach var="hspts" items="${hspts }" varStatus="status">
-			<div>거리 : ${hspts.distance}km</div>
-			<div>hpid : ${hspts.hpid}</div>
-			<div>주소 : ${hspts.address}</div>
-			<div>병원명 : ${hspts.name}</div>
-			<div>병원구분 : ${hspts.divNam}</div>
-			<div>전화번호 : ${hspts.phone}</div>
-			<div>경도 : ${hspts.latitude}</div>
-			<div>위도 : ${hspts.longitude}</div>
-			<div>운영시간 : ${hspts.time}</div>
-			<div>페이지 : ${status.count}</div></br>
-		</c:forEach>
-	</div>
+	<div class="hospitals"></div>
 	<input type="button" class="hospital_All" value="병원데이타전송"></br>
-	<p class="hospitals"></p>
+	<div class="location"></div>
 <!-- 검색 기능을 표시할 <div>를 생성한다 -->
 
 <div id="postcodify"></div>

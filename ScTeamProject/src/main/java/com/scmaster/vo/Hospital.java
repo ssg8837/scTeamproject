@@ -28,7 +28,7 @@ public class Hospital {
 		this.eryn = eryn;
 		this.eryynphone = eryynphone;
 		this.time = time;
-		Latitude = latitude;
+		this.Latitude = latitude;
 		this.longitude = longitude;
 		this.distance = distance;
 	}
@@ -102,7 +102,7 @@ public class Hospital {
 	}
 
 	public void setLatitude(String latitude) {
-		Latitude = latitude;
+		this.Latitude = latitude;
 	}
 
 	public String getLongitude() {
