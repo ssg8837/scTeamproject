@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.scmaster.mapper.BabyBookMapper">
+	
+	<insert id="insertBabyBook" parameterType="BabyBook">
+		insert into babybook(
+			boardnum,
+			userid,
+			title, 
+			content, 
+			regdate,
+			originalfile, 
+			savedfile)
+		values(
+			babybook_seq.nextval,
+			#{userid},
+			#{title},
+			#{content},
+			sysdate,
+			#{originalfile},
+			#{savedfile}
+		)
+	</insert>
+	
+	<select id="selectList" resultType="BabyBook">
+		select * from babybook
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="BabyBook">
+		select * from babybook where boardnum = #{boardnum}
+	</select>
+	
+	
+	
+</mapper>
