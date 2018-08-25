@@ -8,4 +8,6 @@ public interface DiseaseMapper {
 
 	public List<Disease> selectList();
 
+	public Disease selectOne(int diseasenum);
+
 }

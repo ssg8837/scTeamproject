@@ -4,6 +4,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	function selectSubmit(){
+		var searchForm = document.getElementById("searchForm");
+		searchForm.submit();
+	}
+	
+	function registerPopup(babyNo,diseaseNum,diseaseName,vaccineType){
+		var url = "registerPopup?babyNo="+babyNo+"&diseaseNum="+diseaseNum+"&diseaseName="+diseaseName+"&vaccineType="+vaccineType;
+		window.open(url, "", "width=400, height=300, left=100, top=50");
+	}
+	
+	function infoPopup(diseaseNum){
+		var url = "diseaseDetail?diseasenum="+diseaseNum;
+		window.open(url, "", "width=400, height=300, left=100, top=50");
+	}
+	
+	
+</script>
+
+
 <title>Insert title here</title>
 
 <!-- 부트스트랩 -->
@@ -58,28 +79,40 @@
 	</nav>
 	
 	
-	<select name="searchBaby">
-		<option selected disabled="disabled">아이선택</option>
-		<c:forEach var="baby" items="${babyList}">
-			<option value="${baby.babyNo}">${baby.babyName}</option>
-		</c:forEach>
-	</select>
+	<form id="searchForm" action="vaccineForm" method="get">
+	<select id="babyNo" name="babyNo" onchange="selectSubmit()">
+			<option selected disabled="disabled">아이선택</option>
+			<c:forEach var="baby" items="${babyList}">
+				<option value="${baby.babyNo}" ${baby.babyNo == babyNo ? 'selected' : ''}>${baby.babyName}</option>
+			</c:forEach>
+		</select>
+	</form>
 	
-	
-	<table border="1">
-		<c:forEach var="list" items="${list}">
+	<a href="vaccineFormForHospital">어린이 국가예방접종 지정 의료기관 조회</a>
+	<table border="1">	
+		<c:forEach var="vaccine" items="${vaccineList}">
 			<tr>
 				<td>
-					<img src="./resources/image/beforeTest.png">
+				<c:if test="${vaccine.vaccineCheck == 'Y'}">
+				<img src="./resources/image/afterVaccine.png">
+				</c:if>
+				<c:if test="${vaccine.vaccineCheck != 'Y'}">		
+				<img src="./resources/image/beforeVaccine.png">
+				</c:if>
 				</td>
+				
 				<td>
-					${list.diseasename}<br>
-					${list.vaccintype}<br>
-					권장일: ${list.vaccintype}<br>
+				<a href="javascript:registerPopup(${vaccine.babyNo},${vaccine.diseaseNum},'${vaccine.diseaseName}','${vaccine.vaccineType}')">
+					${vaccine.diseaseName}<br>
+					${vaccine.vaccineType}<br>
+					권장일: ${vaccine.vaccineDate}<br>
+					접종일: ${vaccine.checkDate}<br>
 					국가예방접종
+				</a>
 				</td>
+				
 				<td>
-					:
+					<a href="javascript:infoPopup(${vaccine.diseaseNum})">질병상세정보</a>
 				</td>
 			</tr>
 		</c:forEach>
