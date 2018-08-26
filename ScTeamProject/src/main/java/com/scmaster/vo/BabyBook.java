@@ -2,22 +2,24 @@ package com.scmaster.vo;
 
 public class BabyBook {
 	private int boardnum;		
-	private String userid;		
+	private int userNo;	
+	private int babyNo;				
 	private String title;		
 	private String content;			
 	private String regdate;
 	private String originalfile;
 	private String savedfile;
 	
-	public BabyBook() {
-		super();
+	public BabyBook()
+	{
+		
 	}
-
-	public BabyBook(int boardnum, String userid, String title, String content, String regdate, String originalfile,
-			String savedfile) {
-		super();
+	
+	public BabyBook(int boardnum, int userNo, int babyNo, String title, String content, String regdate,
+			String originalfile, String savedfile) {
 		this.boardnum = boardnum;
-		this.userid = userid;
+		this.userNo = userNo;
+		this.babyNo = babyNo;
 		this.title = title;
 		this.content = content;
 		this.regdate = regdate;
@@ -29,16 +31,24 @@ public class BabyBook {
 		return boardnum;
 	}
 
-	public void setBoardnum(int boardnum) {
-		this.boardnum = boardnum;
+	public void setBoardnum(int boardNum) {
+		this.boardnum = boardNum;
 	}
 
-	public String getUserid() {
-		return userid;
+	public int getUserNo() {
+		return userNo;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+
+	public int getBabyNo() {
+		return babyNo;
+	}
+
+	public void setBabyNo(int babyNo) {
+		this.babyNo = babyNo;
 	}
 
 	public String getTitle() {
@@ -83,9 +93,9 @@ public class BabyBook {
 
 	@Override
 	public String toString() {
-		return "BabyBook [boardnum=" + boardnum + ", userid=" + userid + ", title=" + title + ", content=" + content
-				+ ", regdate=" + regdate + ", originalfile=" + originalfile + ", savedfile=" + savedfile + "]";
+		return "BabyBook [boardnum=" + boardnum + ", userNo=" + userNo + ", babyNo=" + babyNo + ", title=" + title
+				+ ", content=" + content + ", regdate=" + regdate + ", originalfile=" + originalfile + ", savedfile="
+				+ savedfile + "]";
 	}
-	
-	
+		
 }

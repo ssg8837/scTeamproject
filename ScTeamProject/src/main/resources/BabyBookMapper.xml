@@ -7,33 +7,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.scmaster.mapper.BabyBookMapper">
 	
 	<insert id="insertBabyBook" parameterType="BabyBook">
-		insert into babybook(
-			boardnum,
-			userid,
-			title, 
-			content, 
-			regdate,
-			originalfile, 
-			savedfile)
-		values(
-			babybook_seq.nextval,
-			#{userid},
+		INSERT INTO BABYBOOK(
+			BOARDNUM,
+			USERNO,
+			BABYNO,
+			TITLE, 
+			CONTENT, 
+			REGDATE,
+			ORIGINALFILE, 
+			SAVEDFILE)
+		VALUES(
+			BABYBOOK_SEQ.NEXTVAL,
+			#{userNo},
+			#{babyNo},
 			#{title},
 			#{content},
-			sysdate,
+			SYSDATE,
 			#{originalfile},
 			#{savedfile}
 		)
 	</insert>
 	
 	<select id="selectList" resultType="BabyBook">
-		select * from babybook
+		SELECT BOARDNUM,
+			USERNO,
+			BABYNO,
+			TITLE, 
+			CONTENT, 
+			REGDATE,
+			ORIGINALFILE, 
+			SAVEDFILE FROM BABYBOOK
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="BabyBook">
-		select * from babybook where boardnum = #{boardnum}
+		SELECT BOARDNUM,
+			USERNO,
+			BABYNO,
+			TITLE, 
+			CONTENT, 
+			REGDATE,
+			ORIGINALFILE, 
+			SAVEDFILE FROM BABYBOOK 
+			WHERE BOARDNUM = #{boardnum}
 	</select>
-	
+	<!-- selectBabyBookListLoginNo  -->
+	<select id="selectBabyBookListLoginNo" parameterType="int" resultType="BabyBook">
+		SELECT BOARDNUM,
+			USERNO,
+			BABYNO,
+			TITLE, 
+			CONTENT, 
+			REGDATE,
+			ORIGINALFILE, 
+			SAVEDFILE FROM BABYBOOK
+			WHERE USERNO = #{userNo}
+	</select>
 	
 	
 </mapper>

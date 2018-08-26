@@ -69,9 +69,9 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
 	    <script src="./resources/js/moment.min.js"></script>
-	    <script src="./resources/js/alarm/fullcalendar.min.js"></script>
-	    <script src="./resources/js/alarm/locale-all.js"></script>
-	    <script src="./resources/js/alarm/ko.js"></script>
+	    <script src="./resources/js/fullcalendar/fullcalendar.min.js"></script>
+	    <script src="./resources/js/fullcalendar/locale-all.js"></script>
+	    <script src="./resources/js/fullcalendar/ko.js"></script>
 	    <script src="./resources/js/alarm/calender.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
 </body>
