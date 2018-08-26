@@ -16,6 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -160,17 +166,37 @@ public class BabyBookController {
         return jsonMsg;
 	}
 	
-	@RequestMapping("/getImage")
-	public void getImage(HttpServletRequest req, HttpSession session, HttpServletResponse res, @RequestParam HashMap<String, String> map) throws Exception {
+	@RequestMapping(value = "/getImage",method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<InputStreamResource> getImage(int boardnum ) throws Exception {
 
 		BabyBookMapper bookMapper=sqlSession.getMapper(BabyBookMapper.class);
 		BabyBook book = bookMapper.selectOne(1);
 		String fullname=book.getSavedfile();
-		fullname.split(regex, limit)
-		String realFile = UPLOADPATH;
-		String fileNm = "파일명";
-		String ext = "파일의 확장자";
+		//String[] name= fullname.split(".");
+		//String fileNm = name[0];
+		//String ext = name[1];
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
 
+		responseHeaders.setContentType(MediaType.IMAGE_JPEG);
+		
+		String path = String.format("%s//%s", UPLOADPATH, fullname);
+
+		FileSystemResource resource = new FileSystemResource(path);
+
+
+		return new ResponseEntity<InputStreamResource>(new InputStreamResource(resource.getInputStream()), responseHeaders, HttpStatus.OK);
+
+
+
+		
+		
+		//return new InputStreamResource(resource.getInputStream());
+
+
+
+		/*
+		System.out.println("DSAd");
 		BufferedOutputStream out = null;
 		InputStream in = null;
 
@@ -193,6 +219,8 @@ public class BabyBookController {
 			if(out != null){ out.close(); }
 			if(in != null){ in.close(); }
 		}
+		return null;
+		*/
 	}
 	
 	

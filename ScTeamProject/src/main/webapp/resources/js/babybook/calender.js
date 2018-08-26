@@ -47,7 +47,7 @@ function babyBookOutput(resp){
 		result += '<input id="title" name="title" type="text" disabled value="'+resp.title+'">';
 		result += '<p>내용</p>';
 		result += '<textarea id="content" name="content" rows="10" cols="100" disabled>'+resp.content+'</textarea><br />';
-		result += '<img id="image_section" src="#" alt="your image" /><br/>';
+		result += '<img id="image_section" src="/home/getImage/" alt="your image" /><br/>';
 		result += '</form>';
 		
 		$('#babyBookDetail').html(result);
