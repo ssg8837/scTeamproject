@@ -170,11 +170,8 @@ public class BabyBookController {
 	public @ResponseBody ResponseEntity<InputStreamResource> getImage(int boardnum ) throws Exception {
 
 		BabyBookMapper bookMapper=sqlSession.getMapper(BabyBookMapper.class);
-		BabyBook book = bookMapper.selectOne(1);
+		BabyBook book = bookMapper.selectOne(boardnum);
 		String fullname=book.getSavedfile();
-		//String[] name= fullname.split(".");
-		//String fileNm = name[0];
-		//String ext = name[1];
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 
@@ -187,40 +184,6 @@ public class BabyBookController {
 
 		return new ResponseEntity<InputStreamResource>(new InputStreamResource(resource.getInputStream()), responseHeaders, HttpStatus.OK);
 
-
-
-		
-		
-		//return new InputStreamResource(resource.getInputStream());
-
-
-
-		/*
-		System.out.println("DSAd");
-		BufferedOutputStream out = null;
-		InputStream in = null;
-
-		try {
-			res.setContentType("image/" + ext);
-			res.setHeader("Content-Disposition", "inline;filename=" + fileNm);
-			File file = new File(realFile);
-			if(file.exists()){
-				in = new FileInputStream(file);
-				out = new BufferedOutputStream(res.getOutputStream());
-				int len;
-				byte[] buf = new byte[1024];
-				while ((len = in.read(buf)) > 0) {
-					out.write(buf, 0, len);
-				}
-			}
-		} catch (Exception e) {
-		} finally {
-			if(out != null){ out.flush(); }
-			if(out != null){ out.close(); }
-			if(in != null){ in.close(); }
-		}
-		return null;
-		*/
 	}
 	
 	
