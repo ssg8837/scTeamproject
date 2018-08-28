@@ -163,7 +163,6 @@ public class AlarmController {
     		MainMapper mainMapper=sqlSession.getMapper(MainMapper.class);
     		Object loginNo=httpSession.getAttribute("loginNo");
     		ArrayList<BS_Alarm> alarmList= new ArrayList<BS_Alarm>();
-    		ArrayList<String> nameList =new ArrayList<String>();
     		if(loginNo!=null)
     		{
 				List<Cal_Event> events = new ArrayList<Cal_Event>();

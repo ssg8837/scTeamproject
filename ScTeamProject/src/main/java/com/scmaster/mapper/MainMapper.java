@@ -14,5 +14,6 @@ public interface MainMapper {
 	void insertBaby(BS_Baby baby);
 	BS_Baby selectBaby(int babyNo);
 	int countUser(String userId);
+	int selectUserById(String userId);
 	
 }
