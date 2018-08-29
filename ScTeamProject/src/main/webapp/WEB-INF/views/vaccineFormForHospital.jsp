@@ -21,6 +21,7 @@
 	
 	$('#btn').on('click',btnClick);
 	
+	
 	});//$(function
 	
 	function btnClick(){
@@ -38,10 +39,12 @@
 	
 	function hospitalOutput(resp){
 		var result = '<tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr>';
+		
 		$.each(resp.vhList,function(index,item){
-			result += '<tr><td>'+item.orgnm+'</td>';
+			result += '<tr onclick="javascript:sendHospital(';
+			result += "'"+item.orgAddr+"'"+')"><td>'+item.orgnm+'</td>';
 			result += '<td>'+item.orgTlno+'</td>';
-			result += '<td>'+item.orgAddr+'</td></tr>';
+			result += '<td id="hospitalAddr">'+item.orgAddr+'</td></tr>';
 		});
 		
 		$('#vaccineHospital').html(result);
@@ -65,6 +68,11 @@
 			success:hospitalOutput
 		});
 	}
+	
+	
+	function sendHospital(hospitalAddr){
+		location.href='sendHospital?hospitalAddr='+hospitalAddr;
+	}; 
 
 </script>
 
