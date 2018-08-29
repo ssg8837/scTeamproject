@@ -7,6 +7,7 @@
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
+	    <link href="./resources/css/home/common_boot.css" rel="stylesheet">
 	</head>
 	<body style='margin-top:70px;'>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -40,13 +41,6 @@
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><span class="caret"></span><span id="alarmNum"></span></a>
 	          <ul class="dropdown-menu" role="menu" id="listMenu">
-	          <!--  <li><a href="#">Action</a></li>
-	            <li><a href="#">Another action</a></li>
-	            <li><a href="#">Something else here</a></li>
-	            <li class="divider"></li>
-	            <li><a href="#">Separated link</a></li>
-	           -->
-	           
 	          </ul>
 	        </li>
       	</ul>	        
@@ -54,13 +48,31 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-			ID:<input type='text' id='userId' name='userId'><br>
-			PWD:<input type='password' id='userPwd' name='userPwd'><br>
-			주소:<input type='text' id='userAddr' name='userAddr'><br>
-			이메일:<input type='text' id='userEmail' name='userEmail'><br>
-			전화번호:<input type='text' id='userPhone' name='userPhone'><br>
-			닉네임:<input type='text' id='userNick' name='userNick'><br>
-			<button type='button' onclick='javascript:insertNewAccount();'>회원가입</button>
+			<div class='input-group col-xs-4'>
+				<span class="input-group-addon">ID</span>
+				<input class="form-control " type='text' id='userId' name='userId'>
+			</div>
+			<div class='input-group col-xs-4'>
+				<span class="input-group-addon">PWD</span>
+				<input class="form-control " type='password' id='userPwd' name='userPwd'>
+			</div>
+			<div class='input-group col-xs-4'>
+				<span class="input-group-addon">주소</span>
+				<input class="form-control " type='text' id='userAddr' name='userAddr'>
+			</div>
+			<div class='input-group col-xs-4'>
+				<span class="input-group-addon">이메일</span>
+				<input class="form-control " type='text' id='userEmail' name='userEmail'>
+			</div>
+			<div class='input-group col-xs-4'>
+				<span class="input-group-addon">전화번호</span>
+				<input class="form-control " type='text' id='userPhone' name='userPhone'>
+			</div>
+			<div class='input-group col-xs-4'>
+				<span class="input-group-addon">닉네임</span>
+				<input class="form-control "type='text' id='userNick' name='userNick'>
+			</div>
+			<button class='btn btn-primary'  type='button' onclick='javascript:insertNewAccount();'>회원가입</button>
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.js"></script>

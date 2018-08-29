@@ -7,7 +7,7 @@
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
-	    <link href="./resources/css/cover.css" rel="stylesheet">
+	    <link href="./resources/css/home/common_boot.css" rel="stylesheet">
 	</head>
 	<body style='margin-top:70px;'>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -40,13 +40,6 @@
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><span class="caret"></span><span id="alarmNum"></span></a>
 	          <ul class="dropdown-menu" role="menu" id="listMenu">
-	          <!--  <li><a href="#">Action</a></li>
-	            <li><a href="#">Another action</a></li>
-	            <li><a href="#">Something else here</a></li>
-	            <li class="divider"></li>
-	            <li><a href="#">Separated link</a></li>
-	           -->
-	           
 	          </ul>
 	        </li>
       	</ul>	      
@@ -57,14 +50,24 @@
 	<c:if test='${sessionScope.loginId == null }'>
 		<form id='home' action='./' method='get'>
 		</form>
-			ID:<input type='text' id='userid' name='userid'><br>
-			PWD:<input type='password' id='userpwd' name='userpwd'>
-			<button type='button' onclick="javascript:login();">로그인</button>
-			<button type='button' onclick="location.href='openNewAccount'">회원가입</button>
+			<div class='input-group col-xs-4'>
+				<span class="input-group-addon">ID</span>
+				<input class="form-control " type='text' id='userid' name='userid'>
+			</div>
+			<div class='input-group col-xs-4'>
+				<span class="input-group-addon">PW</span>
+				<input class="form-control " type='password' id='userpwd' name='userpwd'>
+			</div>
+			<button class='btn btn-primary' type='button' onclick="javascript:login();">로그인</button>
+			<button class='btn btn-primary' type='button' onclick="location.href='openNewAccount'">회원가입</button>
 	</c:if>
 	<c:if  test='${sessionScope.loginId != null }'>
 		<c:if test='${babyList !=null }'>
-			<table>
+			<table class="table ">
+			<tr>
+				<th>이름</th>
+				<th>성별</th>
+			</tr>
 				<c:forEach var='baby' items='${babyList }'>
 					<tr>
 						<th>${baby.babyName }</th>
@@ -74,8 +77,8 @@
 			</table>
 			<input type="hidden" id="loginNo" name="loginNo" value="${sessionScope.loginNo}">
 		</c:if>
-		<button type='submit' onclick="location.href='openNewBaby'">아이등록</button>
-		<button type='submit' onclick="location.href='logout'">로그아웃</button>
+		<button class='btn btn-primary' type='submit' onclick="location.href='openNewBaby'">아이등록</button>
+		<button class='btn btn-primary' type='submit' onclick="location.href='logout'">로그아웃</button>
 	</c:if>
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
