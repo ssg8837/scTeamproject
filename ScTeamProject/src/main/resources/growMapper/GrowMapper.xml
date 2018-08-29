@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.scmaster.mapper.GrowMapper">	
+	<!-- 아이정보 가져오기 -->
+	<select id="showBabyData" resultType="Grow">
+		select *
+		from grow
+		where babyno=#{babyno}
+		order by growregdate asc
+	</select>
+	
+	<!-- 아이정보 가져오기 : bmi만 -->
+	<select id="showBabyBMI" resultType="Grow">
+		select babyno, userno, babyname, babygender, babybirth, babyage, growregdate, growbmi
+		from grow
+		where babyno=#{babyno} and babyage >= 24
+		order by growregdate asc
+	</select>
+
+	<!-- 아이성장기록조회 -->
+	<select id="showBabyDataByAge" parameterType="HashMap" resultType="HashMap">
+		select 	g.babyno, g.babyname, g.babygender, g.growheight, g.growweight, g.growhead, g.babyage, g.growbmi,
+				gd.gender, gd.age, gd.height, gd.weight_a, gd.head, gd.bmi, 
+				(g.growheight - gd.height) m1, (g.growweight - gd.weight_a) m2, (g.growhead - gd.head) m3
+		from 	grow g, grow_default gd
+		where 	g.babyno = #{babyno}
+				and g.babyage = #{babyage}
+				and g.babyage = gd.age
+				and g.babygender = gd.gender
+	</select>
+	
+	<!-- 아이성장정보 수정 -->
+	<update id="updateGrowData" parameterType="HashMap">
+		update 	grow
+		set		growheight = #{newGrowHeight}, growweight = #{newGrowWeight}, growhead = #{newGrowHead}, growbmi = ROUND((#{newGrowWeight}/#{newGrowHeight}/#{newGrowHeight}*10000),2)
+		where	babyno = #{babyno} and babyage = #{babyage}
+	</update>	
+	<!-- 아이별 마지막 성장기록갱신일 가져오기 -->
+	<select id="lastInsertData" resultType="Grow">
+		SELECT *
+		FROM
+			( 	SELECT babyno, userno, babyname, babygender, babybirth, growheight, growweight, growhead, babyage, growregdate, growbmi, ROW_NUMBER() OVER(ORDER BY growregdate DESC) AS RN
+				FROM grow
+				WHERE babyno = #{babyno}
+			)
+		WHERE	RN = 1
+	</select>
+	
+	<!-- 아이성장기록 작성 -->
+	<insert id="insertBabyData" parameterType="Grow">
+		insert into grow (babyno, userno, babyname, babygender, babybirth, growheight, growweight, growhead, babyage, growregdate, growbmi
+		)
+		values (#{babyno}, #{userno}, #{babyname}, #{babygender}, #{babybirth}, #{growheight}, #{growweight}, #{growhead}, TRUNC(MONTHS_BETWEEN(#{growregdate},#{babybirth})),#{growregdate}, ROUND((#{growweight}/#{growheight}/#{growheight}*10000),2)	
+		)
+	</insert>
+	
+	<!-- 기존 기록 확인 -->
+	<select id="checkAge" parameterType="HashMap" resultType="Grow">
+		select *
+		from grow
+		where babyage = TRUNC(MONTHS_BETWEEN(#{growregdate},#{babyBirth})) and babyno=#{babyno}
+	</select>
+</mapper>

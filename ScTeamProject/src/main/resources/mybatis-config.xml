@@ -24,11 +24,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="BS_User" type="com.scmaster.vo.BS_User"></typeAlias>
 		<typeAlias alias="BS_Baby" type="com.scmaster.vo.BS_Baby"></typeAlias>
 		
+		<typeAlias alias="Grow" type="com.scmaster.vo.Grow"></typeAlias>
 		<typeAlias alias="Grow_Default" type="com.scmaster.vo.Grow_Default"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="MainMapper.xml" />
+		
+		<mapper resource="growMapper/GrowMapper.xml" />
 		<mapper resource="growMapper/GrowDefaultMapper.xml" />
 	</mappers>
 </configuration>

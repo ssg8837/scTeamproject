@@ -1,4 +1,8 @@
 
+select * from BS_USER;
+select * from BS_BABY;
+
+
 DROP TABLE BS_USER;
 DROP TABLE BS_BABY;
 

@@ -13,11 +13,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where gender='F'
 	</select>
 	
+	<!-- 표준성장도표 : 여아 : BMI -->
+	<select id="showDefaultValueFemaleBMI" resultType="Grow_Default">
+	select *
+	from grow_default
+	where gender='F' and age >=24
+	</select>
+	
 	<!-- 표준성장도표 : 남아 -->
 	<select id="showDefaultValueMale" resultType="Grow_Default">
 	select *
 	from grow_default
 	where gender='M'
 	</select>
-	
+
+	<!-- 표준성장도표 : 남아 : BMI -->
+	<select id="showDefaultValueMaleBMI" resultType="Grow_Default">
+	select *
+	from grow_default
+	where gender='M' and age >=24
+	</select>	
 </mapper>

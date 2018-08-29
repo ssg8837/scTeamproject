@@ -35,7 +35,7 @@ public class HomeController {
 		{
 			MainMapper mapper= sqlSession.getMapper(MainMapper.class);
 			ArrayList<BS_Baby> babyList= mapper.selectBabyList((Integer)loginNo);
-			System.out.println(babyList);
+			
 			model.addAttribute("babyList", babyList);
 		}
 		return "home";
