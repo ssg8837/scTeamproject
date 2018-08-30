@@ -26,15 +26,30 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 	        <li class="active"><a href="#">메인화면 <span class="sr-only">(current)</span></a></li>
-	        <li><a href="#">성장기록</a></li>
-	        <li><a href="#">생활기록</a></li>
-	        <li><a href="#">예방접종</a></li>
-	        <li><a href="#">병원찾기</a></li>
+	        <li><a href="gotoGrow">성장기록</a></li>
+	        <li><a href="alarm_OpenCalendar">생활기록</a></li>
+	        <li><a href="vaccineForm">예방접종</a></li>
+	        <li><a href="hospital_Test">병원찾기</a></li>
 	        <li><a href="#">기상확인</a></li>
 	        <li><a href="#">다이어리</a></li>
 	        <li><a href="#">SNS</a></li>
 	        <li><a href="#">게시판</a></li>
-	      </ul>	      
+	      </ul>
+			<input type="hidden" id="loginNo" name="loginNo" value="${sessionScope.loginNo}">	  
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><span class="caret"></span><span id="alarmNum"></span></a>
+	          <ul class="dropdown-menu" role="menu" id="listMenu">
+	          <!--  <li><a href="#">Action</a></li>
+	            <li><a href="#">Another action</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">Separated link</a></li>
+	           -->
+	           
+	          </ul>
+	        </li>
+      	</ul>	         
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
@@ -57,5 +72,6 @@
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.js"></script>
+	    <script src="./resources/js/home/bell.js"></script>
 	</body>
 </html>

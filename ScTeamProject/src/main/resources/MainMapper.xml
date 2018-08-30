@@ -33,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT BABYNO, USERNO,  BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
 		FROM BS_BABY
 		WHERE USERNO=#{userNo}
+		ORDER BY BABYBIRTH ASC
 	</select>
 	
 	<insert id="insertBaby" parameterType="BS_Baby" >
@@ -44,6 +45,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{babyName},
 		#{babyBlood})
 	</insert>
+	
+	<select id='countUser' parameterType="String" resultType="Integer">
+		SELECT COUNT(USERID)
+		FROM BS_USER
+		WHERE USERID=#{userId}
+	</select>
+	
+	<select id="selectUserById" parameterType='String' resultType="Integer">
+		SELECT USERNO
+		FROM BS_USER
+		WHERE USERID=#{userId}
+	</select>
 	
 	
 </mapper>

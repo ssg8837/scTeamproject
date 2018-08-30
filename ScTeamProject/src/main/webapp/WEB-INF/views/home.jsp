@@ -7,7 +7,7 @@
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
-	    <link href="./resources/css/cover.css" rel="stylesheet">
+	    <link href="./resources/css/home/common_boot.css" rel="stylesheet">
 	</head>
 	<body style='margin-top:70px;'>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -32,25 +32,42 @@
 	        <li><a href="vaccineForm">예방접종</a></li>
 	        <li><a href="hospital_Test">병원찾기</a></li>
 	        <li><a href="#">기상확인</a></li>
-	        <li><a href="#">다이어리</a></li>
+	        <li><a href="babyBookForm">다이어리</a></li>
 	        <li><a href="#">SNS</a></li>
 	        <li><a href="#">게시판</a></li>
-	      </ul>	      
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><span class="caret"></span><span id="alarmNum"></span></a>
+	          <ul class="dropdown-menu" role="menu" id="listMenu">
+	          </ul>
+	        </li>
+      	</ul>	      
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
 	<c:if test='${sessionScope.loginId == null }'>
-		<form action='login' method='post'>
-			ID:<input type='text' name='userid'><br>
-			PWD:<input type='password' name='userpwd'>
-			<button type='submit'>로그인</button>
+		<form id='home' action='./' method='get'>
 		</form>
-			<button type='submit' onclick="location.href='openNewAccount'">회원가입</button>
+			<div class='input-group col-xs-4'>
+				<span class="input-group-addon">ID</span>
+				<input class="form-control " type='text' id='userid' name='userid'>
+			</div>
+			<div class='input-group col-xs-4'>
+				<span class="input-group-addon">PW</span>
+				<input class="form-control " type='password' id='userpwd' name='userpwd'>
+			</div>
+			<button class='btn btn-primary' type='button' onclick="javascript:login();">로그인</button>
+			<button class='btn btn-primary' type='button' onclick="location.href='openNewAccount'">회원가입</button>
 	</c:if>
 	<c:if  test='${sessionScope.loginId != null }'>
 		<c:if test='${babyList !=null }'>
-			<table>
+			<table class="table ">
+			<tr>
+				<th>이름</th>
+				<th>성별</th>
+			</tr>
 				<c:forEach var='baby' items='${babyList }'>
 					<tr>
 						<th>${baby.babyName }</th>
@@ -58,12 +75,16 @@
 					</tr>
 				</c:forEach>
 			</table>
+			<input type="hidden" id="loginNo" name="loginNo" value="${sessionScope.loginNo}">
 		</c:if>
-		<button type='submit' onclick="location.href='openNewBaby'">아이등록</button>
-		<button type='submit' onclick="location.href='logout'">로그아웃</button>
+		<button class='btn btn-primary' type='submit' onclick="location.href='openNewBaby'">아이등록</button>
+		<button class='btn btn-primary' type='submit' onclick="location.href='logout'">로그아웃</button>
 	</c:if>
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
+	    <script src="./resources/js/util/check_byte.js"></script>
+	    <script src="./resources/js/home/login_check.js"></script>
+	    <script src="./resources/js/home/bell.js"></script>
 	</body>
 </html>

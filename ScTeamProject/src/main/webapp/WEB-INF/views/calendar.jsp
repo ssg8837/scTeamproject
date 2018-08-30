@@ -16,6 +16,7 @@
 	<form class="selectForm" method="post">
 		<input name="alarmNo" id="alarmNo" type="hidden">
   	</form>
+			<input type="hidden" id="loginNo" name="loginNo" value="${sessionScope.loginNo}">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -32,16 +33,30 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	        <li><a href="./">메인화면 <span class="sr-only">(current)</span></a></li>
-	        <li><a href="#">성장기록</a></li>
-	        <li class="active"><a href="#">생활기록</a></li>
-	        <li><a href="#">예방접종</a></li>
-	        <li><a href="#">병원찾기</a></li>
+	        <li><a href="./">메인화면 </a></li>
+	        <li><a href="gotoGrow">성장기록</a></li>
+	        <li class="active"><a href="#">생활기록<span class="sr-only">(current)</span></a></li>
+	        <li><a href="vaccineForm">예방접종</a></li>
+	        <li><a href="hospital_Test">병원찾기</a></li>
 	        <li><a href="#">기상확인</a></li>
 	        <li><a href="#">다이어리</a></li>
 	        <li><a href="#">SNS</a></li>
 	        <li><a href="#">게시판</a></li>
-	      </ul>	      
+	      </ul>	  
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><span class="caret"></span><span id="alarmNum"></span></a>
+	          <ul class="dropdown-menu" role="menu" id="listMenu">
+	          <!--  <li><a href="#">Action</a></li>
+	            <li><a href="#">Another action</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">Separated link</a></li>
+	           -->
+	           
+	          </ul>
+	        </li>
+      	</ul>	         
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
@@ -54,68 +69,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="./resources/js/bootstrap.min.js"></script>
 	    <script src="./resources/js/moment.min.js"></script>
-	    <script src="./resources/js/fullcalendar.min.js"></script>
-	    <script src="./resources/js/locale-all.js"></script>
-	    <script src="./resources/js/ko.js"></script>
-	    <script>
-		var dataset = [
-			<c:forEach var="item" items="${alarmList}" varStatus="status">
-		            {"id":'<c:out value="${item.alarmNo}" />'
-		            ,"title":'<c:out value=" ${item.alarmTitle} [${nameList[status.index]}]" />'
-		            ,"start":"<c:out value="${item.alarmTime}" />"
-		            }
-		            <c:if test='${status.index != fn:length(alarmList)}'>
-		           	,
-		            </c:if>
-		    </c:forEach>
-		];
-
-		$(document).ready(function() {
-		    $('#calendar').fullCalendar({
-		        header: {
-		            left: 'prev,next today',
-		            center: 'title',
-		            right: 'month,basicWeek,basicDay'
-		        },
-		        defaultDate: new Date(),
-		        navLinks: true,
-		        lang : "ko",
-		        editable: false,
-		        eventLimit: true,
-		        events: dataset,
-		        eventClick:function(event) {
-		        	var alarmNo=event.id;
-		        	var newWin = window.open("about:blank", "chooseWin", "width=500, height=300, scrollbars=no");
-		        	var form = document.createElement("form");     
-
-		        	form.setAttribute("method","post");                    
-		        	form.setAttribute("action","alarm_OpenChoose");        
-
-		        	document.body.appendChild(form);                        
-
-		        	 
-
-		        	//input
-		        	var input_id = document.createElement("input");  
-
-		        	input_id.setAttribute("type", "hidden");                 
-
-		        	input_id.setAttribute("name", "alarmNo");                        
-		        	input_id.setAttribute("value", alarmNo);                          
-
-		        	form.appendChild(input_id);
-
-		        	 
-
-		        	//폼전송
-					form.target = "chooseWin";
-					form.submit();
-					//<a href="http://www.example.com/" target="_blank">
-	            }
-
-		    });
-		});
-		
-		</script>
+	    <script src="./resources/js/fullcalendar/fullcalendar.min.js"></script>
+	    <script src="./resources/js/fullcalendar/locale-all.js"></script>
+	    <script src="./resources/js/fullcalendar/ko.js"></script>
+	    <script src="./resources/js/alarm/calender.js"></script>
+	    <script src="./resources/js/home/bell.js"></script>
 </body>
 </html>

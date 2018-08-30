@@ -1,41 +1,129 @@
+html{
+	margin: 0;
+	padding: 0;
+}
 body{
+	margin: 0;
+	padding: 0;
 	padding-top: 70px;
+}
+div{
+	margin: 0;
+	padding: 0;
+}
+button{
+	margin-bottom: 1em;	
 }
 
 /* ------------------------------------------------------------------------------------- */
 
-/*중앙 본문 div*/
+/*본문 div*/
 .grow_main_content{
-	width: 80%;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0;
 	padding: 1em;
-	
+}
+
+
+/* 사이드바(시트/차트 버튼) */
+.grow_sidebar{
+	width: 10%;
 	float: left;
 	
+	margin: 0;
+	
+	padding-top: 3em;
+	padding-bottom: 2em;
+}
+.grow.button{
+	margin: 1em;
+}
+
+
+/*아이정보조회란(시트)*/
+.grow_sheet{
+	margin-bottom: 2em;
+	padding: 2em;
+	text-align: left;
+}
+/*input 디자인*/
+.grow_sheet input{
+	margin-bottom: 1em;
+	height: 30px;
+}
+/*select 디자인*/
+.grow_sheet select{
+	margin-bottom: 1em;
+	width: 30%;
+	height: 30px;
+}
+/*테이블*/
+.grow_sheetData{
+	width: 98%;
+	border: 1px solid black;
+}
+.grow_sheetTable{
+	width: 100%;
+}
+.grow_sheetTable th, .grow_sheetTable td{
+	padding: 1em;
 	text-align: center;
 }
+
 /*차트 div*/
 .grow_chart{
 	margin: auto;
-	width: 80%;
+	width: 70%;
+	height: 100%;
+	float: left;
+	text-align: right;	/*버튼 오른쪽에 몰아넣으려고 넣은 거*/
 }
-/*차트가 그려지는 곳*/
-canvas {
+/*아이선택버튼 div*/
+.grow_selectBabyDiv button{
+	margin-right: 1em;
+}
+/*캔버스 컨테이너(캔버스 날릴 때 남길 틀+캔버스 사이즈 조정)*/
+.grow_canvas_container{
+	position: relative; 
+	margin-bottom: 2em;
 	width: 100%;
-	
-    -moz-user-select: none;
+	height: 600px;
+}	
+.grow_canvas_container canvas{
+	-moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     
+    margin: 0;
+    padding: 0; 
     cursor: pointer;
 }
 
-/* ------------------------------------------------------------------------------------- */
 
-.grow_sidebar{
-	width: 10%;
-	float: right;
+/*아이정보입력란*/
+.grow_insertDiv{
+	width: 20%;
+	float: left;
+	padding: 2em;
 }
-
-.grow.chart.button{
+/*최근갱신일 표시란*/
+.grow_checkRegdate{
+	color: red;
+	font-size: 12px;
+}
+/*input 디자인*/
+.grow_insertDiv input{
 	margin-bottom: 1em;
+	width: 90%;
+}
+/*select 디자인*/
+.grow_insertDiv select{
+	margin-bottom: 1em;
+	height: 30px;
+}
+/*아이정보입력버튼*/
+.grow_float_right{
+	float: right;
 }
