@@ -3,88 +3,187 @@
     pageEncoding="UTF-8"%>
 <html>
 	<head>
-		<title>Home</title>
+		<title>육아서포트페이지</title>
 		<!-- 부트스트랩 -->
-	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
-	    <link href="./resources/css/home/common_boot.css" rel="stylesheet">
+	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
+	    <link href="./resources/css/bootstrap/common_boot.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
+		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
+		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+		
 	</head>
-	<body style='margin-top:70px;'>
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-	    <!-- Brand and toggle get grouped for better mobile display -->
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand" href="#">Brand</a>
-	    </div>
-	
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">메인화면 <span class="sr-only">(current)</span></a></li>
-	        <li><a href="gotoGrow">성장기록</a></li>
-	        <li><a href="alarm_OpenCalendar">생활기록</a></li>
-	        <li><a href="vaccineForm">예방접종</a></li>
-	        <li><a href="hospital_Test">병원찾기</a></li>
-	        <li><a href="#">기상확인</a></li>
-	        <li><a href="babyBookForm">다이어리</a></li>
-	        <li><a href="#">SNS</a></li>
-	        <li><a href="#">게시판</a></li>
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><span class="caret"></span><span id="alarmNum"></span></a>
-	          <ul class="dropdown-menu" role="menu" id="listMenu">
-	          </ul>
-	        </li>
-      	</ul>	      
-	    </div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
-	</nav>
-	
-	<c:if test='${sessionScope.loginId == null }'>
-		<form id='home' action='./' method='get'>
+	<body>
+	<form id='home' action='./' method='get'>
 		</form>
-			<div class='input-group col-xs-4'>
-				<span class="input-group-addon">ID</span>
-				<input class="form-control " type='text' id='userid' name='userid'>
-			</div>
-			<div class='input-group col-xs-4'>
-				<span class="input-group-addon">PW</span>
-				<input class="form-control " type='password' id='userpwd' name='userpwd'>
-			</div>
-			<button class='btn btn-primary' type='button' onclick="javascript:login();">로그인</button>
-			<button class='btn btn-primary' type='button' onclick="location.href='openNewAccount'">회원가입</button>
-	</c:if>
-	<c:if  test='${sessionScope.loginId != null }'>
-		<c:if test='${babyList !=null }'>
-			<table class="table ">
-			<tr>
-				<th>이름</th>
-				<th>성별</th>
-			</tr>
-				<c:forEach var='baby' items='${babyList }'>
-					<tr>
-						<th>${baby.babyName }</th>
-						<td>${baby.babyGender }</td>
-					</tr>
-				</c:forEach>
-			</table>
-			<input type="hidden" id="loginNo" name="loginNo" value="${sessionScope.loginNo}">
+		
+        <c:if test='${sessionScope.loginId != null }'>
+		<input type="hidden" id="loginNo" value="${sessionScope.loginNo}">
 		</c:if>
-		<button class='btn btn-primary' type='submit' onclick="location.href='openNewBaby'">아이등록</button>
-		<button class='btn btn-primary' type='submit' onclick="location.href='logout'">로그아웃</button>
-	</c:if>
+	<section id="container">
+    <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg">
+      <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+      </div>
+      <!--logo start-->
+      <a href="index.html" class="logo"><b>Parenting <span>Support</span> Page</b></a>
+      <!--logo end-->
+      <div class="nav notify-row" id="top_menu">
+        <!--  notification start -->
+        <ul class="nav top-menu">
+          <!-- notification dropdown start-->
+        		<c:if test='${sessionScope.loginId != null }'>
+          <li id="header_notification_bar" class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+              <i class="fa fa-bell-o" style="font: normal normal normal 14px/1.4 FontAwesome;"></i>
+              <span id="bg-warning" class="badge bg-warning"></span>
+              </a>
+            <ul class="dropdown-menu extended notification"><div class="notify-arrow notify-arrow-yellow"></div><li><p class="yellow">You have 1 new notifications</p></li><li><a href="#">testBaby:243 [오전 11:55]</a></li></ul>
+          </li>
+          </c:if>
+          <!-- notification dropdown end -->
+        </ul>
+        <!--  notification end -->
+      </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+        
+        <c:if test='${sessionScope.loginId == null }'>
+          	<li><a class="logout" href="openLogin">Login</a></li>
+        </c:if>
+          
+        <c:if test='${sessionScope.loginId != null }'>
+          	<li><a class="logout" href="logout">Logout</a></li>
+        </c:if>
+        </ul>
+      </div>
+    </header>
+    <!--header end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+       	 <ul class="sidebar-menu" id="nav-accordion">
+        	<c:if test='${sessionScope.loginId != null }'>
+	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<h5 class="centered">${sessionScope.loginNick }</h5>
+        	</c:if>
+	          <li class="sub-menu">
+	            <a href="gotoGrow">
+	              <i class="fa fa-bar-chart fa_left"></i>
+	              <span>성장기록</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="alarm_OpenCalendar">
+	              <i class="fa fa-calendar fa_left"></i>
+	              <span>생활기록</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="vaccineForm">
+	              <i class="fa fa-medkit fa_left"></i>
+	              <span>예방접종</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="hospital_Test">
+	              <i class="fa fa-hospital-o fa_left"></i>
+	              <span>병원찾기</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="hospital_Test">
+	              <i class="fa fa-umbrella fa_left"></i>
+	              <span>기상확인</span>
+	              </a>
+	          </li>
+	           <li class="sub-menu">
+	            <a href="babyBookForm">
+	              <i class="fa fa-book fa_left"></i>
+	              <span>다이어리</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="babyBookForm">
+	              <i class="fa fa-users fa_left"></i>
+	              <span>SNS</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="babyBookForm">
+	              <i class="fa fa-edit fa_left"></i>
+	              <span>게시판</span>
+	              </a>
+	          </li>
+          </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <!--sidebar end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper site-min-height">
+        <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
+        <div class="row mt">
+          <div class="col-lg-12">
+            <p>Place your content here.</p>
+          </div>
+        </div>
+      </section>
+      <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+    <footer class="site-footer">
+      <div class="text-center">
+        <p>
+          &copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
+        </p>
+        <div class="credits">
+          <!--
+            You are NOT allowed to delete the credit link to TemplateMag with free version.
+            You can delete the credit link only if you bought the pro version.
+            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
+            Licensing information: https://templatemag.com/license/
+          -->
+          Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
+        </div>
+        <a href="blank.html#" class="go-top">
+          <i class="fa fa-angle-up"></i>
+          </a>
+      </div>
+    </footer>
+    <!--footer end-->
+  </section>
 	
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	    <script src="./resources/js/bootstrap.min.js"></script>
-	    <script src="./resources/js/util/check_byte.js"></script>
-	    <script src="./resources/js/home/login_check.js"></script>
+	   
+	    
+	    <script src="./resources/js/common/jquery.min.js"></script>
+	    <script src="./resources/js/common/bootstrap.min.js"></script>
+		<script src="./resources/js/common/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="./resources/js/common/jquery.ui.touch-punch.min.js"></script>
+		<script class="include" type="text/javascript" src="./resources/js/common/jquery.dcjqaccordion.2.7.js"></script>
+		<script src="./resources/js/common/jquery.scrollTo.min.js"></script>
+		<script src="./resources/js/common/jquery.nicescroll.js" type="text/javascript"></script>
+		  <!--common script for all pages-->
+		<script src="./resources/js/common/common-scripts.js"></script>
+		  <!--script for this page-->
+		<script src="./resources/js/util/check_byte.js"></script>
+		<script src="./resources/js/home/login_check.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
+  
 	</body>
 </html>

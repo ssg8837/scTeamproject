@@ -10,9 +10,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<!-- 부트스트랩 -->
-	<link href="./resources/css/bootstrap.min.css" rel="stylesheet">
-	<link href="./resources/css/bootstrap-theme.min.css" rel="stylesheet">
-	<script src="./resources/js/bootstrap.min.js"></script>
+	<link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<link href="./resources/css/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
+	<script src="./resources/js/bootstrap/bootstrap.min.js"></script>
 	
 	<!-- chart.js -->
 	<script src="./resources/js/grow/Chart.js"></script>

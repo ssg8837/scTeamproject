@@ -6,8 +6,8 @@
 	<head>
 		<title>생활 기록</title>
 		<!-- 부트스트랩 -->
-	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
+	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
 	    <link href="./resources/css/fullcalendar.min.css" rel="stylesheet">
 	    <link href="./resources/css/fullcalendar.print.min.css"  rel='stylesheet' media='print' />
 	    <link href="./resources/css/alarm_Calendar.css" rel="stylesheet">

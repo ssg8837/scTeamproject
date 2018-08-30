@@ -4,8 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
+	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
 	    <link href="./resources/css/fullcalendar.min.css" rel="stylesheet">
 	    <link href="./resources/css/fullcalendar.print.min.css"  rel='stylesheet' media='print' />
 	    <link href="./resources/css/alarm_Calendar.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="./resources/js/bootstrap.min.js"></script>
+<script src="./resources/js/bootstrap/bootstrap.min.js"></script>
 <script src="./resources/js/moment.min.js"></script>
 <script src="./resources/js/fullcalendar/fullcalendar.min.js"></script>
 <script src="./resources/js/fullcalendar/locale-all.js"></script>

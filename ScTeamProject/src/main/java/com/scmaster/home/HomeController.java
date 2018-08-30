@@ -50,6 +50,11 @@ public class HomeController
 	{
 		return "newBaby";
 	}
+	@RequestMapping(value = "/openLogin", method = RequestMethod.GET)
+	public String openLogin() 
+	{
+		return "login";
+	}
 	/*
 	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
 	public String insertNewAccount(Model model,BS_User user) 
@@ -105,6 +110,7 @@ public class HomeController
 		{
 			httpSession.setAttribute("loginId",user.getUserId());
 			httpSession.setAttribute("loginNo",user.getUserNo());
+			httpSession.setAttribute("loginNick",user.getUserNick());
 			return "로그인 완료되었습니다.";
 		}
 		return "로그인에 실패하였습니다. 아이디나 비밀번호를 확인해주세요.";
