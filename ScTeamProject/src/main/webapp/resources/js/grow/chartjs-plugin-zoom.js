@@ -18,7 +18,7 @@ var Hammer = require('hammer.min.js');
 Hammer = typeof(Hammer) === 'function' ? Hammer : window.Hammer;
 
 // Get the chart variable
-var Chart = require('Chart.bundle.js');
+var Chart = require('Chart.bundle.min.js');
 Chart = typeof(Chart) === 'function' ? Chart : window.Chart;
 var helpers = Chart.helpers;
 
@@ -580,4 +580,4 @@ var zoomPlugin = {
 module.exports = zoomPlugin;
 Chart.pluginService.register(zoomPlugin);
 
-},{"Chart.bundle.js":1,"hammer.min.js":1}]},{},[2]);
+},{"Chart.bundle.min.js":1,"hammer.min.js":1}]},{},[2]);

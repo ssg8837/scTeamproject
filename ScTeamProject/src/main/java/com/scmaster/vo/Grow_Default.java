@@ -4,10 +4,10 @@ public class Grow_Default {
 
 	private String gender;		//성별
 	private int age;			//나이(개월)
-	private int height;			//연령별 표준 신장
-	private int weight_a;		//연령별 표준 체중
-	private int head;			//연령별 표준 머리둘레
-	private int bmi;			//연령별 표준 bmi(2세 이후)
+	private double height;			//연령별 표준 신장
+	private double weight_a;		//연령별 표준 체중
+	private double head;			//연령별 표준 머리둘레
+	private double bmi;			//연령별 표준 bmi(2세 이후)
 	
 	public Grow_Default() {
 		super();
@@ -29,35 +29,35 @@ public class Grow_Default {
 		this.age = age;
 	}
 
-	public int getHeight() {
+	public double getHeight() {
 		return height;
 	}
 
-	public void setHeight(int height) {
+	public void setHeight(double height) {
 		this.height = height;
 	}
 
-	public int getWeight_a() {
+	public double getWeight_a() {
 		return weight_a;
 	}
 
-	public void setWeight_a(int weight_a) {
+	public void setWeight_a(double weight_a) {
 		this.weight_a = weight_a;
 	}
 
-	public int getHead() {
+	public double getHead() {
 		return head;
 	}
 
-	public void setHead(int head) {
+	public void setHead(double head) {
 		this.head = head;
 	}
 
-	public int getBmi() {
+	public double getBmi() {
 		return bmi;
 	}
 
-	public void setBmi(int bmi) {
+	public void setBmi(double bmi) {
 		this.bmi = bmi;
 	}
 

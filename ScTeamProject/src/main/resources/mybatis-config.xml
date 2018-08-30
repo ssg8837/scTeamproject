@@ -5,15 +5,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<properties resource="db.properties" />
 	
-	<!-- 
-	<typeAliases>
-		<typeAlias alias="User" type="com.sesoc2.vo.User"></typeAlias>
-	</typeAliases>
-	<mappers>
-		<mapper resource="UserMapper.xml" />
-	</mappers>
-	
-	-->
 	<settings>
         <setting name="cacheEnabled" value="false" />
         <setting name="jdbcTypeForNull" value="NULL" />
@@ -29,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="Disease" type="com.scmaster.vo.Disease"></typeAlias>
 		<typeAlias alias="Vaccine" type="com.scmaster.vo.Vaccine"></typeAlias>
 		<typeAlias alias="BabyBook" type="com.scmaster.vo.BabyBook"></typeAlias>
+		<typeAlias alias="Grow" type="com.scmaster.vo.Grow"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
@@ -36,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="VaccineMapper.xml" />
 		<mapper resource="AlarmMapper.xml" />
 		<mapper resource="HospitalMapper.xml" />
+		<mapper resource="growMapper/GrowMapper.xml" />
 		<mapper resource="growMapper/GrowDefaultMapper.xml" />
 		<mapper resource="DiseaseMapper.xml" />
 		<mapper resource="BabyBookMapper.xml" />

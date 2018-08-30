@@ -11,8 +11,7 @@
 
 	<!-- 부트스트랩 -->
 	<link href="./resources/css/bootstrap.min.css" rel="stylesheet">
-	<link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
-	<link href="./resources/css/cover.css" rel="stylesheet">
+	<link href="./resources/css/bootstrap-theme.min.css" rel="stylesheet">
 	<script src="./resources/js/bootstrap.min.js"></script>
 	
 	<!-- chart.js -->
