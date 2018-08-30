@@ -56,7 +56,6 @@ public class BS_Baby {
 		this.babyBlood = babyBlood;
 	}
 
-
 	@Override
 	public String toString() {
 		return "아이 프로필 [babyNo=" + babyNo + ", userNo=" + userNo + ", babyGender=" + babyGender + ", babyBirth="
