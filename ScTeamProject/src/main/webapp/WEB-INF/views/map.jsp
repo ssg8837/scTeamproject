@@ -8,7 +8,7 @@
 	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
 	    <link href="./resources/css/cover.css" rel="stylesheet">
-	    <link href="./resources/functions/map.css" rel="stylesheet">
+	    <link href="./resources/js/map/map.css" rel="stylesheet">
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -41,13 +41,7 @@
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><span class="caret"></span><span id="alarmNum"></span></a>
 	          <ul class="dropdown-menu" role="menu" id="listMenu">
-	          <!--  <li><a href="#">Action</a></li>
-	            <li><a href="#">Another action</a></li>
-	            <li><a href="#">Something else here</a></li>
-	            <li class="divider"></li>
-	            <li><a href="#">Separated link</a></li>
-	           -->
-	           
+	          
 	          </ul>
 	        </li>
       	</ul>	           
@@ -76,7 +70,7 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e2f3241393e98d4d475a38553e4f353&libraries=services,clusterer,drawing"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="./resources/js/bootstrap.min.js"></script>
-<script src="./resources/functions/map.js">
+<script src="./resources/js/map/map.js">
 
 </script>
 	    <script src="./resources/js/home/bell.js"></script>
