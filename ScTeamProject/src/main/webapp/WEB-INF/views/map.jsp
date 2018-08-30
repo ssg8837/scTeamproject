@@ -41,8 +41,8 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	<div class="map_wrap">
+		<input id="hospitalAddr" type="hidden" value="${hospitalAddr}"/>
 		<div id="map" style="width:100%;height:100%;overflow:hidden;"></div>
-
 		<div id="menu_wrap" class="bg_white">
 	        <div class="option">
 	            <div>
@@ -56,10 +56,10 @@
 	        <ul id="placesList"></ul>
 	        <div id="pagination"></div>
    		</div>
+   		<div id="test"></div>
 </div>
 
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e2f3241393e98d4d475a38553e4f353&libraries=services,clusterer,drawing"></script>
-<script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="./resources/js/bootstrap.min.js"></script>
 <script src="./resources/functions/map.js">

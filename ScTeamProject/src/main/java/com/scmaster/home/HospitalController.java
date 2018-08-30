@@ -233,6 +233,15 @@ public class HospitalController {
 		return hspts;
 	}
 	
+	@RequestMapping(value = "/selected_Hostpital", method = RequestMethod.GET)
+	private String Hospital_Loaction(String address, Model model) {
+		
+		model.addAttribute("address", address);
+		
+		return "map";
+	}
+	
+	
 	private String getTagValue(String string, Element eElement) {
 		if (eElement.getElementsByTagName(string).item(0) == null)
 			return null;
