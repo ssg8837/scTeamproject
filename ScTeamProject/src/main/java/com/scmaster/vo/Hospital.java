@@ -102,7 +102,7 @@ public class Hospital {
 	}
 
 	public void setLatitude(String latitude) {
-		this.Latitude = latitude;
+		Latitude = latitude;
 	}
 
 	public String getLongitude() {
@@ -112,11 +112,11 @@ public class Hospital {
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
-	
+
 	public String getDistance() {
 		return distance;
 	}
-	
+
 	public void setDistance(String distance) {
 		this.distance = distance;
 	}

@@ -8,7 +8,7 @@
 	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
 	    <link href="./resources/css/cover.css" rel="stylesheet">
-	    <link href="./resources/js/map/map.css" rel="stylesheet">
+	    <link href="./resources/css/map/map.css" rel="stylesheet">
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">

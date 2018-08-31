@@ -13,7 +13,5 @@ public interface MainMapper {
 	ArrayList<BS_Baby> selectBabyList(int loginNo);
 	void insertBaby(BS_Baby baby);
 	BS_Baby selectBaby(int babyNo);
-	int countUser(String userId);
-	int selectUserById(String userId);
-	
+
 }

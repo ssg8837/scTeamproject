@@ -20,6 +20,10 @@
 	var map='';
 	// 마커를 담을 배열입니다
 	var markers = [];
+	// 좌료를 담을 자료형 선언
+	var lat ='',lon='';
+	
+	
 	// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 	var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	
@@ -41,7 +45,6 @@
 			map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 		}
 	
-	var lat ='',lon='';
 	//현재 위치정보 얻어오는 함수
 	function myLocation(){
 

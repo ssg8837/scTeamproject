@@ -19,6 +19,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.scmaster.mapper.HospitalMapper;
 import com.scmaster.vo.Hospital;
 
 @Controller
@@ -32,24 +33,10 @@ public class HospitalController {
 	@RequestMapping(value = "/hospital_Test", method = RequestMethod.GET)
 	public String hospital_Test(Model model) {
 		
-		return "map";
+		return "hospital";
 	}
 	
-	/*@RequestMapping(value = "/hospital_Location", method = RequestMethod.GET)
-	public String hospital_Location(Model model) throws Exception {
-		address를 받아서 위도, 경도 변환 API 사용 후 위도, 경도로 병원 조회
-		조회한 병원 jsp에 뿌리기
-		
-		String lon = "127.07421";
-		String lat = "37.507175";
-		
-		List<Hospital> hspts = getHospital(lon, lat);
-		
-		model.addAttribute("hspts", hspts);
-		return "hospital";
-	}*/
 	//, produces="applicatoin/text; charset=UTF8"
-	
 	@RequestMapping(value = "/hospital_All", method = RequestMethod.GET)
 	public @ResponseBody List<Hospital> hospital_All() throws Exception{
 		
@@ -84,7 +71,10 @@ public class HospitalController {
 				Node nNode = nList.item(j);
 				Element eElement = (Element) nNode;
 				String hpid = getTagValue("hpid", eElement);
-				String address = getTagValue("dutyAddr", eElement);
+				String load_address = getTagValue("dutyAddr", eElement);
+				if (load_address.indexOf("(") > 0) {
+					load_address = load_address.substring(0, load_address.indexOf("("));
+				}
 				String name = getTagValue("dutyName", eElement);
 				String divNam = getTagValue("dutyDivNam", eElement);
 				String phone = getTagValue("dutyTel1", eElement);
@@ -145,27 +135,34 @@ public class HospitalController {
 					t.append(time.get(k));
 				}
 				
-				Hospital h = new Hospital(hpid, address, name, divNam, phone, Integer.parseInt(eryn), eryynphone, t.toString(), latitude, longitude, "");
+				Hospital h = new Hospital(hpid, load_address, name, divNam, phone, Integer.parseInt(eryn), eryynphone, t.toString(), latitude, longitude, "");
 				hspt = h;
 				time.clear();
 				t.setLength(0);
-				
+				hspts.add(hspt);
 			}
-			hspts.add(hspt);
 		}
-		
+		HospitalMapper hsptmapper = sqlSession.getMapper(HospitalMapper.class);
+		Hospital hsptDB = new Hospital();
+		for (int j = 0; j < hspts.size(); j++) {
+			System.out.println(j+">"+hspts.get(j));
+			//병원 설렉트하고 인설트 하기 병원 날리기
+			hsptDB = hsptmapper.selectHspt(hspts.get(j).getHpid());
+			if (hsptDB == null) {
+				hsptmapper.insertHspt(hspts.get(j));
+			}
+		}
 		return hspts;
 	}
 	
 	@RequestMapping(value = "/hospital_myLocation", method = RequestMethod.GET)
 	public @ResponseBody List<Hospital> hospital_myLocation(String lat, String lon) throws Exception{
-		if (lat.length() > 10) {
+		/*if (lat.length() > 10) {
 			lat = lat.substring(0, 10);
 		}
 		if (lon.length() > 10) {
 			lon = lon.substring(0, 10);
-		}
-		
+		}*/
 		
 		List<Hospital> hspts = new ArrayList<Hospital>();
 		Hospital hspt = new Hospital();
@@ -180,7 +177,7 @@ public class HospitalController {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			org.w3c.dom.Document doc = dBuilder.parse("http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncLcinfoInqire?ServiceKey=dBWeSsetEKQH5l9aSW9wYkfPc7JjYZsNg3%2FimojYuBbGY4ktoST1JZU1czNJfm0A42OV8MZm8Df6yRRFTkO32Q%3D%3D&ServiceKey=-"
-					+ "&WGS84_LON=" + lon + "&WGS84_LAT=" + lat + "&pageNo="+api+"&numOfRows=10");
+					+ "&WGS84_LON=" + lon + "&WGS84_LAT=" + lat + "&pageNo="+api+"&numOfRows=100");
 			
 			doc.getDocumentElement().normalize();
 			
@@ -201,6 +198,9 @@ public class HospitalController {
 				Element eElement = (Element) nNode;
 				String hpid = getTagValue("hpid", eElement);
 				String distance = getTagValue("distance", eElement);
+				if (Double.parseDouble(distance) > 0.5) {
+					continue;
+				}
 				String address = getTagValue("dutyAddr", eElement);
 				String name = getTagValue("dutyName", eElement);
 				String divNam = getTagValue("dutyDivName", eElement);
@@ -232,15 +232,6 @@ public class HospitalController {
 		System.out.println(lon + "," + lat);
 		return hspts;
 	}
-	
-	@RequestMapping(value = "/selected_Hostpital", method = RequestMethod.GET)
-	private String Hospital_Loaction(String address, Model model) {
-		
-		model.addAttribute("address", address);
-		
-		return "map";
-	}
-	
 	
 	private String getTagValue(String string, Element eElement) {
 		if (eElement.getElementsByTagName(string).item(0) == null)

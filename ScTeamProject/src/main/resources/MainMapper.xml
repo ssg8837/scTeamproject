@@ -15,13 +15,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertUser" parameterType="BS_User" >
 		INSERT INTO BS_USER(USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK) 
 		VALUES (BS_USERSEQ.NEXTVAL,
-		#{userType},
-		#{userId},
-		#{userPwd},
-		#{userAddr},
-		#{userEmail},
-		#{userPhone},
-		#{userNick})
+		'${userType}',
+		'${userId}',
+		'${userPwd}',
+		'${userAddr}',
+		'${userEmail}',
+		'${userPhone}',
+		'${userNick}')
 	</insert>
 	
 	<select id="selectBaby" resultType="BS_Baby" parameterType="Integer"> 
@@ -30,33 +30,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE BABYNO=#{babyNo}
 	</select>
 	<select id="selectBabyList" resultType="BS_Baby" parameterType="Integer"> 
-		SELECT BABYNO, USERNO,  BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
+		SELECT BABYNO,USERNO,  BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
 		FROM BS_BABY
 		WHERE USERNO=#{userNo}
-		ORDER BY BABYBIRTH ASC
 	</select>
 	
 	<insert id="insertBaby" parameterType="BS_Baby" >
 		INSERT INTO BS_BABY(BABYNO,USERNO, BABYGENDER, BABYBIRTH, BABYNAME, BABYBLOOD) 
 		VALUES (BS_BABYSEQ.NEXTVAL,
-		#{userNo},
-		#{babyGender},
-		TO_DATE(#{babyBirth},'YYYY-MM-DD'),
-		#{babyName},
-		#{babyBlood})
+		'${userNo}',
+		'${babyGender}',
+		TO_DATE('${babyBirth}','YYYY-MM-DD'),
+		'${babyName}',
+		'${babyBlood}')
 	</insert>
-	
-	<select id='countUser' parameterType="String" resultType="Integer">
-		SELECT COUNT(USERID)
-		FROM BS_USER
-		WHERE USERID=#{userId}
-	</select>
-	
-	<select id="selectUserById" parameterType='String' resultType="Integer">
-		SELECT USERNO
-		FROM BS_USER
-		WHERE USERID=#{userId}
-	</select>
 	
 	
 </mapper>
