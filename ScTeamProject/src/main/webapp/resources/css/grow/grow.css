@@ -1,3 +1,19 @@
+html{
+	margin: 0;
+	padding: 0;
+}
+body{
+	margin: 0;
+	padding: 0;
+	padding-top: 70px;
+}
+div{
+	margin: 0;
+	padding: 0;
+}
+button{
+	margin-bottom: 1em;	
+}
 
 /* ------------------------------------------------------------------------------------- */
 
@@ -14,7 +30,8 @@
 /* 사이드바(시트/차트 버튼) */
 .grow_sidebar{
 	width: 10%;
-	float: right;
+	float: left;
+	
 	margin: 0;
 	
 	padding-top: 3em;

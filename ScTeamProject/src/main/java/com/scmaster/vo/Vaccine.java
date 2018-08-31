@@ -8,14 +8,13 @@ public class Vaccine {
 	private String vaccineCheck;
 	private String vaccineDate;
 	private String checkDate;
+	private String memo;
 	
 	public Vaccine() {
-		super();
 	}
 
 	public Vaccine(int babyNo, int diseaseNum, String diseaseName, String vaccineType, String vaccineCheck,
-			String vaccineDate, String checkDate) {
-		super();
+			String vaccineDate, String checkDate, String memo) {
 		this.babyNo = babyNo;
 		this.diseaseNum = diseaseNum;
 		this.diseaseName = diseaseName;
@@ -23,6 +22,7 @@ public class Vaccine {
 		this.vaccineCheck = vaccineCheck;
 		this.vaccineDate = vaccineDate;
 		this.checkDate = checkDate;
+		this.memo = memo;
 	}
 
 	public int getBabyNo() {
@@ -81,12 +81,24 @@ public class Vaccine {
 		this.checkDate = checkDate;
 	}
 
+	
+	
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
 	@Override
 	public String toString() {
 		return "Vaccine [babyNo=" + babyNo + ", diseaseNum=" + diseaseNum + ", diseaseName=" + diseaseName
 				+ ", vaccineType=" + vaccineType + ", vaccineCheck=" + vaccineCheck + ", vaccineDate=" + vaccineDate
-				+ ", checkDate=" + checkDate + "]";
+				+ ", checkDate=" + checkDate + ", memo=" + memo + "]";
 	}
+
+
 	
 	
 }

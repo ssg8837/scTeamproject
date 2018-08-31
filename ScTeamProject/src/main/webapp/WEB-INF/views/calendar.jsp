@@ -18,6 +18,9 @@
 		
 	</head>
 	<body>
+	<form class="selectForm" method="post">
+		<input name="alarmNo" id="alarmNo" type="hidden">
+  	</form>
 	<form id='home' action='./' method='get'>
 		</form>
 		
@@ -34,7 +37,7 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="index.html" class="logo"><b>Parenting <span>Support</span> Page</b></a>
+      <a href="./" class="logo"><b>Parenting <span>Support</span> Page</b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
