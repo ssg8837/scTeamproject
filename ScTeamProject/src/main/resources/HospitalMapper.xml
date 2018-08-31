@@ -5,5 +5,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <mapper namespace="com.scmaster.mapper.HospitalMapper">
+	<select id="selectHspt" resultType="Hospital" parameterType="String"> 
+		SELECT *
+		FROM hospital
+		WHERE hpid=#{hpid}
+	</select>
+	
+	<insert id="insertHspt" parameterType="Hospital" >
+		INSERT INTO hospital(hpid, address, name, divNam, phone, eryn, eryynphone, time, latitude, longitude) 
+		VALUES ('${hpid}',
+		'${address}',
+		'${name}',
+		'${divNam}',
+		'${phone}',
+		'${eryn}',
+		'${eryynphone}',
+		'${time}',
+		'${latitude}',
+		'${longitude}'
+		)
+	</insert>
 
 </mapper>

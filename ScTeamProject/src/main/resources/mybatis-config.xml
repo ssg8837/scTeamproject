@@ -24,9 +24,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="BS_User" type="com.scmaster.vo.BS_User"></typeAlias>
 		<typeAlias alias="BS_Baby" type="com.scmaster.vo.BS_Baby"></typeAlias>
 		<typeAlias alias="Hospital" type="com.scmaster.vo.Hospital"></typeAlias>
+		<typeAlias alias="Weather" type="com.scmaster.vo.Weather"></typeAlias>
+		<typeAlias alias="City" type="com.scmaster.vo.City"></typeAlias>
 	</typeAliases>
 	<mappers>
 		<mapper resource="MainMapper.xml" />
 		<mapper resource="HospitalMapper.xml" />
+		<mapper resource="WeatherMapper.xml" />
+		<mapper resource="CityMapper.xml" />
 	</mappers>
 </configuration>

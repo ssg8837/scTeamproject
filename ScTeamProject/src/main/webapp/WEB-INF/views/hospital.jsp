@@ -74,9 +74,9 @@
 	</script>
 </head>
 <body>
-	<div class="location"></div>
-	<input type="button" class="hospital_All" value="병원데이타전송"></br>
 	<div class="hospitals"></div>
+	<input type="button" class="hospital_All" value="병원데이타전송"></br>
+	<div class="location"></div>
 <!-- 검색 기능을 표시할 <div>를 생성한다 -->
 
 <div id="postcodify"></div>
