@@ -39,11 +39,7 @@
           <!-- notification dropdown start-->
         		<c:if test='${sessionScope.loginId != null }'>
           <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-              <i class="fa fa-bell-o" style="font: normal normal normal 14px/1.4 FontAwesome;"></i>
-              <span id="bg-warning" class="badge bg-warning"></span>
-              </a>
-            <ul class="dropdown-menu extended notification"><div class="notify-arrow notify-arrow-yellow"></div><li><p class="yellow">You have 1 new notifications</p></li><li><a href="#">testBaby:243 [오전 11:55]</a></li></ul>
+            
           </li>
           </c:if>
           <!-- notification dropdown end -->
@@ -147,25 +143,7 @@
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
-    <footer class="site-footer">
-      <div class="text-center">
-        <p>
-          &copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
-        </p>
-        <div class="credits">
-          <!--
-            You are NOT allowed to delete the credit link to TemplateMag with free version.
-            You can delete the credit link only if you bought the pro version.
-            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
-            Licensing information: https://templatemag.com/license/
-          -->
-          Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
-        </div>
-        <a href="blank.html#" class="go-top">
-          <i class="fa fa-angle-up"></i>
-          </a>
-      </div>
-    </footer>
+   
     <!--footer end-->
   </section>
 	
