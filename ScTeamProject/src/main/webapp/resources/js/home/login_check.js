@@ -28,7 +28,7 @@ function login()
 				success:function(data)
 				{
 					alert(data);
-					$('#home').submit();
+                	$(location).attr('href', './');
 				}		
 			});
 		}

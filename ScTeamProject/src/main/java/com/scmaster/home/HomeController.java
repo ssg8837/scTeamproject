@@ -48,37 +48,9 @@ public class HomeController {
 	public String openNewBaby() {
 		return "newBaby";
 	}
-	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
-	public String insertNewAccount(Model model,BS_User user) {
-		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
-		user.setUserType("n");
-		mapper.insertUser(user);
-		return home(model);
+	@RequestMapping(value = "/openLogin", method = RequestMethod.GET)
+	public String openLogin() 
+	{
+		return "login";
 	}
-	@RequestMapping(value = "/insertNewBaby", method = RequestMethod.POST)
-	public String insertNewBaby(Model model,BS_Baby baby) {
-		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
-		mapper.insertBaby(baby);
-		return home(model);
-	}
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(Model model, String userid, String userpwd) {
-		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
-		HashMap<String, String> userMap=new HashMap<String,String>();
-		userMap.put("userId", userid);
-		userMap.put("userPwd",userpwd);
-		BS_User user=mapper.selectUser(userMap);
-		if(user!=null)
-		{
-			httpSession.setAttribute("loginId",user.getUserId());
-			httpSession.setAttribute("loginNo",user.getUserNo());
-		}
-		return home(model);
-	}
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(Model model) {
-		httpSession.invalidate();
-		return "home";
-	}
-	
 }

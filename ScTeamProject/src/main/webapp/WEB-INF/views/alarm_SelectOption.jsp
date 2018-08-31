@@ -6,8 +6,8 @@
 	<head>
 		<title>알람 처리 선택</title>
 		<!-- 부트스트랩 -->
-	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
+	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
 	</head>
 	<body>
 		<div>이 일정을 수정 혹은 삭제 하시겠습니까?</div>
@@ -19,29 +19,8 @@
 		</div>
 		
 		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	    <script src="./resources/js/bootstrap.min.js"></script>
-	    <script>
-	    //selectForm
-	    function goSubmit(alarmNo) 
-	    {
-	    	$( "#alarmNo", opener.document ).val(alarmNo)
-	    	$( ".selectForm", opener.document ).attr("action", "alarm_OpenUpdate");
-	    	$( ".selectForm", opener.document ).submit();
-	        self.close();
-	    }
-	    function goDelete(alarmNo)
-	    {
-	    	var tof = confirm( '정말 삭제하시겠습니까?' );
-	        if(tof==true)
-	        {
-		    	$( "#alarmNo", opener.document ).val(alarmNo)
-	        	$( ".selectForm", opener.document ).attr("action", "alarm_Delete");
-	        	$( ".selectForm", opener.document ).submit();
-		       	self.close();
-	        }
-	    }
-	    
-	    </script>
+		<script src="./resources/js/common/jquery.min.js"></script>
+	    <script src="./resources/js/common/bootstrap.min.js"></script>
+	    <script src="./resources/js/alarm/selectOption.js"></script>
 	</body>
 </html>
