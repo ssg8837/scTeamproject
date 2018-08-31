@@ -40,6 +40,11 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
+	
+	<!-- 로그인화면 확인용 페이지이동버튼 -->
+	<button type='submit' onclick="location.href='gotoLogin'">로그인화면으로이동</button><br><br>
+	
+	
 	<c:if test='${sessionScope.loginId == null }'>
 		<form action='login' method='post'>
 			ID:<input type='text' name='userid'><br>

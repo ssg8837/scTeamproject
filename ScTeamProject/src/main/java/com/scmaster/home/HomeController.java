@@ -28,6 +28,16 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
+	//로그인화면확인용 이동버튼
+	@RequestMapping(value = "/gotoLogin", method = RequestMethod.GET)
+	public String gotoLogin() {
+		return "login";
+	}
+	
+	
+	
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		Object loginNo= httpSession.getAttribute("loginNo");
