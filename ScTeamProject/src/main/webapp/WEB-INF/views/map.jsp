@@ -70,9 +70,6 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e2f3241393e98d4d475a38553e4f353&libraries=services,clusterer,drawing"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="./resources/js/bootstrap.min.js"></script>
-<script src="./resources/js/map/map.js">
-
-</script>
-	    <script src="./resources/js/home/bell.js"></script>
+<script src="./resources/js/map/map.js"></script>
 </body>
 </html>
