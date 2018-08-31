@@ -1375,7 +1375,6 @@ PANELS CONFIGURATIONS
 
 /* Calendar Configuration */
 #calendar {
-	color: white;
 	padding: 0px !important;
 }
 .calendar-month-header {

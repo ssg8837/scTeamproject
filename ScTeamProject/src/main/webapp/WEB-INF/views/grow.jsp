@@ -24,6 +24,7 @@
 	
 	<!-- css : 부트스트랩 css보다 뒤에 놓을 것 -->
 	<link href="./resources/css/grow/grow.css" rel="stylesheet">
+	<script src="./resources/js/grow/grow.js"></script>
 	
 	<!-- bell : 알람용 javascript -->
 	<script src="./resources/js/home/bell.js"></script>
