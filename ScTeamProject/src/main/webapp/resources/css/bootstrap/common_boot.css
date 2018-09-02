@@ -1,0 +1,11 @@
+@charset "UTF-8";
+.input-group-addon {
+    min-width:100px;
+    text-align:left;
+}
+
+.fa_left{
+	min-width:25px;
+}
+
+/* 공통적으로 쓸 css를 여기 위에 입력해주세요. */

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.scmaster.mapper.GrowDefaultMapper">
+
+	<!-- 표준성장도표 : 여아 -->
+	<select id="showDefaultValueFemale" resultType="Grow_Default">
+	select *
+	from grow_default
+	where gender='F'
+	</select>
+	
+	<!-- 표준성장도표 : 여아 : BMI -->
+	<select id="showDefaultValueFemaleBMI" resultType="Grow_Default">
+	select *
+	from grow_default
+	where gender='F' and age >=24
+	</select>
+	
+	<!-- 표준성장도표 : 남아 -->
+	<select id="showDefaultValueMale" resultType="Grow_Default">
+	select *
+	from grow_default
+	where gender='M'
+	</select>
+
+	<!-- 표준성장도표 : 남아 : BMI -->
+	<select id="showDefaultValueMaleBMI" resultType="Grow_Default">
+	select *
+	from grow_default
+	where gender='M' and age >=24
+	</select>	
+</mapper>
