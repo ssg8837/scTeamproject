@@ -1,192 +1,219 @@
 *, *:before, *:after {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
+
 html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow-y: scroll;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
 }
 
 body {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Titillium Web', sans-serif;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	font-family: 'Titillium Web', sans-serif;
 }
 
 a {
-  text-decoration: none;
-  color: #f4a742;
-  transition: .5s ease;
+	text-decoration: none;
+	color: #f4a742;
+	transition: .5s ease;
 }
+
 a:hover {
-  color: #ffc99b;
-  text-decoration: none;
+	color: #ffc99b;
+	text-decoration: none;
 }
 
 /*=============================================================================*/
-
-.login_content{
+.login_content {
 	position: absolute;
 	margin: auto;
-    width: 80%;
-    height: 600px;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+	width: 80%;
+	height: 600px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	
+	display: table;
 }
-.loginImgDiv{
-	margin: auto;
-    margin-right: 2em;
-	width: 60%;
 
-	float: left; 
+.loginImgDiv {
+	margin: auto;
+	margin-right: 2em;
+	width: 60%;
+	height: 100%;
+	display: table;
+	float: left;
 }
+
+.loginImgContainer {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
 #slides {
 	width: 100%;
-	display:none;
+	display: none;
 }
 /*=============================================================================*/
-
 .form {
-  margin: auto;
-  background: white;
-  padding: 40px;
-  border-radius: 4px;
-  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
-  float: left;
-  width: 35%;
-}
-.tab-group {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 40px 0;
-}
-.tab-group:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.tab-group li a {
-  display: block;
-  text-decoration: none;
-  padding: 15px;
-  background: rgba(160, 179, 176, 0.25);
-  color: #a0b3b0;
-  font-size: 20px;
-  float: left;
-  width: 50%;
-  text-align: center;
-  cursor: pointer;
-  transition: .5s ease;
-}
-.tab-group li a:hover {
-  background: #ffc99b;
-  color: #ffffff;
-}
-.tab-group .active a {
-  background: #f4a742;
-  color: #ffffff;
+	margin: auto;
+	background: white;
+	padding: 40px;
+	border-radius: 4px;
+	box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+	float: left;
+	min-width: 35%;
+	
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
 }
 
-.tab-content > div:last-child {
-  display: none;
+.tab-group {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 40px 0;
+}
+
+.tab-group:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.tab-group li a {
+	display: block;
+	text-decoration: none;
+	padding: 15px;
+	background: #FDE4D5;
+	color: #a0b3b0;
+	font-size: 20px;
+	float: left;
+	width: 50%;
+	text-align: center;
+	cursor: pointer;
+	transition: .5s ease;
+}
+
+.tab-group li a:hover {
+	background: #90BEFA;
+	color: #ffffff;
+}
+
+.tab-group .active a {
+	background: #FFA600;
+	color: #ffffff;
+}
+
+.tab-content>div:last-child {
+	display: none;
 }
 
 label {
-  position: absolute;
-  -webkit-transform: translateY(10px);
-          transform: translateY(10px);
-  left: 12px;
-  color: rgba(0, 0, 0, 0.5);
-  transition: all 0.25s ease;
-  -webkit-backface-visibility: hidden;
-  pointer-events: none;
-  font-size: 12px;
+	position: absolute;
+	-webkit-transform: translateY(10px);
+	transform: translateY(10px);
+	left: 12px;
+	color: rgba(0, 0, 0, 0.5);
+	transition: all 0.25s ease;
+	-webkit-backface-visibility: hidden;
+	pointer-events: none;
+	font-size: 12px;
 }
+
 label .req {
-  margin: 2px;
-  color: #f4a742;
+	margin: 2px;
+	color: #f4a742;
 }
 
 label.active {
-  -webkit-transform: translateY(50px);
-          transform: translateY(50px);
-  left: 2px;
-  font-size: 12px;
-  opacity: 0;
+	-webkit-transform: translateY(50px);
+	transform: translateY(50px);
+	left: 2px;
+	font-size: 12px;
+	opacity: 0;
 }
 
 input, textarea {
-  font-size: 14px;
-  display: inline-block;
-  width: 100%;
-  padding: 5px 10px;
-  background: none;
-  background-image: none;
-  border: 1px solid #a0b3b0;
-  color: #000;
-  border-radius: 0;
-  transition: border-color .25s ease, box-shadow .25s ease;
+	font-size: 14px;
+	display: inline-block;
+	width: 100%;
+	padding: 5px 10px;
+	background: none;
+	background-image: none;
+	border: 1px solid #a0b3b0;
+	color: #000;
+	border-radius: 0;
+	transition: border-color .25s ease, box-shadow .25s ease;
 }
+
 input:focus, textarea:focus {
-  outline: 0;
-  border-color: #f4a742;
+	outline: 0;
+	border-color: #FFA600;
 }
 
 textarea {
-  border: 2px solid #a0b3b0;
-  resize: vertical;
+	border: 2px solid #a0b3b0;
+	resize: vertical;
 }
 
 .field-wrap {
-  position: relative;
-  margin-bottom: 40px;
+	position: relative;
+	margin-bottom: 40px;
 }
 
 .top-row:after {
-  content: "";
-  display: table;
-  clear: both;
+	content: "";
+	display: table;
+	clear: both;
 }
-.top-row > div {
-  float: left;
-  width: 48%;
-  margin-right: 4%;
+
+.top-row>div {
+	float: left;
+	width: 48%;
+	margin-right: 4%;
 }
-.top-row > div:last-child {
-  margin: 0;
+
+.top-row>div:last-child {
+	margin: 0;
 }
 
 .button {
-  border: 0;
-  outline: none;
-  border-radius: 0;
-  padding: 15px 0;
-  font-size: 2rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  background: #f4a742;
-  color: #ffffff;
-  transition: all 0.5s ease;
-  -webkit-appearance: none;
+	border: 0;
+	outline: none;
+	border-radius: 0;
+	padding: 15px 0;
+	font-size: 2rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: .1em;
+	background: #FFA600;
+	color: #ffffff;
+	transition: all 0.5s ease;
+	-webkit-appearance: none;
 }
+
 .button:hover, .button:focus {
-  background: #ffc99b;
+	background: #90BEFA;
 }
 
 .button-block {
-  display: block;
-  width: 100%;
+	display: block;
+	width: 100%;
 }
 
 .forgot {
-  margin-top: -20px;
-  text-align: right;
+	margin-top: -20px;
+	text-align: right;
 }
