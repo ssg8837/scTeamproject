@@ -110,8 +110,7 @@ public class VaccineControllerForHospital{
 		
 		List<VaccineHospital> vhList = new ArrayList<VaccineHospital>();
 		
-		String url="https://nip.cdc.go.kr/irapi/rest/getOrgList.do";
-		url += "?serviceKey=PSBYfvxvFrIVh4PnMZ6HDIwOlEcDc7K3NAbmJ5PAOSOB9BLTWfXOZdYAw65Qecliwnk4vJMfIw8kAjwA%2B2UEsw%3D%3D";
+		String url="https://nip.cdc.go.kr/irapi/rest/getOrgList.do?serviceKey=PSBYfvxvFrIVh4PnMZ6HDIwOlEcDc7K3NAbmJ5PAOSOB9BLTWfXOZdYAw65Qecliwnk4vJMfIw8kAjwA%2B2UEsw%3D%3D";
 		url += "&brtcCd="+brtcCd;
 		url += "&sggCd="+sggCd;
 		url += "&pageNo="+page;
