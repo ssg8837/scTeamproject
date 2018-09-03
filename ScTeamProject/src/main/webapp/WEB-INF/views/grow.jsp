@@ -9,15 +9,14 @@
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/common_boot.css" rel="stylesheet">
 		<!-- Custom styles for this template -->
-		<link href="./resources/css/grow/grow.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-		
+		<link href="./resources/css/grow/grow.css" rel="stylesheet">
 	</head>
 	<body>
 	<form id='home' action='./' method='get'>
-		</form>
+	</form>
 		
         <c:if test='${sessionScope.loginId != null }'>
 		<input type="hidden" id="loginNo" value="${sessionScope.loginNo}">
@@ -72,6 +71,7 @@
         	<c:if test='${sessionScope.loginId != null }'>
 	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
+	          	<div class="centered"><button class="edit">회원정보수정</button></div>
         	</c:if>
 	          <li class="sub-menu">
 	            <a class="active" href="gotoGrow">
@@ -132,7 +132,7 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
+        <h3><i class="fa fa-angle-right"></i> 성장기록</h3>
         <div class="row mt">
           <div class="col-lg-12">
             <div class="grow_main_content">
@@ -167,7 +167,7 @@
 						<select id="grow_selectAgeForSheet" name="babyage">
 							<option value="">성장기록을 조회할 나이를 선택해주세요</option>
 						</select>
-					<button type="button" onclick="getData();">아이 성장기록 조회하기</button>
+					<button type="button" onclick="getData();">조회하기</button>
 				</form>
 				
 				<div class="grow_sheetData">	<!-- 시트 테이블 레이아웃용 div -->
@@ -288,17 +288,19 @@
 		<script src="./resources/js/grow/hammer.min.js"></script>
 		<script src="./resources/js/grow/chartjs-plugin-zoom.js"></script>
 		<script src="./resources/js/grow/grow.js"></script>
-		<script type="text/javascript">		
 		
+		<script type="text/javascript">		
 		//시트버튼누르면 캔버스 날리기
 		$('.grow.button.sheet').click(function(){	
 			$('.grow_selectBabyDiv').html('');				// 아이선택버튼 날리기
 			$('.grow_canvas_container').html('');			// 캔버스 날리기
+			$('.grow_canvas_container').css('display','none');
 			$('.grow_sheet').css('display','block');		// 시트 보이기
 		});
 		//그래프버튼 누르면 아이선택버튼 보이게 하기
 		$('.grow.button.chart').click(function(){
-			$('.grow_sheet').css('display','none');	// 시트 가리기
+			$('.grow_sheet').css('display','none');			// 시트 가리기
+			$('.grow_canvas_container').css('display','block');
 			$('.grow_selectBabyDiv').html('');				// 아이선택버튼 날리기
 			$('.grow_selectBabyDiv').html('<c:forEach var="babyList" items="${babyList}"><button id="${babyList.babyName}" value="${babyList.babyNo}"> ${babyList.babyName}</button></c:forEach>');
 		});	

@@ -239,7 +239,7 @@ ul.top-menu > li > .logout {
 }
 
 #sidebar h5 {
-	color: #ffffff;
+	color: #777;
 	font-weight: 700;
 }
 
@@ -1951,13 +1951,13 @@ ul li {
 /*LOGIN CONFIGURATION PAGE*/
 .form-login {
 	max-width: 330px;
-	margin: 100px auto 0;
+	margin:  auto 0;
 	background: #fff;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
 
-.form-login h2.form-login-heading {
+.form-login h3.form-login-heading {
 	margin: 0;
 	padding: 25px 20px;
 	text-align: center;
