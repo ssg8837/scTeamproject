@@ -155,5 +155,15 @@ public class VaccineControllerForHospital{
 	    return map;
 	}
 	
+	///도현씨 보세요 호엥ㅇ에에에에엥
+	@RequestMapping(value = "/sendHospital", method = RequestMethod.GET)
+	public String hopitalTest3(String hospitalAddr){
+		System.out.println("호에에엥에엥ㅇㅇ");
+		System.out.println(hospitalAddr);
+	
+	    return "redirect:vaccineFormForHospital";
+	}
+	
+	
 	
 }
