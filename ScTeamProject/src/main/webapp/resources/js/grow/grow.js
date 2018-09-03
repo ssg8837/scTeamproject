@@ -1,4 +1,3 @@
-
 //차트표시용js - 버튼 클릭시 그래프 추가 - 그래프 색 배정
 window.chartColors = {
 	chartColor1: 'rgb(33, 118, 175)',	//blue 		#2176af

@@ -11,9 +11,6 @@ div{
 	margin: 0;
 	padding: 0;
 }
-button{
-	margin-bottom: 1em;	
-}
 
 /* ------------------------------------------------------------------------------------- */
 
@@ -39,6 +36,7 @@ button{
 }
 .grow.button{
 	margin: 1em;
+	width: 80px;
 }
 
 
@@ -86,6 +84,7 @@ button{
 }
 /*캔버스 컨테이너(캔버스 날릴 때 남길 틀+캔버스 사이즈 조정)*/
 .grow_canvas_container{
+	display: none;
 	position: relative; 
 	margin-bottom: 2em;
 	width: 100%;
