@@ -9,7 +9,7 @@ div{
 	margin: 0;
 	padding: 0;
 }
-
+/*회원정보수정버튼*/
 .edit {
 	padding: 5px 15px;
 	margin-bottom: 1em;
@@ -23,6 +23,12 @@ div{
 	-webkit-border-radius: 4px;
 	border: 1px solid #257df5!important;
 }
+.edit:active, .edit:hover, .edit:focus{
+	background: #FFA600;
+	color: #fff;
+	border: 1px solid #c17d00!important;
+	outline: none;
+}
 
 /* ------------------------------------------------------------------------------------- */
 
@@ -32,17 +38,19 @@ div{
 	width: 100%;
 	height: 100%;
 	margin: 0;
-	padding: 1em;
 }
-
 
 /* 사이드바(시트/차트 버튼) */
 .grow_sidebar{
 	margin: 0;
-	width: 10%;
+	width: 100px;
 	padding-top: 3em;
 	padding-bottom: 2em;
 	float: left;
+}
+.grow_sidebar h5{
+	text-align: center;
+	font-weight: bold;
 }
 .grow.button{
 	margin: 1em;
@@ -58,12 +66,31 @@ div{
 	-webkit-border-radius: 4px;
 	border: 1px solid #257df5!important;
 }
+.grow.button:active, .grow.button:hover, .grow.button:focus{
+	background: #FFD0D0;
+	color: #fff;
+	border: 1px solid #ffacac!important;
+	outline: none;
+}
 
+/*========= 시트+그래프 =========*/
+
+/*차트 div*/
+.grow_chart{
+	margin: auto;
+	width: 70%;
+	min-width: 600px;
+	height: 100%;
+	float: left;
+	text-align: right;	/*버튼 오른쪽에 몰아넣으려고 넣은 거*/
+}
+
+/*========= 시트 =========*/
 
 /*아이정보조회란(시트)*/
 .grow_sheet{
-	margin-bottom: 2em;
 	padding: 2em;
+	padding-top: 5em;
 	text-align: left;
 }
 /*input 디자인*/
@@ -78,8 +105,11 @@ div{
 	height: 30px;
 }
 /*테이블*/
+
+#grow_formchooseData{
+	text-align: center;	
+}
 .grow_sheetData{
-	width: 98%;
 	border: 1px solid black;
 }
 .grow_sheetTable{
@@ -90,17 +120,27 @@ div{
 	text-align: center;
 }
 
-/*차트 div*/
-.grow_chart{
-	margin: auto;
-	width: 70%;
-	height: 100%;
-	float: left;
-	text-align: right;	/*버튼 오른쪽에 몰아넣으려고 넣은 거*/
-}
+/*========= 그래프 =========*/
+
 /*아이선택버튼 div*/
 .grow_selectBabyDiv button{
 	margin-right: 1em;
+	padding: 5px 15px;
+
+	background: #90befa;
+	color: #fff;
+	font-size: 12px;
+	text-align: center;
+	
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: 1px solid #257df5!important;
+}
+.grow_selectBabyDiv button:active, .grow_selectBabyDiv button:hover, .grow_selectBabyDiv button:focus{
+	background: #FFD0D0;
+	color: #fff;
+	border: 1px solid #ffacac!important;
+	outline: none;
 }
 /*캔버스 컨테이너(캔버스 날릴 때 남길 틀+캔버스 사이즈 조정)*/
 .grow_canvas_container{
@@ -120,11 +160,15 @@ div{
     cursor: pointer;
 }
 
+/*========= 입력창 =========*/
 
 /*아이정보입력란*/
 .grow_insertDiv{
-	float: left;
+	position: absolute;
+	left: 75%;
+	right: 1em;
 	padding: 2em;
+	float: left;
 }
 /*최근갱신일 표시란*/
 .grow_checkRegdate{

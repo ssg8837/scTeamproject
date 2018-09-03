@@ -28,7 +28,7 @@ a {
 }
 
 a:hover {
-	color: #ffc99b;
+	color: #;
 	text-decoration: none;
 }
 
@@ -73,7 +73,7 @@ a:hover {
 	border-radius: 4px;
 	box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 	float: left;
-	min-width: 35%;
+	min-width: 400px;
 	
 	display: table-cell;
 	vertical-align: middle;
@@ -97,7 +97,7 @@ a:hover {
 	text-decoration: none;
 	padding: 15px;
 	background: #FDE4D5;
-	color: #a0b3b0;
+	color: #fff;
 	font-size: 20px;
 	float: left;
 	width: 50%;
@@ -107,8 +107,8 @@ a:hover {
 }
 
 .tab-group li a:hover {
-	background: #90BEFA;
-	color: #ffffff;
+	background: #ffe0a6;
+	color: #9b797b;
 }
 
 .tab-group .active a {
@@ -204,8 +204,9 @@ textarea {
 	-webkit-appearance: none;
 }
 
-.button:hover, .button:focus {
-	background: #90BEFA;
+.button:hover, .button:focus,.button:active {
+	background: #ffe0a6;
+	color: #9b797b;
 }
 
 .button-block {
