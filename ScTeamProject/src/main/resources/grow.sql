@@ -2,10 +2,12 @@
 select * from GROW;
 select * from GROW_DEFAULT;
 
+select * from grow where babyno=41
+delete from grow where babyno=41 and babyage=24
 
 
 --------------------------------------------성장기록용 테이블---------------------------------------------------------
-/*
+/*	
  	아이 번호를 fk로 가져오고,
 	BS_BABY 테이블에서 가져올 정보: 		유저넘버, 아이이름, 아이성별, 아이 생일
 	사용자로부터 직접 입력받을 정보:			신장, 체중, 머리둘레
@@ -16,23 +18,25 @@ select * from GROW_DEFAULT;
 	<BMI 계산식> 체질량지수(㎏/㎡) = 체중(㎏) ÷ 신장(㎝) ÷ 신장(㎝) × 10,000
 */
 CREATE TABLE GROW(
-    BABYNO		INTEGER	REFERENCES BS_BABY(BABYNO),
-    
-    USERNO		INTEGER,
-	BABYNAME 	VARCHAR2(30),
-    BABYGENDER 	VARCHAR2(4),
-	BABYBIRTH 	DATE,
+    BABYNO			INTEGER,
+    USERNO			INTEGER,
+	BABYNAME 		VARCHAR2(30),
+    BABYGENDER 		VARCHAR2(4),
+	BABYBIRTH 		DATE,
 	
-	GROWHEIGHT	NUMBER,
-	GROWWEIGHT	NUMBER,
-	GROWHEAD	NUMBER,
+	GROWHEIGHT		NUMBER,
+	GROWWEIGHT		NUMBER,
+	GROWHEAD		NUMBER,
 	
-	BABYAGE		NUMBER,
-	GROWBMI		NUMBER,
-	GROWSREGDATE		DATE DEFAULT SYSDATE
+	BABYAGE			NUMBER,
+	GROWBMI			NUMBER,
+	GROWREGDATE		DATE
 );
 
 DROP TABLE GROW;
+
+------------------------------------------------------------------------------------------------------------
+
 
 /*표준성장도표: 아이 성별,아이 나이(개월),신장,나이별 체중,머리둘레,체질량지수 */
 CREATE TABLE GROW_DEFAULT(

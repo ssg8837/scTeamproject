@@ -1,14 +1,13 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 	$(function(){
 	
-	$('#firstCity').on('change',function(){
+	 $('#firstCity').on('change',function(){
 		var brtcCd = $('#firstCity').val();
 		$.ajax({
 				url:'SearchSecondCity',
@@ -17,10 +16,9 @@
 				success:secondCityOutput
 			});
 		
-		});
+		}); 
 	
 	$('#btn').on('click',btnClick);
-	
 	
 	});//$(function
 	
@@ -38,20 +36,22 @@
 	}//secondCityOutput
 	
 	function hospitalOutput(resp){
-		var result = '<tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr>';
+		var result = '<thead><tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr></thead>';
+			
+			result += '<tbody>';
+			$.each(resp.vhList,function(index,item){
+				result += '<tr><td>'+item.orgnm+'</td>';
+				result += '<td>'+item.orgTlno+'</td>';
+				result += '<td>'+item.orgAddr+'</td></tr>';
+			});
+			result += '</tbody>';
 		
-		$.each(resp.vhList,function(index,item){
-			result += '<tr onclick="javascript:sendHospital(';
-			result += "'"+item.orgAddr+"'"+')"><td>'+item.orgnm+'</td>';
-			result += '<td>'+item.orgTlno+'</td>';
-			result += '<td id="hospitalAddr">'+item.orgAddr+'</td></tr>';
-		});
 		
-		$('#vaccineHospital').html(result);
+		$('#outputHospital').html(result);
 		
 		var paging="";
 		for(var i=0;i<((Number(resp.totalCount)+15-1)/15)-1;i++){
-			paging += '<a href="javascript:searchHospital('+i+')">'+(i+1)+'</a>'+'&nbsp';
+			paging += '&nbsp'+'<a href="javascript:searchHospital('+i+')">'+(i+1)+'</a>'+'&nbsp&nbsp';
 			$('#paging').html(paging);
 		}	
 	}
@@ -69,67 +69,198 @@
 		});
 	}
 	
-	
-	function sendHospital(hospitalAddr){
-		location.href='sendHospital?hospitalAddr='+hospitalAddr;
-	}; 
+
 
 </script>
-
-
-<title>Insert title here</title>
-
-<!-- 부트스트랩 -->
-	    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="./resources/css/bootstrap.theme.min.css" rel="stylesheet">
-	    <link href="./resources/css/cover.css" rel="stylesheet">
+		
+		
+		<title>육아서포트페이지</title>
+		<!-- 부트스트랩 -->
+	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
+	    <link href="./resources/css/bootstrap/common_boot.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
+		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
+		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+		
 	</head>
-	<body style='margin-top:70px;'>
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-	    <!-- Brand and toggle get grouped for better mobile display -->
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand" href="#">Brand</a>
-	    </div>
+	<body>
+	<form id='home' action='./' method='get'>
+		</form>
+		
+        <c:if test='${sessionScope.loginId != null }'>
+		<input type="hidden" id="loginNo" value="${sessionScope.loginNo}">
+		</c:if>
+	<section id="container">
+    <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg">
+      <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+      </div>
+      <!--logo start-->
+      <a href="./" class="logo"><b>Parenting <span>Support</span> Page</b></a>
+      <!--logo end-->
+      <div class="nav notify-row" id="top_menu">
+        <!--  notification start -->
+        <ul class="nav top-menu">
+          <!-- notification dropdown start-->
+        		<c:if test='${sessionScope.loginId != null }'>
+          <li id="header_notification_bar" class="dropdown">
+            
+          </li>
+          </c:if>
+          <!-- notification dropdown end -->
+        </ul>
+        <!--  notification end -->
+      </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+        
+        <c:if test='${sessionScope.loginId == null }'>
+          	<li><a class="logout" href="openLogin">Login</a></li>
+        </c:if>
+          
+        <c:if test='${sessionScope.loginId != null }'>
+          	<li><a class="logout" href="logout">Logout</a></li>
+        </c:if>
+        </ul>
+      </div>
+    </header>
+    <!--header end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+       	 <ul class="sidebar-menu" id="nav-accordion">
+        	<c:if test='${sessionScope.loginId != null }'>
+	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<h5 class="centered">${sessionScope.loginNick }</h5>
+        	</c:if>
+	          <li class="sub-menu">
+	            <a href="gotoGrow">
+	              <i class="fa fa-bar-chart fa_left"></i>
+	              <span>성장기록</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="alarm_OpenCalendar">
+	              <i class="fa fa-calendar fa_left"></i>
+	              <span>생활기록</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="vaccineForm">
+	              <i class="fa fa-medkit fa_left"></i>
+	              <span>예방접종</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="hospital_Test">
+	              <i class="fa fa-hospital-o fa_left"></i>
+	              <span>병원찾기</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="hospital_Test">
+	              <i class="fa fa-umbrella fa_left"></i>
+	              <span>기상확인</span>
+	              </a>
+	          </li>
+	           <li class="sub-menu">
+	            <a href="babyBookForm">
+	              <i class="fa fa-book fa_left"></i>
+	              <span>다이어리</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="babyBookForm">
+	              <i class="fa fa-users fa_left"></i>
+	              <span>SNS</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="babyBookForm">
+	              <i class="fa fa-edit fa_left"></i>
+	              <span>게시판</span>
+	              </a>
+	          </li>
+          </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <!--sidebar end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper site-min-height">
+        <h3><i class="fa fa-angle-right"></i> 국가예방접종 지정 의료기관</h3>
+        <div class="row mt">
+          <div class="col-lg-12">
+            <!-- <p>Place your content here.</p> -->      
+			<select size="1" id="firstCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
+				<option selected disabled="disabled">시/도</option>
+					<c:forEach var="list" items="${list}">
+				<option value="${list.cityCode}">${list.cityName}</option>
+				</c:forEach>
+			</select>
+              
+              <select size="1" id="secondCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
+              	<option selected disabled="disabled">시/군/구</option>
+              </select>
 	
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">메인화면 <span class="sr-only">(current)</span></a></li>
-	        <li><a href="#">성장기록</a></li>
-	        <li><a href="#">생활기록</a></li>
-	        <li><a href="vaccineForm">예방접종</a></li>
-	        <li><a href="#">병원찾기</a></li>
-	        <li><a href="#">기상확인</a></li>
-	        <li><a href="#">다이어리</a></li>
-	        <li><a href="#">SNS</a></li>
-	        <li><a href="#">게시판</a></li>
-	      </ul>	      
-	    </div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
-	</nav>
+				<input id="btn" type="button" value="검색">
+				
+				<!-- <h4><i class="fa fa-angle-right"></i> Hover Table</h4> -->
+              <!-- <hr> -->
+              <table class="table table-hover" id="outputHospital"></table>
+
+				<div id="paging"></div>
+				
 	
+			<!-- <div class="col-md-12 mt"> -->
+            
+            <!-- <div class="content-panel"> -->
+              
+                  
+			
+              
+  
+          </div>
+        </div>
+      </section>
+      <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+   
+    <!--footer end-->
+  </section>
 	
-	<select id="firstCity">
-		<option selected disabled="disabled">시/도</option>
-		<c:forEach var="list" items="${list}">
-			<option value="${list.cityCode}">${list.cityName}</option>
-		</c:forEach>	
-	</select>
-	
-	<select id="secondCity"></select>
-	
-	<input id="btn" type="button" value="검색">
-	
-	<table id="vaccineHospital" border="1"></table>
-	
-	<div id="paging"></div>
-	
-</body>
+	   
+	    
+	    <script src="./resources/js/common/jquery.min.js"></script>
+	    <script src="./resources/js/common/bootstrap.min.js"></script>
+		<script src="./resources/js/common/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="./resources/js/common/jquery.ui.touch-punch.min.js"></script>
+		<script class="include" type="text/javascript" src="./resources/js/common/jquery.dcjqaccordion.2.7.js"></script>
+		<script src="./resources/js/common/jquery.scrollTo.min.js"></script>
+		<script src="./resources/js/common/jquery.nicescroll.js" type="text/javascript"></script>
+		  <!--common script for all pages-->
+		<script src="./resources/js/common/common-scripts.js"></script>
+		  <!--script for this page-->
+		<script src="./resources/js/util/check_byte.js"></script>
+		<script src="./resources/js/home/login_check.js"></script>
+	    <script src="./resources/js/home/bell.js"></script>
+  
+	</body>
 </html>
