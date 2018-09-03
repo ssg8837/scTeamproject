@@ -31,8 +31,9 @@ public class VaccineController {
 	@Autowired HttpSession httpSession;
 	
 	@RequestMapping(value = "/vaccineForm", method = RequestMethod.GET)
-	public String vaccineTest1(HttpSession session,Model model,
+	public String vaccineTest(HttpSession session,Model model,
 								@RequestParam(value="babyNo", defaultValue="0") int babyNo){
+		
 		//예방접종 정보 가지고 오기
 		DiseaseMapper diseaseMapper = sqlSession.getMapper(DiseaseMapper.class);
 		List<Disease> diseaseList = diseaseMapper.selectList();
@@ -45,7 +46,7 @@ public class VaccineController {
 		//예방접종+아기정보 
 		VaccineMapper vaccineMapper = sqlSession.getMapper(VaccineMapper.class);
 		List<Vaccine> vaccineList = vaccineMapper.selectList(babyNo); 
-		
+
 		//vaccine 테이블에 넣고 가지고 오기
 		List<Vaccine> vaccineList2 = vaccineMapper.selectList2(babyNo);
 		if(vaccineList2.size()==0) {
