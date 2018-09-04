@@ -194,7 +194,7 @@
 	    <script src="./resources/js/util/bootstrap-datetimepicker.js"></script>
 	    <script src="./resources/js/util/bootstrap-datetimepicker.ko.js"></script>
 	    <script src="./resources/js/util/datetimepicker.js"></script>
-	    <script src="./resources/js/util/alarm_check.js"></script>
+	    <script src="./resources/js/alarm/alarm_check.js"></script>
   
 	</body>
 </html>
