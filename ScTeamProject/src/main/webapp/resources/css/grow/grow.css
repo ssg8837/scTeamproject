@@ -136,7 +136,7 @@ div{
 	-webkit-border-radius: 4px;
 	border: 1px solid #257df5!important;
 }
-.grow_selectBabyDiv button:active, .grow_selectBabyDiv button:hover, .grow_selectBabyDiv button:focus{
+.grow_selectBabyDiv button.active, .grow_selectBabyDiv button:hover, .grow_selectBabyDiv button:focus{
 	background: #FFD0D0;
 	color: #fff;
 	border: 1px solid #ffacac!important;
@@ -169,6 +169,7 @@ div{
 	right: 1em;
 	padding: 2em;
 	float: left;
+	min-width: 300px;
 }
 /*최근갱신일 표시란*/
 .grow_checkRegdate{

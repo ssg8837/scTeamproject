@@ -77,7 +77,7 @@
 	            <a class="active" href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
 	              <span>성장기록</span>
-	              </a>
+	            </a>
 	          </li>
 	          <li class="sub-menu">
 	            <a href="alarm_OpenCalendar">
