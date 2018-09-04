@@ -90,7 +90,23 @@ public class AlarmController {
 	public String alarm_insertNewAlarm(Model model, BS_Alarm alarm) 
 	{
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
-		alarmMapper.insertAlarm(alarm);
+		int type=alarm.getAlarmType();
+		switch(type)
+		{
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+			alarmMapper.insertAlarm_Amount(alarm);
+			break;
+		case 6:
+		case 7:
+			alarmMapper.insertAlarm_EndTime(alarm);
+			break;
+		default :
+			alarmMapper.insertAlarm(alarm);
+			break;
+		}
 		return alarm_OpenCalendar();
 	}
 	
@@ -131,7 +147,23 @@ public class AlarmController {
 	{
 		System.out.println(alarm);
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
-		alarmMapper.updateAlarm(alarm);
+		int type=alarm.getAlarmType();
+		switch(type)
+		{
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+			alarmMapper.updateAlarm_Amount(alarm);
+			break;
+		case 6:
+		case 7:
+			alarmMapper.updateAlarm_EndTime(alarm);
+			break;
+		default :
+			alarmMapper.updateAlarm(alarm);
+			break;
+		}
 		return alarm_OpenCalendar();
 	}
 	
