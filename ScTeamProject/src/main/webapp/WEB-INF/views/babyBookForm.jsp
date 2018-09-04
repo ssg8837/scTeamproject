@@ -15,9 +15,11 @@
 </head>
 <body>
 
-  <div id='calendar'></div>
+  <div id='calendar'>
+  	
+  </div>
   
-  <a href="registerForm">등록 등록등록등록등록ㄷ옥그등ㄺ</a>
+  <a href="registerForm">등록등록등록등록</a>
   
   <div id="babyBookDetail"></div>
 
