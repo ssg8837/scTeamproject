@@ -78,18 +78,21 @@
 	              <span>성장기록</span>
 	              </a>
 	          </li>
+	         
 	          <li class="sub-menu">
 	            <a href="alarm_OpenCalendar">
 	              <i class="fa fa-calendar fa_left"></i>
 	              <span>생활기록</span>
 	              </a>
 	          </li>
+	          
 	          <li class="sub-menu">
 	            <a href="vaccineForm">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
 	              </a>
 	          </li>
+	          
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
 	              <i class="fa fa-hospital-o fa_left"></i>

@@ -53,7 +53,9 @@
 		for(var i=0;i<((Number(resp.totalCount)+15-1)/15)-1;i++){
 			paging += '&nbsp'+'<a href="javascript:searchHospital('+i+')">'+(i+1)+'</a>'+'&nbsp&nbsp';
 			$('#paging').html(paging);
-		}	
+		}
+		
+		window.scrollTo(0,0);
 	}
 	
 	function searchHospital(p){
@@ -217,14 +219,26 @@
               	<option selected disabled="disabled">시/군/구</option>
               </select>
 	
-				<input id="btn" type="button" value="검색">
+				<input id="btn" type="button" value="조회">
 				
 				<!-- <h4><i class="fa fa-angle-right"></i> Hover Table</h4> -->
               <!-- <hr> -->
-              <table class="table table-hover" id="outputHospital"></table>
+              <table class="table table-hover" id="outputHospital">
+              	<tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr>
+              </table>
+              
+              
 
 				<div id="paging"></div>
 				
+				<hr>
+				
+				<h4>어린이 국가예방접종 지정 의료기관이란?</h4>
+				<p>어린이 국가예방접종 사업에 참여하여 예방접종비용을 지원받을 수 있는 의료기관입니다.
+				</p>
+				<p>의료기관에 따라 접종 가능한 백신 종류가 다를 수 있으므로, 
+				보호자는 방문 전에 지정 의료기관에서 접종 가능한 백신종류를 확인 후 방문하시기 바랍니다.
+				</p>
 	
 			<!-- <div class="col-md-12 mt"> -->
             
