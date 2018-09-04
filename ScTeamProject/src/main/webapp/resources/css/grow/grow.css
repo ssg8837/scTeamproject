@@ -9,26 +9,6 @@ div{
 	margin: 0;
 	padding: 0;
 }
-/*회원정보수정버튼*/
-.edit {
-	padding: 5px 15px;
-	margin-bottom: 1em;
-	
-	background: #90befa;
-	color: #fff;
-	font-size: 12px;
-	text-align: center;
-	
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border: 1px solid #257df5!important;
-}
-.edit:active, .edit:hover, .edit:focus{
-	background: #FFA600;
-	color: #fff;
-	border: 1px solid #c17d00!important;
-	outline: none;
-}
 
 /* ------------------------------------------------------------------------------------- */
 

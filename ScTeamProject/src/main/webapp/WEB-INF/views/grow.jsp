@@ -71,8 +71,16 @@
         	<c:if test='${sessionScope.loginId != null }'>
 	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
-	          	<div class="centered"><button class="edit">회원정보수정</button></div>
+	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
+        	
+        		<li class="sub-menu">
+	            <a href="openNewBaby">
+	              <i class="fa fa-heart fa_left"></i>
+	              <span>아이 추가하기</span>
+	            </a>
+	          </li>
+	        
 	          <li class="sub-menu">
 	            <a class="active" href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
@@ -255,11 +263,13 @@
 			</div><!-- end : 아이정보입력(grow_insertDiv) -->
           </div>	<!-- end : 본문 -->
         </div>
+      	</div>
       </section>
       <!-- /wrapper -->
     </section>
     <!-- /MAIN CONTENT -->
     <!--main content end-->
+    
     <!--footer start-->
    
     <!--footer end-->
@@ -280,6 +290,7 @@
 		<script src="./resources/js/util/check_byte.js"></script>
 		<script src="./resources/js/home/login_check.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
+	    
 		<script src="./resources/js/grow/Chart.js"></script>
 		<script src="./resources/js/grow/Chart.min.js"></script>
 		<script src="./resources/js/grow/Chart.bundle.js"></script>

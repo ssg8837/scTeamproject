@@ -24,6 +24,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{userNick})
 	</insert>
 	
+	<!-- 회원정보보기 -->
+	<select id="myAccount" resultType="BS_User">
+		SELECT USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK
+		FROM BS_USER
+		WHERE USERNO=#{userNo}
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="updateUser" parameterType="BS_User">
+		UPDATE BS_USER
+		SET USERPWD = #{userPwd},
+			USERADDR = #{userAddr},
+			USEREMAIL = #{userEmail},
+			USERPHONE = #{userPhone},
+			USERNICK = #{userNick}
+		WHERE USERID = #{userId}
+	</update>
+	
 	<select id="selectBaby" resultType="BS_Baby" parameterType="Integer"> 
 		SELECT BABYNO,USERNO, BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
 		FROM BS_BABY

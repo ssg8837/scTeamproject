@@ -90,7 +90,12 @@ public class BS_User {
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
 	}
-    
-	
+
+	@Override
+	public String toString() {
+		return "BS_User [userNo=" + userNo + ", userType=" + userType + ", userId=" + userId + ", userPwd=" + userPwd
+				+ ", userAddr=" + userAddr + ", userEmail=" + userEmail + ", userPhone=" + userPhone + ", userNick="
+				+ userNick + "]";
+	}
     
 }

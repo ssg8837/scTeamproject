@@ -1,8 +1,11 @@
 package com.scmaster.home;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -41,11 +44,70 @@ public class HomeController
 		}
 		return "home";
 	}
-	@RequestMapping(value = "/openNewAccount", method = RequestMethod.GET)
-	public String openNewAccount() 
-	{
-		return "newAccount";
+	//회원정보 수정페이지
+	@RequestMapping(value = "/openAccountEdit", method = RequestMethod.GET)
+	public String openAccountEdit(Model model) {
+		
+		int loginNo=(Integer)httpSession.getAttribute("loginNo");
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+		
+		System.out.println(loginNo);
+		
+		BS_User user=mapper.myAccount(loginNo);
+		model.addAttribute("user",user);
+		
+		System.out.println(user);	
+		
+		return "accountEdit";
 	}
+	//회원정보 수정(기능)
+	@RequestMapping(value = "/updateMyPage", method = RequestMethod.POST)
+	public String updateMyPage(BS_User user, String oldUserPwd, HttpServletResponse response){
+		
+		String url="";
+		
+		int loginNo=(Integer)httpSession.getAttribute("loginNo");
+		String loginId=(String)httpSession.getAttribute("loginId");
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+
+		//비밀번호 체크용
+		BS_User checkM = mapper.myAccount(loginNo);
+		String oldpwd = checkM.getUserPwd();
+		
+		//기존비밀번호가 일치할 경우에만 수정
+		if (oldpwd.equals(oldUserPwd) && loginId != null) {
+			
+			user.setUserId(loginId);
+			mapper.updateUser(user);
+			
+			response.setContentType("text/html; charset=UTF-8");
+		    PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>alert('정보수정완료!');</script>");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//내 정보 페이지로 이동
+			url="redirect:/openAccountEdit";
+		}
+		else if(!oldpwd.equals(oldUserPwd)) {
+			response.setContentType("text/html; charset=UTF-8");
+		    PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>alert('기존 비밀번호가 올바르지 않습니다. 확인 후 다시 시도해주세요.'); history.go(-1);</script>");
+				out.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return url;
+	}
+	
+	
+	
 	@RequestMapping(value = "/openNewBaby", method = RequestMethod.GET)
 	public String openNewBaby() 
 	{
