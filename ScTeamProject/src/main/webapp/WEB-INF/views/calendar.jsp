@@ -90,12 +90,18 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
+	          
 	          <li class="sub-menu">
-	            <a href="vaccineForm">
+	            <a href="">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	              </a>
+	            </a>
+	            <ul class="sub" style="display: block;">
+              		<li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+             		<li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+              	</ul>
 	          </li>
+	          
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
 	              <i class="fa fa-hospital-o fa_left"></i>

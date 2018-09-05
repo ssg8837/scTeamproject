@@ -40,14 +40,15 @@
 			
 			result += '<tbody>';
 			$.each(resp.vhList,function(index,item){
-				result += '<tr><td>'+item.orgnm+'</td>';
+				result += '<tr onclick="javascript:sendHospital(';
+				result += "'"+item.orgAddr+"'"+')"><td>'+item.orgnm+'</td>';
 				result += '<td>'+item.orgTlno+'</td>';
-				result += '<td>'+item.orgAddr+'</td></tr>';
+				result += '<td id="hospitalAddr">'+item.orgAddr+'</td></tr>';
 			});
 			result += '</tbody>';
 		
 		
-		$('#outputHospital').html(result);
+		$('#vaccineHospital').html(result);
 		
 		var paging="";
 		for(var i=0;i<((Number(resp.totalCount)+15-1)/15)-1;i++){
@@ -71,7 +72,11 @@
 		});
 	}
 	
-
+	function sendHospital(addr){
+		alert(addr);
+		
+		/* location.href='sendHospital?VaccineHospitalhospital='+addr; */
+	}; 
 
 </script>
 		
@@ -157,12 +162,18 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
+	         
 	          <li class="sub-menu">
-	            <a href="vaccineForm">
+	            <a class="active" href="#">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	              </a>
+	            </a>
+	            <ul class="sub">
+              		<li class="active"><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+             		<li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+              	</ul>
 	          </li>
+	          
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
 	              <i class="fa fa-hospital-o fa_left"></i>
@@ -208,22 +219,28 @@
         <div class="row mt">
           <div class="col-lg-12">
             <!-- <p>Place your content here.</p> -->      
-			<select size="1" id="firstCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
+			<select style="height:33px;" size="1" id="firstCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
 				<option selected disabled="disabled">시/도</option>
 					<c:forEach var="list" items="${list}">
 				<option value="${list.cityCode}">${list.cityName}</option>
 				</c:forEach>
 			</select>
               
-              <select size="1" id="secondCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
+              &nbsp;
+              
+              <select style="height:33px;" size="1" id="secondCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
               	<option selected disabled="disabled">시/군/구</option>
               </select>
-	
-				<input id="btn" type="button" value="조회">
+				
+				&nbsp;&nbsp;
+				<!-- <input id="btn" type="button" value="조회"> -->
+				<button id="btn" type="button" class="btn btn-info">조회</button>
+				
+				<br/><br/>
 				
 				<!-- <h4><i class="fa fa-angle-right"></i> Hover Table</h4> -->
               <!-- <hr> -->
-              <table class="table table-hover" id="outputHospital">
+              <table class="table table-hover" id="vaccineHospital">
               	<tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr>
               </table>
               

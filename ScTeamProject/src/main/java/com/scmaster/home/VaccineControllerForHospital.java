@@ -19,6 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.scmaster.vo.City;
+import com.scmaster.vo.Hospital;
 import com.scmaster.vo.VaccineHospital;
 
 
@@ -157,9 +158,9 @@ public class VaccineControllerForHospital{
 	
 	///도현씨 보세요 호엥ㅇ에에에에엥
 	@RequestMapping(value = "/sendHospital", method = RequestMethod.GET)
-	public String hopitalTest3(String hospitalAddr){
+	public String sendHospital(String addr){
 		System.out.println("호에에엥에엥ㅇㅇ");
-		System.out.println(hospitalAddr);
+		System.out.println(addr);
 	
 	    return "redirect:vaccineFormForHospital";
 	}

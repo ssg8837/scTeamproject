@@ -11,6 +11,10 @@
 	}
 	
 	function registerPopup(babyNo,diseaseNum,diseaseName,vaccineType){
+		if(babyNo==null){
+			alert('아이를 선택해주세요');
+			return;
+		}
 		var url = "registerPopup?babyNo="+babyNo+"&diseaseNum="+diseaseNum+"&diseaseName="+diseaseName+"&vaccineType="+vaccineType;
 		window.open(url, "", "width=400, height=300, left=100, top=50");
 	}
@@ -106,12 +110,19 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
+	          
+	          
 	          <li class="sub-menu">
-	            <a href="vaccineForm">
+	            <a class="active" href="#">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	              </a>
+	            </a>
+	            <ul class="sub">
+              		<li class="active"><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+             		<li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+              	</ul>
 	          </li>
+	          
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
 	              <i class="fa fa-hospital-o fa_left"></i>
@@ -165,8 +176,7 @@
 			</c:forEach>
 		</select>
 	</form>
-	
-	<a href="vaccineFormForHospital">어린이 국가예방접종 지정 의료기관 조회</a>
+
 	
 	<table class="table table-hover">
                  <!-- <h4><i class="fa fa-angle-right"></i> Hover Table</h4> 
@@ -179,6 +189,32 @@
                   </tr>  -->
                 </thead>
                 <tbody>
+                
+                <c:if test="${babyNo==0}">
+                	<c:forEach var="vaccine" items="${diseaseList}">
+						<tr>
+							<td>
+								<img src="./resources/image/beforeVaccine.png">
+							</td>
+				
+							<td>
+								<a href="javascript:registerPopup()">
+									${vaccine.diseasename}<br>
+									${vaccine.vaccinetype}<br>
+									권장일: <br>
+									접종일: <br>
+									국가예방접종
+								</a>
+							</td>
+				
+							<td>
+								<a href="javascript:infoPopup(${vaccine.diseasenum})">질병상세정보</a>
+							</td>
+						</tr>
+					</c:forEach>
+                </c:if>
+                
+                
                   <c:forEach var="vaccine" items="${vaccineList}">
 			<tr>
 				<td>

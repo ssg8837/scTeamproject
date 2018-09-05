@@ -34,6 +34,7 @@ public class VaccineController {
 	public String vaccineTest(HttpSession session,Model model,
 								@RequestParam(value="babyNo", defaultValue="0") int babyNo){
 		
+		
 		//예방접종 정보 가지고 오기
 		DiseaseMapper diseaseMapper = sqlSession.getMapper(DiseaseMapper.class);
 		List<Disease> diseaseList = diseaseMapper.selectList();
@@ -68,12 +69,17 @@ public class VaccineController {
 				String d = selectedBaby.getBabyBirth().substring(8, 10);
 				
 				cal.set(Calendar.YEAR, Integer.parseInt(y));
-				cal.set(Calendar.MONTH, Integer.parseInt(m));
+				cal.set(Calendar.MONTH, Integer.parseInt(m)-1);
 				cal.set(Calendar.DATE, Integer.parseInt(d));	 
 			}
 			
 			cal.add(Calendar.MONTH, Integer.parseInt(vaccineList3.get(i).getVaccineDate()));
-			vaccineList3.get(i).setVaccineDate(cal.get(Calendar.YEAR)+"년 "+cal.get(Calendar.MONTH)+"월");
+			vaccineList3.get(i).setVaccineDate(cal.get(Calendar.YEAR)+"년 "+(cal.get(Calendar.MONTH)+1)+"월 "+cal.get(Calendar.DATE)+"일");
+			
+			//예방접종 권장일 예외 사항들 처리
+			if(vaccineList3.get(i).getDiseaseName().equals("결핵(Tuberculosis)")) {
+				vaccineList3.get(i).setVaccineDate("생후 4주 이내 1회 접종");
+			}
 			
 			if(vaccineList3.get(i).getDiseaseName().equals("인플루엔자 (Influenza : Flu)")) {
 				vaccineList3.get(i).setVaccineDate("매년");
