@@ -80,33 +80,13 @@ public class HomeController
 	}
 	//회원가입(기능)
 	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
-	public @ResponseBody String insertNewAccount(BS_User user, MultipartFile uploadfile) 
+	public @ResponseBody String insertNewAccount(BS_User user) 
 	{
 		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
 		if(mapper.countUser(user.getUserId())!=0)
 			return "false";
 		user.setUserType("n");
 		
-		//기본프로필사진 추가하기
-		user.setUserOriginalFile(uploadfile.getOriginalFilename());
-		String savedName = savedName(uploadfile);
-		user.setUserSavedFile(savedName);
-		
-		File path = new File(UPLOADPATH);
-		if(!path.exists())
-		{
-			path.mkdirs();
-			System.out.println("폴더생성");
-		}
-		
-		File file = new File(UPLOADPATH, savedName);
-		try {
-			uploadfile.transferTo(file);
-		} catch (Exception e) {
-			e.printStackTrace();
-		
-		mapper.updateUser(user);
-		}
 		mapper.insertUser(user);
 		return "true";
 	}
