@@ -69,7 +69,7 @@
 				      </div>
 
 			          <div class="field-wrap">
-			            <label>Email Address<span class="req">*</span></label>
+			            <label>Email (jane@example.com)<span class="req">*</span></label>
 			            <input type='text' id='userEmail' name='userEmail' required autocomplete="off"/>
 			          </div>
 			          
@@ -79,11 +79,11 @@
 			          </div>
 			          
 			          <div class="field-wrap">
-			            <label>Phone<span class="req">*</span></label>
+			            <label>Phone (010-0000-0000)<span class="req">*</span></label>
 			            <input type='text' id='userPhone' name='userPhone' required autocomplete="off"/>
 			          </div>
-			          
-			          <button type="button" class="button button-block" onclick='javascript:insertNewAccount();'>Get Started</button>
+
+			          <button type="submit" class="button button-block" onclick='insertNewAccount();'>Get Started</button>
 		          </form>
 		        </div>	<!-- end : signUp -->
 		        

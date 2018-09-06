@@ -52,30 +52,27 @@ function insertNewAccount() {
         return false;
     }
     
-    
-                            $.ajax({
-                                url: 'insertNewAccount',
-                                method: 'post',
-                                data: {
-                                    "userId": userid,
-                                    "userPwd": userpwd,
-                                    "userAddr":useraddr,
-                                    "userEmail":useremail,
-                                    "userPhone":userphone,
-                                    "userNick":usernick
-                                },
-                                success: function(data) {
-                                    if(data=="true")
-                                    {
-                                    	alert("가입이 완료되었습니다.");
-                                    	location.reload();
-                                    }
-                                    else
-                                    {
-                                    	alert("이미 같은 아이디가 존재합니다.\n다른 아이디를 사용해주세요.");
-                                    }
-                                }
+     $.ajax({
+        url: 'insertNewAccount',
+        method: 'post',
+        data: {
+         "userId": userid,
+         "userPwd": userpwd,
+         "userAddr":useraddr,
+         "userEmail":useremail,
+         "userPhone":userphone,
+         "userNick":usernick
+        },
+        success: function(data) {
+	         if(data=="true"){
+	             alert("가입이 완료되었습니다.");
+	             location.reload();
+	         }
+	         else{
+	             alert("이미 같은 아이디가 존재합니다.\n다른 아이디를 사용해주세요.");
+	         }
+        }
 
-                            });
+    });
 
 }

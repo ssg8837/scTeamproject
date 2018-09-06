@@ -145,14 +145,17 @@
 	
 		<form action='insertNewBaby' method='post'>
 			아기이름:<br>
-			<input type='text' name='babyName'><br>
+			<input type='text' name='babyName' required autocomplete="off"><br>
+			
 			성별:<br>
 			<select name='babyGender'>
 				<option value='M' selected>남자</option>
 				<option value='F'>여자</option>
 			</select><br>
+			
 			생일:<br>
 			<input type='date' name='babyBirth'><br>
+			
 			혈액형:<br>
 			<select name='babyBlood'>
 				<option value='A' selected>A</option>
@@ -160,6 +163,7 @@
 				<option value='AB'>AB</option>
 				<option value='O'>O</option>
 			</select><br>
+			
 			<button type='submit'>아기등록</button>
 		</form>
 		</div>

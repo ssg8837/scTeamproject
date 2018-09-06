@@ -178,7 +178,7 @@
 						<button type="button" onclick="getData();">조회하기</button>
 					</form>
 					
-					<div class="grow_sheetData">	<!-- 시트 테이블 레이아웃용 div -->
+					<div class="table-responsive grow_sheetData">	<!-- 시트 테이블 레이아웃용 div -->
 						<table class="grow_sheetTable">
 							<colgroup>
 								<col width="20%" />

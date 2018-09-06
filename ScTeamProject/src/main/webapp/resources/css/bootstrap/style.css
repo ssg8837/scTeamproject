@@ -3465,9 +3465,15 @@ ul.chat-available-user li a:hover {
 	-webkit-border-radius: 4px;
 	border: 1px solid #257df5!important;
 }
-.edit:active, .edit:hover, .edit:focus{
+.edit.active, .edit:hover, .edit:focus{
 	background: #FFA600;
 	color: #fff;
 	border: 1px solid #c17d00!important;
 	outline: none;
+}
+
+.edit.active:hover,.edit.active:focus {
+	background: #90befa;
+	color: #fff;
+	border: 1px solid #257df5!important;
 }
