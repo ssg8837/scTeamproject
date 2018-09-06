@@ -206,9 +206,49 @@ public class AlarmController {
     			}
     			for(BS_Alarm item : alarmList)
     			{
-    				//item.setAlarmTitle();
+    				int alarmType=item.getAlarmType();
+    				String str="";
     	            Cal_Event event = new Cal_Event();
-    	            event.setTitle(item.getAlarmTitle()+" [ "+(mainMapper.selectBaby(item.getBabyNo()).getBabyName())+" ] ");
+    	            switch(alarmType)
+    	            {
+    	            case 1:
+    	            	str+="모유 : ";
+    	            	str+=item.getAlarmAmount();
+    	            	str+="ml";
+    	            	event.setColor("#4286f4");
+    	            	break;
+    	            case 2:
+    	            	str+="젖병 : ";
+    	            	str+=item.getAlarmAmount();
+    	            	str+="ml";
+    	            	event.setColor("#3aff85");
+    	            	break;
+    	            case 3:
+    	            	str+="이유식 : ";
+    	            	str+=item.getAlarmAmount();
+    	            	event.setColor("#b2a867");
+    	            	str+="ml";
+    	            	break;
+    	            case 4:
+    	            	str+="유축 : ";
+    	            	str+=item.getAlarmAmount();
+    	            	str+="ml";
+    	            	event.setColor("#ffe0c9");
+    	            	break;
+    	            case 5:
+    	            	str+="배소변";
+    	            	event.setColor("#996416");
+    	            	break;
+    	            case 6:
+    	            	str+="수면";
+    	            	event.setColor("#9e80ad");
+    	            	break;
+    	            case 7:
+    	            	str+="목욕";
+    	            	event.setColor("#abcfd8");
+    	            	break;
+    	            }
+    	            event.setTitle(str+" [ "+(mainMapper.selectBaby(item.getBabyNo()).getBabyName())+" ] "+item.getAlarmTitle());
     	            event.setStart(item.getAlarmTime());
     	            event.setId(Integer.toString(item.getAlarmNo()));
     	            events.add(event);

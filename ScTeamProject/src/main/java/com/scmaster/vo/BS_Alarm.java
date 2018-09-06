@@ -14,6 +14,24 @@ public class BS_Alarm {
 	{
 		
 	}
+	public BS_Alarm(int alarmNo, int babyNo, int userNo, String alarmTitle,int alarmType,int alarmAmount, String alarmTime) {
+		this.alarmNo = alarmNo;
+		this.babyNo = babyNo;
+		this.userNo = userNo;
+		this.alarmTitle = alarmTitle;
+		this.alarmAmount = alarmAmount;
+		this.alarmType = alarmType;
+		this.alarmTime = alarmTime;
+	}
+	public BS_Alarm(int alarmNo, int babyNo, int userNo, String alarmTitle,int alarmType, String alarmTime,String endTime) {
+		this.alarmNo = alarmNo;
+		this.babyNo = babyNo;
+		this.userNo = userNo;
+		this.alarmTitle = alarmTitle;
+		this.alarmType = alarmType;
+		this.alarmTime = alarmTime;
+		this.endTime = endTime;
+	}
 	
 	public BS_Alarm(int alarmNo, int babyNo, int userNo, String alarmTitle,int alarmType,int alarmAmount, String alarmTime,String endTime) {
 		this.alarmNo = alarmNo;
