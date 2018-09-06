@@ -17,8 +17,6 @@ body {
 	padding: 0;
 	width: 100%;
 	height: 100%;
-	position: relative;
-	font-family: 'Titillium Web', sans-serif;
 }
 
 a {
@@ -28,8 +26,13 @@ a {
 }
 
 a:hover {
-	color: #ffc99b;
+	color: #8080ff;
 	text-decoration: none;
+}
+
+h3{
+	margin-top: 0;
+	margin-bottom: 1.5em;
 }
 
 /*=============================================================================*/
@@ -37,7 +40,7 @@ a:hover {
 	position: absolute;
 	margin: auto;
 	width: 80%;
-	height: 600px;
+	height: 50%;
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -68,16 +71,16 @@ a:hover {
 /*=============================================================================*/
 .form {
 	margin: auto;
-	background: white;
-	padding: 40px;
-	border-radius: 4px;
-	box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
-	float: left;
-	min-width: 35%;
-	
+	min-width: 400px;
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
+	
+	padding: 40px;
+	background: white;
+	border-radius: 4px;
+	box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+	float: left;
 }
 
 .tab-group {
@@ -97,7 +100,7 @@ a:hover {
 	text-decoration: none;
 	padding: 15px;
 	background: #FDE4D5;
-	color: #a0b3b0;
+	color: #fff;
 	font-size: 20px;
 	float: left;
 	width: 50%;
@@ -107,8 +110,8 @@ a:hover {
 }
 
 .tab-group li a:hover {
-	background: #90BEFA;
-	color: #ffffff;
+	background: #ffe0a6;
+	color: #9b797b;
 }
 
 .tab-group .active a {
@@ -204,8 +207,9 @@ textarea {
 	-webkit-appearance: none;
 }
 
-.button:hover, .button:focus {
-	background: #90BEFA;
+.button:hover, .button:focus,.button:active {
+	background: #ffe0a6;
+	color: #9b797b;
 }
 
 .button-block {

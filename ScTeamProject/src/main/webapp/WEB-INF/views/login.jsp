@@ -43,47 +43,47 @@
       
 		      <ul class="tab-group">
 		        <li class="tab active"><a href="#signup">Sign Up</a></li>
-		        <li class="tab"><a href="#login">Log In</a></li>
+		        <li class="tab"><a href="#login">Login</a></li>
 		      </ul>
       
 		      <div class="tab-content">
 		      <!-- 회원가입 -->
 		        <div id="signup">   
 		          <form action='insertNewAccount' method='post'>
+		          <h3>Don't have an account yet?</h3>
 			          <div class="top-row">
-			            <h3>Don't have an account yet?</h3>
 			            <div class="field-wrap">
 			              <label>ID<span class="req">*</span></label>
-			              <input type="text" required autocomplete="off" />
+			              <input type='text' id='userId' name='userId' required autocomplete="off" />
 			            </div>
 
 			            <div class="field-wrap">
 			              <label>Nick Name<span class="req">*</span></label>
-			              <input type="text"required autocomplete="off"/>
+			              <input type='text' id='userNick' name='userNick' required autocomplete="off"/>
 			            </div>
 			          </div>
 			
 			          <div class="field-wrap">
 				        <label>Set A Password<span class="req">*</span></label>
-				        <input type="password"required autocomplete="off"/>
+				        <input type='password' id='userPwd' name='userPwd' required autocomplete="off"/>
 				      </div>
 
 			          <div class="field-wrap">
-			            <label>Email Address<span class="req">*</span></label>
-			            <input type="email"required autocomplete="off"/>
+			            <label>Email (jane@example.com)<span class="req">*</span></label>
+			            <input type='text' id='userEmail' name='userEmail' required autocomplete="off"/>
 			          </div>
 			          
 					  <div class="field-wrap">
 			            <label>Address<span class="req">*</span></label>
-			            <input type="text"required autocomplete="off"/>
+			            <input type='text' id='userAddr' name='userAddr' required autocomplete="off"/>
 			          </div>
 			          
 			          <div class="field-wrap">
-			            <label>Phone<span class="req">*</span></label>
-			            <input type="number"required autocomplete="off"/>
+			            <label>Phone (010-0000-0000)<span class="req">*</span></label>
+			            <input type='text' id='userPhone' name='userPhone' required autocomplete="off"/>
 			          </div>
-			          
-			          <button type="submit" class="button button-block"/>Get Started</button>
+
+			          <button type="submit" class="button button-block" onclick='insertNewAccount();'>Get Started</button>
 		          </form>
 		        </div>	<!-- end : signUp -->
 		        
@@ -107,7 +107,7 @@
 		          
 		          <p class="forgot"><a data-toggle="modal" href="login.html#myModal">Forgot Password?</a></p>
 		                
-		          <button class="button button-block" href="index.html" type="button" onclick="javascript:login();"/>Log In</button> 
+		          <button type="button" class="button button-block" type="button" onclick="javascript:login();">Log In</button> 
 		          
 		          
 		          <!-- Modal -->
@@ -150,9 +150,8 @@
 		<script src="./resources/js/common/common-scripts.js"></script>
 		  <!--script for this page-->
 		<script src="./resources/js/util/check_byte.js"></script>
-		<script src="./resources/js/home/login_check.js"></script>
-	    <script src="./resources/js/home/bell.js"></script>
-		  <!-- js -->
+		<script src="./resources/js/login/login_check.js"></script>
+		<script src="./resources/js/login/account_check.js"></script>
 		<script src="./resources/js/login/login.js"></script>
 	</body>
 </html>
