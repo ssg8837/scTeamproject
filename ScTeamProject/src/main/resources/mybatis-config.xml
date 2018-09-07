@@ -21,6 +21,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="Vaccine" type="com.scmaster.vo.Vaccine"></typeAlias>
 		<typeAlias alias="BabyBook" type="com.scmaster.vo.BabyBook"></typeAlias>
 		<typeAlias alias="Grow" type="com.scmaster.vo.Grow"></typeAlias>
+		<typeAlias alias="SNS" type="com.scmaster.vo.SNS"></typeAlias>
+		<typeAlias alias="SNS_Reply" type="com.scmaster.vo.SNS_Reply"></typeAlias>
+		<typeAlias alias="Friend" type="com.scmaster.vo.Friend"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
@@ -32,5 +35,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="growMapper/GrowDefaultMapper.xml" />
 		<mapper resource="DiseaseMapper.xml" />
 		<mapper resource="BabyBookMapper.xml" />
+		<mapper resource="SNSMapper.xml" />
 	</mappers>
 </configuration>
