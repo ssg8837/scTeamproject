@@ -140,8 +140,12 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
+<<<<<<< HEAD
         <h3><i class="fa fa-angle-right"></i>성장기록</h3>
         <div class="row mt">
+=======
+        <h3><i class="fa fa-angle-right"></i> 성장기록</h3>
+>>>>>>> refs/remotes/origin/master
           <div class="col-lg-12">
           
 			<!-- 본문 -->

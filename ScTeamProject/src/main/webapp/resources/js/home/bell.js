@@ -34,7 +34,42 @@ $(
             </ul>
 					 * */
 					$.each(data,function(index,item){
-						htmlStr+='<li><a href="#">'+item.alarmTitle+" ["+item.alarmTime+"]"+'</a></li>'
+						var alarmType=item.alarmType;
+						var str="";
+	    	            switch(alarmType)
+	    	            {
+	    	            case 1:
+	    	            	str+="모유 : ";
+	    	            	str+=item.alarmAmount;
+	    	            	str+="ml";
+	    	            	break;
+	    	            case 2:
+	    	            	str+="젖병 : ";
+	    	            	str+=item.alarmAmount;
+	    	            	str+="ml";
+	    	            	break;
+	    	            case 3:
+	    	            	str+="이유식 : ";
+	    	            	str+=item.alarmAmount;
+	    	            	str+="ml";
+	    	            	break;
+	    	            case 4:
+	    	            	str+="유축 : ";
+	    	            	str+=item.alarmAmount;
+	    	            	str+="ml";
+	    	            	break;
+	    	            case 5:
+	    	            	str+="배소변";
+	    	            	break;
+	    	            case 6:
+	    	            	str+="수면";
+	    	            	break;
+	    	            case 7:
+	    	            	str+="목욕";
+	    	            	break;
+	    	            }
+						
+						htmlStr+='<li><a href="#">'+str+" ["+item.alarmTime+"] "+item.alarmTitle+'</a></li>'
 						count++;
 					});
 					$('#bg-warning').text(count);

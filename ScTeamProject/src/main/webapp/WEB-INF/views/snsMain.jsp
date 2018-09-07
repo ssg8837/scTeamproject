@@ -12,6 +12,7 @@
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="./resources/css/sns/snsStyle.css" rel="stylesheet">
 		
 	</head>
 	<body>
@@ -69,7 +70,7 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit"><img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="active edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
@@ -116,7 +117,7 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="openSNS">
+	            <a class="active" href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>
@@ -138,10 +139,29 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
+        <div class="sns_button"> <button type="button" class="btn btn-round btn-info">게시글 쓰기</button> </div> 
         <div class="row mt">
           <div class="col-lg-12">
-            <p>Place your content here.</p>
+            
+            <div class="row">
+              
+              <!-- /col-md-4 -->
+              <!--  Spotify Panel -->
+             
+              <!--  Blog Panel -->
+              <div class="col-lg-12 col-md-12 col-sm-12 mb">
+                <div class="content-panel pn">
+                  <div id="sns-bg">
+                    <div class="sns-title">Incredible Title</div>
+                  </div>
+                  <div class="blog-text">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="#">Read More</a></p>
+                  </div>
+                </div>
+              </div>
+              </div>
+            
+            
           </div>
         </div>
       </section>

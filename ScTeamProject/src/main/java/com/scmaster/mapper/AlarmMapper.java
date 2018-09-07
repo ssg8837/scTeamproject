@@ -8,8 +8,16 @@ public interface AlarmMapper {
 	ArrayList<BS_Alarm> selectBabyAlarmList(int babyNum);
 
 	void insertAlarm(BS_Alarm alarm);
+	
+	void insertAlarm_Amount(BS_Alarm alarm);
+	
+	void insertAlarm_EndTime(BS_Alarm alarm);
 
 	void updateAlarm(BS_Alarm alarm);
+
+	void updateAlarm_Amount(BS_Alarm alarm);
+	
+	void updateAlarm_EndTime(BS_Alarm alarm);
 
 	BS_Alarm selectAlarm(int alarmNo);
 

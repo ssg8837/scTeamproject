@@ -77,7 +77,7 @@
         		<li class="sub-menu">
 	            <a class="active" href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이 추가하기</span>
+	              <span>아이정보</span>
 	            </a>
 	          </li>
 	        
@@ -140,7 +140,7 @@
     <!--main content start-->
       <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 아이추가</h3>
+        <h3><i class="fa fa-angle-right"></i> 아이정보</h3>
         <div class="row mt">
           <div class="col-lg-12">
           	  
@@ -148,14 +148,21 @@
           	  <div class="newBaby_wrapper">
           	 	
           	 	<div class="babyList_Div">
+          	 		<h4>내 아이 정보</h4>
           	 		<c:forEach var="babyList" items="${babyList}">
-						${babyList.babyName} : ${babyList.babyBirth} <br/>
+          	 			<div style="border: 1px solid pink; border-radius: 10px; padding: 1em; width: 50%;">
+						<b>${babyList.babyName}</b> <br/>
+						
+						생일: ${babyList.babyBirth} <br/>
+						</div>
+						<br/>
 					</c:forEach>
           	 	
           	 	</div>
           	 
-          	  
+          	  	 
 				 <form action='insertNewBaby' method='post'>
+				 <h4>아이 정보 등록</h4>
 					아기이름:<br>
 					<input type='text' name='babyName' required autocomplete="off"><br>
 					

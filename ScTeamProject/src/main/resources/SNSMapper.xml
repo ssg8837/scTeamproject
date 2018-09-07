@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.scmaster.mapper.SNSMapper">
+
+	<!-- 미 로그인시 -->
+	<select id="selectPublicSNS" resultType="SNS"> 
+		SELECT SNSNO, USERNO, PERMISSION ,CONTENT, LIKEY, PHOTOCOUNT, PHOTOGROUP, TO_CHAR(WRITEDATE,'YYYY-MM-DD HH24:MI') AS WRITEDATE
+		FROM SNS
+		WHERE PERMISSION = 0
+	</select>
+	
+	<select id="selectFriendList" resultType="Integer">
+		SELECT FRIENDNO 
+		FROM FRIEND
+		WHERE USERNO=#{loginNo}
+	</select>
+	<select id="selectSNS" resultType="SNS">
+		SELECT SNSNO, USERNO, PERMISSION ,CONTENT, LIKEY, PHOTOCOUNT, PHOTOGROUP, TO_CHAR(WRITEDATE,'YYYY-MM-DD HH24:MI') AS WRITEDATE
+		FROM SNS
+		WHERE (USERNO=#{loginNo}) OR
+		(PERMISSION = 0) OR
+		(USERNO GROUP BY (SELECT FRIENDNO 
+		FROM FRIEND
+		WHERE USERNO=#{loginNo}))
+	</select>
+	
+</mapper>

@@ -8,7 +8,7 @@ function caps_lock_signupPwd(e) {
     if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
             || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
         show_caps_lock_signupPwd();
-        setTimeout("hide_caps_lock()", 3500);
+        setTimeout("hide_caps_lock_signupPwd()", 3000);
     } else {
         hide_caps_lock_signupPwd();
     }
@@ -31,7 +31,7 @@ function caps_lock_loginPwd(e) {
     if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
             || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
         show_caps_lock_loginPwd();
-        setTimeout("hide_caps_lock()", 3500);
+        setTimeout("hide_caps_lock_loginPwd()", 3000);
     } else {
         hide_caps_lock_loginPwd();
     }

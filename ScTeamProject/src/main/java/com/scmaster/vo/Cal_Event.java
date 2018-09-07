@@ -5,6 +5,7 @@ public class Cal_Event {
 		private String id;
 	    private String title;
 	    private String start;
+	    private String color;
 	  //  private String end;
 		public String getId() {
 			return id;
@@ -24,7 +25,13 @@ public class Cal_Event {
 		public void setStart(String start) {
 			this.start = start;
 		}
-		
+		public String getColor()
+		{
+			return color;
+		}
+		public void setColor(String color) {
+			this.color = color;
+		}
 	    
 	}
 
