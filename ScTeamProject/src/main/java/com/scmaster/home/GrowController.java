@@ -24,6 +24,7 @@ import com.scmaster.mapper.GrowDefaultMapper;
 import com.scmaster.mapper.GrowMapper;
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.vo.BS_Baby;
+import com.scmaster.vo.BS_User;
 import com.scmaster.vo.Grow;
 import com.scmaster.vo.Grow_Default;
 
@@ -62,6 +63,10 @@ public class GrowController {
 			List<Grow_Default> femaleBMI=mapperGD.showDefaultValueFemaleBMI();
 			List<Grow_Default> maleBMI=mapperGD.showDefaultValueMaleBMI();
 			
+			//사용자 프로필 사진 가져오기
+			BS_User user=mapperM.myAccount((Integer)loginNo);
+			
+			model.addAttribute("user",user);
 			model.addAttribute("female", female);	
 			model.addAttribute("male", male);
 			model.addAttribute("femaleBMI", femaleBMI);	

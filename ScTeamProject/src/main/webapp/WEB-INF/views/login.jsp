@@ -65,7 +65,10 @@
 			
 			          <div class="field-wrap">
 				        <label>Set A Password<span class="req">*</span></label>
-				        <input type='password' id='userPwd' name='userPwd' required autocomplete="off"/>
+				        <input type='password' id='userPwd' name='userPwd' required autocomplete="off" onkeypress="caps_lock_signupPwd(event)"/>
+				        <span id="signupPw_capslock" style="position:relative; border: 1px solid #FF061D; color:#FF061D; font-size: 12px; display:none; top:2px; float: left"> 
+    					&nbsp;<b>Caps Lock</b>&nbsp;is ON &nbsp;
+						</span>
 				      </div>
 
 			          <div class="field-wrap">
@@ -102,7 +105,10 @@
 		            <label>
 		              Password<span class="req">*</span>
 		            </label>
-		            <input type='password' id="userpwd" name='userpwd' required autocomplete="off"/>
+		            <input type='password' id="userpwd" name='userpwd' required autocomplete="off" onkeypress="caps_lock_loginPwd(event)"/>
+		            <span id="loginPw_capslock" style="position:relative; border: 1px solid #FF061D; color:#FF061D; font-size: 12px; display:none; top:2px; float: LEFT"> 
+    					&nbsp;<b>Caps Lock</b>&nbsp;is ON &nbsp;
+					</span>
 		          </div>
 		          
 		          <p class="forgot"><a data-toggle="modal" href="login.html#myModal">Forgot Password?</a></p>

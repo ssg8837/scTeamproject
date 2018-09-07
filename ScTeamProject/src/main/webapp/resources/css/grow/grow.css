@@ -22,7 +22,7 @@ div{
 
 /* 사이드바(시트/차트 버튼) */
 .grow_sidebar{
-	margin: 0;
+	margin-right: -100px;
 	width: 100px;
 	padding-top: 3em;
 	padding-bottom: 2em;
@@ -58,7 +58,7 @@ div{
 /*차트 div*/
 .grow_chart{
 	margin: auto;
-	width: 70%;
+	width: 100%;
 	min-width: 600px;
 	height: 100%;
 	float: left;
@@ -69,6 +69,10 @@ div{
 
 /*아이정보조회란(시트)*/
 .grow_sheet{
+	margin-top: 0 ;
+	margin-bottom: 0;
+	margin-left: 100px;
+	margin-right: 200px;
 	padding: 2em;
 	padding-top: 5em;
 	text-align: left;
@@ -103,8 +107,15 @@ div{
 /*========= 그래프 =========*/
 
 /*아이선택버튼 div*/
+.grow_selectBabyDiv{
+	margin-top: 0 ;
+	margin-bottom: 0;
+	margin-left: 100px;
+	margin-right: 210px;
+}
 .grow_selectBabyDiv button{
 	margin-right: 1em;
+	margin-bottom: 1em;
 	padding: 5px 15px;
 
 	background: #90befa;
@@ -124,10 +135,14 @@ div{
 }
 /*캔버스 컨테이너(캔버스 날릴 때 남길 틀+캔버스 사이즈 조정)*/
 .grow_canvas_container{
+	margin-top: 0 ;
+	margin-bottom: 0;
+	margin-left: 100px;
+	margin-right: 210px;
+	
 	display: none;
 	position: relative; 
 	margin-bottom: 2em;
-	width: 100%;
 	height: 600px;
 }	
 .grow_canvas_container canvas{
@@ -144,12 +159,10 @@ div{
 
 /*아이정보입력란*/
 .grow_insertDiv{
-	position: absolute;
-	left: 75%;
-	right: 1em;
-	padding: 2em;
+	padding-top: 3em;
+	margin-left: -200px;
+	width: 200px;
 	float: left;
-	min-width: 300px;
 }
 /*최근갱신일 표시란*/
 .grow_checkRegdate{
@@ -159,7 +172,7 @@ div{
 /*input 디자인*/
 .grow_insertDiv input{
 	margin-bottom: 1em;
-	width: 90%;
+	width: 150px;
 }
 /*select 디자인*/
 .grow_insertDiv select{
@@ -169,4 +182,5 @@ div{
 /*아이정보입력버튼*/
 .grow_float_right{
 	float: right;
+	margin-right: 5em;
 }

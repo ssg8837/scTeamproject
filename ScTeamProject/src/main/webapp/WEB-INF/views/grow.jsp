@@ -69,7 +69,7 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit"><img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
@@ -140,7 +140,7 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 성장기록</h3>
+        <h3><i class="fa fa-angle-right"></i>성장기록</h3>
         <div class="row mt">
           <div class="col-lg-12">
           
@@ -171,6 +171,7 @@
 									<option value="${babyList.babyNo}">${babyList.babyName}</option>
 								</c:forEach>
 							</select>
+						&nbsp;&nbsp;
 						나이 선택:
 							<select id="grow_selectAgeForSheet" name="babyage">
 								<option value="">성장기록을 조회할 나이를 선택해주세요</option>
@@ -239,10 +240,10 @@
 			<!-- 아이 정보 입력받기 -->
 			<div class="grow_insertDiv">
 				<form id="grow_formSendData" action="grow_insertBabyData" method="post">
-					<h3>아이 성장기록 작성</h3>
+					<h4>성장기록 작성</h4>
 					
 					<select id="grow_selectBaby" name="babyno" onchange="checkit();">
-							<option value="">성장정보를 기록할 아이를 선택해주세요</option>
+							<option value="">아이를 선택해주세요</option>
 						<c:forEach var="babyList" items="${babyList}">
 							<option value="${babyList.babyNo}">${babyList.babyName}</option>
 						</c:forEach>

@@ -43,13 +43,15 @@ public class HomeController
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) 
 	{
-		Object loginNo= httpSession.getAttribute("loginNo");
-		if(loginNo!=null)
-		{
-			MainMapper mapper= sqlSession.getMapper(MainMapper.class);
-			ArrayList<BS_Baby> babyList= mapper.selectBabyList((Integer)loginNo);
-			model.addAttribute("babyList", babyList);
+		Object loginNo=httpSession.getAttribute("loginNo");
+		
+		if(loginNo != null ) {
+			MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+			
+			BS_User user=mapper.myAccount((Integer)loginNo);
+			model.addAttribute("user",user);
 		}
+		
 		return "home";
 	}
 	
@@ -100,6 +102,7 @@ public class HomeController
 		return home(model);
 	}
 	*/
+	//사진 저장이름 생성
 	public String savedName(MultipartFile uploadfile) {
 		UUID uuid = UUID.randomUUID();
 		String savedName = uuid+""+uploadfile.getOriginalFilename();
@@ -121,79 +124,98 @@ public class HomeController
 		int loginNo=(Integer)httpSession.getAttribute("loginNo");
 		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
 		
-		//System.out.println(loginNo);
-		
 		BS_User user=mapper.myAccount(loginNo);
 		model.addAttribute("user",user);
 		
-		//System.out.println(user);	
-		
 		return "accountEdit";
 	}
-	//회원정보 수정(기능)
-	@RequestMapping(value = "/updateMyPage", method = RequestMethod.POST)
-	public String updateMyPage(BS_User user, String oldUserPwd, MultipartFile uploadfile, HttpServletResponse response){
-		
-		System.out.println(uploadfile);
-		
-		String url="";
-		
-		int loginNo=(Integer)httpSession.getAttribute("loginNo");
-		String loginId=(String)httpSession.getAttribute("loginId");
+	//회원 프로필사진 불러오기!
+	@RequestMapping(value = "/getUserImage",method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<InputStreamResource> getUserImage(int userNo ) throws Exception {
+
 		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
-
-		//비밀번호 체크용
-		BS_User checkM = mapper.myAccount(loginNo);
-		String oldpwd = checkM.getUserPwd();
+		BS_User user = mapper.myAccount(userNo);
+		String fullname=user.getUserSavedFile();
 		
-		//기존비밀번호가 일치할 경우에만 수정
-		if (oldpwd.equals(oldUserPwd) && loginId != null) {
-			
-			user.setUserId(loginId);
+		HttpHeaders responseHeaders = new HttpHeaders();
 
+		responseHeaders.setContentType(MediaType.IMAGE_JPEG);
+		
+		String path = String.format("%s//%s", UPLOADPATH, fullname);
+
+		FileSystemResource resource = new FileSystemResource(path);
+
+		return new ResponseEntity<InputStreamResource>(new InputStreamResource(resource.getInputStream()), responseHeaders, HttpStatus.OK);
+		
+	}
+	
+	//회원정보 수정(기능)
+	@RequestMapping(value = "/updateMyPage", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody String updateMyPage(BS_User user, String oldUserPwd, MultipartFile uploadfile){
+
+		String result="";
+		
+		Object loginNo=httpSession.getAttribute("loginNo");
+		
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+		//비밀번호 체크용
+		BS_User checkM = mapper.myAccount((Integer)loginNo);
+		String oldpwd = checkM.getUserPwd();
+
+		//기존비밀번호가 일치할 경우에만 수정
+		if(!oldpwd.equals(oldUserPwd)) {
+			result= "pwNotCorrect";
+		}
+		else if (oldpwd.equals(oldUserPwd) && loginNo != null) {
+			
+			user.setUserNo((Integer)loginNo);
+			
+			System.out.println(uploadfile);
+			
 			//수정 시 새로 첨부한 파일이 있으면 기존 파일을 삭제하고 새로 업로드
 			if (!uploadfile.isEmpty()) {
-				String savedfile = user.getUserSavedFile();	//첨부되어있던 파일의 원본이름
+				String savedfile = user.getUserSavedFile();	//첨부되어있던 파일 이름
+				
+				System.out.println(savedfile);
+				
 				//기존 파일이 있으면 삭제
 				if (savedfile != null) {
 					deleteFile(UPLOADPATH + "/" + savedfile);
 				}
-				
 				//새로 업로드한 파일 저장
 				user.setUserOriginalFile(uploadfile.getOriginalFilename());			
-				//수정 정보에 새로 저장된 파일명과 원래의 파일명 저장
 				String savedName = savedName(uploadfile);
 				user.setUserSavedFile(savedName);
+	
+				File path = new File(UPLOADPATH);
+				if(!path.exists())
+				{
+					path.mkdirs();
+				}
+				File file = new File(UPLOADPATH, savedName);
+				try {
+					uploadfile.transferTo(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
+
+				int update = mapper.updateUser(user);
 				
-				mapper.updateUser(user);
+				if(update==1) { result= "success";}
+				else {result = "fail";}
 				
-				System.out.println(user);
+			}else if(uploadfile.isEmpty()){
+				user.setUserOriginalFile(null);
+				user.setUserSavedFile(null);
+							
+				int update = mapper.updateUser(user);
+				
+				if(update==1) { result= "success";}
+				else {result = "fail";}
 			}
 			
-			//수정 후 띄워줄 alert창
-			response.setContentType("text/html; charset=UTF-8");
-		    PrintWriter out;
-			try {
-				out = response.getWriter();
-				out.println("<script>alert('정보수정완료!');</script>");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			url="redirect:/openAccountEdit";
 		}
-		else if(!oldpwd.equals(oldUserPwd)) {
-			response.setContentType("text/html; charset=UTF-8");
-		    PrintWriter out;
-			try {
-				out = response.getWriter();
-				out.println("<script>alert('기존 비밀번호가 올바르지 않습니다. 확인 후 다시 시도해주세요.'); history.go(-1);</script>");
-				out.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}			
-		return url;
+		return result;
 	}
 	/**
 	 * 서버에 저장된 파일의 전체 경로를 전달받아, 해당 파일을 삭제
@@ -217,8 +239,21 @@ public class HomeController
 
 	//아이추가 페이지(이동)
 	@RequestMapping(value = "/openNewBaby", method = RequestMethod.GET)
-	public String openNewBaby() 
+	public String openNewBaby(Model model) 
 	{
+			Object loginNo= httpSession.getAttribute("loginNo");
+			if(loginNo!=null)
+			{
+				MainMapper mapper= sqlSession.getMapper(MainMapper.class);
+				
+				ArrayList<BS_Baby> babyList= mapper.selectBabyList((Integer)loginNo);
+				model.addAttribute("babyList", babyList);
+				
+				//프로필사진 불러오기(사이드바)
+				BS_User user=mapper.myAccount((Integer)loginNo);
+				model.addAttribute("user",user);
+			}
+		
 		return "newBaby";
 	}
 	//아이추가(기능)
