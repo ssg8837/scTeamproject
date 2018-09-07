@@ -96,14 +96,14 @@ public class VaccineController {
 	
 	//질병 상세 정보
 	@RequestMapping(value = "/diseaseDetail", method = RequestMethod.GET)
-	public String diseaseDetail(String diseasenum, Model model){
+	public @ResponseBody Disease diseaseDetail(String diseasenum){
 		
+		System.out.println("호엥엥ㅇㅇㅇㅇㅇ");
+		System.out.println(diseasenum);
 		DiseaseMapper diseaseMapper = sqlSession.getMapper(DiseaseMapper.class);
 		Disease disease = diseaseMapper.selectOne(Integer.parseInt(diseasenum));
 		
-		model.addAttribute("disease", disease);
-		
-		return "diseaseDetail";
+		return disease;
 	}
 	
 	//접종등록 팝업창	

@@ -52,9 +52,17 @@
 		
 		var paging="";
 		for(var i=0;i<((Number(resp.totalCount)+15-1)/15)-1;i++){
-			paging += '&nbsp'+'<a href="javascript:searchHospital('+i+')">'+(i+1)+'</a>'+'&nbsp&nbsp';
+			paging += '<c:if test="${i+1 == resp.page}"><b></c:if>';
+			paging += '<a href="javascript:searchHospital('+i+')">'+(i+1)+'</a>&nbsp;&nbsp;';
+			paging += '<c:if test="${i+1 == resp.page}"></b></c:if>'
 			$('#paging').html(paging);
 		}
+		
+		/* <c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}">
+		<c:if test="${counter == navi.currentPage}"><b></c:if>
+		<a href="javascript:formSubmit(${counter})">${counter}</a>
+		<c:if test="${counter == navi.currentPage}"></b></c:if>
+		</c:forEach> */
 		
 		window.scrollTo(0,0);
 	}
@@ -90,6 +98,7 @@
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="./resources/css/forVaccine/vaccine.css" rel="stylesheet">
 		
 	</head>
 	<body>
@@ -246,7 +255,7 @@
               
               
 
-				<div id="paging"></div>
+				<div id="paging" class="paging"></div>
 				
 				<hr>
 				

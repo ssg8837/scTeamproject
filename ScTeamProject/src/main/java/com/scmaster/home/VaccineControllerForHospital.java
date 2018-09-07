@@ -151,7 +151,7 @@ public class VaccineControllerForHospital{
 	    Map<String, Object> map = new HashMap<String, Object>();
 		map.put("totalCount", totalCount);
 		map.put("vhList", vhList);
-	    
+	    map.put("page", Integer.parseInt(page));
 	
 	    return map;
 	}

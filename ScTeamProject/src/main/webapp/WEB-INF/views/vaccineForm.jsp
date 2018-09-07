@@ -5,29 +5,108 @@
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script>
-	function selectSubmit(){
-		var searchForm = document.getElementById("searchForm");
-		searchForm.submit();
-	}
-	
-	function registerPopup(babyNo,diseaseNum,diseaseName,vaccineType){
-		if(babyNo==null){
-			alert('아이를 선택해주세요');
-			return;
+		
+		function selectSubmit(){
+			var searchForm = document.getElementById("searchForm");
+			searchForm.submit();
 		}
-		var url = "registerPopup?babyNo="+babyNo+"&diseaseNum="+diseaseNum+"&diseaseName="+diseaseName+"&vaccineType="+vaccineType;
-		window.open(url, "", "width=400, height=300, left=100, top=50");
-	}
 	
-	function infoPopup(diseaseNum){
-		var url = "diseaseDetail?diseasenum="+diseaseNum;
-		window.open(url, "", "width=400, height=300, left=100, top=50");
-	}
+		function registerPopup(babyNo,diseaseNum,diseaseName,vaccineType){
+			if(babyNo==null){
+				alert('아이를 선택해주세요');
+				return;
+			}
+		
+		var result = '<h4>'+diseaseName+'</h4>';
+			result += '<hr />';
+			result += '<input type="radio" id="checkN" class="vaccineCK" name="vaccineCK" value="N" checked="checked" onclick="javascript:deleteDate()"><span class="vaccineCK_check">미접종</span>';
+			result += '&nbsp;&nbsp;<input type="radio" id="checkY" class="vaccineCK" name="vaccineCK" value="Y" onclick="javascript:insertDate()"><span class="vaccineCK_check">접종</span> ';
+			result += '<br /><div id="forCheckdate"></div><br /> ';
+			result += '<p>메모</p><input id="memo" type="text"><br /><br />';
+			result += '<input id="registerbtn" type="button" value="확인" onclick="javascript:clickRegister()">';
+			result += '<input id="cancelbtn" type="button" value="취소" onclick="javascript:clickCancle()">';
+			result += '<input id="babyNo" type="hidden" value="'+babyNo+'">';
+			result += '<input id="diseaseNum" type="hidden" value="'+diseaseNum+'">';
+			result += '<input id="vaccineType" type="hidden" value="'+vaccineType+'">';
+		
+		$('#vaccineRegisterDiv').html(result);
+		
+		document.getElementById('vaccineRegisterModalLight').style.display='block';
+		document.getElementById('vaccineRegisterModalFade').style.display='block';
+		
+		}
+	
+		
+		function insertDate(){
+			$('#forCheckdate').html('<br/ ><p>접종일</p><input id="checkdate" type="date">');
+		}
+		
+		
+		function deleteDate(){
+			$('#forCheckdate').html('');
+		}
 	
 	
+		 function clickRegister(){
+			var babyNo = $('#babyNo').val(); 
+			var diseaseNum = $('#diseaseNum').val();
+			var vaccineType = $('#vaccineType').val();
+			var vaccineCheck = $("input[type=radio][name=vaccineCK]:checked").val();
+			var checkdate = $("#checkdate").val();
+			var memo = $("#memo").val();
+		
+			var sendData = {
+					"babyNo":babyNo,
+					"diseaseNum": diseaseNum,
+					"vaccineCheck":vaccineCheck,
+					"checkdate": checkdate,
+					"vaccineType":vaccineType,
+					"memo":memo
+			};
+		
+			$.ajax({
+				url:"registerCheck",
+				method: "get",
+				data:sendData,
+				success:function(data){
+					alert('등록');
+					document.getElementById('vaccineRegisterModalLight').style.display='none';
+					document.getElementById('vaccineRegisterModalFade').style.display='none';
+					location.reload();
+				}
+			});
+		
+		} 
+	
+		function clickCancle(){
+			document.getElementById('vaccineRegisterModalLight').style.display='none';
+			document.getElementById('vaccineRegisterModalFade').style.display='none';
+		} 
+	
+		function infoPopup(diseaseNum){
+		
+		 	$.ajax({
+				url:'diseaseDetail',
+				data:{'diseasenum':diseaseNum},
+				success:diseaseDetailOutput
+			});
+		
+			document.getElementById('light').style.display='block';
+			document.getElementById('fade').style.display='block'; 
+		
+		}
+	
+		function diseaseDetailOutput(resp){
+			
+			var result = '<h4>'+resp.diseasename+'</h4><br>';
+				result += '<pre style="font-size: 12pt;" id="testcont"></pre>';
+		
+	
+			$('#diseaseDetailDiv').html(result);
+			$('#testcont').html(resp.diseasecontent);
+		}
+
 </script>
-	
-	
 	
 		<title>육아서포트페이지</title>
 		<!-- 부트스트랩 -->
@@ -38,7 +117,7 @@
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-		
+		<link href="./resources/css/forVaccine/vaccine.css" rel="stylesheet">
 	</head>
 	<body>
 	<form id='home' action='./' method='get'>
@@ -168,14 +247,16 @@
         <div class="row mt">
           <div class="col-lg-12">
             <!-- <p>아이를 선택해 주세요</p> -->
+           
             <form id="searchForm" action="vaccineForm" method="get">
-	<select id="babyNo" name="babyNo" onchange="selectSubmit()">
-			<option selected disabled="disabled">아이선택</option>
-			<c:forEach var="baby" items="${babyList}">
-				<option value="${baby.babyNo}" ${baby.babyNo == babyNo ? 'selected' : ''}>${baby.babyName}</option>
-			</c:forEach>
-		</select>
-	</form>
+				<select style="height:20px;" size="1" id="babyNo" name="babyNo" onchange="selectSubmit()">
+					<option selected disabled="disabled">아이선택</option>
+					<c:forEach var="baby" items="${babyList}">
+						<option value="${baby.babyNo}" ${baby.babyNo == babyNo ? 'selected' : ''}>${baby.babyName}</option>
+					</c:forEach>
+				</select>
+				&nbsp;&nbsp;&nbsp;<span style="font-size: 18px;"> * 아이를 선택해주세요.</span>
+			</form>
 
 	
 	<table class="table table-hover">
@@ -243,8 +324,42 @@
 		</c:forEach>
                 </tbody>
               </table>		
-	
-	
+			
+			
+			<!-- 예방접종 등록 모달 -->
+			<div id="vaccineRegisterModalLight" class="white_content">
+				<button type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
+				 onclick = "document.getElementById('vaccineRegisterModalLight').style.display='none';document.getElementById('vaccineRegisterModalFade').style.display='none'">
+				&times;</button>
+				
+				<div id="vaccineRegisterDiv">
+					
+				</div>
+			
+				<!-- <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">닫기</a> -->
+			</div>
+		
+        	<div id="vaccineRegisterModalFade" class="black_overlay"></div>
+			
+			
+			
+			<!-- diseaseContent 모달 -->
+			<div id="light" class="white_content">
+				<button type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
+				 onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+				&times;</button>
+				
+				<div id="diseaseDetailDiv">
+					
+				</div>
+			
+				<!-- <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">닫기</a> -->
+			</div>
+		
+        	<div id="fade" class="black_overlay"></div>
+			
+			
+			
 	
           </div>
         </div>
