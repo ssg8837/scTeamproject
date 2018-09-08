@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM SNS
 		WHERE (USERNO=#{loginNo}) OR
 		(PERMISSION = 0) OR
-		(USERNO GROUP BY (SELECT FRIENDNO 
+		(USERNO IN (SELECT FRIEND
 		FROM FRIEND
 		WHERE USERNO=#{loginNo}))
 	</select>

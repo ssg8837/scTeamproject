@@ -139,7 +139,7 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <div class="sns_button"> <button type="button" class="btn btn-round btn-info">게시글 쓰기</button> </div> 
+        <div class="sns_button"> <button type="button" class="btn btn-round btn-info" onclick="location.href='openNewSns'">게시글 쓰기</button> </div> 
         <div class="row mt">
           <div class="col-lg-12">
             

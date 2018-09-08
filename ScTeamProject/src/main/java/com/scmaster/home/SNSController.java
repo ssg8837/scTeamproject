@@ -37,4 +37,10 @@ public class SNSController {
 		model.addAttribute("snsList", snsList);
 		return "snsMain";
 	}
+	
+	@RequestMapping(value = "/openNewSns", method = RequestMethod.GET)
+	public String openNewSns(Model model) 
+	{
+		return "newSns";
+	}
 }
