@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.scmaster.mapper.SNSMapper;
+import com.scmaster.vo.BabyBook;
 import com.scmaster.vo.SNS;
 
 @Controller
@@ -42,5 +44,10 @@ public class SNSController {
 	public String openNewSns(Model model) 
 	{
 		return "newSns";
+	}
+	@RequestMapping(value = "/insertNewSns", method = RequestMethod.GET)
+	public String insertNewSns(SNS sns, MultipartFile uploadfile, HttpSession session) 
+	{
+		return "snsMain";
 	}
 }
