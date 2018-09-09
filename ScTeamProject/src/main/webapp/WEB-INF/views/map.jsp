@@ -14,6 +14,8 @@
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
 		<link href="./resources/css/map/map.css" rel="stylesheet">
 
+
+
 	</head>
 	<body>
 	<form id='home' action='./' method='get'>
@@ -89,12 +91,16 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
-	          <li class="sub-menu">
-	            <a href="vaccineForm">
-	              <i class="fa fa-medkit fa_left"></i>
-	              <span>예방접종</span>
-	              </a>
-	          </li>
+	        	<li class="sub-menu">
+               <a href="">
+                 <i class="fa fa-medkit fa_left"></i>
+                 <span>예방접종</span>
+               </a>
+               <ul class="sub" style="display: block;">
+                    <li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+                   <li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+                 </ul>
+             </li>
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
 	              <i class="fa fa-hospital-o fa_left"></i>
@@ -102,7 +108,7 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="hospital_Test">
+	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
@@ -134,33 +140,40 @@
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
-    <section id="main-content">
-      <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
-        <div class="row mt">
-          <div class="col-lg-12">
-            		<div class="map_wrap">
-						<input id="hospitalAddr" type="hidden" value="${hospitalAddr}"/>
-						<div id="map" style="width:100%;height:100%;overflow:hidden;"></div>
-							<div id="menu_wrap" class="bg_white">
-	        				<div class="option">
-	            			<div>
-	                		<form onsubmit="searchPlaces(); return false;">
-	                    		키워드 : <input type="text" placeholder="원하시는 병원의 구주소나 신주소를 입력해주세요" id="keyword" value="삼성동" size="15"> 
-	                    		<button type="submit">검색하기</button> 
-	             		   </form>
-	             		</div>
-	            </div>
-	        </div>
-	        <hr>
-	        <ul id="placesList"></ul>
-	        <div id="pagination"></div>
-   		</div>
-          </div>
-        </div>
-      </section>
-      <!-- /wrapper -->
+	<section id="main-content">
+		<section class="wrapper site-min-height">
+			<h3><i class="fa fa-angle-right"></i> 병원정보</h3>
+			<div class="row mt">
+				<div class="col-lg-12">
+					<div class="map_wrap"><!-- 지도 레이아웃을 위한 Wrapper  -->
+						<input id="hospitalAddr" type="hidden" value="${hospitalAddr}"/><!-- 예방접종 예방 병원 객채  -->
+						<!-- 지도 객채를 담을 div 태그  -->
+						<div id="map">
+							<div class="reset_icon_wrap"><!-- 위치정보 초기화 -->
+								<img class="getPostion "src="./resources/image/map/gps-fixed-indicator.png">
+							</div>						
+						</div>
+						<!-- 매뉴 태그들 -->
+						<div id="menu_wrap" class="bg_white">
+	        				<div class="option"><!-- 검색창  -->
+								<i class="sub_menu_icon" data-placement="right" data-original-title="Toggle Navigation"></i><!-- 리스트 접기 아이콘 -->
+	            				<div><!-- 검색창 양식 폼 -->
+	                				<form onsubmit="searchPlaces(); return false;">
+	                    			키워드 : <input type="text" placeholder="원하시는 병원의 구주소나 신주소를 입력해주세요" id="keyword" value="삼성동" size="15"> 
+	                    			<button type="submit">검색하기</button> 
+									</form>
+	             				</div>
+	            			</div>
+							<ul id="placesList"></ul><!--검색 병원표시  -->
+							<div id="pagination"></div><!--병원의 갯수가 많을경우 페이징  -->
+							</div>
+						<hr>
+					</div>
+				</div>
+			</div>
+		</section>
     </section>
+    <!-- /wrapper -->
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
@@ -178,9 +191,6 @@
 		<script src="./resources/js/common/common-scripts.js"></script>
 		  <!--script for this page-->
 	    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e2f3241393e98d4d475a38553e4f353&libraries=services,clusterer,drawing"></script>
-		<script src="./resources/js/util/check_byte.js"></script>
-		<script src="./resources/js/home/login_check.js"></script>
-	    <script src="./resources/js/home/bell.js"></script>
 	    <script src="./resources/js/map/map.js"></script>
 	</body>
 </html>
