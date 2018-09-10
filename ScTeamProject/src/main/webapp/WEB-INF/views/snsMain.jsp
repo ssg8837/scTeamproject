@@ -1,6 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
+
 <html>
 	<head>
 		<title>육아서포트페이지</title>
@@ -149,16 +153,37 @@
               <!--  Spotify Panel -->
              
               <!--  Blog Panel -->
-              <div class="col-lg-12 col-md-12 col-sm-12 mb">
-                <div class="content-panel pn">
-                  <div id="sns-bg">
-                    <div class="sns-title">Incredible Title</div>
-                  </div>
-                  <div class="blog-text">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="#">Read More</a></p>
-                  </div>
-                </div>
-              </div>
+              <c:if test="${fn:length(snsList) ==0 }">
+	              <div class="col-lg-12 col-md-12 col-sm-12 mb">
+	                <div class="content-panel pn">
+	                  <div id="sns-bg">
+	                    <div class="sns-title">올라온 글이 없습니다.</div>
+	                  </div>
+	                  <div class="blog-text">
+	                    <p>없다구요! </p>
+	                  </div>
+	                </div>
+	              </div>
+              </c:if>
+              <c:if test="${fn:length(snsList) !=0 }">
+              
+              <c:forEach var="item" items="${snsList}">
+              
+				   <div class="col-lg-12 col-md-12 col-sm-12 mb">
+	                <div class="content-panel pn">
+	                  <div id="sns-bg">
+	                    <div class="sns-title">${item.userNo }</div>
+	                  </div>
+	                  <div class="blog-text">
+	                    <p>${item.content } </p>
+	                  </div>
+	                </div>
+	             </div>
+				</c:forEach>
+
+              	
+              </c:if>
+              
               </div>
             
             
