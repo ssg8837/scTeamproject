@@ -38,14 +38,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 회원정보수정 -->
 	<update id="updateUser" parameterType="BS_User">
 		UPDATE BS_USER
-		SET USERPWD = #{userPwd},
+		SET 
+			USERPWD = #{userPwd},
 			USERADDR = #{userAddr},
 			USEREMAIL = #{userEmail},
 			USERPHONE = #{userPhone},
 			USERNICK = #{userNick},
 			USERORIGINALFILE = #{userOriginalFile},
 			USERSAVEDFILE = #{userSavedFile}
-		WHERE USERID = #{userId}
+		WHERE USERNO = #{userNo}
 	</update>
 	
 	<!-- 아이선택 -->

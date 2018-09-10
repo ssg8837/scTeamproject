@@ -9,9 +9,9 @@ public class Grow {
 	private String babygender;	//아이 성별
 	private String babybirth;	//아이 생일
 	
-	private double growheight;		//아이 신장
-	private double growweight;		//아이 체중
-	private double growhead;		//아이 머리둘레
+	private double growheight;	//아이 신장
+	private double growweight;	//아이 체중
+	private double growhead;	//아이 머리둘레
 	
 	private int babyage;		//아이 나이(개월)
 	private double growbmi;		//아이 bmi(2세 이후부터 추가)

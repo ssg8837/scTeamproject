@@ -70,6 +70,7 @@ function insertNewAccount() {
 	         }
 	         else{
 	             alert("이미 같은 아이디가 존재합니다.\n다른 아이디를 사용해주세요.");
+	             location.reload();
 	         }
         }
 

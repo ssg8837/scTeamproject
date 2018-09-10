@@ -12,6 +12,7 @@
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="./resources/css/account/babyList.css" rel="stylesheet">
 	</head>
 	<body>
 	<form id='home' action='./' method='get'>
@@ -68,7 +69,7 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit"><img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
@@ -76,7 +77,7 @@
         		<li class="sub-menu">
 	            <a class="active" href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이 추가하기</span>
+	              <span>아이정보</span>
 	            </a>
 	          </li>
 	        
@@ -139,41 +140,67 @@
     <!--main content start-->
       <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 아이추가</h3>
+        <h3><i class="fa fa-angle-right"></i> 아이정보</h3>
         <div class="row mt">
           <div class="col-lg-12">
-	
-		<form action='insertNewBaby' method='post'>
-			아기이름:<br>
-			<input type='text' name='babyName' required autocomplete="off"><br>
+          	  
+          	  
+          	  <div class="newBaby_wrapper">
+          	 	
+          	 	<div class="babyList_Div">
+          	 		<h4>내 아이 정보</h4>
+          	 		<c:forEach var="babyList" items="${babyList}">
+          	 			<div style="border: 1px solid pink; border-radius: 10px; padding: 1em; width: 50%;">
+						<b>${babyList.babyName}</b> <br/>
+						
+						생일: ${babyList.babyBirth} <br/>
+						</div>
+						<br/>
+					</c:forEach>
+          	 	
+          	 	</div>
+          	 
+          	  	 
+				 <form action='insertNewBaby' method='post'>
+				 <h4>아이 정보 등록</h4>
+					아기이름:<br>
+					<input type='text' name='babyName' required autocomplete="off"><br>
+					
+					성별:<br>
+					<select name='babyGender'>
+						<option value='M' selected>남자</option>
+						<option value='F'>여자</option>
+					</select><br>
+					
+					생일:<br>
+					<input type='date' name='babyBirth'><br>
+					
+					혈액형:<br>
+					<select name='babyBlood'>
+						<option value='A' selected>A</option>
+						<option value='B'>B</option>
+						<option value='AB'>AB</option>
+						<option value='O'>O</option>
+					</select><br>
+					
+					<button type='submit'>아기등록</button>
+				</form>
+  
+			  
+			  </div>
 			
-			성별:<br>
-			<select name='babyGender'>
-				<option value='M' selected>남자</option>
-				<option value='F'>여자</option>
-			</select><br>
-			
-			생일:<br>
-			<input type='date' name='babyBirth'><br>
-			
-			혈액형:<br>
-			<select name='babyBlood'>
-				<option value='A' selected>A</option>
-				<option value='B'>B</option>
-				<option value='AB'>AB</option>
-				<option value='O'>O</option>
-			</select><br>
-			
-			<button type='submit'>아기등록</button>
-		</form>
-		</div>
-		</div>
+		 </div>	<!-- col-lg-12 -->
+		</div><!-- row mt -->
       </section>
       <!-- /wrapper -->
     </section>
     <!-- /MAIN CONTENT -->
     <!--main content end-->
 	</section>
+	
+	
+	
+	
 	    <script src="./resources/js/common/jquery.min.js"></script>
 	    <script src="./resources/js/common/bootstrap.min.js"></script>
 		<script src="./resources/js/common/jquery-ui-1.9.2.custom.min.js"></script>
