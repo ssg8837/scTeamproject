@@ -40,15 +40,18 @@ import com.scmaster.vo.Cal_Event;
 
 
 @Controller
-public class BabyBookController {
+public class BabyBookController1 {
 	
 	@Autowired
 	SqlSession sqlSession;
 	
+	@Autowired
+	HttpSession httpSession;
+	
 	private static final String UPLOADPATH = "C://FileRepo";
 	
 	
-	@RequestMapping(value = "/babyBook", method = RequestMethod.GET)
+	@RequestMapping(value = "/babyBookForm", method = RequestMethod.GET)
 	public String joinForm(Model model) {
 		
 		BabyBookMapper mapper = sqlSession.getMapper(BabyBookMapper.class);
@@ -57,17 +60,36 @@ public class BabyBookController {
 		for(int i=0;i<list.size();i++) {
 			String s1 = list.get(i).getRegdate().replaceAll(" ", "T");
 			list.get(i).setRegdate(s1);
-			
-			
 		}
 		
 		model.addAttribute("list", list);
 		
-		return "babyBook";
+		return "babyBookForm";
 	}
 	
-	@RequestMapping(value = "/registerBabyBook", method = RequestMethod.POST)
-	public String registerBabyBook(BabyBook babyBook, MultipartFile uploadfile, HttpSession session) {
+	@RequestMapping(value = "/registerForm", method = RequestMethod.GET)
+	public String registerForm(Model model) 
+	{
+		MainMapper mainMapper=sqlSession.getMapper(MainMapper.class);
+		Object loginNo=httpSession.getAttribute("loginNo");
+		ArrayList<Integer> noList= new ArrayList<Integer>();
+		ArrayList<String> nameList= new ArrayList<String>();
+		if(loginNo!=null)
+		{
+			ArrayList<BS_Baby> babyList=mainMapper.selectBabyList((Integer)loginNo);
+			for(BS_Baby item : babyList)	
+			{
+				noList.add(item.getBabyNo());
+				nameList.add(item.getBabyName());
+			}
+		}
+		model.addAttribute("noList", noList);
+		model.addAttribute("nameList", nameList);
+		return "registerForm";
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String register(BabyBook babyBook, MultipartFile uploadfile, HttpSession session) {
 		
 		babyBook.setOriginalfile(uploadfile.getOriginalFilename());
 		
@@ -92,7 +114,7 @@ public class BabyBookController {
 		BabyBookMapper mapper = sqlSession.getMapper(BabyBookMapper.class);
 		mapper.insertBabyBook(babyBook);
 
-		return "redirect:babyBook";
+		return "redirect:babyBookForm";
 	}
 	
 	public String savedName(MultipartFile uploadfile) {
@@ -102,8 +124,50 @@ public class BabyBookController {
 		return savedName;
 	}
 	
-	@RequestMapping(value = "/getImage",method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<InputStreamResource> getImage(int boardnum) throws Exception {
+	@RequestMapping(value = "/babyBookDetail", method = RequestMethod.GET)
+	public @ResponseBody BabyBook detailForm(int boardnum) {
+		
+		BabyBookMapper mapper = sqlSession.getMapper(BabyBookMapper.class);
+		BabyBook babyBook = mapper.selectOne(boardnum);
+		
+		return babyBook;
+	}
+	
+	@RequestMapping(value = "/babyBook_calenderLoad",method = RequestMethod.POST, produces = "text/html;charset=utf8")
+	public @ResponseBody String babyBook_calenderLoad()
+	{
+		String jsonMsg = null;
+        try {
+        	
+        	BabyBookMapper bookMapper=sqlSession.getMapper(BabyBookMapper.class);
+    		MainMapper mainMapper=sqlSession.getMapper(MainMapper.class);
+    		Object loginNo=httpSession.getAttribute("loginNo");
+    		ArrayList<BabyBook> alarmList= new ArrayList<BabyBook>();
+    		ArrayList<String> nameList =new ArrayList<String>();
+    		if(loginNo!=null)
+    		{
+				List<Cal_Event> events = new ArrayList<Cal_Event>();
+    			ArrayList<BabyBook> babyBookList=bookMapper.selectBabyBookListLoginNo((Integer)loginNo);
+    			for(BabyBook item : babyBookList)
+    			{
+    	            Cal_Event event = new Cal_Event();
+    	            event.setTitle(item.getTitle()+" [ "+(mainMapper.selectBaby(item.getBabyNo()).getBabyName())+" ] ");
+    	            event.setStart(item.getRegdate());
+    	            event.setId(Integer.toString(item.getBoardnum()));
+    	            events.add(event);
+    			}
+
+                ObjectMapper mapper = new ObjectMapper();
+                jsonMsg =  mapper.writerWithDefaultPrettyPrinter().writeValueAsString(events);
+    		}
+        } catch (IOException ioex) {
+            System.out.println(ioex.getMessage());
+        }
+        return jsonMsg;
+	}
+	
+	/*@RequestMapping(value = "/getImage",method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<InputStreamResource> getImage(int boardnum ) throws Exception {
 
 		BabyBookMapper bookMapper=sqlSession.getMapper(BabyBookMapper.class);
 		BabyBook book = bookMapper.selectOne(boardnum);
@@ -120,7 +184,7 @@ public class BabyBookController {
 
 		return new ResponseEntity<InputStreamResource>(new InputStreamResource(resource.getInputStream()), responseHeaders, HttpStatus.OK);
 
-	}
+	}*/
 	
 	
 }

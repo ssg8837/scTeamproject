@@ -4,91 +4,24 @@
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-	$(function(){
-	
-	 $('#firstCity').on('change',function(){
-		var brtcCd = $('#firstCity').val();
-		$.ajax({
-				url:'SearchSecondCity',
-				method:'get',
-				data:{'brtcCd':brtcCd},
-				success:secondCityOutput
+		<script>
+			$(function(){
+				
+				$('#registerBabyBook').on('click',function(){
+					
+					document.getElementById('registerLight').style.display='block';
+					document.getElementById('registerFade').style.display='block';
+					
+				});
+				
+				$('#registerbtn').on('click',function(){
+					var userNo = $('#userNo').val();
+					var content = $('#content').val();
+					$('#registerBabyBookForm').submit();
+				});
+				
 			});
-		
-		}); 
-	
-	$('#btn').on('click',btnClick);
-	
-	});//$(function
-	
-	function btnClick(){
-		searchHospital(0);
-	};
-	
-	function secondCityOutput(resp){
-		var result = '<option selected disabled="disabled">시/군/구</option>';
-		$.each(resp,function(index,item){
-			result += '<option value="'+item.cityCode+'">'+item.cityName+'</option>';
-		});
-		
-		$('#secondCity').html(result);
-	}//secondCityOutput
-	
-	function hospitalOutput(resp){
-		var result = '<thead><tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr></thead>';
-			
-			result += '<tbody>';
-			$.each(resp.vhList,function(index,item){
-				result += '<tr onclick="javascript:sendHospital(';
-				result += "'"+item.orgAddr+"'"+')"><td>'+item.orgnm+'</td>';
-				result += '<td>'+item.orgTlno+'</td>';
-				result += '<td id="hospitalAddr">'+item.orgAddr+'</td></tr>';
-			});
-			result += '</tbody>';
-		
-		
-		$('#vaccineHospital').html(result);
-		
-		var paging="";
-		for(var i=0;i<((Number(resp.totalCount)+15-1)/15)-1;i++){
-			if(resp.page==i+1){
-				paging += '<b><a href="javascript:searchHospital('+i+')" style="color:#FFA600;">'+(i+1)+'</a></b>&nbsp;&nbsp;';
-			}else{
-				paging += '<a href="javascript:searchHospital('+i+')" style="color: #84B8FF;">'+(i+1)+'</a>&nbsp;&nbsp;';	
-			}
-			$('#paging').html(paging);
-		}
-		
-		/* <c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}">
-		<c:if test="${counter == navi.currentPage}"><b></c:if>
-		<a href="javascript:formSubmit(${counter})">${counter}</a>
-		<c:if test="${counter == navi.currentPage}"></b></c:if>
-		</c:forEach> */
-		
-		window.scrollTo(0,0);
-	}
-	
-	function searchHospital(p){
-		var brtcCd = $('#firstCity').val();
-		var sggCd = $('#secondCity').val();
-		var page = p+1;
-		
-		$.ajax({
-			url:'Searchhospital',
-			method:'get',
-			data:{'brtcCd':brtcCd, 'sggCd':sggCd, 'page':page},
-			success:hospitalOutput
-		});
-	}
-	
-	function sendHospital(addr){
-		alert(addr);
-		
-		/* location.href='sendHospital?VaccineHospitalhospital='+addr; */
-	}; 
-
-</script>
+		</script>
 		
 		
 		<title>육아서포트페이지</title>
@@ -100,7 +33,7 @@
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-		<link href="./resources/css/forVaccine/vaccine.css" rel="stylesheet">
+		<link href="./resources/css/forBabyBook/babyBook.css" rel="stylesheet">
 		
 	</head>
 	<body>
@@ -223,65 +156,135 @@
     <!-- **********************************************************************************************************************************************************
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
-    <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 국가예방접종 지정 의료기관</h3>
+        <h3><i class="fa fa-angle-right"></i> 다이어리</h3>
         <div class="row mt">
           <div class="col-lg-12">
-            <!-- <p>Place your content here.</p> -->      
-			<select style="height:33px;" size="1" id="firstCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
-				<option selected disabled="disabled">시/도</option>
-					<c:forEach var="list" items="${list}">
-				<option value="${list.cityCode}">${list.cityName}</option>
-				</c:forEach>
-			</select>
-              
-              &nbsp;
-              
-              <select style="height:33px;" size="1" id="secondCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
-              	<option selected disabled="disabled">시/군/구</option>
-              </select>
-				
-				&nbsp;&nbsp;
-				<!-- <input id="btn" type="button" value="조회"> -->
-				<button id="btn" type="button" class="btn btn-info">조회</button>
-				
-				<br/><br/>
-				
-				<!-- <h4><i class="fa fa-angle-right"></i> Hover Table</h4> -->
-              <!-- <hr> -->
-              <table class="table table-hover" id="vaccineHospital">
-              	<tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr>
-              </table>
-              
-              
-
-				<div id="paging" class="paging"></div>
-				
-				<hr>
-				
-				<h4>어린이 국가예방접종 지정 의료기관이란?</h4>
-				<p>어린이 국가예방접종 사업에 참여하여 예방접종비용을 지원받을 수 있는 의료기관입니다.
-				</p>
-				<p>의료기관에 따라 접종 가능한 백신 종류가 다를 수 있으므로, 
-				보호자는 방문 전에 지정 의료기관에서 접종 가능한 백신종류를 확인 후 방문하시기 바랍니다.
-				</p>
-	
-			<!-- <div class="col-md-12 mt"> -->
             
-            <!-- <div class="content-panel"> -->
+            
+            <div class="row">
               
-                  
+	          <div id="registerBabyBook" class="col-lg-4 col-md-4 col-sm-4 mb">
+                <div class="instagram-panel pn">
+                  <i class="fa fa-instagram fa-4x"></i>
+                </div>
+              </div>
+              
+              
+              <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                <div class="content-panel pn">
+                  <div id="blog-bg">
+                  </div>
+                  <div class="blog-text">
+                    <p>내가 널 좋아하는게 너에겐 민폐가 될까봐 다가갈 수가 없어</p>
+                  </div>
+                  	<div class="blog-date">중요한 건 사랑</div>
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                <div class="content-panel pn">
+                  <div id="blog-bg">
+                  </div>
+                  <div class="blog-text">
+                    <p>나 혼자 설레고 나혼자 바라보고 나 혼자 사랑하고 있어</p>
+                    <div class="blog-date">중요한 건 사랑</div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+            
+            <div class="row">
+              
+              <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                <div class="content-panel pn">
+                  <div id="blog-bg" style="background-image: url(./getImage?boardnum=8);">
+                  </div>
+                  <div class="blog-text">
+                    <p>사랑이 뭘까요 ㅠㅠㅠ끄아아앙아아앙 못하겟어 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 크헠 vvㅠㅠㅠㅠㅠㅠ살져주세요 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅁㅈㄷㄱ</p>
+                  </div>
+                  	<div class="blog-date">2018.08.08 집에서</div>
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                <div class="content-panel pn">
+                  <div id="blog-bg" style="background-image: url(./resources/image/t2.png);">
+                  <div class="blog-date">중요한 건 사랑</div>
+                  </div>
+                  <div class="blog-text">
+                    <p>사랑이 뭘까요</p>
+                  </div>
+                </div>
+                	<div class="blog-date">2018.08.08 우주에서</div>
+              </div>
+              
+              <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                <div class="content-panel pn">
+                  <div id="blog-bg" style="background-image: url(./resources/image/t3.jpg);">
+                  </div>
+                  <div class="blog-text">
+                    <p>사랑이 뭘까요</p>
+                    <div class="blog-date">중요한 건 사랑</div>
+                  </div>
+                </div>
+              </div>
+            	  
+              
+            </div>
+            
+            
+            <div class="row">
+              
+              <c:forEach var="list" items="${list}">
+              	<div class="col-lg-4 col-md-4 col-sm-4 mb">
+                	<div class="content-panel pn">
+                  		<div id="blog-bg" style="background-image: url(./getImage?boardnum=${list.boardnum});">
+                  		</div>
+                  		<div class="blog-text">
+                    		<p>${list.content}</p>
+                  		</div>
+                  			<div class="blog-date">2018.08.08</div>
+               	 	</div>
+              	</div>
+              
+              </c:forEach>
+            	  
+              
+            </div>
+            
+            
+            <div id="registerLight" class="white_content">
+				<button type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
+				 onclick = "document.getElementById('registerLight').style.display='none';document.getElementById('registerFade').style.display='none'">
+				&times;</button>
+				
+				<div id="">
+					<form id="registerBabyBookForm" action="registerBabyBook" method="post" enctype="multipart/form-data" runat="server">
+						<input type="hidden" value="${sessionScope.loginNo}" id="userNo" name="userNo">
+						<!-- <input id="registerDate" type="date"><br> -->
+						<textarea id="content" name="content" rows="10" cols="70" style="resize: none;"></textarea>
+						<br>
+						<input type='file' id="imgInput" name="uploadfile"/><br/>
+	    				<div id="image_section" >
+	    				</div>
+						<input id="registerbtn" type="button" value="등록">
+					</form>
+				</div>
 			
-              
-  
+				<!-- <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">닫기</a> -->
+			</div>
+		
+        	<div id="registerFade" class="black_overlay"></div>
+            
           </div>
         </div>
       </section>
       <!-- /wrapper -->
     </section>
-    <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
    

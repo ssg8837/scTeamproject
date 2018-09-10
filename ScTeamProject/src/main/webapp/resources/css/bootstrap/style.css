@@ -298,7 +298,7 @@ ul.sidebar-menu {
 }
 
 ul.sidebar-menu li ul.sub li{
-    background: #2f323a;
+    background: #fffce6;
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
@@ -319,7 +319,7 @@ ul.sidebar-menu li ul.sub li a {
     -o-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    color: #FFF;
+    color: #777;
 }
 
 ul.sidebar-menu li ul.sub li a:hover {
@@ -328,7 +328,7 @@ ul.sidebar-menu li ul.sub li a:hover {
 }
 
 ul.sidebar-menu li ul.sub li.active a {
-    color: #4ECDC4;
+    color: #777;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;

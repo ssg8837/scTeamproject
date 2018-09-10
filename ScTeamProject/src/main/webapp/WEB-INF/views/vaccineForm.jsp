@@ -215,7 +215,7 @@
 	              </a>
 	          </li>
 	           <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="babyBook">
 	              <i class="fa fa-book fa_left"></i>
 	              <span>다이어리</span>
 	              </a>
@@ -282,8 +282,8 @@
 								<a href="javascript:registerPopup()">
 									${vaccine.diseasename}<br>
 									${vaccine.vaccinetype}<br>
-									권장일: <br>
-									접종일: <br>
+									<br>
+									<br>
 									국가예방접종
 								</a>
 							</td>
