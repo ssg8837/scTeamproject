@@ -6,14 +6,14 @@ function login()
 	var idsize=getByteLength(userid);
 	if(idsize>30||idsize<=0)
 	{
-		alert("아이디는 한글자 이상 30바이트(한글은 3바이트, 영어는 1바이트) 미만입니다.");
+		alert("아이디는 영문으로 1자 이상, 30자 미만이어야 합니다.");
 	}
 	else
 	{
 		var pwdsize=getByteLength(userpwd);
 		if(pwdsize>30||pwdsize<=0)
 		{
-			alert("비밀번호는 한글자 이상 30바이트(한글은 3바이트, 영어는 1바이트) 미만입니다.");
+			alert("비밀번호는 영문으로 1자 이상, 30자 미만이어야 합니다.");
 		}
 		else
 		{
@@ -27,8 +27,12 @@ function login()
 				},
 				success:function(data)
 				{
-					alert(data);
-                	$(location).attr('href', './');
+					if(data=="로그인 완료되었습니다."){
+	                	$(location).attr('href', './');
+					}else if(data=="로그인에 실패하였습니다. 아이디나 비밀번호를 확인해주세요."){
+						alert(data);
+					}
+					
 				}		
 			});
 		}

@@ -90,7 +90,7 @@ public class VaccineControllerForHospital{
 	        
 	        cd = getTagValue("cd",eElement);
 	        cdNm = getTagValue("cdNm",eElement);
-	        System.out.println(cd);
+	        //System.out.println(cd);
 	        City secondCity = new City();
 	        
 	        secondCity.setCityCode(cd);

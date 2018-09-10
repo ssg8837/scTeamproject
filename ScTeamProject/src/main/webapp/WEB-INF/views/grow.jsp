@@ -9,15 +9,14 @@
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/common_boot.css" rel="stylesheet">
 		<!-- Custom styles for this template -->
-		<link href="./resources/css/grow/grow.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-		
+		<link href="./resources/css/grow/grow.css" rel="stylesheet">
 	</head>
 	<body>
 	<form id='home' action='./' method='get'>
-		</form>
+	</form>
 		
         <c:if test='${sessionScope.loginId != null }'>
 		<input type="hidden" id="loginNo" value="${sessionScope.loginNo}">
@@ -70,14 +69,23 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
+	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
+        	
+        		<li class="sub-menu">
+	            <a href="openNewBaby">
+	              <i class="fa fa-heart fa_left"></i>
+	              <span>아이 추가하기</span>
+	            </a>
+	          </li>
+	        
 	          <li class="sub-menu">
 	            <a class="active" href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
 	              <span>성장기록</span>
-	              </a>
+	            </a>
 	          </li>
 	          <li class="sub-menu">
 	            <a href="alarm_OpenCalendar">
@@ -132,135 +140,135 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
-        <div class="row mt">
+        <h3><i class="fa fa-angle-right"></i> 성장기록</h3>
           <div class="col-lg-12">
+          
+			<!-- 본문 -->
             <div class="grow_main_content">
-		
-		
-		<!-- 사이드바 -->
-		<div class="grow_sidebar">
-			<!-- 차트 선택 -->
-			*시트*<br>
-			<button id="grow_babyDataSheets"	class="grow button sheet">	성장기록	</button> <br>
-			*그래프*<br>
-			<button id="grow_chart_height"		class="grow button chart">	신장		</button> <br>
-			<button id="grow_chart_weight"		class="grow button chart">	체중		</button> <br>
-			<button id="grow_chart_head"		class="grow button chart">	머리둘레	</button> <br>
-			<button id="grow_chart_bmi"			class="grow button chart">	BMI		</button>
-		</div> <!-- end : 사이드바(grow_sidebar) -->
+	
+			<!-- 사이드바 -->
+			<div class="grow_sidebar">
+				<!-- 차트 선택 -->
+				<h5>시트</h5>
+				<button id="grow_babyDataSheets"	class="grow button sheet">	성장기록	</button> <br>
+				<h5>그래프</h5>
+				<button id="grow_chart_height"		class="grow button chart">	신장		</button> <br>
+				<button id="grow_chart_weight"		class="grow button chart">	체중		</button> <br>
+				<button id="grow_chart_head"		class="grow button chart">	머리둘레	</button> <br>
+				<button id="grow_chart_bmi"			class="grow button chart">	BMI		</button>
+			</div> <!-- end : 사이드바(grow_sidebar) -->
 
-		<!-- 시트/차트 -->
-		<div class="grow_chart">			
-			<!-- 시트 표시 -->
-			<div class="grow_sheet">
-				<form id="grow_formchooseData" action="grow_selectBabyDataByAge" method="post">
-					<h3>아이 성장기록 조회</h3>
-					아이 선택:
-						<select id="grow_selectBabyForSheet" name="babyno" onchange="getAge();">
-								<option value="">성장기록을 조회할 아이를 선택해주세요</option>
-							<c:forEach var="babyList" items="${babyList}">
-								<option value="${babyList.babyNo}">${babyList.babyName}</option>
-							</c:forEach>
-						</select>
-					나이 선택:
-						<select id="grow_selectAgeForSheet" name="babyage">
-							<option value="">성장기록을 조회할 나이를 선택해주세요</option>
-						</select>
-					<button type="button" onclick="getData();">아이 성장기록 조회하기</button>
-				</form>
-				
-				<div class="grow_sheetData">	<!-- 시트 테이블 레이아웃용 div -->
-					<table class="grow_sheetTable">
-						<colgroup>
-							<col width="20%" />
-				            <col width="20%" />
-				            <col width="40%" />
-				            <col width="20%" />
-						</colgroup>
-						<thead>
-							<tr>
-								<th></th>
-								<th id="grow_sheetTable_ageNgender"></th>
-								<th id="grow_sheetTable_name"></th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th>신장</th>
-								<td id="grow_sheetTable_1"></td>
-								<td id="grow_sheetTable_4"></td>
-								<td id="grow_sheetTable_7"></td>
-							</tr>
-							<tr>
-								<th>체중</th>
-								<td id="grow_sheetTable_2"></td>
-								<td id="grow_sheetTable_5"></td>
-								<td id="grow_sheetTable_8"></td>
-							</tr>
-							<tr>
-								<th>머리둘레</th>
-								<td id="grow_sheetTable_3"></td>
-								<td id="grow_sheetTable_6"></td>
-								<td id="grow_sheetTable_9"></td>
-							</tr>
-							<tr>
-								<th>체질량 지수</th>
-								<td id="grow_sheetTable_10"></td>
-								<td id="grow_sheetTable_11"></td>
-								<td id="grow_sheetTable_12"></td>
-							</tr>
-						</tbody>
-					</table>
+			<!-- 시트/차트 -->
+			<div class="grow_chart">			
+				<!-- 시트 표시 -->
+				<div class="grow_sheet">
+					<form id="grow_formchooseData" action="grow_selectBabyDataByAge" method="post">	
+						아이 선택:
+							<select id="grow_selectBabyForSheet" name="babyno" onchange="getAge();">
+									<option value="">성장기록을 조회할 아이를 선택해주세요</option>
+								<c:forEach var="babyList" items="${babyList}">
+									<option value="${babyList.babyNo}">${babyList.babyName}</option>
+								</c:forEach>
+							</select>
+						나이 선택:
+							<select id="grow_selectAgeForSheet" name="babyage">
+								<option value="">성장기록을 조회할 나이를 선택해주세요</option>
+							</select>
+						<button type="button" onclick="getData();">조회하기</button>
+					</form>
+					
+					<div class="table-responsive grow_sheetData">	<!-- 시트 테이블 레이아웃용 div -->
+						<table class="grow_sheetTable">
+							<colgroup>
+								<col width="20%" />
+					            <col width="20%" />
+					            <col width="40%" />
+					            <col width="20%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th></th>
+									<th id="grow_sheetTable_ageNgender"></th>
+									<th id="grow_sheetTable_name"></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>신장</th>
+									<td id="grow_sheetTable_1"></td>
+									<td id="grow_sheetTable_4"></td>
+									<td id="grow_sheetTable_7"></td>
+								</tr>
+								<tr>
+									<th>체중</th>
+									<td id="grow_sheetTable_2"></td>
+									<td id="grow_sheetTable_5"></td>
+									<td id="grow_sheetTable_8"></td>
+								</tr>
+								<tr>
+									<th>머리둘레</th>
+									<td id="grow_sheetTable_3"></td>
+									<td id="grow_sheetTable_6"></td>
+									<td id="grow_sheetTable_9"></td>
+								</tr>
+								<tr>
+									<th>체질량 지수</th>
+									<td id="grow_sheetTable_10"></td>
+									<td id="grow_sheetTable_11"></td>
+									<td id="grow_sheetTable_12"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+				</div> <!-- end : 시트 표시(grow_sheet) -->  
+			
+				<!-- 아이선택버튼(차트 추가용): 사이드바 버튼 선택에 따라서 이 위치에 아이버튼 새로 생성 -->
+				<div class="grow_selectBabyDiv">
+				</div> <!-- end : 아이선택(차트 추가용) -->
+			
+				<!-- 그래프 표시 -->
+				<div class="grow_canvas_container">
+					<canvas id="grow_canvas"></canvas>      				                                
 				</div>
-				
-			</div> <!-- end : 시트 표시(grow_sheet) -->  
-		
-			<!-- 아이선택버튼(차트 추가용): 사이드바 버튼 선택에 따라서 이 위치에 아이버튼 새로 생성 -->
-			<div class="grow_selectBabyDiv">
-
-			</div> <!-- end : 아이선택(차트 추가용) -->
-		
-			<!-- 그래프 표시 -->
-			<div class="grow_canvas_container">
-				<canvas id="grow_canvas"></canvas>      				                                
-			</div>
-		
-		<!-- 아이 정보 입력받기 -->
-		<div class="grow_insertDiv">
-			<form id="grow_formSendData" action="grow_insertBabyData" method="post">
-				<h3>아이 성장기록 작성</h3>
-				
-				<select id="grow_selectBaby" name="babyno" onchange="checkit();">
-						<option value="">성장정보를 기록할 아이를 선택해주세요</option>
-					<c:forEach var="babyList" items="${babyList}">
-						<option value="${babyList.babyNo}">${babyList.babyName}</option>
-					</c:forEach>
-				</select>
-				<br>
-				<div class="grow_checkRegdate"></div>
-				<br>		
-				날짜 선택:	<br> <input type="date" id="growregdate" name="growregdate">
-				<br>
-				신장:		<br> <input type="number" step="0.1" id="growheight" name="growheight">	cm
-				<br>
-				체중:		<br> <input type="number" step="0.1" id="growweight" name="growweight">	kg
-				<br>
-				머리둘레:	<br> <input type="number" step="0.1" id="growhead"	name="growhead">	cm
-				<br>
-				<button type="button" onclick="sendData();" class="grow_float_right">아이 정보 입력하기</button>
-			</form>
-		</div>
-	</div>	
-	<!-- end : 본문 -->
-          </div>
+			</div>	
+			<!-- end : 시트/차트(grow_chart) -->
+	
+			<!-- 아이 정보 입력받기 -->
+			<div class="grow_insertDiv">
+				<form id="grow_formSendData" action="grow_insertBabyData" method="post">
+					<h3>아이 성장기록 작성</h3>
+					
+					<select id="grow_selectBaby" name="babyno" onchange="checkit();">
+							<option value="">성장정보를 기록할 아이를 선택해주세요</option>
+						<c:forEach var="babyList" items="${babyList}">
+							<option value="${babyList.babyNo}">${babyList.babyName}</option>
+						</c:forEach>
+					</select>
+					<br>
+					<div class="grow_checkRegdate"></div>
+					<br>		
+					날짜 선택:	<br> <input type="date" id="growregdate" name="growregdate">
+					<br>
+					신장:		<br> <input type="number" step="0.1" id="growheight" name="growheight">	cm
+					<br>
+					체중:		<br> <input type="number" step="0.1" id="growweight" name="growweight">	kg
+					<br>
+					머리둘레:	<br> <input type="number" step="0.1" id="growhead"	name="growhead">	cm
+					<br>
+					<button type="button" onclick="sendData();" class="grow_float_right">아이 정보 입력하기</button>
+				</form>
+			</div><!-- end : 아이정보입력(grow_insertDiv) -->
+          </div>	<!-- end : 본문 -->
         </div>
+      	</div>
       </section>
       <!-- /wrapper -->
     </section>
     <!-- /MAIN CONTENT -->
     <!--main content end-->
+    
     <!--footer start-->
    
     <!--footer end-->
@@ -281,6 +289,7 @@
 		<script src="./resources/js/util/check_byte.js"></script>
 		<script src="./resources/js/home/login_check.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
+	    
 		<script src="./resources/js/grow/Chart.js"></script>
 		<script src="./resources/js/grow/Chart.min.js"></script>
 		<script src="./resources/js/grow/Chart.bundle.js"></script>
@@ -288,17 +297,19 @@
 		<script src="./resources/js/grow/hammer.min.js"></script>
 		<script src="./resources/js/grow/chartjs-plugin-zoom.js"></script>
 		<script src="./resources/js/grow/grow.js"></script>
-		<script type="text/javascript">		
 		
+		<script type="text/javascript">		
 		//시트버튼누르면 캔버스 날리기
 		$('.grow.button.sheet').click(function(){	
 			$('.grow_selectBabyDiv').html('');				// 아이선택버튼 날리기
 			$('.grow_canvas_container').html('');			// 캔버스 날리기
+			$('.grow_canvas_container').css('display','none');
 			$('.grow_sheet').css('display','block');		// 시트 보이기
 		});
 		//그래프버튼 누르면 아이선택버튼 보이게 하기
 		$('.grow.button.chart').click(function(){
-			$('.grow_sheet').css('display','none');	// 시트 가리기
+			$('.grow_sheet').css('display','none');			// 시트 가리기
+			$('.grow_canvas_container').css('display','block');
 			$('.grow_selectBabyDiv').html('');				// 아이선택버튼 날리기
 			$('.grow_selectBabyDiv').html('<c:forEach var="babyList" items="${babyList}"><button id="${babyList.babyName}" value="${babyList.babyNo}"> ${babyList.babyName}</button></c:forEach>');
 		});	

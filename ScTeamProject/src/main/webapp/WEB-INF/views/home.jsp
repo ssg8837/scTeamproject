@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <html>
 	<head>
 		<title>육아서포트페이지</title>
@@ -12,19 +12,15 @@
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-
+		
 	</head>
 	<body>
 	<form id='home' action='./' method='get'>
 		</form>
-
 		
         <c:if test='${sessionScope.loginId != null }'>
 		<input type="hidden" id="loginNo" value="${sessionScope.loginNo}">
-
 		</c:if>
-
-	
 	<section id="container">
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
@@ -73,9 +69,16 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
+	          	<div class="centered"><button class="active edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
+        	  <li class="sub-menu">
+	            <a href="openNewBaby">
+	              <i class="fa fa-heart fa_left"></i>
+	              <span>아이 추가하기</span>
+	            </a>
+	          </li>
 	          <li class="sub-menu">
 	            <a href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
@@ -101,7 +104,7 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="weather_Test">
+	            <a href="hospital_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
@@ -113,7 +116,7 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>
@@ -150,6 +153,8 @@
    
     <!--footer end-->
   </section>
+	
+	   
 	    
 	    <script src="./resources/js/common/jquery.min.js"></script>
 	    <script src="./resources/js/common/bootstrap.min.js"></script>
@@ -162,7 +167,7 @@
 		<script src="./resources/js/common/common-scripts.js"></script>
 		  <!--script for this page-->
 		<script src="./resources/js/util/check_byte.js"></script>
-		<script src="./resources/js/home/login_check.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
+  
 	</body>
 </html>

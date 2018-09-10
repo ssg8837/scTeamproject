@@ -70,9 +70,16 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
+	          	<div class="centered"><button class="active edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
+        	 <li class="sub-menu">
+	            <a href="openNewBaby">
+	              <i class="fa fa-heart fa_left"></i>
+	              <span>아이 추가하기</span>
+	            </a>
+	          </li>
 	          <li class="sub-menu">
 	            <a href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
@@ -151,16 +158,29 @@
 				</select>
 			</div>
 			<div class='input-group col-xs-4'>
-				<span class="input-group-addon">할일</span>
-				<input class="form-control " name="alarmTitle" id="alarmTitle" type="text">
+				<span class="input-group-addon">할 일</span><select class="form-control" id="alarmType" name="alarmType" onchange="changeSelect()">
+					<option value='0'>기타</option>
+					<option value='1'>모유</option>
+					<option value='2'>젖병</option>
+					<option value='3'>이유식</option>
+					<option value='4'>유축</option>
+					<option value='5'>배소변</option>
+					<option value='6'>수면</option>
+					<option value='7'>목욕</option>
+				</select>
 			</div>
-			<div class="input-group date form_datetime col-xs-4 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">
-			<span class="input-group-addon">일시</span>
-                    	<input class="form-control " type="text" id='nowAlarm' name="alarmTime" value="" readonly>
-                    
-					<span class="input-group-addon"><span class="fa fa-calendar"></span></span>	
+			<div id="amount" class='input-group col-xs-4'></div>
+		   	<div class="input-group date form_datetime col-xs-4 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">
+			<span id="timesSpan" class="input-group-addon">일시</span>
+				<input class="form-control " type="text" id='nowAlarm' name="alarmTime" value="" readonly>
+				<span class="input-group-addon"><span class="fa fa-calendar"></span></span>	
 			</div>
-           
+			
+			<div id="end"></div>
+           	<div class='input-group col-xs-4'>
+				<span class="input-group-addon">메모</span>
+				<input class="form-control " id="alarmTitle" name="alarmTitle"  type="text" value='${alarm.alarmTitle }'>
+			</div>
 			<!-- http://jsonobject.tistory.com/181 -->
 			<button class='btn btn-primary' type='button' onclick="javascript:alarm_check();" style="margin: 0 auto;">알림 등록</button>
 		</form>
@@ -194,6 +214,7 @@
 	    <script src="./resources/js/util/bootstrap-datetimepicker.js"></script>
 	    <script src="./resources/js/util/bootstrap-datetimepicker.ko.js"></script>
 	    <script src="./resources/js/util/datetimepicker.js"></script>
+	    <script src="./resources/js/alarm/alarm_check.js"></script>
   
 	</body>
 </html>

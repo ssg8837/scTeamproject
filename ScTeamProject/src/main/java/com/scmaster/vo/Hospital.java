@@ -28,7 +28,7 @@ public class Hospital {
 		this.eryn = eryn;
 		this.eryynphone = eryynphone;
 		this.time = time;
-		this.Latitude = latitude;
+		Latitude = latitude;
 		this.longitude = longitude;
 		this.distance = distance;
 	}

@@ -17,7 +17,7 @@ Website: http://Alvarez.is/
 /* BASIC THEME CONFIGURATION */
 body {
     color: #797979;
-	background: #eaeaea;
+	background: #ffffff;
     font-family: 'Ruda', sans-serif;
     padding: 0px !important;
     margin: 0px !important;
@@ -34,7 +34,7 @@ a, a:hover, a:focus {
 }
 ::selection {
 
-    background: #4ECDC4;
+    background: #90BEFA;
     color: #fff;
 }
 ::-moz-selection {
@@ -49,7 +49,7 @@ a, a:hover, a:focus {
 
 /* Bootstrap Modifications */
 .modal-header {
-	background: #4ECDC4;
+	background: #FFA600;
 }
 
 .modal-title {
@@ -97,17 +97,17 @@ a, a:hover, a:focus {
 
 .btn-theme {
   color: #fff;
-  background-color: #4ECDC4;
-  border-color: #48bcb4;
+  background-color: #FFA600;
+  border-color: #c17d00;
 }
 .btn-theme:hover,
 .btn-theme:focus,
 .btn-theme:active,
 .btn-theme.active,
 .open .dropdown-toggle.btn-theme {
-  color: #fff;
-  background-color: #48bcb4;
-  border-color: #48bcb4;
+  color: #9b797b;
+  background: #ffe0a6;
+  border-color: #ffe0a6;
 }
 
 .btn-theme02 {
@@ -216,14 +216,14 @@ hr {
 }
 
 ul.top-menu > li > .logout {
-	color: #f2f2f2;
+	color: #fff;
 	font-size: 12px;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
-	border: 1px solid #64c3c2 !important;
+	border: 1px solid #257df5!important;
 	padding: 5px 15px;
 	margin-right: 15px;
-	background: #4ECDC4;
+	background: #90befa;
 	margin-top: 15px;
 }
 
@@ -234,11 +234,12 @@ ul.top-menu > li > .logout {
     width: 210px;
     height: 100%;
     position: fixed;
-    background: #2f323a;
+    background: #fffce6;
+    color: white;
 }
 
 #sidebar h5 {
-	color: #f2f2f2;
+	color: #777;
 	font-weight: 700;
 }
 
@@ -318,7 +319,7 @@ ul.sidebar-menu li ul.sub li a {
     -o-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    color: #aeb2b7;
+    color: #FFF;
 }
 
 ul.sidebar-menu li ul.sub li a:hover {
@@ -352,7 +353,7 @@ ul.sidebar-menu li a span{
 }
 
 ul.sidebar-menu li a{
-    color: #aeb2b7;
+    color: #777;
     text-decoration: none;
     display: block;
     padding: 15px 0 15px 10px;
@@ -366,7 +367,7 @@ ul.sidebar-menu li a{
 }
 
 ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #4ECDC4;
+    background: #FFD17D;
     color: #fff;
     display: block;
 
@@ -415,7 +416,7 @@ ul.sidebar-menu li a.active i {
 }
 
 .black-bg {
-    background: #edba55;
+    background: #FFFACD;
     border-bottom: 1px solid #393d46;
 }
 
@@ -439,6 +440,7 @@ a.logo {
 
 a.logo b {
     font-weight: 900;
+    color: #84B8FF;
 }
 
 a.logo:hover, a.logo:focus {
@@ -447,7 +449,7 @@ a.logo:hover, a.logo:focus {
 }
 
 a.logo span {
-    color: #4ECDC4;
+    color: #FFA600;
 }
 
 
@@ -678,10 +680,9 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .top-nav ul.top-menu > li > a:hover, .top-nav ul.top-menu > li > a:focus {
-    border:1px solid #F1F2F7;
+	border:1px solid #F1F2F7;
     background: #F1F2F7;
-
-}
+ }
 
 .top-nav .dropdown-menu.extended.logout {
     top: 50px;
@@ -1949,13 +1950,13 @@ ul li {
 /*LOGIN CONFIGURATION PAGE*/
 .form-login {
 	max-width: 330px;
-	margin: 100px auto 0;
+	margin:  auto 0;
 	background: #fff;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
 
-.form-login h2.form-login-heading {
+.form-login h3.form-login-heading {
 	margin: 0;
 	padding: 25px 20px;
 	text-align: center;
@@ -3446,4 +3447,33 @@ ul.chat-available-user li a:hover {
 
 #copyrights a {
   color: #fff;
+}
+
+/*=====================================================*/
+
+/*회원정보수정버튼*/
+.edit {
+	padding: 5px 15px;
+	margin-bottom: 1em;
+	
+	background: #90befa;
+	color: #fff;
+	font-size: 12px;
+	text-align: center;
+	
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: 1px solid #257df5!important;
+}
+.edit.active, .edit:hover, .edit:focus{
+	background: #FFA600;
+	color: #fff;
+	border: 1px solid #c17d00!important;
+	outline: none;
+}
+
+.edit.active:hover,.edit.active:focus {
+	background: #90befa;
+	color: #fff;
+	border: 1px solid #257df5!important;
 }

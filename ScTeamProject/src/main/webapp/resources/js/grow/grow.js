@@ -186,11 +186,11 @@ function updateHeight(babyno, babyage, newGrowHeight, growweight, growhead){
 		},
 		success: function(data){
 			if(data == "success"){
-				alert('아이 신장정보 수정에 성공하였습니다.');
+				alert('아이 신장정보 수정에 성공하였습니다.\n조회하기버튼을 눌러 수정정보를 확인해주세요!');
 				location.href();
 
 			}else{
-				alert('수정실패');
+				alert('저장과정에서 오류가 발생하여 아이 정보를 수정하지 못하였습니다.');
 			}
 		},
 		error:	function(data){
@@ -212,11 +212,11 @@ function updateWeight(babyno, babyage, growheight, newGrowWeight, growhead){
 		},
 		success: function(data){
 			if(data == "success"){
-				alert('아이 체중정보 수정에 성공하였습니다.');
+				alert('아이 체중정보 수정에 성공하였습니다.\n조회하기버튼을 눌러 수정정보를 확인해주세요!');
 				location.href();
 
 			}else{
-				alert('수정실패');
+				alert('저장과정에서 오류가 발생하여 아이 정보를 수정하지 못하였습니다.');
 			}
 		},
 		error:	function(data){
@@ -238,11 +238,11 @@ function updateHead(babyno, babyage, growheight, growweight, newGrowHead){
 		},
 		success: function(data){
 			if(data == "success"){
-				alert('아이 머리둘레정보 수정에 성공하였습니다.');
+				alert('아이 머리둘레정보 수정에 성공하였습니다.\n조회하기버튼을 눌러 수정정보를 확인해주세요!');
 				location.href();
 
 			}else{
-				alert('수정실패');
+				alert('저장과정에서 오류가 발생하여 아이 정보를 수정하지 못하였습니다.');
 			}
 		},
 		error:	function(data){

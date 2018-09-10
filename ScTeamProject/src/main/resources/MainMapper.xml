@@ -6,44 +6,85 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.scmaster.mapper.MainMapper">
 
+	<!-- 로그인 -->
 	<select id="selectUser" resultType="BS_User" parameterType="HashMap"> 
-		SELECT USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK
+		SELECT USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK, USERORIGINALFILE, USERSAVEDFILE
 		FROM BS_USER
 		WHERE USERID=#{userId} AND USERPWD=#{userPwd}
 	</select>
 	
+	<!-- 회원가입 -->
 	<insert id="insertUser" parameterType="BS_User" >
-		INSERT INTO BS_USER(USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK) 
+		INSERT INTO BS_USER(USERNO, USERTYPE, USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK, USERORIGINALFILE, USERSAVEDFILE) 
 		VALUES (BS_USERSEQ.NEXTVAL,
-		'${userType}',
-		'${userId}',
-		'${userPwd}',
-		'${userAddr}',
-		'${userEmail}',
-		'${userPhone}',
-		'${userNick}')
+		#{userType},
+		#{userId},
+		#{userPwd},
+		#{userAddr},
+		#{userEmail},
+		#{userPhone},
+		#{userNick},
+		#{userOriginalFile},
+		#{userSavedFile})
 	</insert>
 	
+	<!-- 회원정보보기 -->
+	<select id="myAccount" resultType="BS_User">
+		SELECT USERID, USERPWD, USERADDR, USEREMAIL, USERPHONE, USERNICK, USERORIGINALFILE, USERSAVEDFILE
+		FROM BS_USER
+		WHERE USERNO=#{userNo}
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="updateUser" parameterType="BS_User">
+		UPDATE BS_USER
+		SET USERPWD = #{userPwd},
+			USERADDR = #{userAddr},
+			USEREMAIL = #{userEmail},
+			USERPHONE = #{userPhone},
+			USERNICK = #{userNick},
+			USERORIGINALFILE = #{userOriginalFile},
+			USERSAVEDFILE = #{userSavedFile}
+		WHERE USERID = #{userId}
+	</update>
+	
+	<!-- 아이선택 -->
 	<select id="selectBaby" resultType="BS_Baby" parameterType="Integer"> 
 		SELECT BABYNO,USERNO, BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
 		FROM BS_BABY
 		WHERE BABYNO=#{babyNo}
 	</select>
+	
+	<!-- 아이목록 -->
 	<select id="selectBabyList" resultType="BS_Baby" parameterType="Integer"> 
-		SELECT BABYNO,USERNO,  BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
+		SELECT BABYNO, USERNO,  BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
 		FROM BS_BABY
 		WHERE USERNO=#{userNo}
+		ORDER BY BABYBIRTH ASC
 	</select>
 	
+	<!-- 아이추가 -->
 	<insert id="insertBaby" parameterType="BS_Baby" >
 		INSERT INTO BS_BABY(BABYNO,USERNO, BABYGENDER, BABYBIRTH, BABYNAME, BABYBLOOD) 
 		VALUES (BS_BABYSEQ.NEXTVAL,
-		'${userNo}',
-		'${babyGender}',
-		TO_DATE('${babyBirth}','YYYY-MM-DD'),
-		'${babyName}',
-		'${babyBlood}')
+		#{userNo},
+		#{babyGender},
+		TO_DATE(#{babyBirth},'YYYY-MM-DD'),
+		#{babyName},
+		#{babyBlood})
 	</insert>
+	
+	<select id='countUser' parameterType="String" resultType="Integer">
+		SELECT COUNT(USERID)
+		FROM BS_USER
+		WHERE USERID=#{userId}
+	</select>
+	
+	<select id="selectUserById" parameterType='String' resultType="Integer">
+		SELECT USERNO
+		FROM BS_USER
+		WHERE USERID=#{userId}
+	</select>
 	
 	
 </mapper>
