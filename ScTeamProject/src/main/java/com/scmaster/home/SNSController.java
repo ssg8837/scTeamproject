@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.scmaster.mapper.SNSMapper;
+
 import com.scmaster.vo.MultiFiles;
+
 import com.scmaster.vo.SNS;
 
 @Controller

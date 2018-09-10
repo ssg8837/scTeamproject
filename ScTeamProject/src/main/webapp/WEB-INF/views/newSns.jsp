@@ -165,6 +165,7 @@
                         </span>
                         <!-- <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>  -->
                       </div>
+
                   </div>
                   
                   <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
@@ -210,7 +211,7 @@
                       </div>
                   </div>
                   </div>
-                        
+
                   <div class="form-group ">
                     <label for="content" class="control-label col-lg-2">내용</label>
                     <div class="col-lg-10">

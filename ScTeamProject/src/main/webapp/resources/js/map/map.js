@@ -5,78 +5,94 @@
 		if(hospitalAddr!=""){
 			selectedHospital(hospitalAddr);
 		}else{
-			
 			//접속위체의 좌표값을 통해 초기 병원 정보를 가져옵니다.
-			myLocation();
-			
-			// 키워드로 장소를 검색합니다
-			searchPlaces();
+			init();
 		}
+		
+		resetPostion.addEventListener("click",init)
+		.addEventListener("hover",resetAnimation)
+	
+		
 	});//DOMContentLoaded 완료시 javascript 로드
 	
 	//예방접종 페이지에서 주소가 넘어왔는지 확인
 	var hospitalAddr = document.querySelector("#hospitalAddr").value;
 	// 지도를 담을 자료형
 	var map='';
+	//위치정보용 마커
+	var marker
+	var positioninfo
 	// 마커를 담을 배열입니다
 	var markers = [];
 	// 좌료를 담을 자료형 선언
 	var lat ='',lon='';
-	
-	
+	// 현재좌표 갱신 객체선언
+	var resetPostion=document.querySelector('.getPostion');
 	// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 	var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	
-		function createMap() {
+	function createMap() {
 			
-			var mapContainer = document.querySelector("#map"), // 지도를 표시할 div  
+		var mapContainer = document.querySelector("#map"), // 지도를 표시할 div  
 			
-			mapOption = { 
-			    center: new daum.maps.LatLng(37.511733, 127.059053), // 지도의 중심좌표
-			    level: 3 // 지도의 확대 레벨
-			};
+		mapOption = { 
+		    center: new daum.maps.LatLng(37.511733, 127.059053), // 지도의 중심좌표
+		    level: 3 // 지도의 확대 레벨
+		};
 			
-			// 지도를 생성합니다
-			map = new daum.maps.Map(mapContainer, mapOption);
-			
-			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성
-			var zoomControl = new daum.maps.ZoomControl();
-			// 지도의 우측에 확대 축소 컨트롤을 추가한다
-			map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-		}
+		// 지도를 생성합니다
+		map = new daum.maps.Map(mapContainer, mapOption);
+		
+		// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성
+		var zoomControl = new daum.maps.ZoomControl();
+		// 지도의 우측에 확대 축소 컨트롤을 추가한다
+		map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+	}
 	
-	//현재 위치정보 얻어오는 함수
-	function myLocation(){
-
+	//현재 위치정보 얻어오는 함수+병원정보 불러오는 함수
+	function init(){
+		myLocation(function (position){
+			getHostpital(position.coords.latitude,position.coords.longitude);
+			console.log(lat+","+lon);
+		})
+	}
+	
+	//현재 위치정보 콜백 함수
+	function myLocation(result){
+		removeMarker();
 		//html5의 navigator.geolocation을 이용하여 위치정보 얻어옵니다.
 		if (navigator.geolocation) { //위치정보 얻어오기에 성공시
-				
-			navigator.geolocation.getCurrentPosition(function(position) {//현재 위치정보의 위도경도 정보를 가져옵니다.
-					
+			//현재 위치정보의 위도경도 정보를 가져옵니다.
+			navigator.geolocation.getCurrentPosition(function (position) {
 				lat = position.coords.latitude; // 위도
 				lon = position.coords.longitude; // 경도
-					        
-					
+
 				var locPosition = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+
 				message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
-					        
-				// 마커와 인포윈도우를 표시합니다
-				displayMarker(locPosition, message);
+
+				displayMarker(locPosition, message);				// 마커와 인포윈도우를 표시합니다
 				
-				getHostpital(lat,lon);
-					
-			});
+				result(position);
+			})
 				
 		} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+		    lat=37.511733; 
+		    lon=127.059053;
 		    
-		    var locPosition = new daum.maps.LatLng(37.511733, 127.059053),    
+		    var locPosition = new daum.maps.LatLng(lat, lon),    
 		        message = '위치 정보를 이용할 수 없습니다. 검색어를 입력해주세요.'
 		        
 		    displayMarker(locPosition, message);
-		    
 		}
 	};
 	
+	function resetAnimation(){
+		resetPostion.sytle.size="32px";
+		resetPostion.style.color="orange";
+	}
+	
+	//비동기로 서버에 병원정보 요청하는 함수
 	function getHostpital(lat,lon){
 		$.ajax({
 			url:"hospital_myLocation",
@@ -100,18 +116,21 @@
 				displayPlaces(data);
 						
 	 			displayPagination(pagination);
+	 			
+	 			console.log(data);
 		
 			},error:function(request,status,error){
-			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+					alert("통신에러.")
+			        console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 			}
 		});
 	}
 		
 	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
 	function displayMarker(locPosition, message) {
-
+		
 		// 마커를 생성합니다
-		 var marker = new daum.maps.Marker({  
+		 marker = new daum.maps.Marker({  
 			 map: map, 
 			 position: locPosition
 		 }); 
@@ -120,16 +139,23 @@
 		 iwRemoveable = true;
 
 		 // 인포윈도우를 생성합니다
-		 var infowindow = new daum.maps.InfoWindow({
+		 positioninfo = new daum.maps.InfoWindow({
 			 content : iwContent,
 			 removable : iwRemoveable
 		 });
 		    
 		 // 인포윈도우를 마커위에 표시합니다 
-		 infowindow.open(map, marker);
+		 positioninfo.open(map, marker);
 		    
 		 // 지도 중심좌표를 접속위치로 변경합니다
 		 map.setCenter(locPosition);      
+	}
+	
+	function removeMarker() {
+		if(marker!=undefined){
+			positioninfo.close();
+			marker.setMap(null);
+		}
 	}
 		
 	// 키워드 검색을 요청하는 함수입니다
@@ -141,7 +167,6 @@
 			alert('키워드를 입력해주세요!');
 			return false;
 		}
-
 		transtoCrood(keyword);
 	}
 	
@@ -150,10 +175,11 @@
 		var geocoder = new daum.maps.services.Geocoder();
 		
 		// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+	
 		geocoder.addressSearch(keyword, function(result, status) {
-
+			console.log(result);
 			// 정상적으로 검색이 완료됐으면 
-			if (status === daum.maps.services.Status.OK) {
+			if (status === daum.maps.services.Status.OK && result.length!=0) {
 
 				var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 		           
@@ -162,7 +188,9 @@
 		            
 				getHostpital(result[0].y, result[0].x);
 		            
-			} 
+			} else if(result.length==0){
+				alert("찾을수 없는 장소입니다. 상세하게 입력해주세요")
+			}
 		});    
 		
 	}
@@ -186,7 +214,7 @@
 		removeAllChildNods(listEl);
 
 		// 지도에 표시되고 있는 마커를 제거합니다
-		removeMarker();
+		removeMarkers();
 		    
 		for ( var i=0; i<data.length; i++ ) {
 
@@ -278,7 +306,7 @@
 		}
 
 		// 지도 위에 표시되고 있는 마커를 모두 제거합니다
-		function removeMarker() {
+		function removeMarkers() {
 		    for ( var i = 0; i < markers.length; i++ ) {
 		        markers[i].setMap(null);
 		    }   

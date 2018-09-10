@@ -315,7 +315,7 @@ public class HomeController
 	{
 		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
 		mapper.insertBaby(baby);
-		return home(model);
+		return openNewBaby(model);
 	}
 	/*
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
