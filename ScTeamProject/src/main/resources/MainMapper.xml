@@ -56,6 +56,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE BABYNO=#{babyNo}
 	</select>
 	
+	<!-- 나이계산 -->
+	<select id="babyAge" resultType="Integer" parameterType="Integer">
+		SELECT TRUNC(MONTHS_BETWEEN(SYSDATE, BABYBIRTH)) AS BABYAGE
+		FROM BS_BABY
+		WHERE BABYNO=#{babyNo}
+	</select>
+	
 	<!-- 아이목록 -->
 	<select id="selectBabyList" resultType="BS_Baby" parameterType="Integer"> 
 		SELECT BABYNO, USERNO,  BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD

@@ -23,7 +23,7 @@ window.chartColors = {
 		
 		$target.empty();
 		if(i==""){
-			$target.append("<option value=''>성장기록을 조회할 나이를 선택해주세요</option>");
+			$target.append("<option value=''>나이를 선택해주세요</option>");
 			return;
 		}
 		
@@ -33,7 +33,7 @@ window.chartColors = {
 			data:	{"babyno": $('#grow_selectBabyForSheet').val()},
 			success: function(responseData){
 				if(responseData.length != 0){
-						$target.append("<option value=''>성장기록을 조회할 나이를 선택해주세요</option>");
+						$target.append("<option value=''>나이를 선택해주세요</option>");
 					$.each(responseData, function(idx, val) {
 						$target.append("<option value="+(val.babyage)+">"+(val.babyage)+"개월</option>");
 					});
@@ -88,10 +88,10 @@ function getData(){
 					$('#grow_sheetTable_name').html(item.BABYNAME);
 					if(item.GENDER == "F"){
 						item.GENDER = "여아";
-						$('#grow_sheetTable_ageNgender').html("평균 ("+item.AGE+"개월, "+item.GENDER+")");
+						$('#grow_sheetTable_ageNgender').html("평균\n("+item.AGE+"개월, "+item.GENDER+")");
 					}else if(item.GENDER == "M"){
 						item.GENDER = "남아";
-						$('#grow_sheetTable_ageNgender').html("평균 ("+item.AGE+"개월, "+item.GENDER+")");
+						$('#grow_sheetTable_ageNgender').html("평균\n("+item.AGE+"개월, "+item.GENDER+")");
 					}
 					
 					$('#grow_sheetTable_1').html(item.HEIGHT+"cm");
@@ -125,7 +125,7 @@ function getData(){
 				    $("#grow_sheetTable_7").append('<button type="button" class="grow_updateHeight">수정</button>');
 				    $("#grow_sheetTable_7").off("click", ".grow_updateHeight").on("click", ".grow_updateHeight", function() {
 				    	$('#grow_sheetTable_4').html('');
-				    	$('#grow_sheetTable_4').append('<input type="text" id="newGrowHeight" placeholder="변경할 값을 적어주세요"> cm');
+				    	$('#grow_sheetTable_4').append('<input type="number" id="newGrowHeight" placeholder="변경할 값을 적어주세요"> cm');
 				    	$(".grow_updateHeight").click(function(){
 				    		updateHeight(item.BABYNO, item.BABYAGE, $('#newGrowHeight').val(), item.GROWWEIGHT, item.GROWHEAD);
 				    	});
@@ -134,7 +134,7 @@ function getData(){
 				    $("#grow_sheetTable_8").append('<button type="button" class="grow_updateWeight">수정</button>');
 				    $("#grow_sheetTable_8").off("click", ".grow_updateWeight").on("click", ".grow_updateWeight", function() {
 				    	$('#grow_sheetTable_5').html('');
-				    	$('#grow_sheetTable_5').append('<input type="text" id="newGrowWeight" placeholder="변경할 값을 적어주세요"> cm');
+				    	$('#grow_sheetTable_5').append('<input type="number" id="newGrowWeight" placeholder="변경할 값을 적어주세요"> cm');
 				    	$(".grow_updateWeight").click(function(){
 				    		updateWeight(item.BABYNO, item.BABYAGE, item.GROWHEIGHT, $('#newGrowWeight').val(), item.GROWHEAD);
 				    	});
@@ -143,19 +143,19 @@ function getData(){
 				    $("#grow_sheetTable_9").append('<button type="button" class="grow_updateHead">수정</button>');
 				    $("#grow_sheetTable_9").off("click", ".grow_updateHead").on("click", ".grow_updateHead", function() {
 				    	$('#grow_sheetTable_6').html('');
-				    	$('#grow_sheetTable_6').append('<input type="text" id="newGrowHead" placeholder="변경할 값을 적어주세요"> cm');
+				    	$('#grow_sheetTable_6').append('<input type="number" id="newGrowHead" placeholder="변경할 값을 적어주세요"> cm');
 				    	$(".grow_updateHead").click(function(){
 				    		updateHead(item.BABYNO, item.BABYAGE, item.GROWHEIGHT, item.GROWWEIGHT, $('#newGrowHead').val());
 				    	});
 					});
 				   
 				    if(item.BABYAGE >= 24){
+				    	$('.TR_BMI').css('visibility','visible');
 				    	$('#grow_sheetTable_10').html(item.BMI+"kg/m2");
 						$('#grow_sheetTable_11').html(item.GROWBMI+"kg/m2");
 						
 				    }else{
-				    	$('#grow_sheetTable_10').html("체질량 지수는 ");
-						$('#grow_sheetTable_11').html("24개월 이후부터 측정합니다");
+				    	$('.TR_BMI').css('visibility','collapse');
 				    }		
 				   
 				});
@@ -194,7 +194,7 @@ function updateHeight(babyno, babyage, newGrowHeight, growweight, growhead){
 			}
 		},
 		error:	function(data){
-			alert("updateFunction ajax error");
+			alert("수정할 값을 입력해주세요");
 		}
 	});
 }
@@ -220,7 +220,7 @@ function updateWeight(babyno, babyage, growheight, newGrowWeight, growhead){
 			}
 		},
 		error:	function(data){
-			alert("updateFunction ajax error");
+			alert("수정할 값을 입력해주세요");
 		}
 	});
 }
@@ -246,7 +246,7 @@ function updateHead(babyno, babyage, growheight, growweight, newGrowHead){
 			}
 		},
 		error:	function(data){
-			alert("updateFunction ajax error");
+			alert("수정할 값을 입력해주세요");
 		}
 	});
 }
@@ -269,7 +269,7 @@ function updateHead(babyno, babyage, growheight, growweight, newGrowHead){
 				}
 			},
 			error: function(responseData){
-				alert("checkit ajax error");
+				alert("성장기록을 기록할 아이를 선택해주세요");
 			}
 		});
 	}
@@ -327,7 +327,7 @@ function updateHead(babyno, babyage, growheight, growweight, newGrowHead){
 				}
 			},
 			error: function(responseData){
-				alert("checkit ajax error");
+				alert("아이 성장정보 입력과정에서 오류가 발생했습니다.");
 			}
 		});
 	}

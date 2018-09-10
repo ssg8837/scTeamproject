@@ -4,44 +4,16 @@ public class BS_Alarm {
 	private int alarmNo;
 	private int babyNo;
 	private int userNo;
-	private String alarmTitle;
-	private int alarmType;
-	private int alarmAmount;
-	private String alarmTime;
-	private String endTime;
+	private String alarmTitle;		//메모
+	private int alarmType;			//카테고리 분류
+	private int alarmDetail;		//카테고리 세부 분류
+	private int alarmAmount;		//양 (모유 젖병 이유식 유축)
+	private String alarmTime;		//기록시작시간
+	private String endTime;			//기록종료시간
 
 	public BS_Alarm()
 	{
 		
-	}
-	public BS_Alarm(int alarmNo, int babyNo, int userNo, String alarmTitle,int alarmType,int alarmAmount, String alarmTime) {
-		this.alarmNo = alarmNo;
-		this.babyNo = babyNo;
-		this.userNo = userNo;
-		this.alarmTitle = alarmTitle;
-		this.alarmAmount = alarmAmount;
-		this.alarmType = alarmType;
-		this.alarmTime = alarmTime;
-	}
-	public BS_Alarm(int alarmNo, int babyNo, int userNo, String alarmTitle,int alarmType, String alarmTime,String endTime) {
-		this.alarmNo = alarmNo;
-		this.babyNo = babyNo;
-		this.userNo = userNo;
-		this.alarmTitle = alarmTitle;
-		this.alarmType = alarmType;
-		this.alarmTime = alarmTime;
-		this.endTime = endTime;
-	}
-	
-	public BS_Alarm(int alarmNo, int babyNo, int userNo, String alarmTitle,int alarmType,int alarmAmount, String alarmTime,String endTime) {
-		this.alarmNo = alarmNo;
-		this.babyNo = babyNo;
-		this.userNo = userNo;
-		this.alarmTitle = alarmTitle;
-		this.alarmAmount = alarmAmount;
-		this.alarmType = alarmType;
-		this.alarmTime = alarmTime;
-		this.endTime = endTime;
 	}
 
 	public int getAlarmNo() {
@@ -92,7 +64,12 @@ public class BS_Alarm {
 		this.alarmType = alarmType;
 	}
 
-	
+	public int getAlarmDetail() {
+		return alarmDetail;
+	}
+	public void setAlarmDetail(int alarmDetail) {
+		this.alarmDetail = alarmDetail;
+	}
 	
 	public int getAlarmAmount() {
 		return alarmAmount;
@@ -113,8 +90,9 @@ public class BS_Alarm {
 	@Override
 	public String toString() {
 		return "BS_Alarm [alarmNo=" + alarmNo + ", babyNo=" + babyNo + ", userNo=" + userNo + ", alarmTitle="
-				+ alarmTitle + ", alarmType=" + alarmType + ", alarmAmount=" + alarmAmount + ", alarmTime=" + alarmTime
-				+ ", endTime=" + endTime + "]";
+				+ alarmTitle + ", alarmType=" + alarmType + ", alarmDetail=" + alarmDetail + ", alarmAmount="
+				+ alarmAmount + ", alarmTime=" + alarmTime + ", endTime=" + endTime + "]";
 	}
+
 
 }

@@ -74,36 +74,87 @@ div{
 	margin-left: 100px;
 	margin-right: 200px;
 	padding: 2em;
-	padding-top: 5em;
 	text-align: left;
 }
-/*input 디자인*/
-.grow_sheet input{
-	margin-bottom: 1em;
-	height: 30px;
-}
-/*select 디자인*/
 .grow_sheet select{
 	margin-bottom: 1em;
-	width: 30%;
 	height: 30px;
+	padding: 5px 10px;
+	background: none;
+	background-image: none;
+	color: #000;
+	font-size: 12px;
+	border: 1px solid #a0b3b0;
+	border-radius: 5px;
+	transition: border-color .25s ease, box-shadow .25s ease;
+}
+.grow_sheet select:focus{
+	outline: none;
+	border: 1px solid #FFAD13;
+}
+.grow_sheet button{
+	height: 30px;
+	padding: 5px 10px;
+	background: #FFFACD;
+	color: #000;
+	text-align: center;
+	font-size: 12px;
+	border: 2px solid #FFF7A6;
+	border-radius: 5px;
+	vertical-align: top;
+}
+.grow_sheet button:focus, .grow_sheet button:active{
+	outline: none;
+	border: 1px solid #FFAD13;  
+}
+/*조회선택*/
+#grow_formchooseData{
+	width: 100%;
+	text-align: right;
 }
 /*테이블*/
-
-#grow_formchooseData{
-	text-align: center;	
-}
 .grow_sheetData{
-	border: 1px solid black;
+	min-height: 300px;
+	border: 1px solid #a0b3b0;
+	border-radius: 10px;
 }
 .grow_sheetTable{
 	width: 100%;
+}
+.grow_sheetTable thead th{
+	padding-top: 1.5em;
 }
 .grow_sheetTable th, .grow_sheetTable td{
 	padding: 1em;
 	text-align: center;
 }
-
+.grow_sheetTable input{
+	width: 160px;
+	height: 30px;
+	padding: 5px 10px;
+	background: none;
+	background-image: none;
+	color: #000;
+	font-size: 12px;
+	border: 1px solid #a0b3b0;
+	border-radius: 5px;
+}
+.grow_sheetTable input:focus{
+	outline: none;
+	border: 1px solid #FFAD13;
+}
+.grow_sheetTable button{
+	width: 50px;
+	height: 30px;
+	padding: 5px 10px;
+	background: #FFFACD;
+	color: #000;
+	text-align: center;
+	font-size: 12px;
+	border: 1px solid #FFF7A6;
+	border-radius: 5px;
+	vertical-align: top;
+}
 /*========= 그래프 =========*/
 
 /*아이선택버튼 div*/
@@ -117,12 +168,10 @@ div{
 	margin-right: 1em;
 	margin-bottom: 1em;
 	padding: 5px 15px;
-
 	background: #90befa;
 	color: #fff;
 	font-size: 12px;
 	text-align: center;
-	
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border: 1px solid #257df5!important;
@@ -159,7 +208,7 @@ div{
 
 /*아이정보입력란*/
 .grow_insertDiv{
-	padding-top: 3em;
+	padding-top: 1.3em;
 	margin-left: -200px;
 	width: 200px;
 	float: left;
@@ -169,18 +218,58 @@ div{
 	color: red;
 	font-size: 12px;
 }
+.grow_insertDiv h4{
+	text-align: center;
+}
 /*input 디자인*/
 .grow_insertDiv input{
 	margin-bottom: 1em;
 	width: 150px;
+	height: 30px;
+	padding: 5px 10px;
+	background: none;
+	background-image: none;
+	color: #000;
+	font-size: 12px;
+	border: 1px solid #a0b3b0;
+	border-radius: 5px;
+}
+.grow_insertDiv input:focus{
+	outline: none;
+	border: 1px solid #FFAD13;
 }
 /*select 디자인*/
 .grow_insertDiv select{
 	margin-bottom: 1em;
 	height: 30px;
+	padding: 5px 10px;
+	background: none;
+	background-image: none;
+	color: #000;
+	font-size: 12px;
+	border: 1px solid #a0b3b0;
+	border-radius: 5px;
+	transition: border-color .25s ease, box-shadow .25s ease;
+}
+.grow_insertDiv select:focus{
+	outline: none;
+	border: 1px solid #FFAD13;
 }
 /*아이정보입력버튼*/
-.grow_float_right{
-	float: right;
-	margin-right: 5em;
+.grow_insertDiv button{
+	width: 150px;
+	margin-bottom: 1em;
+	padding: 5px 15px;
+	background: #ffe0a6;
+	color: #9b797b;
+	font-size: 12px;
+	text-align: center;
+	border: 1px solid #ffe0a6;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+.grow_insertDiv button.active, .grow_insertDiv button:hover, .grow_insertDiv button:focus{
+	background: #ffc557;
+	color: #f2eeee;
+	outline: none;
 }

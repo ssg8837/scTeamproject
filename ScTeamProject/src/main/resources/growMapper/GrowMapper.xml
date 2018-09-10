@@ -39,9 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set		growheight = #{newGrowHeight}, growweight = #{newGrowWeight}, growhead = #{newGrowHead}, growbmi = ROUND((#{newGrowWeight}/#{newGrowHeight}/#{newGrowHeight}*10000),2)
 		where	babyno = #{babyno} and babyage = #{babyage}
 	</update>	
+	
 	<!-- 아이별 마지막 성장기록갱신일 가져오기 -->
 	<select id="lastInsertData" resultType="Grow">
-		SELECT *
+		SELECT babyno, userno, babyname, babygender, babybirth, growheight, growweight, growhead, babyage, TO_CHAR(growregdate,'YYYY-MM-DD') AS growregdate, growbmi
 		FROM
 			( 	SELECT babyno, userno, babyname, babygender, babybirth, growheight, growweight, growhead, babyage, growregdate, growbmi, ROW_NUMBER() OVER(ORDER BY growregdate DESC) AS RN
 				FROM grow
@@ -54,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertBabyData" parameterType="Grow">
 		insert into grow (babyno, userno, babyname, babygender, babybirth, growheight, growweight, growhead, babyage, growregdate, growbmi
 		)
-		values (#{babyno}, #{userno}, #{babyname}, #{babygender}, #{babybirth}, #{growheight}, #{growweight}, #{growhead}, TRUNC(MONTHS_BETWEEN(#{growregdate},#{babybirth})),#{growregdate}, ROUND((#{growweight}/#{growheight}/#{growheight}*10000),2)	
+		values (#{babyno}, #{userno}, #{babyname}, #{babygender}, #{babybirth}, #{growheight}, #{growweight}, #{growhead}, TRUNC(MONTHS_BETWEEN(#{growregdate},#{babybirth})),TO_DATE(#{growregdate},'YYYY-MM-DD'), ROUND((#{growweight}/#{growheight}/#{growheight}*10000),2)	
 		)
 	</insert>
 	

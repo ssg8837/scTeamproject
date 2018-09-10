@@ -2,7 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <html>
-	<head>
+	<head>		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	
 		<title>Home</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -69,7 +71,14 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit"><img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit">
+	          		<c:if test='${sessionScope.loginImg != null }'>
+		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
+		          	</c:if>
+		          	<c:if test='${sessionScope.loginImg == null }'>
+		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
+		          	</c:if>
+	          	</a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
@@ -77,7 +86,7 @@
         		<li class="sub-menu">
 	            <a class="active" href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이정보</span>
+	              <span>아이 정보</span>
 	            </a>
 	          </li>
 	        
@@ -148,46 +157,56 @@
           	  <div class="newBaby_wrapper">
           	 	
           	 	<div class="babyList_Div">
-          	 		<h4>내 아이 정보</h4>
           	 		<c:forEach var="babyList" items="${babyList}">
-          	 			<div style="border: 1px solid pink; border-radius: 10px; padding: 1em; width: 50%;">
-						<b>${babyList.babyName}</b> <br/>
-						
-						생일: ${babyList.babyBirth} <br/>
+          	 			<div class="babyList_box">
+							<b>${babyList.babyName}</b><br><br>
+								성별: ${babyList.babyGender}		<br>
+								생일: ${babyList.babyBirth}		<br>
+							<%--나이: <span class="age"></span> <button type="button" onclick="fn_calcDayMonthCount(${babyList.babyBirth});"></button> <br> --%>
+								혈액형: ${babyList.babyBlood}	<br><br>
+							<button type="button" onclick="location.href='checkPattern?babyNo=${babyList.babyNo}'">${babyList.babyName}의 생활기록 확인하기</button>
 						</div>
-						<br/>
 					</c:forEach>
           	 	
-          	 	</div>
+          	 	</div> <!-- end : babyList_Div -->
           	 
-          	  	 
+          	    <div class="insertForm_Div">
 				 <form action='insertNewBaby' method='post'>
 				 <h4>아이 정보 등록</h4>
-					아기이름:<br>
-					<input type='text' name='babyName' required autocomplete="off"><br>
+				 
+					<div class="field-wrap">
+			          	이름<span class="req">*</span>
+			        	<input type='text' name='babyName' required autocomplete="off">
+			        </div>
+			        
+			        <div class="field-wrap">
+			          	성별<span class="req">*</span>
+			        	<select name='babyGender'>
+							<option value='M' selected>남아</option>
+							<option value='F'>여아</option>
+						</select>
+			        </div>
 					
-					성별:<br>
-					<select name='babyGender'>
-						<option value='M' selected>남자</option>
-						<option value='F'>여자</option>
-					</select><br>
+					<div class="field-wrap">
+			          	생일<span class="req">*</span>
+			        	<input type='date' name='babyBirth'>
+			        </div>
+
+					<div class="field-wrap">
+			          	혈액형<span class="req">*</span>
+			        	<select name='babyBlood'>
+							<option value='A' selected>A</option>
+							<option value='B'>B</option>
+							<option value='AB'>AB</option>
+							<option value='O'>O</option>
+						</select>
+			        </div>
 					
-					생일:<br>
-					<input type='date' name='babyBirth'><br>
-					
-					혈액형:<br>
-					<select name='babyBlood'>
-						<option value='A' selected>A</option>
-						<option value='B'>B</option>
-						<option value='AB'>AB</option>
-						<option value='O'>O</option>
-					</select><br>
-					
-					<button type='submit'>아기등록</button>
+					<button type='submit' class="button button-block" onclick="">아기등록</button>
 				</form>
-  
+			   </div>
 			  
-			  </div>
+			  </div> <!-- end : newBaby_wrapper -->
 			
 		 </div>	<!-- col-lg-12 -->
 		</div><!-- row mt -->
@@ -200,9 +219,8 @@
 	
 	
 	
-	
-	    <script src="./resources/js/common/jquery.min.js"></script>
-	    <script src="./resources/js/common/bootstrap.min.js"></script>
+		<script src="./resources/js/common/jquery.min.js"></script>
+		<script src="./resources/js/common/bootstrap.min.js"></script>
 		<script src="./resources/js/common/jquery-ui-1.9.2.custom.min.js"></script>
 		<script src="./resources/js/common/jquery.ui.touch-punch.min.js"></script>
 		<script class="include" type="text/javascript" src="./resources/js/common/jquery.dcjqaccordion.2.7.js"></script>
@@ -213,5 +231,6 @@
 		  <!--script for this page-->
 		<script src="./resources/js/util/check_byte.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
+    	<script src="./resources/js/account/newBaby.js"></script>
 	</body>
 </html>

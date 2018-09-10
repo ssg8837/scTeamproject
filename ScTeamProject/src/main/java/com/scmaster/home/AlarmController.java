@@ -93,16 +93,25 @@ public class AlarmController {
 		int type=alarm.getAlarmType();
 		switch(type)
 		{
+		//모유,젖병,유축 (시간기록,양,디테일 필요)
 		case 1:
 		case 2:
-		case 3:
 		case 4:
-			alarmMapper.insertAlarm_Amount(alarm);
+			alarmMapper.insertAlarm_All(alarm);
 			break;
-		case 6:
+		//이유식 (시간기록, 양 필요)
+		case 3:
+			alarmMapper.insertAlarm_AmountNTEndTime(alarm);
+			break;
+		//배소변 (디테일 필요)
+		case 5:
+			alarmMapper.insertAlarm_Detail(alarm);
+			break;
+		//수면 (시간기록 필요)
 		case 7:
 			alarmMapper.insertAlarm_EndTime(alarm);
 			break;
+		//기타, 목욕
 		default :
 			alarmMapper.insertAlarm(alarm);
 			break;
@@ -150,16 +159,25 @@ public class AlarmController {
 		int type=alarm.getAlarmType();
 		switch(type)
 		{
+		//모유,젖병,유축 (시간기록,양,디테일 필요)
 		case 1:
 		case 2:
-		case 3:
 		case 4:
-			alarmMapper.updateAlarm_Amount(alarm);
+			alarmMapper.updateAlarm_All(alarm);
 			break;
-		case 6:
+		//이유식 (시간기록, 양 필요)
+		case 3:
+			alarmMapper.updateAlarm_AmountNTEndTime(alarm);
+			break;
+		//배소변 (디테일 필요)
+		case 5:
+			alarmMapper.updateAlarm_Detail(alarm);
+			break;
+		//수면 (시간기록 필요)
 		case 7:
 			alarmMapper.updateAlarm_EndTime(alarm);
 			break;
+		//기타, 목욕
 		default :
 			alarmMapper.updateAlarm(alarm);
 			break;
@@ -240,12 +258,12 @@ public class AlarmController {
     	            	event.setColor("#996416");
     	            	break;
     	            case 6:
-    	            	str+="수면";
-    	            	event.setColor("#9e80ad");
-    	            	break;
-    	            case 7:
     	            	str+="목욕";
     	            	event.setColor("#abcfd8");
+    	            	break;
+    	            case 7:
+    	            	str+="수면";
+    	            	event.setColor("#9e80ad");
     	            	break;
     	            }
     	            event.setTitle(str+" [ "+(mainMapper.selectBaby(item.getBabyNo()).getBabyName())+" ] "+item.getAlarmTitle());
