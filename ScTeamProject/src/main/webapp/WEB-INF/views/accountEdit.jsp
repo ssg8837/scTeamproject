@@ -70,14 +70,21 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit"><img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit">
+	          		<c:if test='${sessionScope.loginImg != null }'>
+		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
+		          	</c:if>
+		          	<c:if test='${sessionScope.loginImg == null }'>
+		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
+		          	</c:if>
+	          	</a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="edit btn btn-primary btn-lg active" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
         		<li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이 추가하기</span>
+	              <span>아이 정보</span>
 	            </a>
 	          </li>
 	        
@@ -151,7 +158,12 @@
 		          
 		          	<!-- 프로필 사진 -->
 		       	  	<div id="image_section">
-		       	  		<img src="getUserImage?userNo=${user.userNo}" />
+		       	  		<c:if test='${sessionScope.loginImg != null }'>
+			          	<img src="getUserImage?userNo=${user.userNo}">
+			          	</c:if>
+			          	<c:if test='${sessionScope.loginImg == null }'>
+			          	<img src="./resources/image/anonymous.png">
+			          	</c:if>
 		       	  	</div> <br/>	 
 		       	    <div class="field-wrap">
 			        	Profile Picture
@@ -205,7 +217,7 @@
 			            <input type="text" id='userPhone' name='userPhone' value="${user.userPhone}" required autocomplete="off"/>
 			          </div>
 			          
-			          <button type="submit" class="button button-block" onclick="check();">회원정보수정</button>
+			          <button type="button" class="button button-block" onclick="check();">회원정보수정</button>
 		          </form>
 		        </div>	<!-- end : signUp -->
 

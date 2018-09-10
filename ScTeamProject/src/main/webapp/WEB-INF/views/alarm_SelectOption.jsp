@@ -10,7 +10,7 @@
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
 	</head>
 	<body>
-		<div>이 일정을 수정 혹은 삭제 하시겠습니까?</div>
+		<div style="margin: auto; margin-top: 1em; text-align: center;">이 일정을 수정 혹은 삭제 하시겠습니까?</div>
 		<div style="margin:auto;  text-align: center;">
   			<p>일정 : ${alarm.alarmTitle}</p>
   			<button class='btn btn-primary' type='button' onclick='javascript:goSubmit(${alarm.alarmNo});'>일정 수정</button>

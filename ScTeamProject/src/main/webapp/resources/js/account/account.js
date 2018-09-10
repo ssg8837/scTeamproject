@@ -120,39 +120,20 @@ function check() {
         $('#userPhone').focus();
         return false;
     }
-    
-    //원래 이렇게 하면 안되는데 일단 alert 창 띄울 다른 방법을 찾아보기..
-    
+
+    //비밀번호 확인
     $.ajax({
-        url: 'updateMyPage',
+        url: 'checkPWD',
         method: 'post',
-        /*      
-	    data: {
-         "userId": userid,
-         "userPwd": userpwd,
-         "userAddr":useraddr,
-         "userEmail":useremail,
-         "userPhone":userphone,
-         "userNick":usernick,
-         "oldUserPwd": oldpwd
-        },
- 		*/
         data: {"oldUserPwd": oldpwd},
         success: function(data) {
-	         if(data=="success"){
-	             alert("회원정보 수정에 성공하였습니다.");
-	             location.reload();
-	         }
-	         else if(data=="fail"){
-	        	 alert("회원정보 수정에 실패하였습니다.");
-	         }
-	         else if(data=="pwNotCorrect"){
+	         if(data=="pwNotCorrect"){
 	             alert("기존 비밀번호가 일치하지 않아 회원정보를 수정할 수 없습니다.");
 	             location.reload();
+	             return false;
 	         }
-        },
-        error: function(data){
-        	location.reload();
         }
     });
+
+    $('#form1').submit();
 }

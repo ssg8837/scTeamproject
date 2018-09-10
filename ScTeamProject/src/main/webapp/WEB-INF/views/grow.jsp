@@ -77,7 +77,7 @@
         		<li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이 추가하기</span>
+	              <span>아이 정보</span>
 	            </a>
 	          </li>
 	        
@@ -140,12 +140,8 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-<<<<<<< HEAD
         <h3><i class="fa fa-angle-right"></i>성장기록</h3>
         <div class="row mt">
-=======
-        <h3><i class="fa fa-angle-right"></i> 성장기록</h3>
->>>>>>> refs/remotes/origin/master
           <div class="col-lg-12">
           
 			<!-- 본문 -->
@@ -168,17 +164,15 @@
 				<!-- 시트 표시 -->
 				<div class="grow_sheet">
 					<form id="grow_formchooseData" action="grow_selectBabyDataByAge" method="post">	
-						아이 선택:
 							<select id="grow_selectBabyForSheet" name="babyno" onchange="getAge();">
-									<option value="">성장기록을 조회할 아이를 선택해주세요</option>
+									<option value="">아이를 선택해주세요</option>
 								<c:forEach var="babyList" items="${babyList}">
 									<option value="${babyList.babyNo}">${babyList.babyName}</option>
 								</c:forEach>
 							</select>
-						&nbsp;&nbsp;
-						나이 선택:
+
 							<select id="grow_selectAgeForSheet" name="babyage">
-								<option value="">성장기록을 조회할 나이를 선택해주세요</option>
+								<option value="">나이를 선택해주세요</option>
 							</select>
 						<button type="button" onclick="getData();">조회하기</button>
 					</form>
@@ -194,8 +188,8 @@
 							<thead>
 								<tr>
 									<th></th>
-									<th id="grow_sheetTable_ageNgender"></th>
-									<th id="grow_sheetTable_name"></th>
+									<th id="grow_sheetTable_ageNgender"> </th>
+									<th id="grow_sheetTable_name"> </th>
 									<th></th>
 								</tr>
 							</thead>
@@ -218,11 +212,10 @@
 									<td id="grow_sheetTable_6"></td>
 									<td id="grow_sheetTable_9"></td>
 								</tr>
-								<tr>
+								<tr class="TR_BMI">
 									<th>체질량 지수</th>
 									<td id="grow_sheetTable_10"></td>
 									<td id="grow_sheetTable_11"></td>
-									<td id="grow_sheetTable_12"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -263,7 +256,7 @@
 					<br>
 					머리둘레:	<br> <input type="number" step="0.1" id="growhead"	name="growhead">	cm
 					<br>
-					<button type="button" onclick="sendData();" class="grow_float_right">아이 정보 입력하기</button>
+					<button type="button" onclick="sendData();">아이 정보 입력하기</button>
 				</form>
 			</div><!-- end : 아이정보입력(grow_insertDiv) -->
           </div>	<!-- end : 본문 -->
@@ -305,12 +298,15 @@
 		<script src="./resources/js/grow/grow.js"></script>
 		
 		<script type="text/javascript">		
-		//시트버튼누르면 캔버스 날리기
+		//시트버튼누르면 페이지새로고침
 		$('.grow.button.sheet').click(function(){	
+			location.reload();
+			/*
 			$('.grow_selectBabyDiv').html('');				// 아이선택버튼 날리기
 			$('.grow_canvas_container').html('');			// 캔버스 날리기
 			$('.grow_canvas_container').css('display','none');
-			$('.grow_sheet').css('display','block');		// 시트 보이기
+			$('.grow_sheet').css('display','block');		// 시트 보이기 
+			*/
 		});
 		//그래프버튼 누르면 아이선택버튼 보이게 하기
 		$('.grow.button.chart').click(function(){

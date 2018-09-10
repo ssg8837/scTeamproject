@@ -77,7 +77,7 @@
         	 <li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이 추가하기</span>
+	              <span>아이 정보</span>
 	            </a>
 	          </li>
 	          <li class="sub-menu">
@@ -144,7 +144,7 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 생활 기록 달력 알림 입력</h3>
+        <h3><i class="fa fa-angle-right"></i> 생활 기록 입력</h3>
         <div class="row mt">
           <div class="col-lg-12">
           <form id="alarmform" action='alarm_insertNewAlarm' method='post'>
@@ -159,16 +159,18 @@
 			</div>
 			<div class='input-group col-xs-4'>
 				<span class="input-group-addon">할 일</span><select class="form-control" id="alarmType" name="alarmType" onchange="changeSelect()">
-					<option value='0'>기타</option>
+					<option value="">카테고리를 선택해주세요</option>
 					<option value='1'>모유</option>
 					<option value='2'>젖병</option>
 					<option value='3'>이유식</option>
 					<option value='4'>유축</option>
 					<option value='5'>배소변</option>
-					<option value='6'>수면</option>
-					<option value='7'>목욕</option>
+					<option value='6'>목욕</option>
+					<option value='7'>수면</option>	
+					<option value='0'>기타</option>	
 				</select>
 			</div>
+			<div id="detail" class='input-group col-xs-4'></div>
 			<div id="amount" class='input-group col-xs-4'></div>
 		   	<div class="input-group date form_datetime col-xs-4 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">
 			<span id="timesSpan" class="input-group-addon">일시</span>
@@ -181,6 +183,7 @@
 				<span class="input-group-addon">메모</span>
 				<input class="form-control " id="alarmTitle" name="alarmTitle"  type="text" value='${alarm.alarmTitle }'>
 			</div>
+			<br/>
 			<!-- http://jsonobject.tistory.com/181 -->
 			<button class='btn btn-primary' type='button' onclick="javascript:alarm_check();" style="margin: 0 auto;">알림 등록</button>
 		</form>

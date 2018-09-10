@@ -81,7 +81,7 @@
         	  <li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이 추가하기</span>
+	              <span>아이 정보</span>
 	            </a>
 	          </li>
 	          <li class="sub-menu">

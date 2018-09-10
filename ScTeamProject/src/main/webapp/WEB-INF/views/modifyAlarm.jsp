@@ -77,7 +77,7 @@
         	<li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이 추가하기</span>
+	              <span>아이 정보</span>
 	            </a>
 	          </li>
 	          <li class="sub-menu">
@@ -172,7 +172,7 @@
                     
 					<span class="input-group-addon"><span class="fa fa-calendar"></span></span>	
 			</div>
-           
+          	 <br/>
 			<!-- http://jsonobject.tistory.com/181 -->
 			<button class='btn btn-primary' type='button' onclick="javascript:alarm_check();" style="margin: 0 auto;">알림 수정</button>
 		</form>
