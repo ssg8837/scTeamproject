@@ -118,7 +118,7 @@
 	              </a>
 	          </li>
 	           <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="babyBook">
 	              <i class="fa fa-book fa_left"></i>
 	              <span>다이어리</span>
 	              </a>
