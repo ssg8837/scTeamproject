@@ -20,7 +20,29 @@
 					$('#registerBabyBookForm').submit();
 				});
 				
+				
+				
 			});
+			
+			function selectOne(boardnum, content){
+				alert(boardnum); 
+				alert(typeof boardnum);
+				
+				var result = '<div class="content-panel pn">';
+					result += '<div style="background-image: url(./getImage?boardnum=17);">';
+					result += '</div>';
+					result += '<div class="blog-text">';
+					result += '<p>'+content+'</p>';
+					result += '</div>';
+					result += '</div>';
+					
+					$('#selectOneDiv').html(result);
+					
+					
+				document.getElementById('selectOneLight').style.display='block';
+				document.getElementById('selectOneFade').style.display='block'; 
+			}
+			
 		</script>
 		
 		
@@ -240,7 +262,8 @@
             <div class="row">
               
               <c:forEach var="list" items="${list}">
-              	<div class="col-lg-4 col-md-4 col-sm-4 mb">
+              	<div class="col-lg-4 col-md-4 col-sm-4 mb" 
+              	onclick="javascript:selectOne(${list.boardnum},'${list.content}')">
                 	<div class="content-panel pn">
                   		<div id="blog-bg" style="background-image: url(./getImage?boardnum=${list.boardnum});">
                   		</div>
@@ -279,6 +302,27 @@
 			</div>
 		
         	<div id="registerFade" class="black_overlay"></div>
+        	
+        	
+        	
+        	<div id="selectOneLight" class="white_content">
+				<button type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
+				 onclick = "document.getElementById('selectOneLight').style.display='none';document.getElementById('selectOneFade').style.display='none'">
+				&times;</button>
+				
+				<div id="selectOneDiv">
+                		<!-- <div class="content-panel pn">
+                  		<div id="blog-bg" style="background-image: url(./resources/image/t3.jpg);">
+                  		</div>
+                  		<div class="blog-text">
+                    	<p>사랑이 뭘까요</p>
+                 	 	</div>
+               		 	</div> -->
+				</div>
+			
+			</div>
+		
+        	<div id="selectOneFade" class="black_overlay"></div>
             
           </div>
         </div>
