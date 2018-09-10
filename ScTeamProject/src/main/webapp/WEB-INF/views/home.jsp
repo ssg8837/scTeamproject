@@ -14,6 +14,7 @@
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
 		
 	</head>
+	
 	<body>
 	<form id='home' action='./' method='get'>
 		</form>
@@ -104,7 +105,7 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="hospital_Test">
+	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
