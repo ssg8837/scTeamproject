@@ -103,15 +103,15 @@ public class WeatherController {
 		
 		rweather = result.toString().split("temp\":")[1];
 		String temp = rweather.substring(0, rweather.indexOf(","));
-		temp = (double)(Math.round((Double.parseDouble(temp) - 273.15)*100))/100 + "";
+		temp = (double)(Math.round((Double.parseDouble(temp) - 273.15)*10))/10 + "";
 
 		rweather = result.toString().split("temp_min\":")[1];
 		String temp_min = rweather.substring(0, rweather.indexOf(","));
-		temp_min =  (double)(Math.round((Double.parseDouble(temp_min) - 273.15)*100))/100 + "";
+		temp_min =  (double)(Math.round((Double.parseDouble(temp_min) - 273.15)*10))/10 + "";
 		
 		rweather = result.toString().split("temp_max\":")[1];
 		String temp_max = rweather.substring(0, rweather.indexOf("}"));
-		temp_max =  (double)(Math.round((Double.parseDouble(temp_max) - 273.15)*100))/100 + "";
+		temp_max =  (double)(Math.round((Double.parseDouble(temp_max) - 273.15)*10))/10 + "";
 		
 		rweather = result.toString().split("humidity\":")[1];
 		String humidity = rweather.substring(0, rweather.indexOf(","));
@@ -125,9 +125,10 @@ public class WeatherController {
 		int userNo = Integer.parseInt(usernum);*/
 		Weather weather = new Weather(1, location, main, cloud, temp, temp_min, temp_max, humidity, wind);
 		
+		weather = life(weather);
+		System.out.println("1>"+weather);
 		weather = air(weather);
 		
-		weather = life(weather);
 		System.out.println("2>"+weather);
 		
 		return weather;

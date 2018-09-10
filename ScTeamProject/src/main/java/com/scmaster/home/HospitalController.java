@@ -154,6 +154,76 @@ public class HospitalController {
 		return hspts;
 	}
 	
+	@RequestMapping(value = "/babiesHospital", method = RequestMethod.GET)
+	public @ResponseBody List<Hospital> babiesHospital(String lat, String lon) throws Exception{
+		
+		List<Hospital> hspts = new ArrayList<Hospital>();
+		Hospital hspt = new Hospital();
+		List<String> time = new ArrayList<String>();
+		StringBuilder t = new StringBuilder();
+		int totalCount = 10;
+		for (int i = 1; i < /*totalCount*/2; i++) {
+			String api = i + "";
+			if (i==1) {
+				System.out.println("1번토탈카운트 >" +totalCount);
+			}
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			org.w3c.dom.Document doc = dBuilder.parse("http://apis.data.go.kr/B552657/HsptlAsembySearchService/getBabyLcinfoInqire?ServiceKey=dBWeSsetEKQH5l9aSW9wYkfPc7JjYZsNg3%2FimojYuBbGY4ktoST1JZU1czNJfm0A42OV8MZm8Df6yRRFTkO32Q%3D%3D&ServiceKey=-&WGS84_LON="
+					+ lon + "&WGS84_LAT=" + lat + "&pageNo="+api+"&numOfRows=100");
+			doc.getDocumentElement().normalize();
+			
+			if (i ==1) {
+				NodeList nList1 = doc.getElementsByTagName("body");
+				Node nNode1 = nList1.item(0);
+				Element eElement1 = (Element) nNode1;
+				String count = getTagValue("totalCount", eElement1);
+				totalCount = Integer.parseInt(count);
+				System.out.println(totalCount);
+			}
+			
+			NodeList nList = doc.getElementsByTagName("item");
+			System.out.println(nList.getLength());
+			for (int j = 0; j < nList.getLength(); j++) {
+				Node nNode = nList.item(j);
+				Element eElement = (Element) nNode;
+				String hpid = getTagValue("hpid", eElement);
+				String distance = getTagValue("distance", eElement);
+				if (Double.parseDouble(distance) > 0.5) {
+					continue;
+				}
+				String address = getTagValue("dutyAddr", eElement);
+				String name = getTagValue("dutyName", eElement);
+				String divNam = getTagValue("dutyDivName", eElement);
+				String phone = getTagValue("dutyTel1", eElement);
+				String latitude = getTagValue("latitude", eElement);
+				String longitude = getTagValue("longitude", eElement);		
+				
+					String timec = getTagValue("endTime", eElement);
+					String times = getTagValue("startTime", eElement);
+						timec = timec.substring(0, 2) + ":" + timec.substring(2, timec.length());
+						times = times.substring(0, 2) + ":" + times.substring(2, times.length());
+						time.add(times+"~");
+						time.add(timec);
+				
+				for (int k = 0; k < time.size(); k++) {
+					t.append(time.get(k));
+				}
+				
+				Hospital h = new Hospital(hpid, address, name, divNam, phone, 0, "", t.toString(), latitude, longitude, distance);
+				hspt = h;
+				time.clear();
+				t.setLength(0);
+				hspts.add(hspt);
+			}
+		}
+		for (int j = 0; j < hspts.size(); j++) {
+			System.out.println(j+">"+hspts.get(j));
+		}
+		System.out.println(lon + "," + lat);
+		return hspts;
+	}
+	
 	@RequestMapping(value = "/hospital_myLocation", method = RequestMethod.GET)
 	public @ResponseBody List<Hospital> hospital_myLocation(String lat, String lon) throws Exception{
 		
@@ -190,7 +260,7 @@ public class HospitalController {
 				Element eElement = (Element) nNode;
 				String hpid = getTagValue("hpid", eElement);
 				String distance = getTagValue("distance", eElement);
-				if (Double.parseDouble(distance) > 0.5) {
+				if (Double.parseDouble(distance) > 5.0) {
 					continue;
 				}
 				String address = getTagValue("dutyAddr", eElement);
