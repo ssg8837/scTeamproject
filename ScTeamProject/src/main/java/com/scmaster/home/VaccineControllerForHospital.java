@@ -19,6 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.scmaster.vo.City;
+import com.scmaster.vo.Hospital;
 import com.scmaster.vo.VaccineHospital;
 
 
@@ -90,7 +91,7 @@ public class VaccineControllerForHospital{
 	        
 	        cd = getTagValue("cd",eElement);
 	        cdNm = getTagValue("cdNm",eElement);
-	        //System.out.println(cd);
+	        System.out.println(cd);
 	        City secondCity = new City();
 	        
 	        secondCity.setCityCode(cd);
@@ -150,10 +151,20 @@ public class VaccineControllerForHospital{
 	    Map<String, Object> map = new HashMap<String, Object>();
 		map.put("totalCount", totalCount);
 		map.put("vhList", vhList);
-	    
+	    map.put("page", Integer.parseInt(page));
 	
 	    return map;
 	}
+	
+	///도현씨 보세요 호엥ㅇ에에에에엥
+	@RequestMapping(value = "/sendHospital", method = RequestMethod.GET)
+	public String sendHospital(String addr){
+		System.out.println("호에에엥에엥ㅇㅇ");
+		System.out.println(addr);
+	
+	    return "redirect:vaccineFormForHospital";
+	}
+	
 	
 	
 }
