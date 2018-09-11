@@ -4,6 +4,7 @@
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
 		<script>
 			$(function(){
 				
@@ -24,23 +25,57 @@
 				
 			});
 			
-			function selectOne(boardnum, content){
-				alert(boardnum); 
-				alert(typeof boardnum);
-				
-				var result = '<div class="content-panel pn">';
-					result += '<div style="background-image: url(./getImage?boardnum=17);">';
+			function selectOne(boardnum, content, regdate){
+				var newContent = "'" + content + "'";
+				var result = '<div>';
+					result += '<div id="blog-bg" style="background-image: url(./getImage?boardnum='+boardnum+');">';
 					result += '</div>';
 					result += '<div class="blog-text">';
 					result += '<p>'+content+'</p>';
+					result += '<p>'+regdate+'</p>';
 					result += '</div>';
+					result += '<input type="button" value="수정" onclick="javascript:updateBabyBook('+boardnum+','+newContent+');">';
+					result += '<input type="button" value="삭제" onclick="javascript:deleteBabyBook('+boardnum+');">';
 					result += '</div>';
+			
 					
 					$('#selectOneDiv').html(result);
 					
 					
 				document.getElementById('selectOneLight').style.display='block';
 				document.getElementById('selectOneFade').style.display='block'; 
+			}
+			
+			function deleteBabyBook(boardnum){
+				
+				if(confirm('정말로 삭제하시겠습니까?')==true){
+					location.href='deleteBabyBook?boardnum='+boardnum;
+				}else{
+					return;
+				}
+			}
+			
+			function updateBabyBook(boardnum, content){
+				
+				var result = '<form id="updateBabyBookForm" action="updateBabyBook" method="post" enctype="multipart/form-data" runat="server" onsubmit="return submitConFirm()">';
+					result += '<input type="hidden" value="'+${sessionScope.loginNo}+'" id="userNo" name="userNo">';
+					result += '<input type="hidden" value="'+boardnum+'" id="boardnum" name="boardnum">';
+					result += '<textarea id="content" name="content" rows="10" cols="70" style="resize: none;">'+content+'</textarea>';
+					result += '<br><input type="file" id="imgInput" name="uploadfile"/><br/>';
+					result += '<div id="image_section" ></div>';
+					result += '<input type="submit" value="수정">';
+					result += '</form>';
+				
+				
+				$('#selectOneDiv').html(result);
+			}
+			
+			function submitConFirm(){
+				if(confirm('정말로 수정하시겠습니까?')==true){
+					return true;
+				}else{
+					return false;
+				}
 			}
 			
 		</script>
@@ -55,6 +90,7 @@
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="./resources/js/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" type="text/css" />
 		<link href="./resources/css/forBabyBook/babyBook.css" rel="stylesheet">
 		
 	</head>
@@ -223,7 +259,7 @@
               
               <div class="col-lg-4 col-md-4 col-sm-4 mb">
                 <div class="content-panel pn">
-                  <div id="blog-bg" style="background-image: url(./getImage?boardnum=8);">
+                  <div id="blog-bg" style="background-image: url(./getImage?boardnum=16);">
                   </div>
                   <div class="blog-text">
                     <p>사랑이 뭘까요 ㅠㅠㅠ끄아아앙아아앙 못하겟어 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 크헠 vvㅠㅠㅠㅠㅠㅠ살져주세요 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅁㅈㄷㄱ</p>
@@ -263,14 +299,14 @@
               
               <c:forEach var="list" items="${list}">
               	<div class="col-lg-4 col-md-4 col-sm-4 mb" 
-              	onclick="javascript:selectOne(${list.boardnum},'${list.content}')">
+              	onclick="javascript:selectOne(${list.boardnum},'${list.content}','${list.regdate}')">
                 	<div class="content-panel pn">
                   		<div id="blog-bg" style="background-image: url(./getImage?boardnum=${list.boardnum});">
                   		</div>
                   		<div class="blog-text">
                     		<p>${list.content}</p>
                   		</div>
-                  			<div class="blog-date">2018.08.08</div>
+                  			<div class="blog-date">${list.regdate}</div>
                	 	</div>
               	</div>
               
@@ -285,7 +321,7 @@
 				 onclick = "document.getElementById('registerLight').style.display='none';document.getElementById('registerFade').style.display='none'">
 				&times;</button>
 				
-				<div id="">
+				<%-- <div id="">
 					<form id="registerBabyBookForm" action="registerBabyBook" method="post" enctype="multipart/form-data" runat="server">
 						<input type="hidden" value="${sessionScope.loginNo}" id="userNo" name="userNo">
 						<!-- <input id="registerDate" type="date"><br> -->
@@ -296,9 +332,54 @@
 	    				</div>
 						<input id="registerbtn" type="button" value="등록">
 					</form>
-				</div>
-			
-				<!-- <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">닫기</a> -->
+				</div> --%>
+				
+				
+		
+        
+		      <section id="main-content">
+		      	<section class="wrapper">
+		        <div class="row mt">
+		          <div class="col-lg-12">
+		            <div class="form-panel">
+		              <form id="registerBabyBookForm" action="registerBabyBook" enctype="multipart/form-data" method="post" class="form-horizontal style-form">
+		                
+		                <input type="hidden" value="${sessionScope.loginNo}" id="userNo" name="userNo">
+		    			<textarea id="content" name="content" rows="10" cols="70" style="resize: none;"></textarea>
+		                
+		                <div  class="form-group last">
+		                  <label class="control-label col-md-3">Image Upload</label>
+		                  <div class="col-md-9">
+		                    <div class="fileupload fileupload-new" data-provides="fileupload">
+		                      <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+		                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
+		                      </div>
+		                      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+		                      <div>
+		                        <span class="btn btn-theme02 btn-file">
+		                          <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select image</span>
+		                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+		                        <input type="file" id="imgInput" name="uploadfile" class="default" />
+		                        </span>
+		                        <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+		                      </div>
+		                    </div>
+		                    
+		                  </div>
+		                  <input id="registerbtn" type="button" value="등록">
+		                </div>
+		              </form>
+		            </div>
+		            <!-- /form-panel -->
+		          </div>
+		          <!-- /col-lg-12 -->
+		        </div>
+		        <!-- row -->
+		      </section>
+		      <!-- /wrapper -->
+		    </section>
+		    <!-- /MAIN CONTENT -->
+
 			</div>
 		
         	<div id="registerFade" class="black_overlay"></div>
@@ -311,17 +392,11 @@
 				&times;</button>
 				
 				<div id="selectOneDiv">
-                		<!-- <div class="content-panel pn">
-                  		<div id="blog-bg" style="background-image: url(./resources/image/t3.jpg);">
-                  		</div>
-                  		<div class="blog-text">
-                    	<p>사랑이 뭘까요</p>
-                 	 	</div>
-               		 	</div> -->
+                	
 				</div>
 			
 			</div>
-		
+
         	<div id="selectOneFade" class="black_overlay"></div>
             
           </div>
@@ -350,6 +425,7 @@
 		<script src="./resources/js/util/check_byte.js"></script>
 		<script src="./resources/js/home/login_check.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
+	    <script src="./resources/js/bootstrap-fileupload/bootstrap-fileupload.js" type="text/javascript" ></script>
   
 	</body>
 </html>
