@@ -60,12 +60,6 @@
 			$('#paging').html(paging);
 		}
 		
-		/* <c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}">
-		<c:if test="${counter == navi.currentPage}"><b></c:if>
-		<a href="javascript:formSubmit(${counter})">${counter}</a>
-		<c:if test="${counter == navi.currentPage}"></b></c:if>
-		</c:forEach> */
-		
 		window.scrollTo(0,0);
 	}
 	
