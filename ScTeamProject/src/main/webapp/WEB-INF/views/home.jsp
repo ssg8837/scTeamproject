@@ -22,7 +22,7 @@
         <c:if test='${sessionScope.loginId != null }'>
 		<input type="hidden" id="loginNo" value="${sessionScope.loginNo}">
 		</c:if>
-	<section id="container">
+	<section id="container" class="sidebar-closed">
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
         *********************************************************************************************************************************************************** -->
@@ -66,7 +66,7 @@
         *********************************************************************************************************************************************************** -->
     <!--sidebar start-->
     <aside>
-      <div id="sidebar" class="nav-collapse ">
+      <div id="sidebar" class="nav-collapse " style="margin-left: -210px;">
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
@@ -144,7 +144,7 @@
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
-    <section id="main-content">
+    <section id="main-content" style="margin-left: 0px;">
       <section class="wrapper site-min-height">
         <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
         <div class="row mt">
