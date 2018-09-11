@@ -154,13 +154,13 @@
              
               <!--  Blog Panel -->
               <c:if test="${fn:length(snsList) ==0 }">
-	              <div class="col-lg-12 col-md-12 col-sm-12 mb">
+	              <div class="col-lg-6 col-md-6 col-sm-6 mb">
 	                <div class="content-panel pn">
 	                  <div id="sns-bg">
 	                    <div class="sns-title">올라온 글이 없습니다.</div>
 	                  </div>
 	                  <div class="blog-text">
-	                    <p>없다구요! </p>
+	                    <p>올라온 글이 없습니다. </p>
 	                  </div>
 	                </div>
 	              </div>
@@ -169,11 +169,28 @@
               
               <c:forEach var="item" items="${snsList}">
               
-				   <div class="col-lg-12 col-md-12 col-sm-12 mb">
+				   <div class="col-lg-6 col-md-6 col-sm-6 mb">
 	                <div class="content-panel pn">
+	                <c:if test="${item.photoCount!=0 }">
+	                	<a class="prev" onclick="plusSlides(-1,${item.SNSNo })">&#10094;</a>
+						<a class="next" onclick="plusSlides(1,${item.SNSNo })">&#10095;</a>
+	                  <div id="sns-bg" class="bg_${item.SNSNo }" onclick="showImages(${item.SNSNo })" style="background: url(./getImageSns?fullname=${item.photo_1}) no-repeat center center; background-size:contain; min-height: 80%">
+		                  <div class="sns-title">${item.userNick }님이  ${item.writeDate}에 작성하신 글</div>
+						  
+						  <input type="hidden" id="count_${item.SNSNo }" value="${item.photoCount }">
+						  <input type="hidden" id="countNow_${item.SNSNo }" value="1">
+						  <input type="hidden" id="photo_1_${item.SNSNo }" value="${item.photo_1 }">
+						  <input type="hidden" id="photo_2_${item.SNSNo }" value="${item.photo_2 }">
+						  <input type="hidden" id="photo_3_${item.SNSNo }" value="${item.photo_3 }">
+						  <input type="hidden" id="photo_4_${item.SNSNo }" value="${item.photo_4 }">
+	                  </div>
+	                  </c:if>
+	                  <c:if test="${item.photoCount==0 }">
 	                  <div id="sns-bg">
 	                    <div class="sns-title">${item.userNo }</div>
 	                  </div>
+	                  </c:if>
+	                  
 	                  <div class="blog-text">
 	                    <p>${item.content } </p>
 	                  </div>
@@ -213,6 +230,7 @@
 		  <!--script for this page-->
 		<script src="./resources/js/util/check_byte.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
+	    <script src="./resources/js/sns/snsMain.js"></script>
   
 	</body>
 </html>

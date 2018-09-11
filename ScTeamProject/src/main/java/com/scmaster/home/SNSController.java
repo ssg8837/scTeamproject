@@ -10,16 +10,24 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.scmaster.mapper.BabyBookMapper;
+import com.scmaster.mapper.MainMapper;
 import com.scmaster.mapper.SNSMapper;
-
+import com.scmaster.vo.BabyBook;
 import com.scmaster.vo.MultiFiles;
-
 import com.scmaster.vo.SNS;
 
 @Controller
@@ -28,7 +36,7 @@ public class SNSController {
 	@Autowired SqlSession sqlSession;
 	@Autowired HttpSession httpSession;
 
-	private static final String UPLOADPATH = "C://FileRepo";
+	private static final String UPLOADPATH = "C://FileRepo//SNS";
 	
 	@RequestMapping(value = "/openSNS", method = RequestMethod.GET)
 	public String openSNS(Model model) 
@@ -45,6 +53,7 @@ public class SNSController {
 			snsList=snsMapper.selectSNS((Integer)loginNo);
 		}
 		System.out.println(snsList);
+		
 		model.addAttribute("snsList", snsList);
 		return "snsMain";
 	}
@@ -62,7 +71,7 @@ public class SNSController {
 		{
 			SNSMapper snsMapper=sqlSession.getMapper(SNSMapper.class);
 			int count=0;
-			String fileGroup="";
+			ArrayList<String> fileGroup=new ArrayList<String>();
 			
 			for(MultipartFile file : boardfiles.getFileSet())
 			{
@@ -73,7 +82,7 @@ public class SNSController {
 					count++;
 					
 					String savedName = savedName(file);
-					fileGroup+=savedName+"*";
+					fileGroup.add(savedName);
 					
 					File path = new File(UPLOADPATH);
 					if(!path.exists())
@@ -81,22 +90,16 @@ public class SNSController {
 						path.mkdirs();
 						System.out.println("폴더가 존재하지 않아 만들었습니다.");
 					}
-					
 					File realFile = new File(UPLOADPATH, savedName);
 					try {
 						file.transferTo(realFile);
 					} catch (Exception e) {
 						e.printStackTrace();
 					} 
-	
-					
-					
 				}
-				
-				
 			}//for
-			System.out.println(fileGroup);
-			System.out.println(count);
+			//System.out.println(fileGroup);
+			//System.out.println(count);
 			SNS sns = new SNS();
 			sns.setContent(content);
 			sns.setPermission(0);
@@ -106,8 +109,19 @@ public class SNSController {
 			}
 			sns.setUserNo((Integer)loginNo);
 			sns.setPhotoCount(count);
-			sns.setPhotoGroup(fileGroup);
-					
+			switch(count)
+			{
+			case 4:
+				sns.setPhoto_4(fileGroup.get(3));
+			case 3:
+				sns.setPhoto_3(fileGroup.get(2));
+			case 2:
+				sns.setPhoto_2(fileGroup.get(1));
+			case 1:
+				sns.setPhoto_1(fileGroup.get(0));
+				break;
+			}
+			sns.setUserNick((String)httpSession.getAttribute("loginNick"));
 			snsMapper.insertSNS(sns);
 		}
 		return "snsMain";
@@ -118,5 +132,22 @@ public class SNSController {
 		String savedName = uuid+""+uploadfile.getOriginalFilename();
 		
 		return savedName;
+	}
+	
+	@RequestMapping(value = "/getImageSns",method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<InputStreamResource> getImageSns(String fullname) throws Exception {
+
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+
+		responseHeaders.setContentType(MediaType.IMAGE_JPEG);
+		
+		String path = String.format("%s//%s", UPLOADPATH, fullname);
+
+		FileSystemResource resource = new FileSystemResource(path);
+
+
+		return new ResponseEntity<InputStreamResource>(new InputStreamResource(resource.getInputStream()), responseHeaders, HttpStatus.OK);
+
 	}
 }
