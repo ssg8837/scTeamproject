@@ -1,13 +1,9 @@
 package com.scmaster.home;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,9 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.scmaster.mapper.MainMapper;
-import com.scmaster.vo.BS_Baby;
 import com.scmaster.vo.BS_User;
-import com.scmaster.vo.BabyBook;
 
 //메인화면, 로그인, 회원가입, 회원정보수정(account) 관련 기능 이쪽 컨트롤러에 있습니다.
 

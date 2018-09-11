@@ -6,6 +6,7 @@ import com.scmaster.vo.SNS;
 public interface SNSMapper {
 	ArrayList<SNS> selectPublicSNS();
 	ArrayList<Integer> selectFriendList(Integer loginNo);
-	ArrayList<SNS> selectSNS();
+	ArrayList<SNS> selectSNS(Integer loginNo);
+	void insertSNS(SNS sns);
 
 }

@@ -10,8 +10,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO BABYBOOK(
 			BOARDNUM,
 			USERNO,
-			BABYNO,
-			TITLE, 
 			CONTENT, 
 			REGDATE,
 			ORIGINALFILE, 
@@ -19,8 +17,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(
 			BABYBOOK_SEQ.NEXTVAL,
 			#{userNo},
-			#{babyNo},
-			#{title},
 			#{content},
 			SYSDATE,
 			#{originalfile},
@@ -30,9 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectList" resultType="BabyBook">
 		SELECT BOARDNUM,
-			USERNO,
-			BABYNO,
-			TITLE, 
+			USERNO, 
 			CONTENT, 
 			REGDATE,
 			ORIGINALFILE, 
@@ -42,13 +36,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectOne" parameterType="int" resultType="BabyBook">
 		SELECT BOARDNUM,
 			USERNO,
-			BABYNO,
-			TITLE, 
 			CONTENT, 
 			REGDATE,
 			ORIGINALFILE, 
 			SAVEDFILE FROM BABYBOOK 
 			WHERE BOARDNUM = #{boardnum}
+	
 	</select>
 	<!-- selectBabyBookListLoginNo  -->
 	<select id="selectBabyBookListLoginNo" parameterType="int" resultType="BabyBook">

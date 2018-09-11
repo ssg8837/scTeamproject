@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="BS_Baby" type="com.scmaster.vo.BS_Baby"></typeAlias>
 		<typeAlias alias="BS_Alarm" type="com.scmaster.vo.BS_Alarm"></typeAlias>
 		<typeAlias alias="Hospital" type="com.scmaster.vo.Hospital"></typeAlias>
+		<typeAlias alias="City" type="com.scmaster.vo.City"></typeAlias>
 		<typeAlias alias="Grow_Default" type="com.scmaster.vo.Grow_Default"></typeAlias>
 		<typeAlias alias="Disease" type="com.scmaster.vo.Disease"></typeAlias>
 		<typeAlias alias="Vaccine" type="com.scmaster.vo.Vaccine"></typeAlias>
@@ -31,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="VaccineMapper.xml" />
 		<mapper resource="AlarmMapper.xml" />
 		<mapper resource="HospitalMapper.xml" />
+		<mapper resource="CityMapper.xml" />
 		<mapper resource="growMapper/GrowMapper.xml" />
 		<mapper resource="growMapper/GrowDefaultMapper.xml" />
 		<mapper resource="DiseaseMapper.xml" />
