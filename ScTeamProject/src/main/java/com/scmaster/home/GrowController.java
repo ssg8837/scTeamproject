@@ -28,7 +28,8 @@ import com.scmaster.vo.Grow_Default;
 @Controller
 public class GrowController {
 
-
+	//성장기록(grow) 관련 기능 이쪽 컨트롤러에 있습니다.
+	
 	@Autowired SqlSession session;
 	@Autowired HttpSession httpSession;
 	
