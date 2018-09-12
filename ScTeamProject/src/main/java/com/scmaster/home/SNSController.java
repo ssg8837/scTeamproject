@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.scmaster.mapper.MainMapper;
 import com.scmaster.mapper.SNSMapper;
-
+import com.scmaster.vo.BS_User;
 import com.scmaster.vo.MultiFiles;
 
 import com.scmaster.vo.SNS;
@@ -46,6 +47,12 @@ public class SNSController {
 		}
 		System.out.println(snsList);
 		model.addAttribute("snsList", snsList);
+		
+		//프로필사진 불러오기
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
+		
 		return "snsMain";
 	}
 	

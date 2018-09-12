@@ -29,8 +29,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<mappers>
 		<mapper resource="MainMapper.xml" />
-		<mapper resource="VaccineMapper.xml" />
-		<mapper resource="AlarmMapper.xml" />
+		<mapper resource="VaccineMapper.xml" />				
+		<mapper resource="AlarmMapper.xml" />			
 		<mapper resource="HospitalMapper.xml" />
 		<mapper resource="CityMapper.xml" />
 		<mapper resource="growMapper/GrowMapper.xml" />

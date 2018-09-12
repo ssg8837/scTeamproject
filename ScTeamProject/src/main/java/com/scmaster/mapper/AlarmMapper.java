@@ -5,7 +5,7 @@ import com.scmaster.vo.BS_Alarm;
 
 public interface AlarmMapper {
 
-	ArrayList<BS_Alarm> selectBabyAlarmList(int babyNum);
+	ArrayList<BS_Alarm> selectBabyAlarmList(int babyNum);	//babyList에서도 사용합니다. 수정시 유의.
 
 	
 	void insertAlarm(BS_Alarm alarm);

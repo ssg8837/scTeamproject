@@ -30,7 +30,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			CONTENT, 
 			REGDATE,
 			ORIGINALFILE, 
-			SAVEDFILE FROM BABYBOOK
+			SAVEDFILE 
+		FROM 
+			BABYBOOK
+		ORDER BY 
+			BOARDNUM
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="BabyBook">

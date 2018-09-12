@@ -249,6 +249,7 @@ ul.top-menu > li > .logout {
 
 #sidebar .sub-menu > .sub li  {
     padding-left: 32px;
+    background-color: #e9d1b6;
 }
 
 #sidebar .sub-menu > .sub li:last-child {
@@ -328,7 +329,7 @@ ul.sidebar-menu li ul.sub li a:hover {
 }
 
 ul.sidebar-menu li ul.sub li.active a {
-    color: #777;
+    color: #fff;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;

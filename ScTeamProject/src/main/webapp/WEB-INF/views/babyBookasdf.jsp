@@ -149,24 +149,9 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit">
-	          		<c:if test='${sessionScope.loginImg != null }'>
-		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
-		          	</c:if>
-		          	<c:if test='${sessionScope.loginImg == null }'>
-		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
-		          	</c:if>
-	          	</a></p>
+	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
-	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
-        	
-        		<li class="sub-menu">
-	            <a href="openNewBaby">
-	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이 정보</span>
-	            </a>
-	          </li>
 	          <li class="sub-menu">
 	            <a href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
@@ -181,12 +166,12 @@
 	          </li>
 	         
 	          <li class="sub-menu">
-	            <a href="#">
+	            <a class="active" href="#">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
 	            </a>
 	            <ul class="sub">
-              		<li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+              		<li class="active"><a href="vaccineForm">질병 및 예방접종 조회</a></li>
              		<li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
               	</ul>
 	          </li>
@@ -198,7 +183,7 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="weather_Test">
+	            <a href="hospital_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
@@ -210,7 +195,7 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="openSNS">
+	            <a href="babyBookForm">
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>
@@ -277,9 +262,9 @@
                   <div id="blog-bg" style="background-image: url(./getImage?boardnum=16);">
                   </div>
                   <div class="blog-text">
-                    <p>끄아아앙아아앙 못하겟어 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 크헠 vvㅠㅠㅠㅠㅠㅠ살져주세요 ㅠㅠㅠㅠ</p>
+                    <p>사랑이 뭘까요 ㅠㅠㅠ끄아아앙아아앙 못하겟어 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 크헠 vvㅠㅠㅠㅠㅠㅠ살져주세요 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅁㅈㄷㄱ</p>
                   </div>
-                  	<div class="blog-date">2018.08.08 </div>
+                  	<div class="blog-date">2018.08.08 집에서</div>
                 </div>
               </div>
               
@@ -393,32 +378,6 @@
 		      </section>
 		      <!-- /wrapper -->
 		    </section>
-		    <!-- /MAIN CONTENT -->
-
-			</div>
-		
-        	<div id="registerFade" class="black_overlay"></div>
-        	
-        	
-        	
-        	<div id="selectOneLight" class="white_content">
-				<button type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
-				 onclick = "document.getElementById('selectOneLight').style.display='none';document.getElementById('selectOneFade').style.display='none'">
-				&times;</button>
-				
-				<div id="selectOneDiv">
-                	
-				</div>
-			
-			</div>
-
-        	<div id="selectOneFade" class="black_overlay"></div>
-            
-          </div>
-        </div>
-      </section>
-      <!-- /wrapper -->
-    </section>
 		    <!-- /MAIN CONTENT -->
 
 			</div>

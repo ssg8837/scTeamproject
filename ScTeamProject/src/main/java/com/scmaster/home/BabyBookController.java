@@ -1,8 +1,7 @@
 package com.scmaster.home;
 
+
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,19 +22,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scmaster.mapper.BabyBookMapper;
 import com.scmaster.mapper.MainMapper;
-import com.scmaster.vo.BS_Baby;
+import com.scmaster.vo.BS_User;
 import com.scmaster.vo.BabyBook;
-import com.scmaster.vo.Cal_Event;
 
 
 @Controller
 public class BabyBookController {
 	
-	@Autowired
-	SqlSession sqlSession;
+	@Autowired SqlSession sqlSession;
+	@Autowired HttpSession httpSession;
 	
 	private static final String UPLOADPATH = "C://FileRepo";
 	
@@ -53,6 +50,12 @@ public class BabyBookController {
 		
 			
 		model.addAttribute("list", list);
+		
+		//프로필사진 불러오기
+		Object loginNo=httpSession.getAttribute("loginNo");
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
 		
 		return "babyBook";
 	}

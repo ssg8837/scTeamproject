@@ -4,110 +4,98 @@
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script>
-		
-		function selectSubmit(){
-			var searchForm = document.getElementById("searchForm");
-			searchForm.submit();
-		}
+<script>
+	$(function(){
 	
-		function registerPopup(babyNo,diseaseNum,diseaseName,vaccineType){
-			if(babyNo==null){
-				alert('아이를 선택해주세요');
-				return;
-			}
-		
-		var result = '<h4>'+diseaseName+'</h4>';
-			result += '<hr />';
-			result += '<input type="radio" id="checkN" class="vaccineCK" name="vaccineCK" value="N" checked="checked" onclick="javascript:deleteDate()"><span class="vaccineCK_check">미접종</span>';
-			result += '&nbsp;&nbsp;<input type="radio" id="checkY" class="vaccineCK" name="vaccineCK" value="Y" onclick="javascript:insertDate()"><span class="vaccineCK_check">접종</span> ';
-			result += '<br /><div id="forCheckdate"></div><br /> ';
-			result += '<p>메모</p><input id="memo" type="text"><br /><br />';
-			result += '<input id="registerbtn" type="button" value="확인" onclick="javascript:clickRegister()">';
-			result += '<input id="cancelbtn" type="button" value="취소" onclick="javascript:clickCancle()">';
-			result += '<input id="babyNo" type="hidden" value="'+babyNo+'">';
-			result += '<input id="diseaseNum" type="hidden" value="'+diseaseNum+'">';
-			result += '<input id="vaccineType" type="hidden" value="'+vaccineType+'">';
-		
-		$('#vaccineRegisterDiv').html(result);
-		
-		document.getElementById('vaccineRegisterModalLight').style.display='block';
-		document.getElementById('vaccineRegisterModalFade').style.display='block';
-		
-		}
-	
-		
-		function insertDate(){
-			$('#forCheckdate').html('<br/ ><p>접종일</p><input id="checkdate" type="date">');
-		}
-		
-		
-		function deleteDate(){
-			$('#forCheckdate').html('');
-		}
-	
-	
-		 function clickRegister(){
-			var babyNo = $('#babyNo').val(); 
-			var diseaseNum = $('#diseaseNum').val();
-			var vaccineType = $('#vaccineType').val();
-			var vaccineCheck = $("input[type=radio][name=vaccineCK]:checked").val();
-			var checkdate = $("#checkdate").val();
-			var memo = $("#memo").val();
-		
-			var sendData = {
-					"babyNo":babyNo,
-					"diseaseNum": diseaseNum,
-					"vaccineCheck":vaccineCheck,
-					"checkdate": checkdate,
-					"vaccineType":vaccineType,
-					"memo":memo
-			};
-		
-			$.ajax({
-				url:"registerCheck",
-				method: "get",
-				data:sendData,
-				success:function(data){
-					alert('등록');
-					document.getElementById('vaccineRegisterModalLight').style.display='none';
-					document.getElementById('vaccineRegisterModalFade').style.display='none';
-					location.reload();
-				}
+	 $('#firstCity').on('change',function(){
+		var brtcCd = $('#firstCity').val();
+		$.ajax({
+				url:'SearchSecondCity',
+				method:'get',
+				data:{'brtcCd':brtcCd},
+				success:secondCityOutput
 			});
 		
-		} 
+		}); 
 	
-		function clickCancle(){
-			document.getElementById('vaccineRegisterModalLight').style.display='none';
-			document.getElementById('vaccineRegisterModalFade').style.display='none';
-		} 
+	$('#btn').on('click',btnClick);
 	
-		function infoPopup(diseaseNum){
-		
-		 	$.ajax({
-				url:'diseaseDetail',
-				data:{'diseasenum':diseaseNum},
-				success:diseaseDetailOutput
-			});
-		
-			document.getElementById('light').style.display='block';
-			document.getElementById('fade').style.display='block'; 
-		
-		}
+	});//$(function
 	
-		function diseaseDetailOutput(resp){
+	function btnClick(){
+		searchHospital(0);
+	};
+	
+	function secondCityOutput(resp){
+		var result = '<option selected disabled="disabled">시/군/구</option>';
+		$.each(resp,function(index,item){
+			result += '<option value="'+item.cityCode+'">'+item.cityName+'</option>';
+		});
+		
+		$('#secondCity').html(result);
+	}//secondCityOutput
+	
+	function hospitalOutput(resp){
+		var result = '<thead><tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr></thead>';
+			result += '<tbody>';
 			
-			var result = '<h4>'+resp.diseasename+'</h4><br>';
-				result += '<pre style="font-size: 12pt;" id="testcont"></pre>';
+			$.each(resp.vhList,function(index,item){
+				var name = "'" + item.orgnm + "'";
+				var addr = "'" + item.orgAddr + "'";
+				var tel = "'" + item.orgTlno + "'";
+				
+				result +='<tr onclick="javascript:sendHospital('+name+','+addr+','+tel+');">';
+				result += '<td>'+item.orgnm+'</td>';
+				result += '<td>'+item.orgTlno+'</td>';
+				result += '<td id="hospitalAddr">'+item.orgAddr+'</td></tr>';
+			});
+			result += '</tbody>';
+			
 		
-	
-			$('#diseaseDetailDiv').html(result);
-			$('#testcont').html(resp.diseasecontent);
+		$('#vaccineHospital').html(result);
+		
+		var paging="";
+		for(var i=0;i<((Number(resp.totalCount)+15-1)/15)-1;i++){
+			if(resp.page==i+1){
+				paging += '<b><a href="javascript:searchHospital('+i+')" style="color:#FFA600;">'+(i+1)+'</a></b>&nbsp;&nbsp;';
+			}else{
+				paging += '<a href="javascript:searchHospital('+i+')" style="color: #84B8FF;">'+(i+1)+'</a>&nbsp;&nbsp;';	
+			}
+			$('#paging').html(paging);
 		}
+		
+		window.scrollTo(0,0);
+	}
+	
+	function searchHospital(p){
+		var brtcCd = $('#firstCity').val();
+		var sggCd = $('#secondCity').val();
+		var page = p+1;
+		
+		if(sggCd==null){
+			alert('시/군/구 를 선택해주세요');
+			return;
+		}
+		
+		$.ajax({
+			url:'Searchhospital',
+			method:'get',
+			data:{'brtcCd':brtcCd, 'sggCd':sggCd, 'page':page},
+			success:hospitalOutput
+		});
+	}
+	
+	function sendHospital(name, addr, tel){
+		alert(name);
+		alert(addr);
+		alert(tel);
+		
+		location.href='sendHospital?orgnm='+name+'&orgTlno='+tel+'&orgAddr='+addr;
+	}; 
 
 </script>
-	
+		
+		
 		<title>육아서포트페이지</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -118,6 +106,7 @@
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
 		<link href="./resources/css/forVaccine/vaccine.css" rel="stylesheet">
+		
 	</head>
 	<body>
 	<form id='home' action='./' method='get'>
@@ -189,8 +178,7 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
-	          
-	          
+	         
 	          <li class="sub-menu">
 	            <a class="active" href="#">
 	              <i class="fa fa-medkit fa_left"></i>
@@ -243,133 +231,62 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 예방접종</h3>
+        <h3><i class="fa fa-angle-right"></i> 국가예방접종 지정 의료기관</h3>
         <div class="row mt">
           <div class="col-lg-12">
-            <!-- <p>아이를 선택해 주세요</p> -->
-           
-            <form id="searchForm" action="vaccineForm" method="get">
-				<select style="height:20px;" size="1" id="babyNo" name="babyNo" onchange="selectSubmit()">
-					<option selected disabled="disabled">아이선택</option>
-					<c:forEach var="baby" items="${babyList}">
-						<option value="${baby.babyNo}" ${baby.babyNo == babyNo ? 'selected' : ''}>${baby.babyName}</option>
-					</c:forEach>
-				</select>
-				&nbsp;&nbsp;&nbsp;<span style="font-size: 18px;"> * 아이를 선택해주세요.</span>
-			</form>
+            <!-- <p>Place your content here.</p> -->      
+			<select style="height:33px;" size="1" id="firstCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
+				<option selected disabled="disabled">시/도</option>
+					<c:forEach var="list" items="${list}">
+				<option value="${list.cityCode}">${list.cityName}</option>
+				</c:forEach>
+			</select>
+              
+              &nbsp;
+              
+              <select style="height:33px;" size="1" id="secondCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
+              	<option selected disabled="disabled">시/군/구</option>
+              </select>
+				
+				&nbsp;&nbsp;
+				<!-- <input id="btn" type="button" value="조회"> -->
+				<button id="btn" type="button" class="btn btn-info">조회</button>
+				
+				<br/><br/>
+				
+				<!-- <h4><i class="fa fa-angle-right"></i> Hover Table</h4> -->
+              <!-- <hr> -->
+              <table class="table table-hover" id="vaccineHospital">
+              	<tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr>
+              </table>
+              
+              
 
+				<div id="paging" class="paging"></div>
+				
+				<hr>
+				
+				<h4>어린이 국가예방접종 지정 의료기관이란?</h4>
+				<p>어린이 국가예방접종 사업에 참여하여 예방접종비용을 지원받을 수 있는 의료기관입니다.
+				</p>
+				<p>의료기관에 따라 접종 가능한 백신 종류가 다를 수 있으므로, 
+				보호자는 방문 전에 지정 의료기관에서 접종 가능한 백신종류를 확인 후 방문하시기 바랍니다.
+				</p>
 	
-	<table class="table table-hover">
-                 <!-- <h4><i class="fa fa-angle-right"></i> Hover Table</h4> 
-                 <hr>  -->
-                <thead>
-                   <!-- <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                  </tr>  -->
-                </thead>
-                <tbody>
-                
-                <c:if test="${babyNo==0}">
-                	<c:forEach var="vaccine" items="${diseaseList}">
-						<tr>
-							<td>
-								<img src="./resources/image/beforeVaccine.png">
-							</td>
-				
-							<td>
-								<a href="javascript:registerPopup()">
-									${vaccine.diseasename}<br>
-									${vaccine.vaccinetype}<br>
-									<br>
-									<br>
-									국가예방접종
-								</a>
-							</td>
-				
-							<td>
-								<a href="javascript:infoPopup(${vaccine.diseasenum})">질병상세정보</a>
-							</td>
-						</tr>
-					</c:forEach>
-                </c:if>
-                
-                
-                  <c:forEach var="vaccine" items="${vaccineList}">
-			<tr>
-				<td>
-				<c:if test="${vaccine.vaccineCheck == 'Y'}">
-				<img src="./resources/image/afterVaccine.png">
-				</c:if>
-				<c:if test="${vaccine.vaccineCheck != 'Y'}">		
-				<img src="./resources/image/beforeVaccine.png">
-				</c:if>
-				</td>
-				
-				<td>
-				<a href="javascript:registerPopup(${vaccine.babyNo},${vaccine.diseaseNum},'${vaccine.diseaseName}','${vaccine.vaccineType}')">
-					${vaccine.diseaseName}<br>
-					${vaccine.vaccineType}<br>
-					권장일: ${vaccine.vaccineDate}<br>
-					접종일: ${vaccine.checkDate}<br>
-					국가예방접종
-				</a>
-				</td>
-				
-				<td>
-					<a href="javascript:infoPopup(${vaccine.diseaseNum})">질병상세정보</a>
-				</td>
-			</tr>
-		</c:forEach>
-                </tbody>
-              </table>		
+			<!-- <div class="col-md-12 mt"> -->
+            
+            <!-- <div class="content-panel"> -->
+              
+                  
 			
-			
-			<!-- 예방접종 등록 모달 -->
-			<div id="vaccineRegisterModalLight" class="white_content">
-				<button type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
-				 onclick = "document.getElementById('vaccineRegisterModalLight').style.display='none';document.getElementById('vaccineRegisterModalFade').style.display='none'">
-				&times;</button>
-				
-				<div id="vaccineRegisterDiv">
-					
-				</div>
-			
-				<!-- <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">닫기</a> -->
-			</div>
-		
-        	<div id="vaccineRegisterModalFade" class="black_overlay"></div>
-			
-			
-			
-			<!-- diseaseContent 모달 -->
-			<div id="light" class="white_content">
-				<button type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
-				 onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
-				&times;</button>
-				
-				<div id="diseaseDetailDiv">
-					
-				</div>
-			
-				<!-- <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">닫기</a> -->
-			</div>
-		
-        	<div id="fade" class="black_overlay"></div>
-			
-			
-			
-	
+              
+  
           </div>
         </div>
       </section>
       <!-- /wrapper -->
     </section>
     <!-- /MAIN CONTENT -->
-    
-    	
-    
     <!--main content end-->
     <!--footer start-->
    

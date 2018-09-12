@@ -2,21 +2,28 @@
 		// 맵을 생성합니다. 
 		createMap();
 		
-		if(hospitalAddr!=""){
-			selectedHospital(hospitalAddr);
+		if(hospital.length>0){
+			console.log('객채받음');
+			
+			selectedHospital(hospital.Addr);
 		}else{
 			//접속위체의 좌표값을 통해 초기 병원 정보를 가져옵니다.
+			console.log('초기화');
 			init();
 		}
 		
-		resetPostion.addEventListener("click",init)
-		.addEventListener("hover",resetAnimation)
+		/*resetPostion.addEventListener("click",init)
+		.addEventListener("hover",resetAnimation)*/
 	
 		
 	});//DOMContentLoaded 완료시 javascript 로드
 	
-	//예방접종 페이지에서 주소가 넘어왔는지 확인
-	var hospitalAddr = document.querySelector("#hospitalAddr").value;
+	//예방접종 페이지에서 객체가 넘어왔는지 확인
+	var hospital = {
+			Name: document.querySelector("#hospitalName").value,
+			Tel:document.querySelector("#hospitalTel").value,
+			Addr:document.querySelector("#hospitalAddr").value
+	}
 	// 지도를 담을 자료형
 	var map='';
 	//위치정보용 마커
@@ -175,7 +182,7 @@
 		var geocoder = new daum.maps.services.Geocoder();
 		
 		// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-	
+		console.log(keyword);
 		geocoder.addressSearch(keyword, function(result, status) {
 			console.log(result);
 			// 정상적으로 검색이 완료됐으면 
@@ -186,7 +193,40 @@
 				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				map.setCenter(coords);
 		            
-				getHostpital(result[0].y, result[0].x);
+				if(hospitalAddr!=""){
+					// 마커가 표시될 위치입니다 
+					var markerPosition  = new daum.maps.LatLng(result[0].y, result[0].x); 
+					// 마커를 생성합니다
+					var	selectedmarker = new daum.maps.Marker({
+						position: markerPosition,
+						clickable: true 
+					});
+					// 마커가 지도 위에 표시되도록 설정합니다
+					selectedmarker.setMap(map);
+					
+					var message	='<div style="padding:5px;">';
+						message +='<div>'+"병 원이름 : "+hospital.Name+'</div>'
+						message +='<div>'+"전화 번호 : "+hospital.Tel+'</div>'
+						message +='<div>'+"병원 주소 : "+hospital.Addr+'</div>'
+						message +='</div>'
+					
+					var iwContent = message, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+						iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+					// 인포윈도우를 생성합니다
+					var infowindow = new daum.maps.InfoWindow({
+						content : iwContent,
+						removable : iwRemoveable
+					});
+
+					// 마커에 클릭이벤트를 등록합니다
+					daum.maps.event.addListener(selectedmarker, 'click', function() {
+					// 마커 위에 인포윈도우를 표시합니다
+					infowindow.open(map, selectedmarker);  
+					});
+				}else{
+					getHostpital(result[0].y, result[0].x);
+				}
 		            
 			} else if(result.length==0){
 				alert("찾을수 없는 장소입니다. 상세하게 입력해주세요")

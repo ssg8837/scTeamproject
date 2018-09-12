@@ -34,9 +34,9 @@ public class HomeController
 	
 	private static final String UPLOADPATH = "C://FileRepo//profilePic"; //프로필사진 저장용
 	
+	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) 
-	{
+	public String home(Model model) {
 		Object loginNo=httpSession.getAttribute("loginNo");
 		
 		if(loginNo != null ) {
@@ -49,16 +49,44 @@ public class HomeController
 		return "home";
 	}
 	
-	//로그인 페이지(이동)
+	//회원가입+로그인 페이지(이동)
 	@RequestMapping(value = "/openLogin", method = RequestMethod.GET)
-	public String openLogin() 
-	{
+	public String openLogin() {
 		return "login";
 	}
+	
+	//회원가입(기능)
+	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
+	public @ResponseBody String insertNewAccount(BS_User user) {
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+		if(mapper.countUser(user.getUserId())!=0)
+			return "false";
+		user.setUserType("n");
+		
+		mapper.insertUser(user);
+		return "true";
+	}
+	/*
+	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
+	public String insertNewAccount(Model model,BS_User user) 
+	{
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+		user.setUserType("n");
+		mapper.insertUser(user);
+		return home(model);
+	}
+	*/
+	//사진 저장이름 생성
+	public String savedName(MultipartFile uploadfile) {
+		UUID uuid = UUID.randomUUID();
+		String savedName = uuid+""+uploadfile.getOriginalFilename();
+			
+		return savedName;
+	}
+
 	//로그인-AJax용 코드
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html;charset=utf8")
-	public @ResponseBody String login( String userid, String userpwd) 
-	{
+	public @ResponseBody String login( String userid, String userpwd) {
 		//response.setContentType("text/html; charset=UTF-8");
 		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
 		HashMap<String, String> userMap=new HashMap<String,String>();
@@ -95,46 +123,16 @@ public class HomeController
 		return home(model);
 	}
 	*/
-	//회원가입(기능)
-	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
-	public @ResponseBody String insertNewAccount(BS_User user) 
-	{
-		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
-		if(mapper.countUser(user.getUserId())!=0)
-			return "false";
-		user.setUserType("n");
-		
-		mapper.insertUser(user);
-		return "true";
-	}
-	/*
-	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
-	public String insertNewAccount(Model model,BS_User user) 
-	{
-		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
-		user.setUserType("n");
-		mapper.insertUser(user);
-		return home(model);
-	}
-	*/
-	//사진 저장이름 생성
-	public String savedName(MultipartFile uploadfile) {
-		UUID uuid = UUID.randomUUID();
-		String savedName = uuid+""+uploadfile.getOriginalFilename();
-			
-		return savedName;
-	}
 	//로그아웃(기능)
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(Model model) 
-	{
+	public String logout(Model model) {
 		httpSession.invalidate();
 		return "home";
 	}
 
 	
 	
-	
+	/*---------------------------------------------------------------------------------------------------------------------*/
 	
 	
 	

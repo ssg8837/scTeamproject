@@ -21,6 +21,7 @@ import com.scmaster.mapper.AlarmMapper;
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.vo.BS_Alarm;
 import com.scmaster.vo.BS_Baby;
+import com.scmaster.vo.BS_User;
 import com.scmaster.vo.Cal_Event;
 import com.scmaster.vo.KeyboardVO;
 
@@ -31,36 +32,15 @@ public class AlarmController {
 	@Autowired SqlSession sqlSession;
 	@Autowired HttpSession httpSession;
 	
-	/*
+
 	@RequestMapping(value = "/alarm_OpenCalendar", method = RequestMethod.GET)
 	public String alarm_OpenCalendar(Model model) 
 	{
-		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
-		MainMapper mainMapper=sqlSession.getMapper(MainMapper.class);
+		//프로필사진 불러오기
 		Object loginNo=httpSession.getAttribute("loginNo");
-		ArrayList<BS_Alarm> alarmList= new ArrayList<BS_Alarm>();
-		ArrayList<String> nameList =new ArrayList<String>();
-		if(loginNo!=null)
-		{
-			ArrayList<BS_Baby> babyList=mainMapper.selectBabyList((Integer)loginNo);
-			for(BS_Baby item : babyList)	
-			{
-				int babyNum=item.getBabyNo();
-				alarmList.addAll(alarmMapper.selectBabyAlarmList(babyNum));
-			}
-			for(BS_Alarm item : alarmList)
-			{
-				nameList.add(mainMapper.selectBaby(item.getBabyNo()).getBabyName());
-			}
-		}
-		model.addAttribute("alarmList", alarmList);
-		model.addAttribute("nameList", nameList);
-		return "calendar";
-	}
-	*/
-	@RequestMapping(value = "/alarm_OpenCalendar", method = RequestMethod.GET)
-	public String alarm_OpenCalendar() 
-	{
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
 		
 		return "calendar";
 	}
@@ -83,6 +63,12 @@ public class AlarmController {
 		}
 		model.addAttribute("noList", noList);
 		model.addAttribute("nameList", nameList);
+		
+		//프로필사진 불러오기
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
+		
 		return "newAlarm";
 	}
 	
@@ -116,7 +102,7 @@ public class AlarmController {
 			alarmMapper.insertAlarm(alarm);
 			break;
 		}
-		return alarm_OpenCalendar();
+		return alarm_OpenCalendar(model);
 	}
 	
 	@RequestMapping(value = "/alarm_OpenChoose", method = RequestMethod.POST)
@@ -148,6 +134,12 @@ public class AlarmController {
 		}
 		model.addAttribute("noList", noList);
 		model.addAttribute("nameList", nameList);
+		
+		//프로필사진 불러오기
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
+				
 		return "modifyAlarm";
 	}
 	
@@ -182,7 +174,7 @@ public class AlarmController {
 			alarmMapper.updateAlarm(alarm);
 			break;
 		}
-		return alarm_OpenCalendar();
+		return alarm_OpenCalendar(model);
 	}
 	
 	//alarm_Delete
@@ -191,7 +183,7 @@ public class AlarmController {
 	{
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		alarmMapper.deleteAlarm(alarmNo);
-		return alarm_OpenCalendar();
+		return alarm_OpenCalendar(model);
 	}
 	
 	@RequestMapping(value = "/alarm_load",method = RequestMethod.POST)

@@ -76,9 +76,23 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit">
+	          		<c:if test='${sessionScope.loginImg != null }'>
+		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
+		          	</c:if>
+		          	<c:if test='${sessionScope.loginImg == null }'>
+		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
+		          	</c:if>
+	          	</a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
+	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
+        		<li class="sub-menu">
+	            <a href="openNewBaby">
+	              <i class="fa fa-heart fa_left"></i>
+	              <span>아이 정보</span>
+	            </a>
+	          </li>
 	          <li class="sub-menu">
 	            <a href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
@@ -99,10 +113,10 @@
                <ul class="sub" style="display: block;">
                     <li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
                    <li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
-                 </ul>
+               </ul>
              </li>
 	          <li class="sub-menu">
-	            <a href="hospital_Test">
+	            <a class="active" href="hospital_Test">
 	              <i class="fa fa-hospital-o fa_left"></i>
 	              <span>병원찾기</span>
 	              </a>
@@ -114,13 +128,13 @@
 	              </a>
 	          </li>
 	           <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="babyBook">
 	              <i class="fa fa-book fa_left"></i>
 	              <span>다이어리</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>
@@ -146,7 +160,9 @@
 			<div class="row mt">
 				<div class="col-lg-12">
 					<div class="map_wrap"><!-- 지도 레이아웃을 위한 Wrapper  -->
-						<input id="hospitalAddr" type="hidden" value="${hospitalAddr}"/><!-- 예방접종 예방 병원 객채  -->
+						<input id="hospitalAddr" type="hidden" value="${hospital.address}"/><!-- 예방접종 예방 병원 객채  -->
+						<input id="hospitalName" type="hidden" value="${hospital.name}"/><!-- 예방접종 예방 병원 객채  -->
+						<input id="hospitalTel" type="hidden" value="${hospital.phone}"/><!-- 예방접종 예방 병원 객채  -->
 						<!-- 지도 객채를 담을 div 태그  -->
 						<div id="map">
 							<div class="reset_icon_wrap"><!-- 위치정보 초기화 -->

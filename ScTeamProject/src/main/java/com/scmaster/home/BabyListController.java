@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.scmaster.mapper.AlarmMapper;
 import com.scmaster.mapper.MainMapper;
+import com.scmaster.vo.BS_Alarm;
 import com.scmaster.vo.BS_Baby;
 import com.scmaster.vo.BS_User;
 
@@ -39,7 +41,7 @@ public class BabyListController {
 			model.addAttribute("user",user);
 		}
 		
-		return "newBaby";
+		return "babyList";
 	}
 	//아이 나이 계산
 	@RequestMapping(value = "/babyAge", method = RequestMethod.GET)
@@ -60,9 +62,14 @@ public class BabyListController {
 			if(loginNo!=null)
 			{
 				MainMapper mapper= sqlSession.getMapper(MainMapper.class);
-				
 				BS_Baby baby = mapper.selectBaby(babyNo);
 				model.addAttribute("baby", baby);
+				
+				AlarmMapper mapperA = sqlSession.getMapper(AlarmMapper.class);
+				ArrayList<BS_Alarm> list = mapperA.selectBabyAlarmList(babyNo);
+				model.addAttribute("list", list);
+				
+				System.out.println(list);
 				
 				//프로필사진 불러오기(사이드바)
 				BS_User user=mapper.myAccount((Integer)loginNo);
