@@ -111,3 +111,24 @@ cursor: pointer;
 {
 	height:auto;
 }
+
+.replyDiv
+{
+	display:inline-block;
+	width:100%;
+}
+
+.replyProfile
+{
+	display:inline-block;
+	text-align:center;
+	width:20%;
+	height:40;
+}
+.replyContent
+{
+	top:50%;
+	display:inline-block;
+	width:75%;
+	height:40;
+}

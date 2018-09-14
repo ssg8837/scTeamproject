@@ -9,7 +9,7 @@ public class SNS_Reply {
 	private String content;
 	private int parent_Rply;
 	private String writeDate;
-	
+		
 	public SNS_Reply() {
 		
 	}

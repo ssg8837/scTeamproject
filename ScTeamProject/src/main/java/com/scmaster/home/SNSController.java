@@ -48,7 +48,6 @@ public class SNSController {
 		Object loginNo=httpSession.getAttribute("loginNo");
 		ArrayList<SNS> snsList=null;
 		ArrayList<Integer> likelyList=new ArrayList<Integer>();
-		ArrayList<SNS_Reply> rplyList=new ArrayList<SNS_Reply>();
 		if(loginNo==null)
 		{
 			snsList=snsMapper.selectPublicSNS();

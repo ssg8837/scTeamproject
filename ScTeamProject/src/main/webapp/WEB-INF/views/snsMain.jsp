@@ -197,8 +197,19 @@
 	                    <p>${item.content } </p>
 	                  </div>
 	                  <c:forEach var="rply" items="${item.replyList}" varStatus="stax">
-	                  	<div>
-	                  		<p>${rply.content }</p>
+	                  	<div class="replyDiv">
+	                  		<div class="replyProfile">
+					          	<a href="#">
+						          	<c:if test='${sessionScope.loginImg != null }'>
+						          	<img src="getUserImage?userNo=${rply.userNo}" class="img-circle" width="35" height="35">
+						          	</c:if>
+						          	<c:if test='${sessionScope.loginImg == null }'>
+						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
+						          	</c:if>
+					          	</a><br>${sessionScope.loginNick }
+	                  		</div>
+	                  		<div class="replyContent">
+	                  		<p>${rply.content }</p></div>
 	                  	</div>
 	                  </c:forEach>
 	                  <div class="inputReply">
