@@ -30,3 +30,54 @@ function showImages(nowNo)
 	var imageUrl='./getImageSns?fullname='+fullname;
 	window.open(imageUrl,'이미지 보기');
 }
+
+function like(nowNo)
+{
+	var heart="#heart_"+nowNo;
+	if($(heart).hasClass('fa-heart-o'))
+	{
+		
+		$.ajax({
+            url:'./likePlus',
+            type:"POST",
+            data:{snsNo: nowNo},
+            success:function(data){
+            	$(heart).removeClass('fa-heart-o');
+        		$(heart).addClass('fa-heart');
+        		$("#likelyNum_"+nowNo).text(data);
+        		
+            }
+        });
+	}
+	else if($(heart).hasClass('fa-heart'))
+	{
+		
+		$.ajax({
+            url:'./likeMinus',
+            type:"POST",
+            data:{snsNo: nowNo},
+            success:function(data){
+        		$(heart).removeClass('fa-heart');
+        		$(heart).addClass('fa-heart-o');
+        		$("#likelyNum_"+nowNo).text(data);	
+        		
+            }
+        });
+	}
+}
+
+function insertContent(nowNo)
+{
+	var inputReply=$("#inputReply_"+nowNo).val();
+	$.ajax({
+        url:'./insertNewReply',
+        type:"POST",
+        data:{snsNo: nowNo,
+        	content:inputReply
+        	},
+        success:function(data){	
+        	alert(data);
+    		
+        }
+    });
+}

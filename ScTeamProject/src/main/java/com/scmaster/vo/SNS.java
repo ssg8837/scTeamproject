@@ -1,12 +1,14 @@
 package com.scmaster.vo;
 
+import java.util.ArrayList;
+
 public class SNS {
 	private int SNSNo; 
 	private int userNo;
 	private String userNick;
 	private int permission;
 	private String content;
-	private int likely;
+	private int likey;
 	private int photoCount;
 	private String photo_1;
 	private String photo_2;
@@ -14,12 +16,14 @@ public class SNS {
 	private String photo_4;
 	private String writeDate;
 	
+	private ArrayList<SNS_Reply> replyList;//jsp를 위한 arrayList mybatis에서는 쓰지 않음. #생성자에 넣지 말것!
+	
 	
 	public SNS() {
 	}
 
 
-	public SNS(int sNSNo, int userNo, String userNick, int permission, String content, int likely, int photoCount,
+	public SNS(int sNSNo, int userNo, String userNick, int permission, String content, int likey, int photoCount,
 			String photo_1, String photo_2, String photo_3, String photo_4, String writeDate) {
 		super();
 		SNSNo = sNSNo;
@@ -27,7 +31,7 @@ public class SNS {
 		this.userNick = userNick;
 		this.permission = permission;
 		this.content = content;
-		this.likely = likely;
+		this.likey = likey;
 		this.photoCount = photoCount;
 		this.photo_1 = photo_1;
 		this.photo_2 = photo_2;
@@ -87,13 +91,13 @@ public class SNS {
 	}
 
 
-	public int getLikely() {
-		return likely;
+	public int getLikey() {
+		return likey;
 	}
 
 
-	public void setLikely(int likely) {
-		this.likely = likely;
+	public void setLikely(int likey) {
+		this.likey = likey;
 	}
 
 
@@ -155,5 +159,21 @@ public class SNS {
 	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
 	}
+
+
+	public ArrayList<SNS_Reply> getReplyList() {
+		return replyList;
+	}
+
+
+	public void setReplyList(ArrayList<SNS_Reply> replyList) {
+		this.replyList = replyList;
+	}
+
+
+	public void setLikey(int likey) {
+		this.likey = likey;
+	}
+	
 	
 }

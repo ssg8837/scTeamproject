@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT SNSNO, USERNO, USERNICK,PERMISSION ,CONTENT, LIKEY, PHOTOCOUNT, PHOTO_1,PHOTO_2,PHOTO_3,PHOTO_4, TO_CHAR(WRITEDATE,'YYYY-MM-DD HH24:MI') AS WRITEDATE
 		FROM SNS
 		WHERE PERMISSION = 1
+		ORDER BY SNSNO DESC
 	</select>
 	
 	<select id="selectFriendList" resultType="Integer">
@@ -26,12 +27,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(USERNO IN (SELECT FRIEND
 		FROM FRIEND
 		WHERE USERNO=#{loginNo}) AND PERMISSION = 0)
+		ORDER BY SNSNO DESC
 	</select>
 	
 	<insert id="insertSNS" parameterType="SNS">
 		INSERT INTO SNS(SNSNO, USERNO, USERNICK,PERMISSION ,CONTENT, LIKEY, PHOTOCOUNT, PHOTO_1,PHOTO_2,PHOTO_3,PHOTO_4, WRITEDATE)
 		VALUES
 		(SNS_SEQ.NEXTVAL, #{userNo},#{userNick}, #{permission}, #{content}, 0,#{photoCount}, #{photo_1},#{photo_2},#{photo_3},#{photo_4}, SYSDATE)
+	</insert>
+	
+	<select id="selectLikely" parameterType="Likely" resultType="Integer">
+		SELECT COUNT(SNSNO)
+		FROM LIKELY
+		WHERE USERNO=#{userNo} AND SNSNO=#{snsNo}
+	</select>
+	<insert id="insertLikely" parameterType="Likely">
+		INSERT INTO LIKELY(USERNO, SNSNO) VALUES (#{userNo}, #{snsNo})
+	</insert>
+	<delete id="deleteLikely" parameterType="likely">
+		DELETE FROM LIKELY WHERE USERNO=#{userNo} AND SNSNO=#{snsNo}
+	</delete>
+	
+	<select id="selectCountLikely" parameterType="likely" resultType="Integer">
+		SELECT LIKEY
+		FROM SNS
+		WHERE SNSNO=#{snsNo}
+	</select>
+	
+	<update id="updateCountLikely" parameterType="hashmap">
+		UPDATE SNS 
+		SET LIKEY=LIKEY+#{plusMinus}
+		WHERE SNSNO=#{snsNo}
+	</update>
+	
+	<select id="selectReply" parameterType="Integer" resultType="SNS_Reply">
+		SELECT RPLYNO, SNSNO,USERNO, USERNICK ,CONTENT , PARENT_RPLY, TO_CHAR(WRITEDATE,'YYYY-MM-DD HH24:MI') AS WRITEDATE
+		FROM SNS_REPLY
+		WHERE SNSNO = #{snsNo}
+		ORDER BY RPLYNO DESC
+	</select> 
+	
+	<insert id="insertReply" parameterType="SNS_Reply" >
+		INSERT INTO SNS_REPLY (RPLYNO, SNSNO,USERNO, USERNICK ,CONTENT , PARENT_RPLY, WRITEDATE)
+		VALUES (SNS_RPLY_SEQ.NEXTVAL, #{snsNo}, #{userNo}, #{userNick} ,#{content}, #{parent_Rply}, SYSDATE) 
 	</insert>
 	
 	

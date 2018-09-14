@@ -167,16 +167,18 @@
               </c:if>
               <c:if test="${fn:length(snsList) !=0 }">
               
-              <c:forEach var="item" items="${snsList}">
+              <c:forEach var="item" items="${snsList}" varStatus="sta">
               
-				   <div class="col-lg-6 col-md-6 col-sm-6 mb">
+				   <div class="col-lg-6 col-md-6 col-sm-12 mb">
 	                <div class="content-panel pn">
+	                <div >
 	                <c:if test="${item.photoCount!=0 }">
 	                	<a class="prev" onclick="plusSlides(-1,${item.SNSNo })">&#10094;</a>
 						<a class="next" onclick="plusSlides(1,${item.SNSNo })">&#10095;</a>
-	                  <div id="sns-bg" class="bg_${item.SNSNo }" onclick="showImages(${item.SNSNo })" style="background: url(./getImageSns?fullname=${item.photo_1}) no-repeat center center; background-size:contain; min-height: 80%">
-		                  <div class="sns-title">${item.userNick }님이  ${item.writeDate}에 작성하신 글</div>
-						  
+						<c:if test="${likelyList[sta.index]==0 }"><div class="likely" ><a id="heart_${item.SNSNo }" class="fa red fa-heart-o" onclick="like(${item.SNSNo })"></a><span id="likelyNum_${item.SNSNo }">${item.likey }</span></div></c:if>
+						<c:if test="${likelyList[sta.index]==1 }"><div class="likely" ><a id="heart_${item.SNSNo }" class="fa red fa-heart" onclick="like(${item.SNSNo })"></a><span id="likelyNum_${item.SNSNo }">${item.likey }</span></div></c:if>
+						<div class="sns-title">${item.userNick }님이  ${item.writeDate}에 작성하신 글</div>
+	                  <div id="sns-bg" class="bg_${item.SNSNo }" onclick="showImages(${item.SNSNo })" style="background: url(./getImageSns?fullname=${item.photo_1}) no-repeat center center; background-size:contain; min-height: 200px">
 						  <input type="hidden" id="count_${item.SNSNo }" value="${item.photoCount }">
 						  <input type="hidden" id="countNow_${item.SNSNo }" value="1">
 						  <input type="hidden" id="photo_1_${item.SNSNo }" value="${item.photo_1 }">
@@ -190,10 +192,20 @@
 	                    <div class="sns-title">${item.userNo }</div>
 	                  </div>
 	                  </c:if>
-	                  
+	                  </div>
 	                  <div class="blog-text">
 	                    <p>${item.content } </p>
 	                  </div>
+	                  <c:forEach var="rply" items="${item.replyList}" varStatus="stax">
+	                  	<div>
+	                  		<p>${rply.content }</p>
+	                  	</div>
+	                  </c:forEach>
+	                  <div class="inputReply">
+	                    <textarea id="inputReply_${item.SNSNo }"  style="width:100%; resize:none;"></textarea><br>
+	                    <div class="reply_div"> <button type="button" class="btn btn-round btn-info" onclick="insertContent(${item.SNSNo });" id="replyButton_${item.SNSNo }">댓글 달기</button></div>
+	                  </div>
+	                  
 	                </div>
 	             </div>
 				</c:forEach>
