@@ -45,6 +45,7 @@ public class SNSController {
 	public String openSNS(Model model) 
 	{
 		SNSMapper snsMapper = sqlSession.getMapper(SNSMapper.class);
+		MainMapper mainMapper = sqlSession.getMapper(MainMapper.class);
 		Object loginNo=httpSession.getAttribute("loginNo");
 		ArrayList<SNS> snsList=null;
 		ArrayList<Integer> likelyList=new ArrayList<Integer>();
@@ -53,7 +54,21 @@ public class SNSController {
 			snsList=snsMapper.selectPublicSNS();
 			for(SNS item :snsList)
 			{
-				item.setReplyList(snsMapper.selectReply(item.getSNSNo()));
+				ArrayList<SNS_Reply> replyList=snsMapper.selectReply(item.getSNSNo());
+				Object obj_item=mainMapper.selectImg(item.getUserNo());
+				if(obj_item!=null)
+				{
+					item.setImgExist(1);
+				}
+				for(SNS_Reply s : replyList)
+				{
+					Object obj=mainMapper.selectImg(s.getUserNo());
+					if(obj!=null)
+					{
+						s.setImgExist(1);
+					}
+				}
+				item.setReplyList(replyList);
 			}
 		}
 		else
@@ -61,7 +76,21 @@ public class SNSController {
 			snsList=snsMapper.selectSNS((Integer)loginNo);
 			for(SNS item :snsList)
 			{
-				item.setReplyList(snsMapper.selectReply(item.getSNSNo()));
+				ArrayList<SNS_Reply> replyList=snsMapper.selectReply(item.getSNSNo());
+				Object obj_item=mainMapper.selectImg(item.getUserNo());
+				if(obj_item!=null)
+				{
+					item.setImgExist(1);
+				}
+				for(SNS_Reply s : replyList)
+				{
+					Object obj=mainMapper.selectImg(s.getUserNo());
+					if(obj!=null)
+					{
+						s.setImgExist(1);
+					}
+				}
+				item.setReplyList(replyList);
 				Likely temp =new Likely((Integer)loginNo,item.getSNSNo());
 				likelyList.add(snsMapper.selectLikely(temp));
 				model.addAttribute("likelyList", likelyList);

@@ -9,9 +9,11 @@ public class SNS_Reply {
 	private String content;
 	private int parent_Rply;
 	private String writeDate;
-		
+	
+	private int imgExist;
+	
 	public SNS_Reply() {
-		
+		imgExist=0;
 	}
 	
 	public SNS_Reply(int rplyNo,  int snsNo,int userNo,String userNick, String content, int parent_Rply,String writeDate) {
@@ -22,6 +24,7 @@ public class SNS_Reply {
 		this.content = content;
 		this.parent_Rply = parent_Rply;
 		this.writeDate = writeDate;
+		imgExist=0;
 	}
 
 	public int getRplyNo() {
@@ -77,6 +80,14 @@ public class SNS_Reply {
 
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
+	}
+
+	public int getImgExist() {
+		return imgExist;
+	}
+
+	public void setImgExist(int imgExist) {
+		this.imgExist = imgExist;
 	}
 
 	@Override

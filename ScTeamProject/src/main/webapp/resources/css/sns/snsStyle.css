@@ -127,8 +127,23 @@ cursor: pointer;
 }
 .replyContent
 {
-	top:50%;
+	top:10%;
 	display:inline-block;
 	width:75%;
+}
+.titleDiv
+{
+	display:inline-block;
+	width:100%;
+}
+
+.titleProfile
+{
+	display:inline-block;
+	text-align:center;
 	height:40;
+}
+.titleContent
+{
+	display:inline-block;
 }

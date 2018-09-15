@@ -81,3 +81,8 @@ function insertContent(nowNo)
         }
     });
 }
+
+function sentFriend()
+{
+	
+}

@@ -17,15 +17,17 @@ public class SNS {
 	private String writeDate;
 	
 	private ArrayList<SNS_Reply> replyList;//jsp를 위한 arrayList mybatis에서는 쓰지 않음. #생성자에 넣지 말것!
-	
+
+	private int imgExist;
 	
 	public SNS() {
+		imgExist=0;
 	}
 
 
 	public SNS(int sNSNo, int userNo, String userNick, int permission, String content, int likey, int photoCount,
 			String photo_1, String photo_2, String photo_3, String photo_4, String writeDate) {
-		super();
+		imgExist=0;
 		SNSNo = sNSNo;
 		this.userNo = userNo;
 		this.userNick = userNick;
@@ -173,6 +175,15 @@ public class SNS {
 
 	public void setLikey(int likey) {
 		this.likey = likey;
+	}
+
+
+	public int getImgExist() {
+		return imgExist;
+	}
+
+	public void setImgExist(int imgExist) {
+		this.imgExist = imgExist;
 	}
 	
 	

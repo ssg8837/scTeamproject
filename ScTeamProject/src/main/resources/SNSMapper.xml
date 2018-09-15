@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(PERMISSION = 1) OR
 		(USERNO IN (SELECT FRIEND
 		FROM FRIEND
-		WHERE USERNO=#{loginNo}) AND PERMISSION = 0)
+		WHERE USERNO=#{loginNo} AND APPLY="N") AND PERMISSION = 0)
 		ORDER BY SNSNO DESC
 	</select>
 	
@@ -71,6 +71,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO SNS_REPLY (RPLYNO, SNSNO,USERNO, USERNICK ,CONTENT , PARENT_RPLY, WRITEDATE)
 		VALUES (SNS_RPLY_SEQ.NEXTVAL, #{snsNo}, #{userNo}, #{userNick} ,#{content}, #{parent_Rply}, SYSDATE) 
 	</insert>
+	
+	<insert id="applyFriend" parameterType="Friend">
+		INSERT INTO FRIEND(USERNO, FRIENDNO, APPLY)
+		VALUES(#{userNo},#{friendNo},#{apply})
+	</insert>
+	
+	<select id="selectFriend" resultType ="Friend" parameterType="Integer">
+		SELECT USERNO, FRIENDNO, APPLY
+		FROM FRIEND
+		WHERE USERNO=#{userNo}
+	</select>
+	
+	<select id="selectApplyList" resultType ="Friend" parameterType="Friend">
+		SELECT USERNO, FRIENDNO, APPLY
+		FROM FRIEND
+		WHERE USERNO=#{userNo} AND APPLY=#{apply}
+	</select>
+	
+	<update id="updateApply" parameterType="Friend">
+		UPDATE FRIEND 
+		SET APPLY=#{apply}
+		WHERE USERNO=#{userNo}
+	</update>
 	
 	
 </mapper>

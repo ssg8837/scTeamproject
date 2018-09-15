@@ -94,5 +94,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE USERID=#{userId}
 	</select>
 	
+	<select id="selectImg" parameterType="Integer" resultType="Object">
+		SELECT USERSAVEDFILE
+		FROM BS_USER
+		WHERE USERNO=#{userNo}
+	</select>
+	
 	
 </mapper>

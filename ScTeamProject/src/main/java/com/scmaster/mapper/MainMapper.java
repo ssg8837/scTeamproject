@@ -22,4 +22,6 @@ public interface MainMapper {
 	int countUser(String userId);
 	int selectUserById(String userId);
 	
+	Object selectImg(int userNo);
+	
 }
