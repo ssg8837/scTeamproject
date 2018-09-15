@@ -13,6 +13,8 @@ public interface AlarmMapper {
 	
 	void insertAlarm_EndTime(BS_Alarm alarm);
 	
+	void insertAlarm_EndTimeNDetail(BS_Alarm alarm);
+	
 	void insertAlarm_AmountNTEndTime(BS_Alarm alarm);
 	
 	void insertAlarm_All(BS_Alarm alarm);
@@ -23,6 +25,8 @@ public interface AlarmMapper {
 	void updateAlarm_Detail(BS_Alarm alarm);
 	
 	void updateAlarm_EndTime(BS_Alarm alarm);
+	
+	void updateAlarm_EndTimeNDetail(BS_Alarm alarm);
 
 	void updateAlarm_AmountNTEndTime(BS_Alarm alarm);
 	

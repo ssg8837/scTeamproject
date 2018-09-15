@@ -79,8 +79,11 @@ public class AlarmController {
 		int type=alarm.getAlarmType();
 		switch(type)
 		{
-		//모유,젖병,유축 (시간기록,양,디테일 필요)
+		//모유
 		case 1:
+			alarmMapper.insertAlarm_EndTimeNDetail(alarm);
+			break;
+		//젖병,유축 (시간기록,양,디테일 필요)
 		case 2:
 		case 4:
 			alarmMapper.insertAlarm_All(alarm);
@@ -93,13 +96,15 @@ public class AlarmController {
 		case 5:
 			alarmMapper.insertAlarm_Detail(alarm);
 			break;
-		//수면 (시간기록 필요)
-		case 7:
-			alarmMapper.insertAlarm_EndTime(alarm);
-			break;
-		//기타, 목욕
-		default :
+		//목욕
+		case 6:
 			alarmMapper.insertAlarm(alarm);
+			break;
+		//기타, 수면, 디폴트 (시간기록 필요)
+		case 0:
+		case 7:
+		default :
+			alarmMapper.insertAlarm_EndTime(alarm);
 			break;
 		}
 		return alarm_OpenCalendar(model);
@@ -150,8 +155,11 @@ public class AlarmController {
 		int type=alarm.getAlarmType();
 		switch(type)
 		{
-		//모유,젖병,유축 (시간기록,양,디테일 필요)
+		//모유
 		case 1:
+			alarmMapper.updateAlarm_EndTimeNDetail(alarm);
+			break;
+		//젖병,유축 (시간기록,양,디테일 필요)
 		case 2:
 		case 4:
 			alarmMapper.updateAlarm_All(alarm);
@@ -164,13 +172,15 @@ public class AlarmController {
 		case 5:
 			alarmMapper.updateAlarm_Detail(alarm);
 			break;
-		//수면 (시간기록 필요)
-		case 7:
-			alarmMapper.updateAlarm_EndTime(alarm);
-			break;
-		//기타, 목욕
-		default :
+		//목욕
+		case 6:
 			alarmMapper.updateAlarm(alarm);
+			break;
+		//기타, 수면, 디폴트 (시간기록 필요)
+		case 0:
+		case 7:
+		default :
+			alarmMapper.updateAlarm_EndTime(alarm);
 			break;
 		}
 		return alarm_OpenCalendar(model);
@@ -222,12 +232,20 @@ public class AlarmController {
     	            {
     	            case 1:
     	            	str+="모유 : ";
-    	            	str+=item.getAlarmAmount();
-    	            	str+="ml";
+    	            	if(item.getAlarmDetail()==1) {
+    	            		str+="왼쪽";
+    	            	}else if(item.getAlarmDetail()==2) {
+    	            		str+="오른쪽";
+    	            	};	
     	            	event.setColor("#4286f4");
     	            	break;
     	            case 2:
     	            	str+="젖병 : ";
+    	            	if(item.getAlarmDetail()==3) {
+    	            		str+="모유";
+    	            	}else if(item.getAlarmDetail()==4) {
+    	            		str+="분유";
+    	            	};
     	            	str+=item.getAlarmAmount();
     	            	str+="ml";
     	            	event.setColor("#3aff85");
@@ -240,12 +258,21 @@ public class AlarmController {
     	            	break;
     	            case 4:
     	            	str+="유축 : ";
+    	            	if(item.getAlarmDetail()==1) {
+    	            		str+="왼쪽";
+    	            	}else if(item.getAlarmDetail()==2) {
+    	            		str+="오른쪽";
+    	            	};
     	            	str+=item.getAlarmAmount();
     	            	str+="ml";
     	            	event.setColor("#ffe0c9");
     	            	break;
     	            case 5:
-    	            	str+="배소변";
+    	            	if(item.getAlarmDetail()==5) {
+    	            		str+="배변";
+    	            	}else if(item.getAlarmDetail()==6) {
+    	            		str+="소변";
+    	            	}
     	            	event.setColor("#996416");
     	            	break;
     	            case 6:

@@ -37,13 +37,10 @@ function changeSelect()
 	$("#timesSpan").text("일시");
 	var alarmType=$('#alarmType').val();
 	switch (alarmType){
-	//모유,유축
+	//모유
 	case "1" :
-	case "4" :
 		detail+='<span class="input-group-addon">방향</span>';
 		detail+='<select class="form-control" id="alarmDetail" name="alarmDetail"><option value="1">왼쪽</option><option value="2">오른쪽</option></select>';
-		amount+='<span class="input-group-addon">양(ml)</span>';
-		amount+='<input class="form-control " id="alarmAmount" name="alarmAmount"  type="number" value="0">';
 		end+='<div class="input-group date form_datetime_end col-xs-4 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">';
 		end+='<span class="input-group-addon">종료시간</span>';
 		end+='<input class="form-control " type="text" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
@@ -84,16 +81,12 @@ function changeSelect()
 		$("#end").html(end);
 		$('.form_datetime_end').datetimepicker({ language : 'ko' });
 		break;
-	//배소변
-	case "5" :
-		detail+='<span class="input-group-addon">배소변 분류</span>';
-		detail+='<select class="form-control" id="alarmDetail" name="alarmDetail"><option value="5">배변</option><option value="6">소변</option></select>';
-		$("#detail").html(detail);
-		$("#amount").html(amount);
-		$("#end").html(end);
-		break;
-	//수면
-	case "7" :
+	//유축
+	case "4" :
+		detail+='<span class="input-group-addon">방향</span>';
+		detail+='<select class="form-control" id="alarmDetail" name="alarmDetail"><option value="1">왼쪽</option><option value="2">오른쪽</option></select>';
+		amount+='<span class="input-group-addon">양(ml)</span>';
+		amount+='<input class="form-control " id="alarmAmount" name="alarmAmount"  type="number" value="0">';
 		end+='<div class="input-group date form_datetime_end col-xs-4 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">';
 		end+='<span class="input-group-addon">종료시간</span>';
 		end+='<input class="form-control " type="text" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
@@ -104,10 +97,32 @@ function changeSelect()
 		$("#end").html(end);
 		$('.form_datetime_end').datetimepicker({ language : 'ko' });
 		break;
-	//기타, 목욕	
-	default :
+	//배소변
+	case "5" :
+		detail+='<span class="input-group-addon">배소변 분류</span>';
+		detail+='<select class="form-control" id="alarmDetail" name="alarmDetail"><option value="5">배변</option><option value="6">소변</option></select>';
 		$("#detail").html(detail);
 		$("#amount").html(amount);
 		$("#end").html(end);
-	}
+		break;
+	//목욕
+	case 6:
+		$("#detail").html(detail);
+		$("#amount").html(amount);
+		$("#end").html(end);
+		break;
+	//기타, 수면, 디폴트
+	case "0" :
+	case "7" :
+	default :
+		end+='<div class="input-group date form_datetime_end col-xs-4 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">';
+		end+='<span class="input-group-addon">종료시간</span>';
+		end+='<input class="form-control " type="text" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
+		end+='<span class="input-group-addon"><span class="fa fa-calendar"></span></span></div>';
+		$("#timesSpan").text("시작시간");
+		$("#detail").html(detail);
+		$("#amount").html(amount);
+		$("#end").html(end);
+		$('.form_datetime_end').datetimepicker({ language : 'ko' });
+		}
 }

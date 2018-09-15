@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY ALARMTIME ASC
 	</select>
 	
-	<!-- 기타, 목욕 -->
+	<!--목욕 -->
 	<insert id="insertAlarm" parameterType="BS_Alarm" >
 		INSERT INTO BS_ALARM (ALARMNO, BABYNO, USERNO, ALARMTITLE, ALARMTYPE, ALARMTIME)
 		VALUES (BS_ALARMSEQ.NEXTVAL,
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
-	<!-- 수면 (시간기록) -->
+	<!-- 기타, 수면 (시간기록) -->
 	<insert id="insertAlarm_EndTime" parameterType="BS_Alarm" >
 		INSERT INTO BS_ALARM (ALARMNO, BABYNO, USERNO, ALARMTITLE, ALARMTYPE, ALARMTIME, ENDTIME)
 		VALUES (BS_ALARMSEQ.NEXTVAL,
@@ -46,6 +46,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{userNo},
 		#{alarmTitle},
 		#{alarmType},
+		TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'),
+		TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
+		)
+	</insert>
+	
+	<!-- 모유(시간기록 + 디테일) -->
+	<insert id="insertAlarm_EndTimeNDetail" parameterType="BS_Alarm" >
+		INSERT INTO BS_ALARM (ALARMNO, BABYNO, USERNO, ALARMTITLE, ALARMTYPE, ALARMDETAIL, ALARMTIME, ENDTIME)
+		VALUES (BS_ALARMSEQ.NEXTVAL,
+		#{babyNo},
+		#{userNo},
+		#{alarmTitle},
+		#{alarmType},
+		#{alarmDetail},
 		TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'),
 		TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
 		)
@@ -90,6 +104,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<update id="updateAlarm_EndTime" parameterType="BS_Alarm" >
 		UPDATE BS_ALARM SET BABYNO=#{babyNo}, ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
+		WHERE ALARMNO = #{alarmNo}
+	</update>
+	<update id="updateAlarm_EndTimeNDetail" parameterType="BS_Alarm" >
+		UPDATE BS_ALARM SET BABYNO=#{babyNo}, ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMDETAIL=#{alarmDetail}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
 		WHERE ALARMNO = #{alarmNo}
 	</update>
 	<update id="updateAlarm_AmountNEndTime" parameterType="BS_Alarm" >
