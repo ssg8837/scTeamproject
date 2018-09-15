@@ -141,7 +141,8 @@ public class SNSController {
 		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
 		BS_User user=mapperM.myAccount((Integer)loginNo);
 		model.addAttribute("user",user);
-		return "snsMain";
+		
+		return openSNS(model);
 	}
 	
 	public String savedName(MultipartFile uploadfile) {

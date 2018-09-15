@@ -408,13 +408,10 @@
         <h3><i class="fa fa-angle-right"></i> 오늘의 날씨</h3>
         <div class="row mt">
           <div class="col-lg-12">
-          	<table>
-				<tr align="right">
-					<td><input type="text" class="search" value="${search}">
+          	<div class="search" >
+          			<input type="text" value="${search}">
 					<input type="button" value="주소검색" class="locationSearch"></td>
-				</tr>
-			</table>
-			</br>
+			</div>
 				<div class="weather"></div>
             	
             	<div class="location"></div>

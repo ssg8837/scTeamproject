@@ -306,7 +306,7 @@
 		<script src="./resources/js/grow/chartjs-plugin-zoom.js"></script>
 		<script src="./resources/js/grow/grow.js"></script>
 		
-		<script type="text/javascript">		
+		<script type="text/javascript">	
 		//시트버튼누르면 페이지새로고침
 		$('.grow.button.sheet').click(function(){	
 			location.reload();
@@ -324,6 +324,7 @@
 			$('.grow_selectBabyDiv').html('');				// 아이선택버튼 날리기
 			$('.grow_selectBabyDiv').html('<c:forEach var="babyList" items="${babyList}"><button id="${babyList.babyName}" value="${babyList.babyNo}"> ${babyList.babyName}</button></c:forEach>');
 		});	
+		
 		//신장 그래프
 		$('#grow_chart_height').click(function(){
 			//캔버스 날렸다가 다시 그리기
@@ -419,7 +420,7 @@
 			
 			var ctx = document.getElementById("grow_canvas").getContext('2d');
 			grow_canvas = new Chart(ctx, chartHeight);
-			
+
 			//버튼 클릭시 그래프 추가
 			$('.grow_selectBabyDiv button').click(function(e){
 				var babyname = e.target.getAttribute('id');
@@ -442,9 +443,16 @@
 								borderWidth: 1,
 								fill: false
 							};
+							
+							//0914 여기서부터 수정
 							//데이터에 아이 성장기록 데이터 추가
 							$.each(responseData, function(idx, val) {
-								newDataset.data.push(val.growheight);
+								if(val == null){
+									newDataset.data.push('NaN');
+								}else{
+									newDataset.data.push(val.growheight);
+								}
+								console.log(val);
 							});
 							//그래프 추가 전에 기존 그래프 날리기
 							for(var i=0; i<chartHeight.data.datasets.length; i++){
@@ -464,8 +472,9 @@
 					}
 				});	
 			
-			});	//그래프추가 end
+			});//그래프추가 end
 		});	
+		
 		//체중그래프
 		$('#grow_chart_weight').click(function(){
 			$('.grow_canvas_container').html(''); 										
@@ -581,7 +590,11 @@
 							};
 							//데이터에 아이 성장기록 데이터 추가
 							$.each(responseData, function(idx, val) {
-								newDataset.data.push(val.growweight);
+								if(val == null){
+									newDataset.data.push('NaN');
+								}else{
+									newDataset.data.push(val.growweight);
+								}
 							});
 							//그래프 추가 전에 기존 그래프 날리기
 							for(var i=0; i<chartWeight.data.datasets.length; i++){
@@ -721,7 +734,11 @@
 							};
 							//데이터에 아이 성장기록 데이터 추가
 							$.each(responseData, function(idx, val) {
-								newDataset.data.push(val.growhead);
+								if(val == null){
+									newDataset.data.push('NaN');
+								}else{
+									newDataset.data.push(val.growhead);
+								}								
 							});
 							//그래프 추가 전에 기존 그래프 날리기
 							for(var i=0; i<chartHead.data.datasets.length; i++){
@@ -866,7 +883,11 @@
 							};
 							//데이터에 아이 성장기록 데이터 추가
 							$.each(responseData, function(idx, val) {
-								newDataset.data.push(val.growbmi);
+								if(val == null){
+									newDataset.data.push('NaN');
+								}else{
+									newDataset.data.push(val.growbmi);
+								}
 							});
 							//그래프 추가 전에 기존 그래프 날리기
 							for(var i=0; i<chartBMI.data.datasets.length; i++){
@@ -878,7 +899,7 @@
 							chartBMI.data.datasets.push(newDataset);
 							grow_canvas.update();		
 						}else if(responseData.length == 0){
-							alert("성장기록이 없거나, 아이 나이가 24개월 미만인 경우\n그래프를 표기할 수 없습니다");
+							alert("성장기록이 없거나 아이 나이가 24개월 미만인 경우\n그래프를 표기할 수 없습니다");
 						}
 					},
 					error: function(model){
@@ -886,9 +907,9 @@
 					}
 				});	
 			
-			});	//그래프추가 end
-		});
-	</script>
+			  });	//그래프추가 end
+		   });
+		</script>
 	  
 	</body>
 </html>

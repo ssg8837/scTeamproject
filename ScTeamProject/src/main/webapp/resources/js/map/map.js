@@ -1,8 +1,8 @@
 	document.addEventListener('DOMContentLoaded', function() {
 		// 맵을 생성합니다. 
 		createMap();
-		
-		if(hospital.length>0){
+		console.log(hospital);
+		if(hospital != null){
 			console.log('객채받음');
 			
 			selectedHospital(hospital.Addr);

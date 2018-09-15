@@ -40,7 +40,7 @@ h3{
 	position: absolute;
 	margin: auto;
 	width: 80%;
-	height: 50%;
+	height: 60%;
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -220,4 +220,63 @@ textarea {
 .forgot {
 	margin-top: -20px;
 	text-align: right;
+}
+
+/*-----------모바일 화면 레이아웃-----------*/
+@media (max-width: 1300px) {
+	.login_content{
+		margin: auto;
+		margin-top: 2em;
+		margin-bottom: 2em;
+		width: 90%;
+	}
+	
+	.loginImgDiv{
+		width: 50%;
+	}
+	.form{
+		margin: 0 auto;
+		max-width: 400px;
+		min-width: 300px;
+	}
+}
+
+@media (max-width: 1024px) {
+	.login_content{
+		margin: auto;
+		margin-top: 2em;
+		margin-bottom: 2em;
+		width: 100%;
+	}
+	
+	.loginImgDiv{
+		width: 48%;
+	}
+	.loginimgcontainer{
+		margin: auto;
+	}
+	.form{
+		margin: 0 auto;
+		min-width: 300px;
+	}
+}
+
+@media ( max-width: 767px ) {
+	.login_content{
+		margin: auto;
+		margin-top: 2em;
+		margin-bottom: 2em;
+		width: 80%;
+		align-content: center;
+	}
+	.loginImgDiv{
+		display: none;
+	}
+	
+	.form{
+		margin: auto;
+		width: 100%;
+		min-width: 300px;
+		clear: both;
+	}
 }

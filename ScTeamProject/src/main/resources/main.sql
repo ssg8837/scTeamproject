@@ -2,6 +2,8 @@
 select * from BS_USER;
 select * from BS_BABY;
 
+delete from BS_USER where userno=46
+
 DROP TABLE BS_USER;
 DROP TABLE BS_BABY;
 

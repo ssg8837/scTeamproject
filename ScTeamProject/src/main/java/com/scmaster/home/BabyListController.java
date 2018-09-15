@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.scmaster.mapper.AlarmMapper;
+import com.scmaster.mapper.BabyListMapper;
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.vo.BS_Alarm;
 import com.scmaster.vo.BS_Baby;
@@ -65,11 +66,11 @@ public class BabyListController {
 				BS_Baby baby = mapper.selectBaby(babyNo);
 				model.addAttribute("baby", baby);
 				
-				AlarmMapper mapperA = sqlSession.getMapper(AlarmMapper.class);
-				ArrayList<BS_Alarm> list = mapperA.selectBabyAlarmList(babyNo);
-				model.addAttribute("list", list);
-				
-				System.out.println(list);
+				BabyListMapper mapperBL = sqlSession.getMapper(BabyListMapper.class);
+				ArrayList<BS_Alarm> bottle = mapperBL.selectBottleAmount(babyNo);
+				ArrayList<BS_Alarm> pee = mapperBL.selectPeeCount(babyNo);
+				model.addAttribute("bottle", bottle);
+				model.addAttribute("pee", pee);
 				
 				//프로필사진 불러오기(사이드바)
 				BS_User user=mapper.myAccount((Integer)loginNo);

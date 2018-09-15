@@ -146,7 +146,6 @@ public class AlarmController {
 	@RequestMapping(value = "/alarm_UpdateAlarm", method = RequestMethod.POST)
 	public String alarm_UpdateAlarm(Model model, BS_Alarm alarm) 
 	{
-		System.out.println(alarm);
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		int type=alarm.getAlarmType();
 		switch(type)

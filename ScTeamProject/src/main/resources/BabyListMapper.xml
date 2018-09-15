@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.scmaster.mapper.BabyListMapper">
+	
+	<!-- 하루 젖병량 -->
+	<select id="selectBottleAmount" resultType="BS_Alarm" parameterType="Integer"> 
+		SELECT BABYNO, ALARMTYPE, ALARMDETAIL, SUM(ALARMAMOUNT) AS "ALARMAMOUNT", TO_CHAR(ALARMTIME,'YYYY-MM-DD') AS "ALARMTIME", TO_CHAR(ENDTIME,'YYYY-MM-DD') AS "ENDTIME"
+		FROM BS_ALARM
+		GROUP BY BABYNO, ALARMTYPE, ALARMDETAIL, ALARMAMOUNT, TO_CHAR(ALARMTIME,'YYYY-MM-DD'), TO_CHAR(ENDTIME,'YYYY-MM-DD')
+		HAVING ALARMTYPE=2 and BABYNO=#{babyNo}
+		ORDER BY ALARMTIME ASC
+	</select>
+	
+	<!-- 하루 이유식량 -->
+	<select id="selectFoodAmount" resultType="BS_Alarm" parameterType="Integer"> 
+		SELECT BABYNO, ALARMTYPE, ALARMDETAIL, SUM(ALARMAMOUNT) AS "ALARMAMOUNT", TO_CHAR(ALARMTIME,'YYYY-MM-DD') AS "ALARMTIME", TO_CHAR(ENDTIME,'YYYY-MM-DD') AS "ENDTIME"
+		FROM BS_ALARM
+		GROUP BY BABYNO, ALARMTYPE, ALARMDETAIL, ALARMAMOUNT, TO_CHAR(ALARMTIME,'YYYY-MM-DD'), TO_CHAR(ENDTIME,'YYYY-MM-DD')
+		HAVING ALARMTYPE=3 and BABYNO=#{babyNo}
+		ORDER BY ALARMTIME ASC
+	</select>
+	
+	<!-- 하루 배소변 횟수 -->
+	<select id="selectPeeCount" resultType="BS_Alarm" parameterType="Integer"> 
+		SELECT BABYNO, ALARMTYPE, ALARMDETAIL, COUNT(ALARMDETAIL) AS "ALARMAMOUNT", TO_CHAR(ALARMTIME,'YYYY-MM-DD') AS "ALARMTIME"
+		FROM BS_ALARM
+		GROUP BY BABYNO, ALARMTYPE, ALARMDETAIL, TO_CHAR(ALARMTIME,'YYYY-MM-DD')
+		HAVING ALARMTYPE=5 and BABYNO=#{babyNo}
+		ORDER BY ALARMTIME ASC
+	</select>
+	
+	<!-- 하루 목욕 횟수 -->
+	<select id="selectShowerCount" resultType="BS_Alarm" parameterType="Integer"> 
+		SELECT BABYNO, ALARMTYPE, ALARMDETAIL, COUNT(ALARMDETAIL) AS "ALARMAMOUNT", TO_CHAR(ALARMTIME,'YYYY-MM-DD') AS "ALARMTIME"
+		FROM BS_ALARM
+		GROUP BY BABYNO, ALARMTYPE, ALARMDETAIL, TO_CHAR(ALARMTIME,'YYYY-MM-DD')
+		HAVING ALARMTYPE=6 and BABYNO=#{babyNo}
+		ORDER BY ALARMTIME ASC
+	</select>
+	
+</mapper>

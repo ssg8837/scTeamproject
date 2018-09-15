@@ -3,6 +3,7 @@ package com.scmaster.home;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -87,16 +88,51 @@ public class GrowController {
 		}
 		return url;
 	}
+	//아이 성장정보 조회 - 나이 가져오기
+	@RequestMapping(value = "/grow_selectSheetData", method = {RequestMethod.GET , RequestMethod.POST})
+	@ResponseBody public List<Grow> grow_selectSheetData(int babyno) 
+	{
+		//사용자 자녀의 성장기록 가져오기
+		GrowMapper mapperG = session.getMapper(GrowMapper.class);
+		List<Grow> myBabyGrowList = mapperG.showBabyData(babyno);
+		
+		return myBabyGrowList;
+	}
 	
-	//아이 성장정보 가져오기 - 그래프 추가(ajax)  +  아이 성장정보 조회 - 나이 가져오기
+	//아이 성장정보 가져오기 - 그래프 추가(ajax)
 	@RequestMapping(value = "/grow_selectBabyData", method = {RequestMethod.GET , RequestMethod.POST})
 	@ResponseBody public List<Grow> grow_selectBabyData(int babyno) 
 	{
 		//사용자 자녀의 성장기록 가져오기
 		GrowMapper mapperG = session.getMapper(GrowMapper.class);
 		List<Grow> myBabyGrowList = mapperG.showBabyData(babyno);
-
-		return myBabyGrowList;
+				
+		//기본개월수랑 저장된 개월수를 비교해서 일치하는 경우 보내줄 리스트에 해당 데이터 셋, 일치하지 않는 경우 null 셋.
+		List<Integer> AGE = new ArrayList<Integer>();
+		for(int i=0; i<73; i++){
+			AGE.add(i);
+		};		
+		List<Grow> growList = new ArrayList<Grow>();
+		int cnt=0;
+		for(int j=0; j<myBabyGrowList.size(); j++){
+			if(AGE.get(j) == myBabyGrowList.get(j).getBabyage()) {	
+				growList.add(myBabyGrowList.get(j));
+			}		
+			else if(AGE.get(j) != myBabyGrowList.get(j).getBabyage()){				
+				for(int a=AGE.get(j+cnt); a<myBabyGrowList.get(j).getBabyage()+1; a++) {
+					if(AGE.get(a) != myBabyGrowList.get(j).getBabyage()) {
+						growList.add(null);
+						cnt+=1;
+					}
+					else if(AGE.get(a) == myBabyGrowList.get(j).getBabyage()){
+						growList.add(myBabyGrowList.get(j));
+						break;
+					}
+				};
+			}
+		};
+		
+		return growList;
 	}
 	
 	//아이 성장정보 가져오기: BMI - 그래프 추가(ajax)
@@ -107,7 +143,31 @@ public class GrowController {
 		GrowMapper mapperG = session.getMapper(GrowMapper.class);
 		List<Grow> myBabyBMIList = mapperG.showBabyBMI(babyno);
 
-		return myBabyBMIList;
+		//기본개월수랑 저장된 개월수를 비교해서 일치하는 경우 보내줄 리스트에 해당 데이터 셋, 일치하지 않는 경우 null 셋.
+		List<Integer> AGE = new ArrayList<Integer>();
+		for(int i=0; i<49; i++){
+			AGE.add(i+24);
+		};		
+		List<Grow> growBmiList = new ArrayList<Grow>();
+		int cnt=0;
+		for(int j=0; j<myBabyBMIList.size(); j++){
+			if(AGE.get(j) == myBabyBMIList.get(j).getBabyage() && myBabyBMIList.get(j)!=null) {	
+				growBmiList.add(myBabyBMIList.get(j));
+			}
+			
+			else if(AGE.get(j) != myBabyBMIList.get(j).getBabyage()){
+				for(int a=j+cnt; a<myBabyBMIList.get(j).getBabyage()-23; a++) {
+					if(AGE.get(a) != myBabyBMIList.get(j).getBabyage()) {
+						growBmiList.add(null);
+						cnt+=1;
+					}else if(AGE.get(a) == myBabyBMIList.get(j).getBabyage()){
+						growBmiList.add(myBabyBMIList.get(j));		
+					}
+				}
+			}
+		};
+		
+		return growBmiList;
 	}
 
 	//아이 성장정보 조회 - 또래 아이들과 비교하여 계산
@@ -181,8 +241,6 @@ public class GrowController {
 		map.put("babyBirth", babyBirth);
 		map.put("growregdate", growregdate);
 		map.put("babyno", babyno);
-		
-		System.out.println(map);
 		
 		Grow checkAge = mapperG.checkAge(map);
 		

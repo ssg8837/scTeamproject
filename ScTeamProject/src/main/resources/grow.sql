@@ -5,7 +5,7 @@ select * from GROW;
 select * from GROW_DEFAULT;
 
 select * from grow where babyno=41
-delete from grow where babyno=41 and babyage=54
+delete from grow where babyno=41 and babyage=97
 ---------------------------------------------------------------------------------------------------------------------------------
 /*	[성장기록용 테이블]
  	아이 번호를 fk로 가져오고,

@@ -247,43 +247,178 @@
  
 		<script type="text/javascript">
 
-			var milkLeft = [];
-			var milkRight = [];
+			/*젖병*/
+			var B_Milk = [];
+			var B_Powder = [];
 			var alarmTime = [];
+			var same = 0;
 			
-			<c:forEach var="item" items="${list}">
-				<c:if test= '${item.alarmDetail eq 1}'>
-					alarmTime.push("${item.alarmTime}");
-					milkLeft.push("${item.alarmAmount}");
-				</c:if>
+			<c:forEach var="item" items="${bottle}">
 				
-				<c:if test=' ${item.alarmDetail eq 2}'>
+				for(var i=0; i<alarmTime.length; i++){	
+					if(alarmTime[i] == '${item.alarmTime}'){
+						same++;
+					}
+				}
+				if(same == 0){
 					alarmTime.push("${item.alarmTime}");
-					milkRight.push('${item.alarmAmount}');
+				}
+
+				<c:if test= '${item.alarmDetail eq 3}'>
+					B_Milk.push("${item.alarmAmount}");
+				</c:if>
+				<c:if test= '${item.alarmDetail ne 3}'>
+					B_Milk.push('NaN');
+				</c:if>
+				<c:if test= '${item.alarmDetail eq 4}'>
+					B_Powder.push("${item.alarmAmount}");
+				</c:if>	
+				<c:if test= '${item.alarmDetail ne 4}'>
+					B_Powder.push('NaN');
 				</c:if>
 			</c:forEach>
-
 			
-			console.log(alarmTime);
-			
-			var chartMilk = {
+			var chartBottle = {
 			    type: 'bar',
 			    data: {
 			    	labels: alarmTime,
 			        datasets: [
 			        	{	
-				        	label: '모유(왼쪽)',							
-				            data: [{x: alarmTime, y: milkLeft}], 	
-				            backgroundColor: 'rgba(255, 57, 125, 0)',
+				        	label: '모유',							
+				            data: B_Milk, 	
+				            backgroundColor: 'rgba(255, 57, 125, 0.5)',
 				            borderColor: 'rgba(255, 57, 125, 1)',
-				            borderWidth: 1									
+				            borderWidth: 1,
+				            fill: false
 			        	},
 			        	{	
+				        	label: '분유',							
+				            data: B_Powder, 	
+				            backgroundColor: 'rgba(108, 108, 255, 0.5)',
+				            borderColor: 'rgba(108, 108, 255, 1)',
+				            borderWidth: 1,
+				            fill: false
+			        	}
+			        	/*
+ 			        	{	
 				        	label: '모유(오른쪽)',							
 				            data: [{x: alarmTime, y: milkRight}], 	
 				            backgroundColor: 'rgba(108, 108, 255, 0)',
 				            borderColor: 'rgba(108, 108, 255, 1)',
 				            borderWidth: 1									
+			        	}
+			        	*/
+			        ]
+			    },
+			    options: {
+					layout: {
+			            padding: 0
+			        },
+			    	animation: {
+			            animateScale: true					
+			        },
+			        responsive: true,					//컨테이너 크기에 따라 캔버스 크기 조절
+			        maintainAspectRatio : false,		//캔버스 높이 고정
+			        scales: {
+			            xAxes: [{
+			                gridLines: {
+								zeroLineColor: "rgba(222,222,222,0,1)"
+			            	},
+				            ticks: {
+				                fontSize: 9
+				            }
+			            }],
+			            yAxes: [{
+			            	scaleLabel: {
+			                    display: true,
+			                    labelString: '양(ml)'
+			                },
+			                ticks: {
+			                    beginAtZero: true,
+			                    fontSize: 9
+			                }
+			              }]
+			        },
+			    	pan: {
+			    		enabled: false,
+			    		mode: 'xy',
+			    		limits: {
+							max: 0.5,
+							min: 0.1
+						}
+			    	},
+			    	zoom: {
+			    		enabled: true,
+			    		drag: false,
+			    		mode: 'xy',
+			    		limits: {
+							max: 0.5,
+							min: 0.1
+						}
+			    	}
+			    }
+			};
+			
+			var ctx = document.getElementById("canvas_bottle").getContext('2d');
+			canvas_bottle = new Chart(ctx, chartBottle);
+			
+			/*배소변*/
+			var pee_b = [];
+			var pee_s = [];
+			var alarmTime1 = [];
+			
+			<c:forEach var="item" items="${pee}">
+				<c:if test= '${item.alarmType eq 5}'>
+					alarmTime1.push("${item.alarmTime}");
+				</c:if>
+			</c:forEach>
+			
+			var count = "";
+
+			for (var i = 0; i < alarmTime1.length; i++) {
+			    for (var j = 1; j < alarmTime1.length; j++) {
+			        if (alarmTime1[i] == alarmTime1[j]) {
+			        	alarmTime1.pop(j);
+			        }
+			    }
+			}
+
+			<c:forEach var="item" items="${pee}">
+
+				<c:if test= '${item.alarmDetail eq 5}'>
+					pee_b.push("${item.alarmAmount}");
+				</c:if>
+				<c:if test= '${item.alarmDetail ne 5}'>
+					pee_b.push('NaN');
+				</c:if>
+				<c:if test= '${item.alarmDetail eq 6}'>
+					pee_s.push("${item.alarmAmount}");
+				</c:if>	
+				<c:if test= '${item.alarmDetail ne 6}'>
+					pee_s.push('NaN');
+				</c:if>
+			</c:forEach>
+			
+			var chartPee = {
+			    type: 'bar',
+			    data: {
+			    	labels: alarmTime1,
+			        datasets: [
+			        	{	
+				        	label: '배변',							
+				            data: pee_b, 	
+				            backgroundColor: 'rgba(255, 57, 125, 0.5)',
+				            borderColor: 'rgba(255, 57, 125, 1)',
+				            borderWidth: 1,
+				            fill: false
+			        	},
+			        	{	
+				        	label: '소변',							
+				            data: pee_s, 	
+				            backgroundColor: 'rgba(108, 108, 255, 0.5)',
+				            borderColor: 'rgba(108, 108, 255, 1)',
+				            borderWidth: 1,
+				            fill: false
 			        	}
 			        ]
 			    },
@@ -301,39 +436,43 @@
 			                gridLines: {
 								zeroLineColor: "rgba(222,222,222,0,1)"
 			            	},
-			            	scaleLabel: {
-				                display: true,
-				                labelString: '날짜',
+				            ticks: {
+				                fontSize: 9
 				            }
 			            }],
 			            yAxes: [{
 			            	scaleLabel: {
 			                    display: true,
-			                    labelString: '양(ml)'
+			                    labelString: '횟수'
 			                },
 			                ticks: {
-			                    beginAtZero: true
+			                    beginAtZero: true,
+			                    fontSize: 9
 			                }
 			              }]
 			        },
 			    	pan: {
-			    		enabled: true,
-			    		mode: 'xy'
+			    		enabled: false,
+			    		mode: 'xy',
+			    		limits: {
+							max: 0.5,
+							min: 0.1
+						}
 			    	},
 			    	zoom: {
 			    		enabled: true,
 			    		drag: false,
 			    		mode: 'xy',
 			    		limits: {
-							max: 3,
-							min: 0.5
+							max: 0.5,
+							min: 0.1
 						}
 			    	}
 			    }
 			};
 			
-			var ctx = document.getElementById("canvas_milk").getContext('2d');
-			canvas_milk = new Chart(ctx, chartMilk);
+			var ctx = document.getElementById("canvas_pee").getContext('2d');
+			canvas_pee = new Chart(ctx, chartPee);
 			
 		</script>
 	
