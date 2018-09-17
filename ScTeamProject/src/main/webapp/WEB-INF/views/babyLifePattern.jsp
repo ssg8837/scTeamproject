@@ -150,6 +150,7 @@
     <section id="main-content">
       <section class="wrapper site-min-height">
         <h3><i class="fa fa-angle-right"></i> ${baby.babyName}의 생활기록</h3>
+        <p>* 금일 기준 7일 이내의 정보만 표시됩니다.</p>
 		<!-- page start-->
         <div class="tab-pane" id="chartjs">
           
@@ -244,70 +245,120 @@
 		
 		<script src="./resources/js/util/check_byte.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
- 
+		 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
 		<script type="text/javascript">
-
+			/*모유*/
+			var milk = [];
+			var milk_time=[];
+			var alarmTime_m = [];
+			
+			<c:forEach var="item" items="${milk}">
+				alarmTime_m.push("${item.alarmTime}");
+				milk_time.push("${item.endTime}");
+				milk.push("${item.alarmAmount}");
+			</c:forEach>
+			
+			var chartMilk = {
+			    type: 'bar',
+			    data: {
+			    	labels: alarmTime_m,
+			        datasets: [
+			        	{			
+			        		type: 'bar',
+			        		label: "수유 횟수",
+				            data: milk, 	
+				            backgroundColor: 'rgba(255, 128, 64, 0.2)',
+				            borderColor: 'rgba(255, 128, 64, 1)',
+				            borderWidth: 1,
+				            fill: false
+			        	},
+			        	{			
+			        		type: 'line',
+			        		label: "수유 시간(분)",
+				            data: milk_time, 	
+				            backgroundColor: 'rgba(255, 152, 49, 1)',
+				            borderColor: 'rgba(255, 152, 49, 1)',
+				            borderWidth: 1,
+				            fill: false
+			        	}
+			        ]
+			    },
+			    options: {
+					layout: {
+			            padding: 0
+			        },
+			    	animation: {
+			            animateScale: true					
+			        },
+			        responsive: true,					//컨테이너 크기에 따라 캔버스 크기 조절
+			        maintainAspectRatio : false,		//캔버스 높이 고정
+			        scales: {
+			            xAxes: [{
+							gridLines: {
+								zeroLineColor: "rgba(222,222,222,0,1)"
+			            	},
+				            ticks: {
+				                fontSize: 9
+				            }
+			            }],
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero: true,
+			                    fontSize: 9,
+			                    stepSize: 1
+			                }
+			              }]
+			        },	    
+			    	zoom: {
+				   		enabled: true,
+			    		drag: false,
+			    		mode: 'xy',
+			    		limits: {
+							max: 1,
+							min: 0.1
+						}
+			    	}
+			    }
+			};
+			
+			var ctx = document.getElementById("canvas_milk").getContext('2d');
+			canvas_milk = new Chart(ctx, chartMilk);
+			
 			/*젖병*/
-			var B_Milk = [];
-			var B_Powder = [];
-			var alarmTime = [];
-			var same = 0;
+			var bottle = [];
+			var bottle_time=[];
+			var alarmTime_b = [];
 			
 			<c:forEach var="item" items="${bottle}">
-				
-				for(var i=0; i<alarmTime.length; i++){	
-					if(alarmTime[i] == '${item.alarmTime}'){
-						same++;
-					}
-				}
-				if(same == 0){
-					alarmTime.push("${item.alarmTime}");
-				}
-
-				<c:if test= '${item.alarmDetail eq 3}'>
-					B_Milk.push("${item.alarmAmount}");
-				</c:if>
-				<c:if test= '${item.alarmDetail ne 3}'>
-					B_Milk.push('NaN');
-				</c:if>
-				<c:if test= '${item.alarmDetail eq 4}'>
-					B_Powder.push("${item.alarmAmount}");
-				</c:if>	
-				<c:if test= '${item.alarmDetail ne 4}'>
-					B_Powder.push('NaN');
-				</c:if>
+				alarmTime_b.push("${item.alarmTime}");
+				bottle_time.push("${item.endTime}");
+				bottle.push("${item.alarmAmount}");
 			</c:forEach>
+			console.log(bottle_time);
 			
 			var chartBottle = {
 			    type: 'bar',
 			    data: {
-			    	labels: alarmTime,
+			    	labels: alarmTime_b,
 			        datasets: [
 			        	{	
-				        	label: '모유',							
-				            data: B_Milk, 	
-				            backgroundColor: 'rgba(255, 57, 125, 0.5)',
-				            borderColor: 'rgba(255, 57, 125, 1)',
+			        		type: 'bar',
+				        	label: '양(ml)',							
+				            data: bottle, 	
+				            backgroundColor: 'rgba(135, 242, 203, 0.2)',
+				            borderColor: 'rgba(135, 242, 203, 1)',
 				            borderWidth: 1,
 				            fill: false
 			        	},
 			        	{	
-				        	label: '분유',							
-				            data: B_Powder, 	
-				            backgroundColor: 'rgba(108, 108, 255, 0.5)',
-				            borderColor: 'rgba(108, 108, 255, 1)',
+			        		type: 'line',
+				        	label: '시간(분)',							
+				            data: bottle_time, 	
+				            backgroundColor: 'rgba(13, 140, 92, 1)',
+				            borderColor: 'rgba(13, 140, 92, 1)',
 				            borderWidth: 1,
 				            fill: false
 			        	}
-			        	/*
- 			        	{	
-				        	label: '모유(오른쪽)',							
-				            data: [{x: alarmTime, y: milkRight}], 	
-				            backgroundColor: 'rgba(108, 108, 255, 0)',
-				            borderColor: 'rgba(108, 108, 255, 1)',
-				            borderWidth: 1									
-			        	}
-			        	*/
 			        ]
 			    },
 			    options: {
@@ -329,30 +380,18 @@
 				            }
 			            }],
 			            yAxes: [{
-			            	scaleLabel: {
-			                    display: true,
-			                    labelString: '양(ml)'
-			                },
 			                ticks: {
 			                    beginAtZero: true,
 			                    fontSize: 9
 			                }
 			              }]
-			        },
-			    	pan: {
-			    		enabled: false,
-			    		mode: 'xy',
-			    		limits: {
-							max: 0.5,
-							min: 0.1
-						}
-			    	},
+			        },	    
 			    	zoom: {
-			    		enabled: true,
+				   		enabled: true,
 			    		drag: false,
 			    		mode: 'xy',
 			    		limits: {
-							max: 0.5,
+							max: 1,
 							min: 0.1
 						}
 			    	}
@@ -362,60 +401,165 @@
 			var ctx = document.getElementById("canvas_bottle").getContext('2d');
 			canvas_bottle = new Chart(ctx, chartBottle);
 			
-			/*배소변*/
-			var pee_b = [];
-			var pee_s = [];
-			var alarmTime1 = [];
+			/*이유식*/
+			var food = [];
+			var food_time=[];
+			var alarmTime_f = [];
 			
-			<c:forEach var="item" items="${pee}">
-				<c:if test= '${item.alarmType eq 5}'>
-					alarmTime1.push("${item.alarmTime}");
-				</c:if>
+			<c:forEach var="item" items="${food}">
+				alarmTime_f.push("${item.alarmTime}");
+				food_time.push("${item.endTime}");
+				food.push("${item.alarmAmount}");
 			</c:forEach>
 			
-			var count = "";
-
-			for (var i = 0; i < alarmTime1.length; i++) {
-			    for (var j = 1; j < alarmTime1.length; j++) {
-			        if (alarmTime1[i] == alarmTime1[j]) {
-			        	alarmTime1.pop(j);
-			        }
+			var chartFood = {
+			    type: 'bar',
+			    data: {
+			    	labels: alarmTime_f,
+			        datasets: [
+			        	{		
+			        		type: 'bar',
+			        		label: "양(ml)",
+				            data: food, 	
+				            backgroundColor: 'rgba(255, 170, 200, 0.2)',
+				            borderColor: 'rgba(255, 170, 200, 1)',
+				            borderWidth: 1,
+				            fill: false
+			        	},
+			        	{		
+			        		type: 'line',
+			        		label: "시간(분)",
+				            data: food_time, 	
+				            backgroundColor: 'rgba(238, 0, 83, 1)',
+				            borderColor: 'rgba(238, 0, 83, 1)',
+				            borderWidth: 1,
+				            fill: false
+			        	}
+			        ]
+			    },
+			    options: {
+					layout: {
+			            padding: 0
+			        },
+			    	animation: {
+			            animateScale: true					
+			        },
+			        responsive: true,					//컨테이너 크기에 따라 캔버스 크기 조절
+			        maintainAspectRatio : false,		//캔버스 높이 고정
+			        scales: {
+			            xAxes: [{
+							gridLines: {
+								zeroLineColor: "rgba(222,222,222,0,1)"
+			            	},
+				            ticks: {
+				                fontSize: 9
+				            }
+			            }],
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero: true,
+			                    fontSize: 9
+			                }
+			              }]
+			        },	    
+			    	zoom: {
+				   		enabled: true,
+			    		drag: false,
+			    		mode: 'xy',
+			    		limits: {
+							max: 1,
+							min: 0.1
+						}
+			    	}
 			    }
-			}
-
-			<c:forEach var="item" items="${pee}">
-
-				<c:if test= '${item.alarmDetail eq 5}'>
-					pee_b.push("${item.alarmAmount}");
-				</c:if>
-				<c:if test= '${item.alarmDetail ne 5}'>
-					pee_b.push('NaN');
-				</c:if>
-				<c:if test= '${item.alarmDetail eq 6}'>
-					pee_s.push("${item.alarmAmount}");
-				</c:if>	
-				<c:if test= '${item.alarmDetail ne 6}'>
-					pee_s.push('NaN');
-				</c:if>
+			};
+			
+			var ctx = document.getElementById("canvas_food").getContext('2d');
+			canvas_food = new Chart(ctx, chartFood);
+			
+			/*배소변*/
+			var pee = [];
+			var alarmTime_p = [];
+			
+			<c:forEach var="item" items="${pee}">			
+				alarmTime_p.push("${item.alarmTime}");	
+				pee.push("${item.alarmAmount}");
 			</c:forEach>
 			
 			var chartPee = {
 			    type: 'bar',
 			    data: {
-			    	labels: alarmTime1,
+			    	labels: alarmTime_p,
 			        datasets: [
 			        	{	
-				        	label: '배변',							
-				            data: pee_b, 	
-				            backgroundColor: 'rgba(255, 57, 125, 0.5)',
-				            borderColor: 'rgba(255, 57, 125, 1)',
+				        	label: '횟수',							
+				            data: pee, 	
+				            backgroundColor: 'rgba(255, 255, 111, 0.2)',
+				            borderColor: 'rgba(255, 255, 111, 1)',
 				            borderWidth: 1,
 				            fill: false
-			        	},
+			        	}
+			        ]
+			    },
+			    options: {
+					layout: {
+			            padding: 0
+			        },
+			    	animation: {
+			            animateScale: true					
+			        },
+			        responsive: true,					//컨테이너 크기에 따라 캔버스 크기 조절
+			        maintainAspectRatio : false,		//캔버스 높이 고정
+			        scales: {
+			            xAxes: [{
+			                gridLines: {
+								zeroLineColor: "rgba(222,222,222,0,1)"
+			            	},
+				            ticks: {
+				                fontSize: 9
+				            }
+			            }],
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero: true,
+			                    fontSize: 9,
+			                    stepSize: 1
+			                }
+			              }]
+			        },	    
+			    	zoom: {
+				   		enabled: true,
+			    		drag: false,
+			    		mode: 'xy',
+			    		limits: {
+							max: 1,
+							min: 0.1
+						}
+			    	}
+			    }
+			};
+			
+			var ctx = document.getElementById("canvas_pee").getContext('2d');
+			canvas_pee = new Chart(ctx, chartPee);
+			
+			/*목욕*/
+			var shower = [];
+			var alarmTime_s = [];
+			
+			<c:forEach var="item" items="${shower}">			
+				alarmTime_s.push("${item.alarmTime}");	
+				shower.push("${item.alarmAmount}");
+			</c:forEach>
+			
+			var chartShower = {
+			    type: 'bar',
+			    data: {
+			    	labels: alarmTime_s,
+			        datasets: [
 			        	{	
-				        	label: '소변',							
-				            data: pee_s, 	
-				            backgroundColor: 'rgba(108, 108, 255, 0.5)',
+				        	label: '횟수',							
+				            data: shower, 	
+				            backgroundColor: 'rgba(108, 108, 255, 0.2)',
 				            borderColor: 'rgba(108, 108, 255, 1)',
 				            borderWidth: 1,
 				            fill: false
@@ -441,39 +585,103 @@
 				            }
 			            }],
 			            yAxes: [{
-			            	scaleLabel: {
-			                    display: true,
-			                    labelString: '횟수'
-			                },
 			                ticks: {
 			                    beginAtZero: true,
-			                    fontSize: 9
+			                    fontSize: 9,
+			                    stepSize: 1
 			                }
 			              }]
-			        },
-			    	pan: {
-			    		enabled: false,
-			    		mode: 'xy',
-			    		limits: {
-							max: 0.5,
-							min: 0.1
-						}
-			    	},
+			        },	    
 			    	zoom: {
-			    		enabled: true,
+				   		enabled: true,
 			    		drag: false,
 			    		mode: 'xy',
 			    		limits: {
-							max: 0.5,
+							max: 1,
 							min: 0.1
 						}
 			    	}
 			    }
 			};
 			
-			var ctx = document.getElementById("canvas_pee").getContext('2d');
-			canvas_pee = new Chart(ctx, chartPee);
+			var ctx = document.getElementById("canvas_shower").getContext('2d');
+			canvas_shower = new Chart(ctx, chartShower);
 			
+			/*수면*/
+			var sleep = [];
+			var sleep_time=[];
+			var alarmTime_sleep = [];
+			
+			<c:forEach var="item" items="${sleep}">			
+				alarmTime_sleep.push("${item.alarmTime}");
+				sleep_time.push("${item.endTime}");
+				sleep.push("${item.alarmAmount}");
+			</c:forEach>
+			
+			var chartSleep = {
+			    type: 'bar',
+			    data: {
+			    	labels: alarmTime_sleep,
+			        datasets: [
+			        	{	
+			        		type:'bar',
+				        	label: '횟수',							
+				            data: sleep, 	
+				            backgroundColor: 'rgba(188, 121, 255, 0.2)',
+				            borderColor: 'rgba(188, 121, 255, 1)',
+				            borderWidth: 1,
+				            fill: false
+			        	},
+			        	{	
+			        		type:'line',
+				        	label: '시간',							
+				            data: sleep_time, 	
+				            backgroundColor: 'rgba(141, 28, 255, 1)',
+				            borderColor: 'rgba(141, 28, 255, 1)',
+				            borderWidth: 1,
+				            fill: false
+			        	}
+			        ]
+			    },
+			    options: {
+					layout: {
+			            padding: 0
+			        },
+			    	animation: {
+			            animateScale: true					
+			        },
+			        responsive: true,					//컨테이너 크기에 따라 캔버스 크기 조절
+			        maintainAspectRatio : false,		//캔버스 높이 고정
+			        scales: {
+			            xAxes: [{
+			                gridLines: {
+								zeroLineColor: "rgba(222,222,222,0,1)"
+			            	},
+				            ticks: {
+				                fontSize: 9
+				            }
+			            }],
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero: true,
+			                    fontSize: 9
+			                }
+			              }]
+			        },	    
+			    	zoom: {
+				   		enabled: true,
+			    		drag: false,
+			    		mode: 'xy',
+			    		limits: {
+							max: 1,
+							min: 0.1
+						}
+			    	}
+			    }
+			};
+			
+			var ctx = document.getElementById("canvas_sleep").getContext('2d');
+			canvas_sleep = new Chart(ctx, chartSleep);
 		</script>
 	
 	</body>

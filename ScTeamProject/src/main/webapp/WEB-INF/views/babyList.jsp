@@ -162,13 +162,18 @@
           	 	
           	 	<div class="babyList_Div">
           	 		<c:forEach var="babyList" items="${babyList}">
-          	 			<div class="babyList_box">
-							<b>${babyList.babyName}</b><br><br>
-								성별: ${babyList.babyGender}		<br>
-								생일: ${babyList.babyBirth}		<br>
+          	 			<div class="babyList_box">	
+          	 				<b>${babyList.babyName}</b>					
+							<div class="babyList_Btn_Div">
+								<button type="button" onclick="deleteBaby(${babyList.babyNo});">X</button>
+								<%-- <button type="button" onclick="location.href='deleteBaby?babyNo=${babyList.babyNo}'">X</button> --%>
+							</div>
+							<br><br>
+							성별: ${babyList.babyGender}		<br>
+							생일: ${babyList.babyBirth}		<br>
 							<%--나이: <span class="age"></span> <button type="button" onclick="fn_calcDayMonthCount(${babyList.babyBirth});"></button> <br> --%>
-								혈액형: ${babyList.babyBlood}	<br><br>
-							<button type="button" onclick="location.href='checkPattern?babyNo=${babyList.babyNo}'">${babyList.babyName}의 생활기록 확인하기</button>
+							혈액형: ${babyList.babyBlood}	<br><br>
+							<button class="patternBTN" type="button" onclick="location.href='checkPattern?babyNo=${babyList.babyNo}'">${babyList.babyName}의 생활기록 확인하기</button>
 						</div>
 					</c:forEach>
           	 	

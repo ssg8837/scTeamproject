@@ -96,14 +96,14 @@ public class AlarmController {
 		case 5:
 			alarmMapper.insertAlarm_Detail(alarm);
 			break;
-		//목욕
+		//목욕, 디폴트
 		case 6:
+		default :
 			alarmMapper.insertAlarm(alarm);
 			break;
-		//기타, 수면, 디폴트 (시간기록 필요)
+		//기타, 수면 (시간기록 필요)
 		case 0:
-		case 7:
-		default :
+		case 7:	
 			alarmMapper.insertAlarm_EndTime(alarm);
 			break;
 		}
@@ -172,14 +172,14 @@ public class AlarmController {
 		case 5:
 			alarmMapper.updateAlarm_Detail(alarm);
 			break;
-		//목욕
+		//목욕, 디폴트
 		case 6:
+		default :
 			alarmMapper.updateAlarm(alarm);
 			break;
-		//기타, 수면, 디폴트 (시간기록 필요)
+		//기타, 수면 (시간기록 필요)
 		case 0:
 		case 7:
-		default :
 			alarmMapper.updateAlarm_EndTime(alarm);
 			break;
 		}

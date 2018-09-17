@@ -105,16 +105,16 @@ function changeSelect()
 		$("#amount").html(amount);
 		$("#end").html(end);
 		break;
-	//목욕
+	//목욕, 디폴트
 	case 6:
+	default :
 		$("#detail").html(detail);
 		$("#amount").html(amount);
 		$("#end").html(end);
 		break;
-	//기타, 수면, 디폴트
+	//기타, 수면
 	case "0" :
 	case "7" :
-	default :
 		end+='<div class="input-group date form_datetime_end col-xs-4 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">';
 		end+='<span class="input-group-addon">종료시간</span>';
 		end+='<input class="form-control " type="text" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';

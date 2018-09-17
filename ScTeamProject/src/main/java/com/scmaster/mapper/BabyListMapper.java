@@ -1,10 +1,13 @@
 package com.scmaster.mapper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.scmaster.vo.BS_Alarm;
 
 public interface BabyListMapper {
-
+	int days(HashMap<String, String> map);
+	
 	ArrayList<BS_Alarm> selectMilkCount(int babyNo);		//1일	모유횟수
 	ArrayList<BS_Alarm> selectBottleAmount(int babyNo);		//1일	젖병량
 	ArrayList<BS_Alarm> selectFoodAmount(int babyNo);		//1일	이유식량

@@ -1,6 +1,9 @@
 package com.scmaster.home;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -44,15 +47,25 @@ public class BabyListController {
 		
 		return "babyList";
 	}
+	//아이정보삭제
+	@RequestMapping(value = "/deleteBaby", method = RequestMethod.GET)
+	public String deleteBaby(int babyNo) {
+
+		MainMapper mapper= sqlSession.getMapper(MainMapper.class);		
+		mapper.deleteBaby(babyNo);
+		
+		return "redirect:/openNewBaby";
+	}
+	
 	//아이 나이 계산
 	@RequestMapping(value = "/babyAge", method = RequestMethod.GET)
 	@ResponseBody public int babyAge(int babyNo) {
-		System.out.println(babyNo);
+		//System.out.println(babyNo);
 		
 		MainMapper mapper= sqlSession.getMapper(MainMapper.class);		
 		int babyAge = mapper.babyAge(babyNo);
 		
-		System.out.println(babyAge);
+		//System.out.println(babyAge);
 		
 		return babyAge;
 	}
@@ -67,10 +80,20 @@ public class BabyListController {
 				model.addAttribute("baby", baby);
 				
 				BabyListMapper mapperBL = sqlSession.getMapper(BabyListMapper.class);
+				//그래프용 데이터 불러오기
+				ArrayList<BS_Alarm> milk = mapperBL.selectMilkCount(babyNo);
 				ArrayList<BS_Alarm> bottle = mapperBL.selectBottleAmount(babyNo);
+				ArrayList<BS_Alarm> food = mapperBL.selectFoodAmount(babyNo);
 				ArrayList<BS_Alarm> pee = mapperBL.selectPeeCount(babyNo);
+				ArrayList<BS_Alarm> shower = mapperBL.selectShowerCount(babyNo);
+				ArrayList<BS_Alarm> sleep = mapperBL.selectSleepCount(babyNo);
+				
+				model.addAttribute("milk", milk);
 				model.addAttribute("bottle", bottle);
+				model.addAttribute("food", food);
 				model.addAttribute("pee", pee);
+				model.addAttribute("shower", shower);
+				model.addAttribute("sleep", sleep);
 				
 				//프로필사진 불러오기(사이드바)
 				BS_User user=mapper.myAccount((Integer)loginNo);
