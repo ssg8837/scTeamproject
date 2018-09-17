@@ -100,5 +100,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE USERNO=#{userNo}
 	</select>
 	
+	<select id="selectNick" parameterType="Integer" resultType="String">
+		SELECT USERNICK
+		FROM BS_USER
+		WHERE USERNO=#{userNo}
+	</select>
 	
 </mapper>

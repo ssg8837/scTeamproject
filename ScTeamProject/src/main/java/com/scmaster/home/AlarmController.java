@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scmaster.mapper.AlarmMapper;
 import com.scmaster.mapper.MainMapper;
+import com.scmaster.mapper.SNSMapper;
 import com.scmaster.vo.BS_Alarm;
 import com.scmaster.vo.BS_Baby;
+import com.scmaster.vo.Bell;
 import com.scmaster.vo.Cal_Event;
+import com.scmaster.vo.Friend;
 
 @Controller
 public class AlarmController {
@@ -165,14 +168,6 @@ public class AlarmController {
 		return alarm_OpenCalendar();
 	}
 	
-	@RequestMapping(value = "/alarm_load",method = RequestMethod.POST)
-	public @ResponseBody ArrayList<BS_Alarm> alarm_load(int loginNo)
-	{
-		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
-		ArrayList<BS_Alarm> alarmList;
-		alarmList=alarmMapper.selectAlarmList(loginNo);
-		return alarmList;
-	}
 	
 	@RequestMapping(value = "/alarm_calenderLoad",method = RequestMethod.POST, produces = "text/html;charset=utf8")
 	public @ResponseBody String alarm_calenderLoad()

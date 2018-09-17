@@ -21,7 +21,9 @@ public interface SNSMapper {
 	ArrayList<SNS_Reply> selectReply(int snsNo);
 	int insertReply(SNS_Reply reply);
 	int applyFriend(Friend friend);
-	int selectFriend(Friend friend);
-	ArrayList<Friend> selectApplyList(Friend friend);
+	int checkFriend(Friend friend);
+	ArrayList<Friend> selectApplyList(int userNo);
 	int updateApply(Friend friend);
+	ArrayList<Friend> selectDenyList(int loginNo);
+	int deleteFriend(Friend friend);
 }

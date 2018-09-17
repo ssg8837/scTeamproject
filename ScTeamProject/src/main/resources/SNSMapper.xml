@@ -24,9 +24,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM SNS
 		WHERE (USERNO=#{loginNo} AND PERMISSION = 0) OR
 		(PERMISSION = 1) OR
-		(USERNO IN (SELECT FRIEND
+		(USERNO IN (SELECT FRIENDNO
 		FROM FRIEND
-		WHERE USERNO=#{loginNo} AND APPLY="N") AND PERMISSION = 0)
+		WHERE USERNO=#{loginNo} AND APPLY='N') AND PERMISSION = 0)
 		ORDER BY SNSNO DESC
 	</select>
 	
@@ -77,23 +77,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(#{userNo},#{friendNo},#{apply})
 	</insert>
 	
-	<select id="selectFriend" resultType ="Friend" parameterType="Integer">
-		SELECT USERNO, FRIENDNO, APPLY
+	<select id="checkFriend" resultType ="Integer" parameterType="Friend">
+		SELECT COUNT(USERNO)
 		FROM FRIEND
-		WHERE USERNO=#{userNo}
+		WHERE USERNO=#{userNo} AND FRIENDNO=#{friendNo}
 	</select>
 	
-	<select id="selectApplyList" resultType ="Friend" parameterType="Friend">
+	<select id="selectApplyList" resultType ="Friend" parameterType="Integer">
 		SELECT USERNO, FRIENDNO, APPLY
 		FROM FRIEND
-		WHERE USERNO=#{userNo} AND APPLY=#{apply}
+		WHERE FRIENDNO=#{userNo} AND APPLY='Y'
 	</select>
 	
 	<update id="updateApply" parameterType="Friend">
 		UPDATE FRIEND 
 		SET APPLY=#{apply}
-		WHERE USERNO=#{userNo}
+		WHERE USERNO=#{userNo} AND FRIENDNO=#{friendNo}
 	</update>
 	
+	<select id="selectDenyList" resultType ="Friend" parameterType="Integer">
+		SELECT USERNO, FRIENDNO, APPLY
+		FROM FRIEND
+		WHERE USERNO=#{userNo} AND APPLY='D'
+	</select>
+	
+	<delete id="deleteFriend" parameterType="Friend">
+		DELETE FROM FRIEND WHERE USERNO=#{userNo} AND FRIENDNO=#{friendNo}
+	</delete>
 	
 </mapper>

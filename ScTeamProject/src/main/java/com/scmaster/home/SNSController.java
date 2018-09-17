@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.scmaster.mapper.BabyBookMapper;
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.mapper.SNSMapper;
-import com.scmaster.vo.BabyBook;
+import com.scmaster.vo.Bell;
+import com.scmaster.vo.Friend;
 import com.scmaster.vo.Likely;
 import com.scmaster.vo.MultiFiles;
 import com.scmaster.vo.SNS;
@@ -125,6 +125,36 @@ public class SNSController {
 		//return "newSns";
 	}
 	
+
+	@RequestMapping(value = "/alarm_load",method = RequestMethod.POST)
+	public @ResponseBody ArrayList<Bell> alarm_load(int loginNo)
+	{
+		SNSMapper snsMapper=sqlSession.getMapper(SNSMapper.class);
+		MainMapper mainMapper=sqlSession.getMapper(MainMapper.class);
+		ArrayList<Bell> bellList=new ArrayList<Bell>();
+		ArrayList<Friend> friendList=snsMapper.selectApplyList(loginNo);
+		for(Friend item : friendList)
+		{
+			int sender = item.getUserNo();
+			int receiver =item.getFriendNo();
+			String sendNick = mainMapper.selectNick(sender);
+			String str=sendNick+"님으로 부터 친구 신청";
+			Bell bell= new Bell(sender, receiver, str,1);
+			bellList.add(bell);
+		}
+		friendList=snsMapper.selectDenyList(loginNo);
+		for(Friend item : friendList)
+		{
+			int sender = item.getUserNo();
+			int receiver =item.getFriendNo();
+			String sendNick = mainMapper.selectNick(receiver);
+			String str=sendNick+"님이 친구 신청을 거절하였습니다.";
+			Bell bell= new Bell(sender, receiver, str,2);
+			bellList.add(bell);
+		}
+		return bellList;
+	}
+	
 	@RequestMapping(value = "/likeMinus", method = RequestMethod.POST)
 	public @ResponseBody int likeMinus(int snsNo) 
 	{
@@ -177,8 +207,6 @@ public class SNSController {
 					} 
 				}
 			}//for
-			//System.out.println(fileGroup);
-			//System.out.println(count);
 			SNS sns = new SNS();
 			sns.setContent(content);
 			sns.setPermission(0);
@@ -247,5 +275,67 @@ public class SNSController {
 
 		return new ResponseEntity<InputStreamResource>(new InputStreamResource(resource.getInputStream()), responseHeaders, HttpStatus.OK);
 
+	}
+	
+	//sentFriend
+	@RequestMapping(value = "/sentFriend",method = RequestMethod.POST)
+	public @ResponseBody int sentFriend(int sender,int receiver) 
+	{
+		int result=0;
+		SNSMapper snsMapper =sqlSession.getMapper(SNSMapper.class);
+		Friend friend =new Friend(receiver,sender,"Y");
+		result=snsMapper.checkFriend(friend);
+		if(result==0)
+		{
+			friend =new Friend(sender,receiver,"Y");
+			result=snsMapper.applyFriend(friend);
+		}
+		else
+		{
+			friend = new Friend(sender,receiver,"N");
+			result=snsMapper.applyFriend(friend);
+			friend = new Friend(receiver,sender,"N");
+			result+=snsMapper.updateApply(friend);
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/checkFriend",method = RequestMethod.POST)
+	public @ResponseBody int checkFriend(int sender,int receiver) 
+	{
+		int result=0;
+		SNSMapper snsMapper =sqlSession.getMapper(SNSMapper.class);
+		Friend friend =new Friend(sender,receiver,"Y");
+		result=snsMapper.checkFriend(friend);
+		return result;
+	}
+	@RequestMapping(value = "/acceptFriend",method = RequestMethod.POST)
+	public @ResponseBody int acceptFriend(int sender,int receiver) 
+	{
+		int result=0;
+		SNSMapper snsMapper =sqlSession.getMapper(SNSMapper.class);
+		Friend friend =new Friend(receiver,sender,"N");
+		result=snsMapper.applyFriend(friend);
+		friend =new Friend(sender,receiver,"N");
+		result+=snsMapper.updateApply(friend);
+		return result;
+	}
+	@RequestMapping(value = "/denyFriend",method = RequestMethod.POST)
+	public @ResponseBody int denyFriend(int sender,int receiver) 
+	{
+		int result=0;
+		SNSMapper snsMapper =sqlSession.getMapper(SNSMapper.class);
+		Friend friend =new Friend(sender,receiver,"D");
+		result=snsMapper.updateApply(friend);
+		return result;
+	}
+	@RequestMapping(value = "/acceptDeny",method = RequestMethod.POST)
+	public @ResponseBody int acceptDeny(int sender,int receiver)
+	{
+		int result=0;
+		SNSMapper snsMapper =sqlSession.getMapper(SNSMapper.class);
+		Friend friend =new Friend(sender,receiver,"D");
+		result=snsMapper.deleteFriend(friend);
+		return result;
 	}
 }

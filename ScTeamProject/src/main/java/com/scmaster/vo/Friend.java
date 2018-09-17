@@ -1,15 +1,24 @@
 package com.scmaster.vo;
 
+import java.math.BigDecimal;
+
 public class Friend {
 	private int userNo;
 	private int friendNo;
-	private String apply;
+	private String apply;//Y:신청중, N:이미 친구, D:거절당함.
 	
 	public Friend(int userNo, int friendNo, String apply) {
 		this.userNo = userNo;
 		this.friendNo = friendNo;
 		this.apply =apply;
 	}
+	
+	public Friend(BigDecimal userNo, BigDecimal friendNo, String apply) {
+		this.userNo = userNo.intValue();
+		this.friendNo = friendNo.intValue();
+		this.apply =apply;
+	}
+	
 	public int getUserNo() {
 		return userNo;
 	}

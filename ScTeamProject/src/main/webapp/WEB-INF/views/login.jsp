@@ -49,7 +49,7 @@
 		      <div class="tab-content">
 		      <!-- 회원가입 -->
 		        <div id="signup">   
-		          <form action='insertNewAccount' method='post'>
+		          <form >
 		          <h3>Don't have an account yet?</h3>
 			          <div class="top-row">
 			            <div class="field-wrap">
@@ -86,7 +86,7 @@
 			            <input type='text' id='userPhone' name='userPhone' required autocomplete="off"/>
 			          </div>
 
-			          <button type="submit" class="button button-block" onclick='insertNewAccount();'>Get Started</button>
+			          <button type="button" class="button button-block" onclick='insertNewAccount();'>Get Started</button>
 		          </form>
 		        </div>	<!-- end : signUp -->
 		        

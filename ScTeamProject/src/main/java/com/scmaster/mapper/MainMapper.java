@@ -23,5 +23,6 @@ public interface MainMapper {
 	int selectUserById(String userId);
 	
 	Object selectImg(int userNo);
+	String selectNick(int userNo);
 	
 }

@@ -180,7 +180,8 @@
 						<div class="sns-title">
 							<div class="titleDiv">
 	                  		<div class="titleProfile">
-					          	<a href="#" style="color:yellow;">
+	                  		<c:if test="${item.userNo ne sessionScope.loginNo }">
+					          	<a href="javascript:sentFriend('${item.userNick }',${sessionScope.loginNo },${item.userNo })" style="color:yellow;">
 						          	<c:if test='${item.imgExist !=0 }'>
 						          	<img src="getUserImage?userNo=${item.userNo}" class="img-circle" width="35" height="35">
 						          	</c:if>
@@ -188,6 +189,15 @@
 						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
 						          	</c:if>${item.userNick }
 					          	</a>
+					          	</c:if>
+					          	<c:if test="${item.userNo eq sessionScope.loginNo }">
+						          	<c:if test='${item.imgExist !=0 }'>
+						          	<img src="getUserImage?userNo=${item.userNo}" class="img-circle" width="35" height="35">
+						          	</c:if>
+						          	<c:if test='${item.imgExist !=1 }'>
+						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
+						          	</c:if>${item.userNick }
+					          	</c:if>
 	                  		</div>
 	                  		<div class="titleContent">
 	                  		<p>님이  ${item.writeDate}에 작성하신 글</p></div>
@@ -216,14 +226,27 @@
 	                  <c:forEach var="rply" items="${item.replyList}" varStatus="stax">
 	                  	<div class="replyDiv">
 	                  		<div class="replyProfile">
-					          	<a href="#">
+	                  		<c:if test="${rply.userNo ne sessionScope.loginNo }">
+					          	<a href="javascript:sentFriend('${rply.userNick }',${sessionScope.loginNo },${rply.userNo })">
 						          	<c:if test='${rply.imgExist !=0 }'>
 						          	<img src="getUserImage?userNo=${rply.userNo}" class="img-circle" width="35" height="35">
 						          	</c:if>
 						          	<c:if test='${rply.imgExist !=1 }'>
 						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
 						          	</c:if>
-					          	</a><br>${rply.userNick }
+					          	<br>${rply.userNick }
+	                  		</a>
+	                  		</c:if>
+	                  		<c:if test="${rply.userNo eq sessionScope.loginNo }">
+					          	
+						          	<c:if test='${rply.imgExist !=0 }'>
+						          	<img src="getUserImage?userNo=${rply.userNo}" class="img-circle" width="35" height="35">
+						          	</c:if>
+						          	<c:if test='${rply.imgExist !=1 }'>
+						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
+						          	</c:if>
+					          	<br>${rply.userNick }
+	                  		</c:if>
 	                  		</div>
 	                  		<div class="replyContent">
 	                  		<p>${rply.content }</p></div>

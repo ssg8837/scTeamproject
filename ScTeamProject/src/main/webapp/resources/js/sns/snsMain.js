@@ -76,13 +76,44 @@ function insertContent(nowNo)
         	content:inputReply
         	},
         success:function(data){	
-        	alert(data);
-    		
+        	alert("답글을 성공적으로 달았습니다.");
+        	location.reload();
         }
     });
 }
 
-function sentFriend()
+function sentFriend(nick,sender,receiver)
 {
+	$.ajax({
+		url:"./checkFriend",
+		type:"POST",
+		data:{"sender" : sender,
+			"receiver" : receiver
+		},
+		success:function(data){	
+			if(data==0)
+			{
+				if(confirm(nick+"님에게 친구 요청을 보내겠습니까?"))
+				{
+					$.ajax({
+				        url:'./sentFriend',
+				        type:"POST",
+						data:{"sender" : sender,
+							"receiver" : receiver
+						},
+				        success:function(data){	
+				        	alert("친구 신청을 성공적으로 보냈습니다.");
+				        	location.reload();
+				        }
+				    });
+				}
+				else
+				{
+					alert("친구 신청을 취소하셨습니다.");
+				}
+			}
+		}
+		
+	});
 	
 }
