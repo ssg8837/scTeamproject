@@ -1,3 +1,52 @@
+
+//caps lock 켜져있으면 알림-회원가입
+function caps_lock_signupPwd(e) {
+    var keyCode = 0;
+    var shiftKey = false;
+    keyCode = e.keyCode;
+    shiftKey = e.shiftKey;
+    if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
+            || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
+        show_caps_lock_signupPwd();
+        setTimeout("hide_caps_lock_signupPwd()", 3000);
+    } else {
+        hide_caps_lock_signupPwd();
+    }
+}
+
+function show_caps_lock_signupPwd() {
+ $("#signupPw_capslock").show();
+}
+
+function hide_caps_lock_signupPwd() {
+ $("#signupPw_capslock").hide();
+}
+
+//caps lock 켜져있으면 알림-로그인
+function caps_lock_loginPwd(e) {
+    var keyCode = 0;
+    var shiftKey = false;
+    keyCode = e.keyCode;
+    shiftKey = e.shiftKey;
+    if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
+            || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
+        show_caps_lock_loginPwd();
+        setTimeout("hide_caps_lock_loginPwd()", 3000);
+    } else {
+        hide_caps_lock_loginPwd();
+    }
+}
+
+function show_caps_lock_loginPwd() {
+ $("#loginPw_capslock").show();
+}
+
+function hide_caps_lock_loginPwd() {
+ $("#loginPw_capslock").hide();
+}
+
+
+//유효성 검사
 function login()
 {
 	var userid=$('#userid').val();

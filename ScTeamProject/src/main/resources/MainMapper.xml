@@ -38,19 +38,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 회원정보수정 -->
 	<update id="updateUser" parameterType="BS_User">
 		UPDATE BS_USER
-		SET USERPWD = #{userPwd},
+		SET 
+			USERPWD = #{userPwd},
 			USERADDR = #{userAddr},
 			USEREMAIL = #{userEmail},
 			USERPHONE = #{userPhone},
 			USERNICK = #{userNick},
 			USERORIGINALFILE = #{userOriginalFile},
 			USERSAVEDFILE = #{userSavedFile}
-		WHERE USERID = #{userId}
+		WHERE USERNO = #{userNo}
 	</update>
 	
 	<!-- 아이선택 -->
 	<select id="selectBaby" resultType="BS_Baby" parameterType="Integer"> 
 		SELECT BABYNO,USERNO, BABYGENDER, TO_CHAR(BABYBIRTH,'YYYY-MM-DD') AS BABYBIRTH, BABYNAME, BABYBLOOD
+		FROM BS_BABY
+		WHERE BABYNO=#{babyNo}
+	</select>
+	
+	<!-- 나이계산 -->
+	<select id="babyAge" resultType="Integer" parameterType="Integer">
+		SELECT TRUNC(MONTHS_BETWEEN(SYSDATE, BABYBIRTH)) AS BABYAGE
 		FROM BS_BABY
 		WHERE BABYNO=#{babyNo}
 	</select>

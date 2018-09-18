@@ -1,3 +1,6 @@
+//login_check와 다른 파일입니다. 삭제하지 마세요!
+
+
 $('.form').find('input, textarea').on('keyup blur focus', function (e) {
   
   var $this = $(this),

@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectPublicSNS" resultType="SNS"> 
 		SELECT SNSNO, USERNO, PERMISSION ,CONTENT, LIKEY, PHOTOCOUNT, PHOTOGROUP, TO_CHAR(WRITEDATE,'YYYY-MM-DD HH24:MI') AS WRITEDATE
 		FROM SNS
-		WHERE PERMISSION = 0
+		WHERE PERMISSION = 1
 	</select>
 	
 	<select id="selectFriendList" resultType="Integer">
@@ -18,14 +18,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM FRIEND
 		WHERE USERNO=#{loginNo}
 	</select>
-	<select id="selectSNS" resultType="SNS">
+	<select id="selectSNS" resultType="SNS" parameterType="Integer">
 		SELECT SNSNO, USERNO, PERMISSION ,CONTENT, LIKEY, PHOTOCOUNT, PHOTOGROUP, TO_CHAR(WRITEDATE,'YYYY-MM-DD HH24:MI') AS WRITEDATE
 		FROM SNS
-		WHERE (USERNO=#{loginNo}) OR
-		(PERMISSION = 0) OR
+		WHERE (USERNO=#{loginNo} AND PERMISSION = 0) OR
+		(PERMISSION = 1) OR
 		(USERNO IN (SELECT FRIEND
 		FROM FRIEND
-		WHERE USERNO=#{loginNo}))
+		WHERE USERNO=#{loginNo}) AND PERMISSION = 0)
 	</select>
+	
+	<insert id="insertSNS" parameterType="SNS">
+		INSERT INTO SNS(SNSNO, USERNO, PERMISSION ,CONTENT, LIKEY, PHOTOCOUNT, PHOTOGROUP,WRITEDATE)
+		VALUES
+		(SNS_SEQ.NEXTVAL, #{userNo}, #{permission}, #{content}, 0,#{photoCount}, #{photoGroup}, SYSDATE)
+	</insert>
+	
 	
 </mapper>

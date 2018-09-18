@@ -10,6 +10,9 @@ public class SNS {
 	private String photoGroup;
 	private String writeDate;
 	
+	
+	public SNS() {
+	}
 	public SNS(int SNSNo, int userNo, int permission, String content, int likely, int photoCount, String photoGroup, String writeDate) {
 		this.SNSNo = SNSNo;
 		this.userNo = userNo;

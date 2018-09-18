@@ -14,6 +14,7 @@
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
 		
 	</head>
+	
 	<body>
 	<form id='home' action='./' method='get'>
 		</form>
@@ -21,7 +22,7 @@
         <c:if test='${sessionScope.loginId != null }'>
 		<input type="hidden" id="loginNo" value="${sessionScope.loginNo}">
 		</c:if>
-	<section id="container">
+	<section id="container" class="sidebar-closed">
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
         *********************************************************************************************************************************************************** -->
@@ -65,18 +66,25 @@
         *********************************************************************************************************************************************************** -->
     <!--sidebar start-->
     <aside>
-      <div id="sidebar" class="nav-collapse ">
+      <div id="sidebar" class="nav-collapse " style="margin-left: -210px;">
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit">
+		          	<c:if test='${sessionScope.loginImg != null }'>
+		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
+		          	</c:if>
+		          	<c:if test='${sessionScope.loginImg == null }'>
+		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
+		          	</c:if>
+	          	</a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="active edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
         	  <li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이 추가하기</span>
+	              <span>아이 정보</span>
 	            </a>
 	          </li>
 	          <li class="sub-menu">
@@ -104,13 +112,13 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="hospital_Test">
+	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
 	          </li>
 	           <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="babyBook">
 	              <i class="fa fa-book fa_left"></i>
 	              <span>다이어리</span>
 	              </a>
@@ -122,9 +130,9 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="flea_list">
 	              <i class="fa fa-edit fa_left"></i>
-	              <span>게시판</span>
+	              <span>벼룩시장</span>
 	              </a>
 	          </li>
           </ul>
@@ -136,7 +144,7 @@
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
-    <section id="main-content">
+    <section id="main-content" style="margin-left: 0px;">
       <section class="wrapper site-min-height">
         <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
         <div class="row mt">
@@ -153,9 +161,6 @@
    
     <!--footer end-->
   </section>
-	
-	   
-	    
 	    <script src="./resources/js/common/jquery.min.js"></script>
 	    <script src="./resources/js/common/bootstrap.min.js"></script>
 		<script src="./resources/js/common/jquery-ui-1.9.2.custom.min.js"></script>

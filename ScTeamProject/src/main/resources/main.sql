@@ -2,7 +2,6 @@
 select * from BS_USER;
 select * from BS_BABY;
 
-
 DROP TABLE BS_USER;
 DROP TABLE BS_BABY;
 
@@ -21,7 +20,7 @@ ALTER TABLE BS_USER ADD (USERORIGINALFILE VARCHAR2(100));
 ALTER TABLE BS_USER ADD (USERSAVEDFILE VARCHAR2(100));
 
 
-INSERT INTO BS_USER VALUES(0,'n','test','test','testaddr','test@mail.com','000-111-2234', 'tester');
+INSERT INTO BS_USER VALUES(0,'n','test','test','testaddr','test@mail.com','000-111-2234', 'tester',null,null);
 
 CREATE TABLE BS_BABY
 (

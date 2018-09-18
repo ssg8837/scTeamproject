@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scmaster.mapper.FleaMapper">
+
+  	<select id="getBoardList" parameterType="map" resultType="Flea">
+ 		SELECT 
+  			* 
+  		FROM 
+  			(SELECT 
+  				rownum num, b.* 
+			FROM 
+				(SELECT 
+					f.userNo, bs.USERID, bs.USERNICK, bs.USERPHONE, bs.USEREMAIL, f.fleaNum, f.fleaTitle, f.fleaText,  to_char(f.FLEAREGDATE,'yyyy-mm-dd') as REGDATE, f.FLEASAVEDFILE
+				FROM 
+					Flea f,BS_USER bs  
+				WHERE
+					bs.userNo=f.userNo 
+				<if test="#{searchText}!=null">
+				 and 
+					fleaTitle like '%' || #{searchText} || '%'
+				</if> 
+				ORDER BY 
+					f.fleaNum DESC) 
+				b) 
+  	</select>
+
+  	<select id="selectOne" parameterType="int" resultType="Flea">
+		SELECT 
+			f.userNo, bs.USERID, bs.USERNICK, bs.userAddr, bs.USERPHONE, bs.USEREMAIL, f.fleaNum, f.fleaTitle, f.fleaText,  to_char(f.FLEAREGDATE,'yyyy-mm-dd') as REGDATE, f.FLEASAVEDFILE
+		FROM 
+			Flea f,BS_USER bs  
+		WHERE
+			bs.userNo=f.userNo
+		and
+			f.fleaNum=#{fleaNum}
+  	</select>
+
+  	<select id="countTotal" parameterType="map" resultType="int">
+  		SELECT 
+  			COUNT(*)
+  		FROM
+  			 flea
+  		<if test="#{searchText}!=null">
+		WHERE 
+			fleaTitle like  '%' || #{searchText} || '%'
+		</if> 
+  	</select>
+  	
+  	<insert id="boardWrite" parameterType="Flea">
+		INSERT INTO 
+			FLEA
+				(userNo,fleaNum,fleaTitle,fleaText,flearegdate,fleaSavedFile)
+		VALUES
+  	</insert>
+
+  	<update id="updateHits" parameterType="int"> 
+ 		UPDATE 
+  			FLEA
+  		SET 
+  			hitcount=hitcount+1 
+  		WHERE 
+  			fleaNum=#{fleaNum} 
+  	</update>
+
+  	<update id="updateBoard" parameterType="Flea"> 
+  		 
+  	</update>
+
+  	<delete id="deleteBoard" parameterType="int"> 
+  		 DELETE 
+  		 	FLEA
+  		 WHERE
+  		 	FLEANUM=#{fleaNum}
+  	</delete>
+</mapper>
