@@ -15,8 +15,7 @@ public class SNS_Reply {
 	public SNS_Reply() {
 		imgExist=0;
 	}
-	
-	public SNS_Reply(int rplyNo,  int snsNo,int userNo,String userNick, String content, int parent_Rply,String writeDate) {
+	public SNS_Reply( int rplyNo, int snsNo, int userNo, String userNick, String content, int parent_Rply, String writeDate ) {
 		this.rplyNo = rplyNo;
 		this.userNo = userNo;
 		this.snsNo = snsNo;

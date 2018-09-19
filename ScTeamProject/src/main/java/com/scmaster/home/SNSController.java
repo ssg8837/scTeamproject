@@ -107,6 +107,32 @@ public class SNSController {
 	{
 		return "newSns";
 	}
+	@RequestMapping(value = "/sns_OpenChoose", method = RequestMethod.POST)
+	public String sns_OpenChoose(Model model,int snsNo) 
+	{
+		SNSMapper snsMapper= sqlSession.getMapper(SNSMapper.class);
+		SNS sns = snsMapper.selectSNSbySnsNo(snsNo);
+		model.addAttribute("sns", sns);
+		return "Sns_SelectOption";
+	}
+	@RequestMapping(value = "/reply_OpenChoose", method = RequestMethod.POST)
+	public String reply_OpenChoose(Model model,int rplyNo) 
+	{
+		SNSMapper snsMapper= sqlSession.getMapper(SNSMapper.class);
+		SNS_Reply reply = snsMapper.selectReplyByRplyNo(rplyNo);
+		model.addAttribute("reply", reply);
+		return "Reply_SelectOption";
+	}
+	//sns_OpenUpdate
+	@RequestMapping(value = "/sns_OpenUpdate", method = RequestMethod.POST)
+	public String sns_OpenUpdate(Model model,int selectNo) 
+	{
+		SNSMapper snsMapper= sqlSession.getMapper(SNSMapper.class);
+		SNS sns = snsMapper.selectSNSbySnsNo(selectNo);
+		model.addAttribute("sns", sns);
+		return "modifySns";
+	}
+	
 	@RequestMapping(value = "/likePlus", method = RequestMethod.POST)
 	public @ResponseBody int likePlus(int snsNo) 
 	{
@@ -181,18 +207,14 @@ public class SNSController {
 			SNSMapper snsMapper=sqlSession.getMapper(SNSMapper.class);
 			int count=0;
 			ArrayList<String> fileGroup=new ArrayList<String>();
-			
 			for(MultipartFile file : boardfiles.getFileSet())
 			{
-					
 				//System.out.println(file.getOriginalFilename());
 				if(file.getOriginalFilename().length()!=0)
 				{
 					count++;
-					
 					String savedName = savedName(file);
 					fileGroup.add(savedName);
-					
 					File path = new File(UPLOADPATH);
 					if(!path.exists())
 					{
@@ -256,23 +278,15 @@ public class SNSController {
 	public String savedName(MultipartFile uploadfile) {
 		UUID uuid = UUID.randomUUID();
 		String savedName = uuid+""+uploadfile.getOriginalFilename();
-		
 		return savedName;
 	}
 	
 	@RequestMapping(value = "/getImageSns",method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<InputStreamResource> getImageSns(String fullname) throws Exception {
-
-		
 		HttpHeaders responseHeaders = new HttpHeaders();
-
 		responseHeaders.setContentType(MediaType.IMAGE_JPEG);
-		
 		String path = String.format("%s//%s", UPLOADPATH, fullname);
-
 		FileSystemResource resource = new FileSystemResource(path);
-
-
 		return new ResponseEntity<InputStreamResource>(new InputStreamResource(resource.getInputStream()), responseHeaders, HttpStatus.OK);
 
 	}
@@ -338,4 +352,56 @@ public class SNSController {
 		result=snsMapper.deleteFriend(friend);
 		return result;
 	}
+
+	//sns_Delete
+	@RequestMapping(value = "/sns_Delete", method = RequestMethod.POST)
+	public String sns_Delete(Model model, int selectNo) 
+	{
+		SNSMapper snsMapper=sqlSession.getMapper(SNSMapper.class);
+		snsMapper.deleteSns(selectNo);
+		snsMapper.deleteReplyBySnsNo(selectNo);
+		return openSNS(model);
+	}
+	
+	@RequestMapping(value = "/updateNewSns", method = RequestMethod.POST)
+	public String updateNewSns(Model model, String content,boolean permission,int snsNo) 
+	{
+		Object loginNo=httpSession.getAttribute("loginNo");
+		if(loginNo!=null)
+		{
+			SNSMapper snsMapper=sqlSession.getMapper(SNSMapper.class);
+			SNS sns = new SNS();
+			sns.setContent(content);
+			sns.setSNSNo(snsNo);
+			if(permission==true)//1은 전체공개, 0은 친구들만.
+			{
+				sns.setPermission(1);
+			}
+			else
+			{
+				sns.setPermission(0);
+			}
+			snsMapper.updateSNS(sns);
+		}
+		return openSNS(model);
+	}
+	
+		@RequestMapping(value = "/reply_Delete", method = RequestMethod.POST)
+		public String reply_Delete(Model model, int selectNo) 
+		{
+			SNSMapper snsMapper=sqlSession.getMapper(SNSMapper.class);
+			snsMapper.deleteReplyByRplyNo(selectNo);
+			return openSNS(model);
+		}
+		@RequestMapping(value = "/reply_Update", method = RequestMethod.POST)
+		public String reply_Update(Model model, int selectNo, String content) 
+		{
+			SNSMapper snsMapper=sqlSession.getMapper(SNSMapper.class);
+			SNS_Reply reply= new SNS_Reply();
+			reply.setRplyNo(selectNo);
+			reply.setContent(content);
+			snsMapper.updateReply(reply);
+			return openSNS(model);
+		}
+		
 }

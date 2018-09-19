@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM FRIEND
 		WHERE USERNO=#{loginNo}
 	</select>
+	
 	<select id="selectSNS" resultType="SNS" parameterType="Integer">
 		SELECT SNSNO, USERNO, USERNICK,PERMISSION ,CONTENT, LIKEY, PHOTOCOUNT, PHOTO_1,PHOTO_2,PHOTO_3,PHOTO_4, TO_CHAR(WRITEDATE,'YYYY-MM-DD HH24:MI') AS WRITEDATE
 		FROM SNS
@@ -28,6 +29,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM FRIEND
 		WHERE USERNO=#{loginNo} AND APPLY='N') AND PERMISSION = 0)
 		ORDER BY SNSNO DESC
+	</select>
+	
+		<select id="selectSNSbySnsNo" resultType="SNS" parameterType="Integer">
+		SELECT SNSNO, USERNO, USERNICK,PERMISSION ,CONTENT, LIKEY, PHOTOCOUNT, PHOTO_1,PHOTO_2,PHOTO_3,PHOTO_4, TO_CHAR(WRITEDATE,'YYYY-MM-DD HH24:MI') AS WRITEDATE
+		FROM SNS
+		WHERE SNSNO=#{snsNo}
 	</select>
 	
 	<insert id="insertSNS" parameterType="SNS">
@@ -44,6 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertLikely" parameterType="Likely">
 		INSERT INTO LIKELY(USERNO, SNSNO) VALUES (#{userNo}, #{snsNo})
 	</insert>
+	
 	<delete id="deleteLikely" parameterType="likely">
 		DELETE FROM LIKELY WHERE USERNO=#{userNo} AND SNSNO=#{snsNo}
 	</delete>
@@ -104,5 +112,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteFriend" parameterType="Friend">
 		DELETE FROM FRIEND WHERE USERNO=#{userNo} AND FRIENDNO=#{friendNo}
 	</delete>
+	
+	<delete id="deleteSns" parameterType="Integer">
+		DELETE FROM SNS WHERE SNSNO=#{selectNo}
+	</delete>
+	
+	<delete id="deleteReplyBySnsNo" parameterType="Integer">
+		DELETE FROM SNS_REPLY WHERE SNSNO=#{selectNo}
+	</delete>
+	
+	<update id="updateSNS" parameterType="SNS">
+		UPDATE SNS 
+		SET USERNO=#{userNo}, CONTENT = #{content}, PERMISSION=#{permission}
+		WHERE SNSNO=#{SNSNo}
+	</update>
+	
+	<select id="selectReplyByRplyNo" parameterType="Integer" resultType="SNS_Reply">
+		SELECT RPLYNO, SNSNO, USERNO, USERNICK ,CONTENT , PARENT_RPLY, TO_CHAR(WRITEDATE,'YYYY-MM-DD HH24:MI') AS WRITEDATE
+		FROM SNS_REPLY
+		WHERE RPLYNO = #{rplyNo}
+	</select>
+	
+	<select id="deleteReplyByRplyNo" parameterType="Integer" resultType="SNS_Reply">
+		DELETE FROM SNS_REPLY
+		WHERE RPLYNO = #{rplyNo}
+	</select>
+	
+	<update id="updateReply" parameterType="SNS_Reply">
+		UPDATE SNS_REPLY 
+		SET  CONTENT = #{content}
+		WHERE RPLYNO = #{rplyNo}
+	</update>
 	
 </mapper>

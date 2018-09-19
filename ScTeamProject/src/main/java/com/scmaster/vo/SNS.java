@@ -6,7 +6,7 @@ public class SNS {
 	private int SNSNo; 
 	private int userNo;
 	private String userNick;
-	private int permission;
+	private int permission; // 1이 전체공개, 0이 아닐걸
 	private String content;
 	private int likey;
 	private int photoCount;

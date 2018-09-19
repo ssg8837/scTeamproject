@@ -117,3 +117,40 @@ function sentFriend(nick,sender,receiver)
 	});
 	
 }
+
+function modifySns(snsNo)
+{
+	var newWin = window.open("about:blank", "modifySns", "width=500, height=300, scrollbars=no");
+	var form = document.createElement("form");    
+	form.setAttribute("method","post");                    
+	form.setAttribute("action","sns_OpenChoose");        
+	document.body.appendChild(form);   
+	//input
+	var input_id = document.createElement("input");  
+	input_id.setAttribute("type", "hidden");  
+	input_id.setAttribute("name", "snsNo");                        
+	input_id.setAttribute("value", snsNo);     
+	form.appendChild(input_id);
+	//폼전송
+	form.target = "modifySns";
+	form.submit();
+	
+}
+
+function modifyRelpy(rplyNo)
+{
+	var newWin = window.open("about:blank", "modifyReply", "width=500, height=300, scrollbars=no");
+	var form = document.createElement("form");
+	form.setAttribute("method","post");                    
+	form.setAttribute("action","reply_OpenChoose");        
+	document.body.appendChild(form);
+	var input_id = document.createElement("input");  
+	input_id.setAttribute("type", "hidden");  
+	input_id.setAttribute("name", "rplyNo");                        
+	input_id.setAttribute("value", rplyNo);
+	form.appendChild(input_id);
+	//폼전송
+	form.target = "modifyReply";
+	form.submit();
+	
+}

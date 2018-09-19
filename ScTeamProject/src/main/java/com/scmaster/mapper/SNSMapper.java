@@ -12,6 +12,7 @@ public interface SNSMapper {
 	ArrayList<SNS> selectPublicSNS();
 	ArrayList<Integer> selectFriendList(Integer loginNo);
 	ArrayList<SNS> selectSNS(Integer loginNo);
+	SNS selectSNSbySnsNo(int snsNo);
 	void insertSNS(SNS sns);
 	int selectLikely(Likely temp);
 	void insertLikely(Likely likely);
@@ -26,4 +27,10 @@ public interface SNSMapper {
 	int updateApply(Friend friend);
 	ArrayList<Friend> selectDenyList(int loginNo);
 	int deleteFriend(Friend friend);
+	void deleteSns(int selectNo);
+	void deleteReplyBySnsNo(int selectNo);
+	void updateSNS(SNS sns);
+	SNS_Reply selectReplyByRplyNo(int rplyNo);
+	void deleteReplyByRplyNo(int rplyNo);
+	void updateReply(SNS_Reply reply);
 }

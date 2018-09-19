@@ -3,8 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
-
 <html>
 	<head>
 		<title>육아서포트페이지</title>
@@ -20,6 +18,11 @@
 		
 	</head>
 	<body>
+	
+	<form class="selectForm" method="post">
+		<input name="selectNo" id="selectNo" type="hidden">
+  	</form>
+	
 	<form id='home' action='./' method='get'>
 		</form>
 		
@@ -188,20 +191,20 @@
 						          	<c:if test='${item.imgExist !=1 }'>
 						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
 						          	</c:if>${item.userNick }
-					          	</a>
+					          	</a> 님이  ${item.writeDate}에 작성하신 글
 					          	</c:if>
 					          	<c:if test="${item.userNo eq sessionScope.loginNo }">
+					          	<a href="javascript:modifySns('${item.SNSNo }')" style="color:white;">
 						          	<c:if test='${item.imgExist !=0 }'>
 						          	<img src="getUserImage?userNo=${item.userNo}" class="img-circle" width="35" height="35">
 						          	</c:if>
 						          	<c:if test='${item.imgExist !=1 }'>
 						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
-						          	</c:if>${item.userNick }
+						          	</c:if>${item.userNick } 님이  ${item.writeDate}에 작성하신 글
+						          	</a>
 					          	</c:if>
 	                  		</div>
-	                  		<div class="titleContent">
-	                  		<p>님이  ${item.writeDate}에 작성하신 글</p></div>
-	                  	</div>
+	                  		</div>
 						
 						
 						</div>
@@ -224,9 +227,10 @@
 	                    <p>${item.content } </p>
 	                  </div>
 	                  <c:forEach var="rply" items="${item.replyList}" varStatus="stax">
-	                  	<div class="replyDiv">
-	                  		<div class="replyProfile">
+	                  	
+					        <div class="replyDiv">
 	                  		<c:if test="${rply.userNo ne sessionScope.loginNo }">
+	                  		<div class="replyProfile">
 					          	<a href="javascript:sentFriend('${rply.userNick }',${sessionScope.loginNo },${rply.userNo })">
 						          	<c:if test='${rply.imgExist !=0 }'>
 						          	<img src="getUserImage?userNo=${rply.userNo}" class="img-circle" width="35" height="35">
@@ -236,21 +240,29 @@
 						          	</c:if>
 					          	<br>${rply.userNick }
 	                  		</a>
+		                  		</div>
+	                  		<div class="replyContent">
+	                  		<p>${rply.content }</p></div>
 	                  		</c:if>
+	                  			
 	                  		<c:if test="${rply.userNo eq sessionScope.loginNo }">
-					          	
+	                  		<div class="replyProfile">
+	                  			<a href="javascript:modifyRelpy(${rply.rplyNo })">
 						          	<c:if test='${rply.imgExist !=0 }'>
 						          	<img src="getUserImage?userNo=${rply.userNo}" class="img-circle" width="35" height="35">
 						          	</c:if>
 						          	<c:if test='${rply.imgExist !=1 }'>
 						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
 						          	</c:if>
-					          	<br>${rply.userNick }
+					          	<br>${rply.userNick }</a>
+					          	</div>
+		                  		<div class="replyContent">
+	                  			<p><a href="javascript:modifyRelpy(${rply.rplyNo })">
+		                  			${rply.content }
+		                  		</a></p>
+		                  		</div>
 	                  		</c:if>
 	                  		</div>
-	                  		<div class="replyContent">
-	                  		<p>${rply.content }</p></div>
-	                  	</div>
 	                  </c:forEach>
 	                  <div class="inputReply">
 	                    <textarea id="inputReply_${item.SNSNo }"  style="width:100%; resize:none;"></textarea><br>
