@@ -120,7 +120,7 @@ public class VaccineControllerForHospital{
 	//병원 검색 ㅠㅠ
 	@RequestMapping(value = "/Searchhospital", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> hopitalTest3(String brtcCd, String sggCd,
-															@RequestParam(value="page", defaultValue="1") String page
+															@RequestParam(value="page", defaultValue="1") String page												
 															) throws Exception{
 		
 		List<VaccineHospital> vhList = new ArrayList<VaccineHospital>();
@@ -166,7 +166,7 @@ public class VaccineControllerForHospital{
 		map.put("totalCount", totalCount);
 		map.put("vhList", vhList);
 	    map.put("page", Integer.parseInt(page));
-	
+	   
 	    return map;
 	}
 	
@@ -177,6 +177,12 @@ public class VaccineControllerForHospital{
 		System.out.println(hospital);
 		
 		model.addAttribute("hospital", hospital);
+		
+		//프로필사진 불러오기
+  		Object loginNo=httpSession.getAttribute("loginNo");
+  		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+  		BS_User user=mapperM.myAccount((Integer)loginNo);
+  		model.addAttribute("user",user);  
 	    return "map";
 	}
 	

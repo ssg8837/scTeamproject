@@ -160,7 +160,7 @@
           <div class="col-lg-12">
           <form id="alarmform" action='alarm_insertNewAlarm' method='post'>
 			<input type="hidden" value="${sessionScope.loginNo}" id="userNo" name="userNo">
-			<div class='input-group col-xs-4'>
+			<div class='input-group col-xs-10'>
 				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
 				
 				<c:forEach var='val' items='${noList }' varStatus='sta'>
@@ -168,7 +168,7 @@
 				</c:forEach>
 				</select>
 			</div>
-			<div class='input-group col-xs-4'>
+			<div class='input-group col-xs-10'>
 				<span class="input-group-addon">할 일</span><select class="form-control" id="alarmType" name="alarmType" onchange="changeSelect()">
 					<option value="">카테고리를 선택해주세요</option>
 					<option value='1'>모유</option>
@@ -181,16 +181,16 @@
 					<option value='0'>기타</option>	
 				</select>
 			</div>
-			<div id="detail" class='input-group col-xs-4'></div>
-			<div id="amount" class='input-group col-xs-4'></div>
-		   	<div class="input-group date form_datetime col-xs-4 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">
+			<div id="detail" class='input-group col-xs-10'></div>
+			<div id="amount" class='input-group col-xs-10'></div>
+		   	<div class="input-group date form_datetime col-xs-10 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">
 			<span id="timesSpan" class="input-group-addon">일시</span>
 				<input class="form-control " type="text" id='nowAlarm' name="alarmTime" value="" readonly>
 				<span class="input-group-addon"><span class="fa fa-calendar"></span></span>	
 			</div>
 			
 			<div id="end"></div>
-           	<div class='input-group col-xs-4'>
+           	<div class='input-group col-xs-10'>
 				<span class="input-group-addon">메모</span>
 				<input class="form-control " id="alarmTitle" name="alarmTitle"  type="text" value='${alarm.alarmTitle }'>
 			</div>

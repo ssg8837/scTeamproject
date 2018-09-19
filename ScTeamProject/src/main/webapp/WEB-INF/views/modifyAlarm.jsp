@@ -98,11 +98,6 @@
 	              <i class="fa fa-calendar fa_left"></i>
 	              <span>생활기록</span>
 	              </a>
-	              <ul class="sub">
-		              <li class="active">
-		                <a href="javascript:window.location.href=window.location.href">일정 수정</a>
-		              </li>
-	              </ul>
 	          </li>
 	          <li class="sub-menu">
 	            <a href="">
@@ -160,7 +155,7 @@
           <div class="col-lg-12">
           <form id="alarmform" action='alarm_UpdateAlarm' method='post'>
 			<input type='hidden' name='alarmNo' value='${alarm.alarmNo }'>
-			<div class='input-group col-xs-4'>
+			<div class='input-group col-xs-10'>
 				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
 				
 				<c:forEach var='val' items='${noList }' varStatus='sta'>
@@ -173,11 +168,11 @@
 				</c:forEach>
 				</select>
 			</div>
-			<div class='input-group col-xs-4'>
+			<div class='input-group col-xs-10'>
 				<span class="input-group-addon">할일</span>
 				<input class="form-control " id="alarmTitle" name="alarmTitle"  type="text" value='${alarm.alarmTitle }'>
 			</div>
-			<div class="input-group date form_datetime col-xs-4 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
+			<div class="input-group date form_datetime col-xs-10 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
 			<span class="input-group-addon">일시</span>
                     	<input class="form-control " type="text" name="alarmTime" value="${alarm.alarmTime }" readonly>
                     

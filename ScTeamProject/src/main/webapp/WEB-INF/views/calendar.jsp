@@ -155,7 +155,7 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 생활 기록 달력</h3>
+        <h3><i class="fa fa-angle-right"></i> 생활 기록</h3>
         <div class="row mt">
           <div class="col-lg-12">
            <div id='calendar'></div>

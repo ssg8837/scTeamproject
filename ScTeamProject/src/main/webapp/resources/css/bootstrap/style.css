@@ -32,6 +32,9 @@ a, a:hover, a:focus {
     text-decoration: none;
     outline: none;
 }
+::-webkit-scrollbar {
+	display:none;
+}
 ::selection {
 
     background: #90BEFA;
@@ -411,6 +414,7 @@ ul.sidebar-menu li a.active i {
 
 .header {
     position: fixed;
+    top: 0;
     left: 0;
     right: 0;
     z-index: 1002;

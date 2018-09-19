@@ -223,32 +223,46 @@ textarea {
 }
 
 /*-----------모바일 화면 레이아웃-----------*/
-@media (max-width: 1300px) {
+@media (max-width: 1340px) {
 	.login_content{
 		margin: auto;
 		margin-top: 2em;
 		margin-bottom: 2em;
 		width: 90%;
 	}
-	
 	.loginImgDiv{
-		width: 50%;
+		width: 56%;
 	}
 	.form{
-		margin: 0 auto;
 		max-width: 400px;
 		min-width: 300px;
 	}
 }
 
+@media (max-width: 1200px) {
+	.login_content{
+		margin: auto;
+		margin-top: 2em;
+		margin-bottom: 2em;
+		width: 90%;
+	}
+	.loginImgDiv{
+		width: 50%;
+	}
+	.form{
+		max-width: 400px;
+		min-width: 300px;
+	}
+}
+
+/* pc */
 @media (max-width: 1024px) {
 	.login_content{
 		margin: auto;
 		margin-top: 2em;
 		margin-bottom: 2em;
 		width: 100%;
-	}
-	
+	}	
 	.loginImgDiv{
 		width: 48%;
 	}
@@ -256,11 +270,12 @@ textarea {
 		margin: auto;
 	}
 	.form{
-		margin: 0 auto;
+		max-width: 360px;
 		min-width: 300px;
 	}
 }
 
+/* 태블릿 */
 @media ( max-width: 767px ) {
 	.login_content{
 		margin: auto;
@@ -272,9 +287,7 @@ textarea {
 	.loginImgDiv{
 		display: none;
 	}
-	
 	.form{
-		margin: auto;
 		width: 100%;
 		min-width: 300px;
 		clear: both;
