@@ -29,7 +29,7 @@ window.chartColors = {
 		
 		$.ajax({
 			type:	'post',
-			url:	'grow_selectBabyData',
+			url:	'grow_selectSheetData',
 			data:	{"babyno": $('#grow_selectBabyForSheet').val()},
 			success: function(responseData){
 				if(responseData.length != 0){

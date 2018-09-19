@@ -37,16 +37,20 @@
 	
 	function hospitalOutput(resp){
 		var result = '<thead><tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr></thead>';
-			
 			result += '<tbody>';
+			
 			$.each(resp.vhList,function(index,item){
-				result += '<tr onclick="javascript:sendHospital(';
-				result += "'"+item.orgAddr+"'"+')"><td>'+item.orgnm+'</td>';
+				var name = "'" + item.orgnm + "'";
+				var addr = "'" + item.orgAddr + "'";
+				var tel = "'" + item.orgTlno + "'";
+				
+				result +='<tr onclick="javascript:sendHospital('+name+','+addr+','+tel+');">';
+				result += '<td>'+item.orgnm+'</td>';
 				result += '<td>'+item.orgTlno+'</td>';
 				result += '<td id="hospitalAddr">'+item.orgAddr+'</td></tr>';
 			});
 			result += '</tbody>';
-		
+			
 		
 		$('#vaccineHospital').html(result);
 		
@@ -69,7 +73,7 @@
 		var page = p+1;
 		
 		if(sggCd==null){
-			alert('시/군/구 를 선택해 주세요');
+			alert('시/군/구 를 선택해주세요');
 			return;
 		}
 		
@@ -81,10 +85,9 @@
 		});
 	}
 	
-	function sendHospital(addr){
-		alert(addr);
-		
-		/* location.href='sendHospital?VaccineHospitalhospital='+addr; */
+	function sendHospital(name, addr, tel){
+		console.log(name+",",+addr+","+tel);
+		location.href='sendHospital?address='+addr+'&name='+name+'&phone='+tel;
 	}; 
 
 </script>
@@ -157,9 +160,23 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit">
+	          		<c:if test='${sessionScope.loginImg != null }'>
+		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
+		          	</c:if>
+		          	<c:if test='${sessionScope.loginImg == null }'>
+		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
+		          	</c:if>
+	          	</a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
+	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
+        		<li class="sub-menu">
+	            <a href="openNewBaby">
+	              <i class="fa fa-heart fa_left"></i>
+	              <span>아이 정보</span>
+	            </a>
+	          </li>
 	          <li class="sub-menu">
 	            <a href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
@@ -179,8 +196,8 @@
 	              <span>예방접종</span>
 	            </a>
 	            <ul class="sub">
-              		<li class="active"><a href="vaccineForm">질병 및 예방접종 조회</a></li>
-             		<li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+              		<li ><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+             		<li class="active"><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
               	</ul>
 	          </li>
 	          
@@ -191,7 +208,7 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="hospital_Test">
+	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
@@ -203,7 +220,7 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>

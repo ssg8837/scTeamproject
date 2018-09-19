@@ -69,11 +69,17 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit"><img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit">
+	          		<c:if test='${sessionScope.loginImg != null }'>
+		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
+		          	</c:if>
+		          	<c:if test='${sessionScope.loginImg == null }'>
+		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
+		          	</c:if>
+	          	</a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
-        	
         		<li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
@@ -94,10 +100,14 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="vaccineForm">
+	            <a href="">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	              </a>
+	            </a>
+	           	<ul class="sub" style="display: block;">
+                    <li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+                   <li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+               	</ul>
 	          </li>
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
@@ -106,19 +116,19 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="hospital_Test">
+	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
 	          </li>
 	           <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="babyBook">
 	              <i class="fa fa-book fa_left"></i>
 	              <span>다이어리</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>
@@ -151,7 +161,8 @@
 			<div class="grow_sidebar">
 				<!-- 차트 선택 -->
 				<h5>시트</h5>
-				<button id="grow_babyDataSheets"	class="grow button sheet">	성장기록	</button> <br>
+				<button id="grow_babyDataSheets_Write"	class="grow button">	기록하기	</button> <br>
+				<button id="grow_babyDataSheets"		class="grow button sheet">	기록보기</button> <br>
 				<h5>그래프</h5>
 				<button id="grow_chart_height"		class="grow button chart">	신장		</button> <br>
 				<button id="grow_chart_weight"		class="grow button chart">	체중		</button> <br>
@@ -161,6 +172,32 @@
 
 			<!-- 시트/차트 -->
 			<div class="grow_chart">			
+				<!-- 아이 정보 입력받기 -->
+				<div class="grow_insertDiv">
+					<form id="grow_formSendData" action="grow_insertBabyData" method="post">
+						<h4>성장기록 작성</h4>
+						
+						<select id="grow_selectBaby" name="babyno" onchange="checkit();">
+								<option value="">아이를 선택해주세요</option>
+							<c:forEach var="babyList" items="${babyList}">
+								<option value="${babyList.babyNo}">${babyList.babyName}</option>
+							</c:forEach>
+						</select>
+						<br>
+						<div class="grow_checkRegdate"></div>
+						<br>		
+						<p>날짜 선택:</p> <input type="date" id="growregdate" name="growregdate">
+						<br>
+						<p>신장(cm):		</p> <input type="number" step="0.1" id="growheight" name="growheight">
+						<br>
+						<p>체중(kg):		</p> <input type="number" step="0.1" id="growweight" name="growweight">
+						<br>
+						<p>머리둘레(cm): </p> <input type="number" step="0.1" id="growhead"	name="growhead">
+						<br>
+						<button type="button" onclick="sendData();">아이 정보 입력하기</button>
+					</form>
+				</div><!-- end : 아이정보입력(grow_insertDiv) -->		
+			
 				<!-- 시트 표시 -->
 				<div class="grow_sheet">
 					<form id="grow_formchooseData" action="grow_selectBabyDataByAge" method="post">	
@@ -233,32 +270,6 @@
 				</div>
 			</div>	
 			<!-- end : 시트/차트(grow_chart) -->
-	
-			<!-- 아이 정보 입력받기 -->
-			<div class="grow_insertDiv">
-				<form id="grow_formSendData" action="grow_insertBabyData" method="post">
-					<h4>성장기록 작성</h4>
-					
-					<select id="grow_selectBaby" name="babyno" onchange="checkit();">
-							<option value="">아이를 선택해주세요</option>
-						<c:forEach var="babyList" items="${babyList}">
-							<option value="${babyList.babyNo}">${babyList.babyName}</option>
-						</c:forEach>
-					</select>
-					<br>
-					<div class="grow_checkRegdate"></div>
-					<br>		
-					날짜 선택:	<br> <input type="date" id="growregdate" name="growregdate">
-					<br>
-					신장:		<br> <input type="number" step="0.1" id="growheight" name="growheight">	cm
-					<br>
-					체중:		<br> <input type="number" step="0.1" id="growweight" name="growweight">	kg
-					<br>
-					머리둘레:	<br> <input type="number" step="0.1" id="growhead"	name="growhead">	cm
-					<br>
-					<button type="button" onclick="sendData();">아이 정보 입력하기</button>
-				</form>
-			</div><!-- end : 아이정보입력(grow_insertDiv) -->
           </div>	<!-- end : 본문 -->
         </div>
       	</div>
@@ -267,10 +278,6 @@
     </section>
     <!-- /MAIN CONTENT -->
     <!--main content end-->
-    
-    <!--footer start-->
-   
-    <!--footer end-->
   </section>
 	
 	   
@@ -286,7 +293,6 @@
 		<script src="./resources/js/common/common-scripts.js"></script>
 		  <!--script for this page-->
 		<script src="./resources/js/util/check_byte.js"></script>
-		<script src="./resources/js/home/login_check.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
 	    
 		<script src="./resources/js/grow/Chart.js"></script>
@@ -297,24 +303,26 @@
 		<script src="./resources/js/grow/chartjs-plugin-zoom.js"></script>
 		<script src="./resources/js/grow/grow.js"></script>
 		
-		<script type="text/javascript">		
+		<script type="text/javascript">
+		$('#grow_babyDataSheets_Write').click(function(){
+			$('.grow_sheet').css('display','none');
+			$('.grow_selectBabyDiv').html('');
+			$('.grow_canvas_container').html('');
+			$('.grow_insertDiv').css('display','block');
+		});
 		//시트버튼누르면 페이지새로고침
 		$('.grow.button.sheet').click(function(){	
 			location.reload();
-			/*
-			$('.grow_selectBabyDiv').html('');				// 아이선택버튼 날리기
-			$('.grow_canvas_container').html('');			// 캔버스 날리기
-			$('.grow_canvas_container').css('display','none');
-			$('.grow_sheet').css('display','block');		// 시트 보이기 
-			*/
 		});
 		//그래프버튼 누르면 아이선택버튼 보이게 하기
 		$('.grow.button.chart').click(function(){
-			$('.grow_sheet').css('display','none');			// 시트 가리기
-			$('.grow_canvas_container').css('display','block');
-			$('.grow_selectBabyDiv').html('');				// 아이선택버튼 날리기
+			$('.grow_insertDiv').css('display', 'none')			// '기록하기' 가리기
+			$('.grow_sheet').css('display','none');				// '기록보기' 가리기
+			$('.grow_canvas_container').css('display','block');	// 그래프 캔버스 보이기
+			$('.grow_selectBabyDiv').html('');					// 아이선택버튼 날리기
 			$('.grow_selectBabyDiv').html('<c:forEach var="babyList" items="${babyList}"><button id="${babyList.babyName}" value="${babyList.babyNo}"> ${babyList.babyName}</button></c:forEach>');
 		});	
+		
 		//신장 그래프
 		$('#grow_chart_height').click(function(){
 			//캔버스 날렸다가 다시 그리기
@@ -410,7 +418,7 @@
 			
 			var ctx = document.getElementById("grow_canvas").getContext('2d');
 			grow_canvas = new Chart(ctx, chartHeight);
-			
+
 			//버튼 클릭시 그래프 추가
 			$('.grow_selectBabyDiv button').click(function(e){
 				var babyname = e.target.getAttribute('id');
@@ -433,9 +441,16 @@
 								borderWidth: 1,
 								fill: false
 							};
+							
+							//0914 여기서부터 수정
 							//데이터에 아이 성장기록 데이터 추가
 							$.each(responseData, function(idx, val) {
-								newDataset.data.push(val.growheight);
+								if(val == null){
+									newDataset.data.push('NaN');
+								}else{
+									newDataset.data.push(val.growheight);
+								}
+								console.log(val);
 							});
 							//그래프 추가 전에 기존 그래프 날리기
 							for(var i=0; i<chartHeight.data.datasets.length; i++){
@@ -455,8 +470,9 @@
 					}
 				});	
 			
-			});	//그래프추가 end
+			});//그래프추가 end
 		});	
+		
 		//체중그래프
 		$('#grow_chart_weight').click(function(){
 			$('.grow_canvas_container').html(''); 										
@@ -572,7 +588,11 @@
 							};
 							//데이터에 아이 성장기록 데이터 추가
 							$.each(responseData, function(idx, val) {
-								newDataset.data.push(val.growweight);
+								if(val == null){
+									newDataset.data.push('NaN');
+								}else{
+									newDataset.data.push(val.growweight);
+								}
 							});
 							//그래프 추가 전에 기존 그래프 날리기
 							for(var i=0; i<chartWeight.data.datasets.length; i++){
@@ -712,7 +732,11 @@
 							};
 							//데이터에 아이 성장기록 데이터 추가
 							$.each(responseData, function(idx, val) {
-								newDataset.data.push(val.growhead);
+								if(val == null){
+									newDataset.data.push('NaN');
+								}else{
+									newDataset.data.push(val.growhead);
+								}								
 							});
 							//그래프 추가 전에 기존 그래프 날리기
 							for(var i=0; i<chartHead.data.datasets.length; i++){
@@ -857,7 +881,11 @@
 							};
 							//데이터에 아이 성장기록 데이터 추가
 							$.each(responseData, function(idx, val) {
-								newDataset.data.push(val.growbmi);
+								if(val == null){
+									newDataset.data.push('NaN');
+								}else{
+									newDataset.data.push(val.growbmi);
+								}
 							});
 							//그래프 추가 전에 기존 그래프 날리기
 							for(var i=0; i<chartBMI.data.datasets.length; i++){
@@ -869,7 +897,7 @@
 							chartBMI.data.datasets.push(newDataset);
 							grow_canvas.update();		
 						}else if(responseData.length == 0){
-							alert("성장기록이 없거나, 아이 나이가 24개월 미만인 경우\n그래프를 표기할 수 없습니다");
+							alert("성장기록이 없거나 아이 나이가 24개월 미만인 경우\n그래프를 표기할 수 없습니다");
 						}
 					},
 					error: function(model){
@@ -877,9 +905,9 @@
 					}
 				});	
 			
-			});	//그래프추가 end
-		});
-	</script>
+			  });	//그래프추가 end
+		   });
+		</script>
 	  
 	</body>
 </html>

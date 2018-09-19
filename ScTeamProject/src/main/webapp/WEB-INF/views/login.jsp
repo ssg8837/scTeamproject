@@ -26,10 +26,12 @@
 			<div class="loginImgDiv hidden-md-down">
 			  <div class="loginImgContainer">
 			    <div id="slides">
-			      <img src="./resources/image/login/sample01.jpg" />
-			      <img src="./resources/image/login/sample02.jpg" />
-			      <img src="./resources/image/login/sample03.jpg" />
-			      <img src="./resources/image/login/sample05.jpg" />
+			      <img src="./resources/image/login/babyData.png" />
+			      <img src="./resources/image/login/babyData02.png" />
+			      <img src="./resources/image/login/babyData03.png" />
+			      <img src="./resources/image/login/cal01.png" />
+			      <img src="./resources/image/login/vac01.png" />
+			      <img src="./resources/image/login/vac02.png" />
 			    </div>
 			  </div> <!-- end : 컨테이너 -->
 			  
@@ -49,7 +51,7 @@
 		      <div class="tab-content">
 		      <!-- 회원가입 -->
 		        <div id="signup">   
-		          <form >
+		          <form action='' method='post'>
 		          <h3>Don't have an account yet?</h3>
 			          <div class="top-row">
 			            <div class="field-wrap">

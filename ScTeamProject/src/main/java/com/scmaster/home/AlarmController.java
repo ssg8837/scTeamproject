@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scmaster.mapper.AlarmMapper;
 import com.scmaster.mapper.MainMapper;
-import com.scmaster.mapper.SNSMapper;
 import com.scmaster.vo.BS_Alarm;
 import com.scmaster.vo.BS_Baby;
-import com.scmaster.vo.Bell;
+import com.scmaster.vo.BS_User;
 import com.scmaster.vo.Cal_Event;
-import com.scmaster.vo.Friend;
 
 @Controller
 public class AlarmController {
@@ -33,8 +31,13 @@ public class AlarmController {
 	
 
 	@RequestMapping(value = "/alarm_OpenCalendar", method = RequestMethod.GET)
-	public String alarm_OpenCalendar() 
+	public String alarm_OpenCalendar(Model model) 
 	{
+		//프로필사진 불러오기
+		Object loginNo=httpSession.getAttribute("loginNo");
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
 		
 		return "calendar";
 	}
@@ -57,6 +60,12 @@ public class AlarmController {
 		}
 		model.addAttribute("noList", noList);
 		model.addAttribute("nameList", nameList);
+		
+		//프로필사진 불러오기
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
+		
 		return "newAlarm";
 	}
 	
@@ -67,8 +76,11 @@ public class AlarmController {
 		int type=alarm.getAlarmType();
 		switch(type)
 		{
-		//모유,젖병,유축 (시간기록,양,디테일 필요)
+		//모유
 		case 1:
+			alarmMapper.insertAlarm_EndTimeNDetail(alarm);
+			break;
+		//젖병,유축 (시간기록,양,디테일 필요)
 		case 2:
 		case 4:
 			alarmMapper.insertAlarm_All(alarm);
@@ -81,16 +93,18 @@ public class AlarmController {
 		case 5:
 			alarmMapper.insertAlarm_Detail(alarm);
 			break;
-		//수면 (시간기록 필요)
-		case 7:
-			alarmMapper.insertAlarm_EndTime(alarm);
-			break;
-		//기타, 목욕
+		//목욕, 디폴트
+		case 6:
 		default :
 			alarmMapper.insertAlarm(alarm);
 			break;
+		//기타, 수면 (시간기록 필요)
+		case 0:
+		case 7:	
+			alarmMapper.insertAlarm_EndTime(alarm);
+			break;
 		}
-		return alarm_OpenCalendar();
+		return alarm_OpenCalendar(model);
 	}
 	
 	@RequestMapping(value = "/alarm_OpenChoose", method = RequestMethod.POST)
@@ -122,19 +136,27 @@ public class AlarmController {
 		}
 		model.addAttribute("noList", noList);
 		model.addAttribute("nameList", nameList);
+		
+		//프로필사진 불러오기
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
+				
 		return "modifyAlarm";
 	}
 	
 	@RequestMapping(value = "/alarm_UpdateAlarm", method = RequestMethod.POST)
 	public String alarm_UpdateAlarm(Model model, BS_Alarm alarm) 
 	{
-		System.out.println(alarm);
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		int type=alarm.getAlarmType();
 		switch(type)
 		{
-		//모유,젖병,유축 (시간기록,양,디테일 필요)
+		//모유
 		case 1:
+			alarmMapper.updateAlarm_EndTimeNDetail(alarm);
+			break;
+		//젖병,유축 (시간기록,양,디테일 필요)
 		case 2:
 		case 4:
 			alarmMapper.updateAlarm_All(alarm);
@@ -147,16 +169,18 @@ public class AlarmController {
 		case 5:
 			alarmMapper.updateAlarm_Detail(alarm);
 			break;
-		//수면 (시간기록 필요)
-		case 7:
-			alarmMapper.updateAlarm_EndTime(alarm);
-			break;
-		//기타, 목욕
+		//목욕, 디폴트
+		case 6:
 		default :
 			alarmMapper.updateAlarm(alarm);
 			break;
+		//기타, 수면 (시간기록 필요)
+		case 0:
+		case 7:
+			alarmMapper.updateAlarm_EndTime(alarm);
+			break;
 		}
-		return alarm_OpenCalendar();
+		return alarm_OpenCalendar(model);
 	}
 	
 	//alarm_Delete
@@ -165,9 +189,17 @@ public class AlarmController {
 	{
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		alarmMapper.deleteAlarm(alarmNo);
-		return alarm_OpenCalendar();
+		return alarm_OpenCalendar(model);
 	}
 	
+	@RequestMapping(value = "/alarm_load",method = RequestMethod.POST)
+	public @ResponseBody ArrayList<BS_Alarm> alarm_load(int loginNo)
+	{
+		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
+		ArrayList<BS_Alarm> alarmList;
+		alarmList=alarmMapper.selectAlarmList(loginNo);
+		return alarmList;
+	}
 	
 	@RequestMapping(value = "/alarm_calenderLoad",method = RequestMethod.POST, produces = "text/html;charset=utf8")
 	public @ResponseBody String alarm_calenderLoad()
@@ -197,12 +229,20 @@ public class AlarmController {
     	            {
     	            case 1:
     	            	str+="모유 : ";
-    	            	str+=item.getAlarmAmount();
-    	            	str+="ml";
+    	            	if(item.getAlarmDetail()==1) {
+    	            		str+="왼쪽";
+    	            	}else if(item.getAlarmDetail()==2) {
+    	            		str+="오른쪽";
+    	            	};	
     	            	event.setColor("#4286f4");
     	            	break;
     	            case 2:
     	            	str+="젖병 : ";
+    	            	if(item.getAlarmDetail()==3) {
+    	            		str+="모유";
+    	            	}else if(item.getAlarmDetail()==4) {
+    	            		str+="분유";
+    	            	};
     	            	str+=item.getAlarmAmount();
     	            	str+="ml";
     	            	event.setColor("#3aff85");
@@ -215,12 +255,21 @@ public class AlarmController {
     	            	break;
     	            case 4:
     	            	str+="유축 : ";
+    	            	if(item.getAlarmDetail()==1) {
+    	            		str+="왼쪽";
+    	            	}else if(item.getAlarmDetail()==2) {
+    	            		str+="오른쪽";
+    	            	};
     	            	str+=item.getAlarmAmount();
     	            	str+="ml";
     	            	event.setColor("#ffe0c9");
     	            	break;
     	            case 5:
-    	            	str+="배소변";
+    	            	if(item.getAlarmDetail()==5) {
+    	            		str+="배변";
+    	            	}else if(item.getAlarmDetail()==6) {
+    	            		str+="소변";
+    	            	}
     	            	event.setColor("#996416");
     	            	break;
     	            case 6:
@@ -247,5 +296,52 @@ public class AlarmController {
         return jsonMsg;
 	}
 	
+	//카카오톡 api
+	
+	/*
+	// 메세지
+	@RequestMapping(value = "/message", method = RequestMethod.POST, headers = "Accept=application/json")
+	@ResponseBody
+	public String message(@RequestBody JSONObject resObj) {
+
+	    System.out.println("/message");
+	    System.out.println(resObj.toString());
+
+	    String content;
+	    content = (String) resObj.get("content");
+	    JSONObject jobjRes = new JSONObject();
+	    JSONObject jobjText = new JSONObject();
+
+	    // 사용자 구현
+	    if(content.contains("안녕")){
+	        jobjText.put("text","안녕 하세요");
+	    } else if(content.contains("사랑")){
+	        jobjText.put("text","나도 너무너무 사랑해");
+	    } else if(content.contains("잘자")){
+	        jobjText.put("text","꿈 속에서도 너를 볼꺼야");
+	    } else if(content.contains("졸려")){
+	        jobjText.put("text","졸리면 언능 세수하러 가용!");
+	    } else if(content.contains("시간")||content.contains("몇 시")){
+	        jobjText.put("text","섹시");
+	    } else {
+	        jobjText.put("text","흠... 아직 지정해 두지 않은 말인걸.");
+	    }
+
+	    jobjRes.put("message", jobjText);
+	    System.out.println(jobjRes.toString());
+
+	    return  jobjRes.toString();
+	}
+	
+	//키보드
+	@RequestMapping(value = "/keyboard", method = RequestMethod.GET,  headers = "Accept=application/json;charset=utf8")
+	public KeyboardVO keyboard() {
+
+		System.out.println("들어는 왔는데?");
+		KeyboardVO key=new KeyboardVO();
+
+	    return key;
+	}
+	*/
 	
 }

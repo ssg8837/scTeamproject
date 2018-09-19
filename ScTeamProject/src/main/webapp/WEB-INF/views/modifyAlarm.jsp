@@ -70,9 +70,16 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit"><img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit">
+	          		<c:if test='${sessionScope.loginImg != null }'>
+		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
+		          	</c:if>
+		          	<c:if test='${sessionScope.loginImg == null }'>
+		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
+		          	</c:if>
+	          	</a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
-	          	<div class="centered"><button class="active edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
+	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
         	<li class="sub-menu">
 	            <a href="openNewBaby">
@@ -91,17 +98,16 @@
 	              <i class="fa fa-calendar fa_left"></i>
 	              <span>생활기록</span>
 	              </a>
-	              <ul class="sub">
-		              <li class="active">
-		                <a href="javascript:window.location.href=window.location.href">일정 수정</a>
-		              </li>
-	              </ul>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="vaccineForm">
+	            <a href="">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	              </a>
+	            </a>
+	           	<ul class="sub" style="display: block;">
+                    <li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+                   <li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+               	</ul>
 	          </li>
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
@@ -110,19 +116,19 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="hospital_Test">
+	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
 	          </li>
 	           <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="babyBook">
 	              <i class="fa fa-book fa_left"></i>
 	              <span>다이어리</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>
@@ -144,12 +150,12 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 생활 기록 달력 알림 수정</h3>
+        <h3><i class="fa fa-angle-right"></i> 생활 기록 수정</h3>
         <div class="row mt">
           <div class="col-lg-12">
           <form id="alarmform" action='alarm_UpdateAlarm' method='post'>
 			<input type='hidden' name='alarmNo' value='${alarm.alarmNo }'>
-			<div class='input-group col-xs-4'>
+			<div class='input-group col-xs-10'>
 				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
 				
 				<c:forEach var='val' items='${noList }' varStatus='sta'>
@@ -162,11 +168,11 @@
 				</c:forEach>
 				</select>
 			</div>
-			<div class='input-group col-xs-4'>
+			<div class='input-group col-xs-10'>
 				<span class="input-group-addon">할일</span>
 				<input class="form-control " id="alarmTitle" name="alarmTitle"  type="text" value='${alarm.alarmTitle }'>
 			</div>
-			<div class="input-group date form_datetime col-xs-4 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
+			<div class="input-group date form_datetime col-xs-10 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
 			<span class="input-group-addon">일시</span>
                     	<input class="form-control " type="text" name="alarmTime" value="${alarm.alarmTime }" readonly>
                     

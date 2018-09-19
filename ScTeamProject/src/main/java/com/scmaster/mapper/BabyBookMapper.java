@@ -9,7 +9,7 @@ import com.scmaster.vo.BabyBook;
 
 public interface BabyBookMapper {
 
-	public void insertBabyBook(BabyBook babyBook);
+	public int insertBabyBook(BabyBook babyBook);
 
 	public List<BabyBook> selectList();
 
@@ -19,4 +19,8 @@ public interface BabyBookMapper {
 
 	public ArrayList<BabyBook> selectBabyBookListLoginNo(Integer loginNo);
 
+	public int deleteBabyBook(int boardnum);
+
+	public int updateBabyBook(BabyBook babyBook);
+	
 }

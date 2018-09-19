@@ -1,8 +1,7 @@
 package com.scmaster.home;
 
+
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,19 +22,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scmaster.mapper.BabyBookMapper;
 import com.scmaster.mapper.MainMapper;
-import com.scmaster.vo.BS_Baby;
+import com.scmaster.vo.BS_User;
 import com.scmaster.vo.BabyBook;
-import com.scmaster.vo.Cal_Event;
 
 
 @Controller
 public class BabyBookController {
 	
-	@Autowired
-	SqlSession sqlSession;
+	@Autowired SqlSession sqlSession;
+	@Autowired HttpSession httpSession;
 	
 	private static final String UPLOADPATH = "C://FileRepo";
 	
@@ -47,13 +44,18 @@ public class BabyBookController {
 		List<BabyBook> list = mapper.selectList();
 		
 		for(int i=0;i<list.size();i++) {
-			String s1 = list.get(i).getRegdate().replaceAll(" ", "T");
-			list.get(i).setRegdate(s1);
-			
-			
+			String s1 = list.get(i).getRegdate().substring(0,10);
+			list.get(i).setRegdate(s1);	
 		}
 		
+			
 		model.addAttribute("list", list);
+		
+		//프로필사진 불러오기
+		Object loginNo=httpSession.getAttribute("loginNo");
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
 		
 		return "babyBook";
 	}
@@ -112,6 +114,44 @@ public class BabyBookController {
 
 		return new ResponseEntity<InputStreamResource>(new InputStreamResource(resource.getInputStream()), responseHeaders, HttpStatus.OK);
 
+	}
+	
+	@RequestMapping(value = "/deleteBabyBook", method = RequestMethod.GET)
+	public String deleteBabyBook(int boardnum) {
+		
+		BabyBookMapper mapper = sqlSession.getMapper(BabyBookMapper.class);
+		mapper.deleteBabyBook(boardnum);
+		
+		return "redirect:babyBook";
+	}
+	
+	@RequestMapping(value = "/updateBabyBook", method = RequestMethod.POST)
+	public String updateBabyBook(BabyBook babyBook, MultipartFile uploadfile, HttpSession session) {
+		
+		babyBook.setOriginalfile(uploadfile.getOriginalFilename());
+		
+		String savedName = savedName(uploadfile);
+		babyBook.setSavedfile(savedName);
+		
+		File path = new File(UPLOADPATH);
+		if(!path.exists())
+		{
+			path.mkdirs();
+			System.out.println("폴더가 존재하지 않아 만들었습니다.");
+		}
+		
+		File file = new File(UPLOADPATH, savedName);
+		try {
+			uploadfile.transferTo(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		babyBook.setUserNo((Integer)session.getAttribute("loginNo"));
+		BabyBookMapper mapper = sqlSession.getMapper(BabyBookMapper.class);
+		mapper.updateBabyBook(babyBook);
+
+		return "redirect:babyBook";
 	}
 	
 	
