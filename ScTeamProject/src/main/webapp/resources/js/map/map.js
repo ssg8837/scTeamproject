@@ -3,40 +3,60 @@
 		createMap();
 		
 		if(hospital !=null ){
-			console.log('객채받음');
-			
+			console.log('예방병원 객채받음');
+			console.log(hospital);
 			selectedHospital(hospital.Addr);
 		}else{
 			//접속위체의 좌표값을 통해 초기 병원 정보를 가져옵니다.
 			console.log('초기화');
 			init();
 		}
-		
-		/*resetPostion.addEventListener("click",init)
-		.addEventListener("hover",resetAnimation)*/
-	
+		resetPosition.addEventListener('click',init)
+		var sidebarOn=true;
+		var sub_menu=document.querySelector('#menu_wrap')
+		sub_menu_icon.addEventListener('click',function(){
+			  if (sidebarOn) {
+				  sub_menu.style.width="35px";
+				  sub_menu.style.minHeight="35px";
+			      jQuery('#menu_wrap > ul').hide();
+			      jQuery('#menu_wrap > div').hide();
+			      jQuery('#menu_wrap > form').hide();
+			      jQuery("#menu_wrap").addClass("submenu-closed");
+			      sidebarOn=false;
+			    } else {
+			    	sub_menu.style.width="240px";
+			    	sub_menu.style.height="370px";
+			    	jQuery('#menu_wrap > ul').show();
+			    	jQuery('#menu_wrap > div').show();
+			    	jQuery('#menu_wrap > form').show();
+			    	jQuery("#menu_wrap").removeClass("submenu-closed");
+			      sidebarOn=true;
+			    }
+		})
 		
 	});//DOMContentLoaded 완료시 javascript 로드
 	
 	//예방접종 페이지에서 객체가 넘어왔는지 확인
-	var hospital = {
-		Name: hospitalName,
-		Tel: hospitalTel,
-		Addr:hospitalAddr
+	if(document.querySelector('#hospitalName').value || document.querySelector('#hospitalTel').value || document.querySelector('#hospitalAddr').value){
+		var hospital = {
+				Name: document.querySelector('#hospitalName').value,
+				Tel: document.querySelector('#hospitalTel').value,
+				Addr:document.querySelector('#hospitalAddr').value
+		}
 	}
-			
-
 	// 지도를 담을 자료형
 	var map='';
-	//위치정보용 마커
+	// 위치정보용 마커
 	var marker
+	// 위치정보 
 	var positioninfo
 	// 마커를 담을 배열입니다
 	var markers = [];
+	// 현재좌표 갱신 객체선언
+	var resetPosition=document.querySelector('#getPostion');
 	// 좌료를 담을 자료형 선언
 	var lat ='',lon='';
-	// 현재좌표 갱신 객체선언
-	var resetPostion=document.querySelector('.getPostion');
+	var sub_menu_icon=document.querySelector('.sub_menu_icon');
 	// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 	var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	
@@ -96,10 +116,6 @@
 		}
 	};
 	
-	function resetAnimation(){
-		resetPostion.sytle.size="32px";
-		resetPostion.style.color="orange";
-	}
 	
 	//비동기로 서버에 병원정보 요청하는 함수
 	function getHostpital(lat,lon){
@@ -349,10 +365,12 @@
 
 		// 지도 위에 표시되고 있는 마커를 모두 제거합니다
 		function removeMarkers() {
+			if(markers!==undefined){
 				for ( var i = 0; i < markers.length; i++ ) {
 		    		markers[i].setMap(null);
 		    	}   
 		    	markers = [];
+			}
 		}
 
 		// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
@@ -400,3 +418,4 @@
 		        el.removeChild (el.lastChild);
 		    }
 		}
+	

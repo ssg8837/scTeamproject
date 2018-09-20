@@ -148,8 +148,8 @@
 						<div class="funcBtn">
 							<button id="golist">목록</button>
 						</div>
-							<form class="writeFlea" name="Flea" action="flea_write" method="post"  enctype="multipart/form-data">
-								<input type="hidden" id="userNo" name="userNo" value="${sessionScope.loginNo}"/>
+							<form id="Flea" class="writeFlea" name="write" action="flea_write" method="post"  enctype="multipart/form-data">
+								<input type="hidden" id="userNo" name="userNo" value="${sessionScope.loginNo}" readonly/>
 								
 								<div class="userAddr">
 									<label  for="userAddr" class="Addrlabel">주소</label>
@@ -174,12 +174,11 @@
 								<div class="textfield">
 									<p><textarea id="fleaText" name="fleaText"></textarea></p>
 								</div>
-								
 								<div class="fleaSavedFile">
 									<label for="fleaSavedFile" class="filelabel">파일 업로드</label>
-									<input type="file" id="fleaSavedFile" name="fleaSavedFile"/>
+									<!-- <input type="file" id="fleaSavedFile" name="fleaSavedFile"/> -->
 								</div>
-									<button id="submitBtn">글 작성</button>
+									<button type="button" id="submitBtn">글 작성</button>
 							</form>
 					</c:if>
 					<c:if test="${!empty board}">

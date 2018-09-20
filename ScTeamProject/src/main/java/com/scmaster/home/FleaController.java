@@ -66,7 +66,7 @@ public class FleaController
 	
 	@RequestMapping(value = "/flea_read", method = RequestMethod.GET)
 	public String boardRead(int fleaNum, Model model) {
-		System.out.println(fleaNum);
+		System.out.println(fleaNum+"게시글 ");
 		Flea board=selectOne(fleaNum);
 		model.addAttribute("board", board);
 		
@@ -87,31 +87,32 @@ public class FleaController
 	}
 	
 	@RequestMapping(value = "/flea_write", method = RequestMethod.POST)
-	public String boardWrite(Flea write, MultipartFile uplodgingFile) {
+	public String boardWrite(Flea write, MultipartFile fleaSavedFile) {
 		System.out.println("들어는 왔니?");
-		write.setFleaSavedFile(uploadfile(uplodgingFile));
+		write.setFleaSavedFile(uploadfile(fleaSavedFile));
 		
 		FleaMapper mapper=sqlSession.getMapper(FleaMapper.class);
 		int result=mapper.boardWrite(write);
-		System.out.println(result);
-		
-		return "redirect:flea_read";
+		System.out.println(result+"개 게시글 삽입 성공");
+		System.out.println(write.getUserNo());
+		int NewBoardNum=mapper.getNewBoardNum(write.getUserNo());
+		return "flea_read?fleaNum="+NewBoardNum;
 	}
 	
-	public String uploadfile(MultipartFile uplodgingFile) {
-		if(uplodgingFile == null) {
+	public String uploadfile(MultipartFile fleaSavedFile) {
+		if(fleaSavedFile == null) {
 			return null;
 		}
 		//랜덤번호 생성
 		UUID uuid =UUID.randomUUID();
 		//저장된 파일이름을 새로 생성(보안상, 덮어씌워짐 방지, 바이러스 침입등을 방지)
-		String saveName=uuid+"_"+uplodgingFile.getOriginalFilename();//이름의 중복을 피하기위해 바꿔주려는 문자열
+		String saveName=uuid+"_"+fleaSavedFile.getOriginalFilename();//이름의 중복을 피하기위해 바꿔주려는 문자열
 		//껍데기 파일 생성
 		File file=new File(UPLOADPATH,saveName);
 		System.out.println(file);
 		try {
 			//파일 껍데이기에 저장할 파일을 추가
-			uplodgingFile.transferTo(file);
+			fleaSavedFile.transferTo(file);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -124,7 +125,7 @@ public class FleaController
 		FleaMapper mapper=sqlSession.getMapper(FleaMapper.class);
 		int result=mapper.deleteBoard(fleaNum);
 		System.out.println(result);
-		return "redirect:flea_market_list";
+		return "redirect:flea_list";
 	}
 	
 	@RequestMapping(value = "/flea_update", method = RequestMethod.POST)

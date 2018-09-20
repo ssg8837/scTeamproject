@@ -147,6 +147,8 @@
 				<div class="col-lg-12">
 					<div class="map_wrap"><!-- 지도 레이아웃을 위한 Wrapper  -->
 						<input id="hospitalAddr" type="hidden" value="${hospitalAddr}"/><!-- 예방접종 예방 병원 객채  -->
+						<input id="hospitalName" type="hidden" value="${hospitalName}"/><!-- 예방접종 예방 병원 객채  -->
+						<input id="hospitalTel" type="hidden" value="${hospitalTel}"/><!-- 예방접종 예방 병원 객채  -->
 						<!-- 병원선택 -->
 						<div class="menubar">
 							<ul>
@@ -158,18 +160,17 @@
 								</li>
 							</ul>
 						</div>										
+						<div class="reset_icon_wrap"><!-- 위치정보 초기화 -->
+							<button id="getPostion">현재위치</button>
+						</div>		
 						<!-- 지도 객채를 담을 div 태그  -->
-						<div id="map">
-							<div class="reset_icon_wrap"><!-- 위치정보 초기화 -->
-								<i class="getPostion "></i>
-							</div>						
-						</div>
+						<div id="map"></div>
 						<!-- 매뉴 태그들 -->
 						<div id="menu_wrap" class="bg_white">
+							<img class="sub_menu_icon" src=".resources/image/menu-button.png"/><!-- 리스트 접기 아이콘 -->
 	        				<div class="option"><!-- 검색창  -->
-								<i class="sub_menu_icon" data-placement="right" data-original-title="Toggle Navigation"></i><!-- 리스트 접기 아이콘 -->
 	            				<div><!-- 검색창 양식 폼 -->
-	                				<form onsubmit="searchPlaces(); return false;">
+	                				<form id="searchform" onsubmit="searchPlaces(); return false;">
 	                    			키워드 : <input type="text" placeholder="원하시는 병원의 구주소나 신주소를 입력해주세요" id="keyword" value="삼성동" size="15"> 
 	                    			<button type="submit">검색하기</button> 
 									</form>

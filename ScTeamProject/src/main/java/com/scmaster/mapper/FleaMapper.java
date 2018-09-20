@@ -17,6 +17,7 @@ public interface FleaMapper {
 	public int updateHits(int fleanum);
 	/*글쓰기*/	
 	public int boardWrite(Flea flea);
+	public int getNewBoardNum(int userNo);
 	/*게시글 업데이트*/
 	public int updateBoard(Flea flea);
 	/*게시글 삭제*/
