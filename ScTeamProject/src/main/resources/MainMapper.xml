@@ -112,4 +112,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE USERNO=#{userNo}
 	</select>
 	
+	<select id="selectBabyName" parameterType="Integer" resultType="String">
+		SELECT BABYNAME
+		FROM BS_BABY
+		WHERE BABYNO=#{babyNo}
+	</select>
+	
 </mapper>

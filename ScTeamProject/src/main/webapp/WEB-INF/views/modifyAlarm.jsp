@@ -156,30 +156,116 @@
           <form id="alarmform" action='alarm_UpdateAlarm' method='post'>
 			<input type='hidden' name='alarmNo' value='${alarm.alarmNo }'>
 			<div class='input-group col-xs-10'>
-				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
-				
-				<c:forEach var='val' items='${noList }' varStatus='sta'>
-				<c:if test='${val == alarm.babyNo }'>
-					<option value='${val }' selected='selected'> ${nameList[sta.index] } </option>
-				</c:if>
-				<c:if test='${val != alarm.babyNo }'>
-					<option value='${val }'> ${nameList[sta.index] } </option>
-				</c:if>
-				</c:forEach>
-				</select>
+				<span class="input-group-addon">아기</span>
+				<input class="form-control"  type="text" value='${babyName}' readonly>
 			</div>
 			<div class='input-group col-xs-10'>
+				<input type="hidden" id="alarmType" name="alarmType" value='${alarm.alarmType }'>
 				<span class="input-group-addon">할일</span>
-				<input class="form-control " id="alarmTitle" name="alarmTitle"  type="text" value='${alarm.alarmTitle }'>
+				<c:if test='${alarm.alarmType eq 1}'>
+					<input class="form-control"  type="text" value='모유' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 2}'>
+					<input class="form-control"  type="text" value='젖병' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 3}'>
+					<input class="form-control"  type="text" value='이유식' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 4}'>
+					<input class="form-control"  type="text" value='유축' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 5}'>
+					<input class="form-control"  type="text" value='배소변' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 6}'>
+					<input class="form-control"  type="text" value='목욕' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 7}'>
+					<input class="form-control"  type="text" value='수면' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 0}'>
+					<input class="form-control"  type="text" value='기타' readonly>
+				</c:if>
 			</div>
+				<c:if test='${alarm.alarmType eq 1}'>
+					<div id="detail" class="input-group col-xs-10">
+					<span class="input-group-addon">방향</span>
+						<select class="form-control" id="alarmDetail" name="alarmDetail">
+							<c:if test='${alarm.alarmDetail eq 1 }'>
+							<option value="1" selected>왼쪽</option>
+							<option value="2">오른쪽</option>
+							</c:if>
+							<c:if test='${alarm.alarmDetail eq 2 }'>
+							<option value="1">왼쪽</option>
+							<option value="2" selected>오른쪽</option>
+							</c:if>
+						</select>
+					</div>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 2}'>
+					<div id="detail" class="input-group col-xs-10"><span class="input-group-addon">수유 타입</span>
+					<select class="form-control" id="alarmDetail" name="alarmDetail">
+					<c:if test='${alarm.alarmDetail eq 3 }'>
+						<option value="3" selected>모유</option>
+						<option value="4">분유</option>
+					</c:if>
+					<c:if test='${alarm.alarmDetail eq 4 }'>
+						<option value="3">모유</option>
+						<option value="4" selected>분유</option>
+					</c:if>
+					</select></div>
+					<div id="amount" class="input-group col-xs-10">
+					<span class="input-group-addon">양(ml)</span>
+					<input class="form-control " id="alarmAmount" name="alarmAmount" type="number" value="${alarm.alarmAmount }"></div>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 3}'>
+					<div id="amount" class="input-group col-xs-10">
+					<span class="input-group-addon">양(ml)</span>
+					<input class="form-control " id="alarmAmount" name="alarmAmount" type="number" value="${alarm.alarmAmount }"></div>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 4}'>
+					<c:if test='${alarm.alarmDetail eq 1 }'>
+						<option value="1" selected>왼쪽</option>
+						<option value="2">오른쪽</option>
+					</c:if>
+					<c:if test='${alarm.alarmDetail eq 2 }'>
+						<option value="1">왼쪽</option>
+						<option value="2" selected>오른쪽</option>
+					</c:if>
+					<div id="amount" class="input-group col-xs-10">
+					<span class="input-group-addon">양(ml)</span>
+					<input class="form-control " id="alarmAmount" name="alarmAmount" type="number" value="${alarm.alarmAmount }"></div>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 5}'>
+					<div id="detail" class="input-group col-xs-10"><span class="input-group-addon">배소변 분류</span>
+					<select class="form-control" id="alarmDetail" name="alarmDetail">
+					<c:if test='${alarm.alarmDetail eq 5 }'>
+						<option value="5" selected>배변</option>
+						<option value="6">소변</option>
+					</c:if>
+					<c:if test='${alarm.alarmDetail eq 6 }'>
+						<option value="5">배변</option>
+						<option value="6" selected>소변</option>
+					</c:if>
+					</select></div>
+				</c:if>
 			<div class="input-group date form_datetime col-xs-10 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
 			<span class="input-group-addon">일시</span>
                     	<input class="form-control " type="text" name="alarmTime" value="${alarm.alarmTime }" readonly>
                     
 					<span class="input-group-addon"><span class="fa fa-calendar"></span></span>	
 			</div>
-          	 <br/>
+			<c:if test="${alarm.alarmType eq 1 or alarm.alarmType eq 2 or alarm.alarmType eq 3 or alarm.alarmType eq 4 or alarm.alarmType eq 7}">
+			<div class="input-group date form_datetime col-xs-10 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
+			<span class="input-group-addon">종료시간</span><input class="form-control " type="text" name="endTime" value="${alarm.endTime }" readonly>
+			<span class="input-group-addon"><span class="fa fa-calendar"></span></span></div>
+			</c:if>
 			<!-- http://jsonobject.tistory.com/181 -->
+			<div class="input-group col-xs-10">
+				<span class="input-group-addon">메모</span>
+				<input class="form-control " id="alarmTitle" name="alarmTitle" type="text" value="${alarm.alarmTitle }">
+			</div>
+          	 <br/>
 			<button class='btn btn-primary' type='button' onclick="javascript:alarm_check();" style="margin: 0 auto;">알림 수정</button>
 		</form>
           </div>

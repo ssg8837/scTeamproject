@@ -165,7 +165,7 @@
                         <img src="./getImageSns?fullname=${sns.photo_3}" alt="">
                       </div>
 				</c:if>	
-                <c:if test="${sns.photoCount gt 2 }">
+                <c:if test="${sns.photoCount gt 3 }">
                       <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
                         <img src="./getImageSns?fullname=${sns.photo_4}" alt="">
                       </div>

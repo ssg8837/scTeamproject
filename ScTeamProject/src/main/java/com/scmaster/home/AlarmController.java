@@ -123,20 +123,8 @@ public class AlarmController {
 		model.addAttribute("alarm", alarm);
 		MainMapper mainMapper=sqlSession.getMapper(MainMapper.class);
 		Object loginNo=httpSession.getAttribute("loginNo");
-		ArrayList<Integer> noList= new ArrayList<Integer>();
-		ArrayList<String> nameList= new ArrayList<String>();
-		if(loginNo!=null)
-		{
-			ArrayList<BS_Baby> babyList=mainMapper.selectBabyList((Integer)loginNo);
-			for(BS_Baby item : babyList)	
-			{
-				noList.add(item.getBabyNo());
-				nameList.add(item.getBabyName());
-			}
-		}
-		model.addAttribute("noList", noList);
-		model.addAttribute("nameList", nameList);
 		
+		model.addAttribute("babyName", mainMapper.selectBabyName(alarm.getBabyNo()));
 		//프로필사진 불러오기
 		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
 		BS_User user=mapperM.myAccount((Integer)loginNo);
@@ -192,14 +180,6 @@ public class AlarmController {
 		return alarm_OpenCalendar(model);
 	}
 	
-	@RequestMapping(value = "/alarm_load",method = RequestMethod.POST)
-	public @ResponseBody ArrayList<BS_Alarm> alarm_load(int loginNo)
-	{
-		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
-		ArrayList<BS_Alarm> alarmList;
-		alarmList=alarmMapper.selectAlarmList(loginNo);
-		return alarmList;
-	}
 	
 	@RequestMapping(value = "/alarm_calenderLoad",method = RequestMethod.POST, produces = "text/html;charset=utf8")
 	public @ResponseBody String alarm_calenderLoad()
