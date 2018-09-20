@@ -15,13 +15,9 @@
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="./resources/assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="./resources/assets/css/noscript.css" /></noscript>
 	</head>
 	
-	<body>
-	<form id='home' action='./' method='get'>
-		</form>
-		
+	<body>	
         <c:if test='${sessionScope.loginId != null }'>
 		<input type="hidden" id="loginNo" value="${sessionScope.loginNo}">
 		</c:if>
@@ -220,7 +216,14 @@
 									<li><a href="#" class="icon style2 fa-phone"><span class="label">Phone</span></a></li>
 									<li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
 								</ul>
+								
+							
+							<input type="checkbox" id="chk2" name="chk2"><label for="chk2">체크박스2</label><br>
+							<input type="radio" id="r2_1" name="r2" checked><label for="r2_1">라디오3</label>
+							<input type="radio" id="r2_2" name="r2"><label for="r2_2">라디오4</label><br><br>
+								
 							</section>
+
 							<ul class="copyright">
 								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 							</ul>
@@ -241,6 +244,7 @@
 		<script src="./resources/js/common/jquery.nicescroll.js" type="text/javascript"></script>
 		  <!--common script for all pages-->
 		<script src="./resources/js/common/common-scripts.js"></script>
+
 		  <!--script for this page-->
 		<script src="./resources/js/util/check_byte.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
