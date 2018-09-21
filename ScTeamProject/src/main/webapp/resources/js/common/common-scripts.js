@@ -1,3 +1,5 @@
+var sidebarOn=false;
+
 /*---LEFT BAR ACCORDION----*/
 $(function() {
   $('#nav-accordion').dcAccordion({
@@ -49,7 +51,7 @@ var Script = function() {
   });
 
   $('.fa-bars').click(function() {
-    if ($('#sidebar > ul').is(":visible") === true) {
+    if (sidebarOn) {
       $('#main-content').css({
         'margin-left': '0px'
       });
@@ -58,6 +60,7 @@ var Script = function() {
       });
       $('#sidebar > ul').hide();
       $("#container").addClass("sidebar-closed");
+      sidebarOn=false;
     } else {
       $('#main-content').css({
         'margin-left': '210px'
@@ -67,6 +70,7 @@ var Script = function() {
         'margin-left': '0'
       });
       $("#container").removeClass("sidebar-closed");
+      sidebarOn=true;
     }
   });
 

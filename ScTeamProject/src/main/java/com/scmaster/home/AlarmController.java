@@ -123,25 +123,8 @@ public class AlarmController {
 		model.addAttribute("alarm", alarm);
 		MainMapper mainMapper=sqlSession.getMapper(MainMapper.class);
 		Object loginNo=httpSession.getAttribute("loginNo");
-<<<<<<< HEAD
 		
 		model.addAttribute("babyName", mainMapper.selectBabyName(alarm.getBabyNo()));
-=======
-		ArrayList<Integer> noList= new ArrayList<Integer>();
-		ArrayList<String> nameList= new ArrayList<String>();
-		if(loginNo!=null)
-		{
-			ArrayList<BS_Baby> babyList=mainMapper.selectBabyList((Integer)loginNo);
-			for(BS_Baby item : babyList)	
-			{
-				noList.add(item.getBabyNo());
-				nameList.add(item.getBabyName());
-			}
-		}
-		model.addAttribute("noList", noList);
-		model.addAttribute("nameList", nameList);
-		
->>>>>>> refs/remotes/origin/leesa
 		//프로필사진 불러오기
 		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
 		BS_User user=mapperM.myAccount((Integer)loginNo);

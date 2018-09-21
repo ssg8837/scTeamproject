@@ -1,24 +1,16 @@
 	document.addEventListener('DOMContentLoaded', function() {
 		// 맵을 생성합니다. 
 		createMap();
-<<<<<<< HEAD
 		
 		if(hospital !=null ){
 			console.log('예방병원 객채받음');
 			console.log(hospital);
-=======
-		console.log(hospital);
-		if(hospital != null){
-			console.log('객채받음');
-			
->>>>>>> refs/remotes/origin/leesa
 			selectedHospital(hospital.Addr);
 		}else{
 			//접속위체의 좌표값을 통해 초기 병원 정보를 가져옵니다.
 			console.log('초기화');
 			init();
 		}
-<<<<<<< HEAD
 		resetPosition.addEventListener('click',init)
 		var sidebarOn=true;
 		var sub_menu=document.querySelector('#menu_wrap')
@@ -41,29 +33,16 @@
 			      sidebarOn=true;
 			    }
 		})
-=======
-		
-		/*resetPostion.addEventListener("click",init)
-		.addEventListener("hover",resetAnimation)*/
-	
->>>>>>> refs/remotes/origin/leesa
 		
 	});//DOMContentLoaded 완료시 javascript 로드
 	
 	//예방접종 페이지에서 객체가 넘어왔는지 확인
-<<<<<<< HEAD
 	if(document.querySelector('#hospitalName').value || document.querySelector('#hospitalTel').value || document.querySelector('#hospitalAddr').value){
 		var hospital = {
 				Name: document.querySelector('#hospitalName').value,
 				Tel: document.querySelector('#hospitalTel').value,
 				Addr:document.querySelector('#hospitalAddr').value
 		}
-=======
-	var hospital = {
-			Name: document.querySelector("#hospitalName").value,
-			Tel:document.querySelector("#hospitalTel").value,
-			Addr:document.querySelector("#hospitalAddr").value
->>>>>>> refs/remotes/origin/leesa
 	}
 	// 지도를 담을 자료형
 	var map='';

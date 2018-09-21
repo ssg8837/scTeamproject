@@ -30,11 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			CONTENT, 
 			REGDATE,
 			ORIGINALFILE, 
-			SAVEDFILE 
-		FROM 
-			BABYBOOK
-		where userno = #{userno}
-		ORDER BY BOARDNUM
+			SAVEDFILE FROM BABYBOOK
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="BabyBook">
@@ -45,6 +41,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			ORIGINALFILE, 
 			SAVEDFILE FROM BABYBOOK 
 			WHERE BOARDNUM = #{boardnum}
+			order by boardnum
+	
+	</select>
+	<!-- selectBabyBookListLoginNo  -->
+	<select id="selectBabyBookListLoginNo" parameterType="int" resultType="BabyBook">
+		SELECT BOARDNUM,
+			USERNO,
+			BABYNO,
+			TITLE, 
+			CONTENT, 
+			REGDATE,
+			ORIGINALFILE, 
+			SAVEDFILE FROM BABYBOOK
+			WHERE USERNO = #{userNo}
 	</select>
 	
 	<delete id="deleteBabyBook" parameterType="int">
@@ -60,21 +70,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where 
 			boardnum = #{boardnum}
 	</update>
-	
-	<select id="selectListByMonth" parameterType="string" resultType="BabyBook">
-		SELECT 
-			BOARDNUM,
-			USERNO, 
-			CONTENT, 
-			REGDATE,
-			ORIGINALFILE, 
-			SAVEDFILE 
-			FROM 
-				BABYBOOK
-			WHERE 
-				TO_CHAR(REGDATE, 'YYYY-MM') = #{smonth}
-			ORDER BY 
-				BOARDNUM
-	</select>
 	
 </mapper>

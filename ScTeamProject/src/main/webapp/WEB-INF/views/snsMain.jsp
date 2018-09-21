@@ -5,7 +5,7 @@
 
 <html>
 	<head>
-		<title>SNS</title>
+		<title>육아서포트페이지</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">

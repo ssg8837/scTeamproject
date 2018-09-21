@@ -156,28 +156,11 @@
           <form id="alarmform" action='alarm_UpdateAlarm' method='post'>
 			<input type='hidden' name='alarmNo' value='${alarm.alarmNo }'>
 			<div class='input-group col-xs-10'>
-<<<<<<< HEAD
 				<span class="input-group-addon">아기</span>
 				<input class="form-control"  type="text" value='${babyName}' readonly>
-=======
-				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
-				
-				<c:forEach var='val' items='${noList }' varStatus='sta'>
-				<c:if test='${val == alarm.babyNo }'>
-					<option value='${val }' selected='selected'> ${nameList[sta.index] } </option>
-				</c:if>
-				<c:if test='${val != alarm.babyNo }'>
-					<option value='${val }'> ${nameList[sta.index] } </option>
-				</c:if>
-				</c:forEach>
-				</select>
->>>>>>> refs/remotes/origin/leesa
 			</div>
 			<div class='input-group col-xs-10'>
-<<<<<<< HEAD
 				<input type="hidden" id="alarmType" name="alarmType" value='${alarm.alarmType }'>
-=======
->>>>>>> refs/remotes/origin/leesa
 				<span class="input-group-addon">할일</span>
 				<c:if test='${alarm.alarmType eq 1}'>
 					<input class="form-control"  type="text" value='모유' readonly>
@@ -204,7 +187,6 @@
 					<input class="form-control"  type="text" value='기타' readonly>
 				</c:if>
 			</div>
-<<<<<<< HEAD
 				<c:if test='${alarm.alarmType eq 1}'>
 					<div id="detail" class="input-group col-xs-10">
 					<span class="input-group-addon">방향</span>
@@ -267,8 +249,6 @@
 					</c:if>
 					</select></div>
 				</c:if>
-=======
->>>>>>> refs/remotes/origin/leesa
 			<div class="input-group date form_datetime col-xs-10 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
 			<span class="input-group-addon">일시</span>
                     	<input class="form-control " type="text" name="alarmTime" value="${alarm.alarmTime }" readonly>

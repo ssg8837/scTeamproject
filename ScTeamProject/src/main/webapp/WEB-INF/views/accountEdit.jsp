@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <html>
 	<head>
-		<title>회원정보수정</title>
+		<title>Home</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
@@ -101,14 +101,10 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="">
+	            <a href="vaccineForm">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	            </a>
-	           	<ul class="sub" style="display: block;">
-                    <li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
-                   <li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
-               	</ul>
+	              </a>
 	          </li>
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
@@ -117,19 +113,19 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="weather_Test">
+	            <a href="hospital_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
 	          </li>
 	           <li class="sub-menu">
-	            <a href="babyBook">
+	            <a href="babyBookForm">
 	              <i class="fa fa-book fa_left"></i>
 	              <span>다이어리</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="openSNS">
+	            <a href="babyBookForm">
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>

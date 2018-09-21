@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <html>
 	<head>
-		<title>${baby.babyName}의 생활기록</title>
+		<title>육아서포트페이지</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
@@ -304,12 +304,8 @@
 			            yAxes: [{
 			                ticks: {
 			                    beginAtZero: true,
-<<<<<<< HEAD
 			                    fontSize: 9,
 			                    stepSize: 1
-=======
-			                    fontSize: 9
->>>>>>> refs/remotes/origin/leesa
 			                }
 			              }]
 			        },	    
