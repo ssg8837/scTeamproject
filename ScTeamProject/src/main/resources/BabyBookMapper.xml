@@ -46,25 +46,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SAVEDFILE FROM BABYBOOK 
 			WHERE BOARDNUM = #{boardnum}
 	</select>
-<<<<<<< HEAD
-=======
 	
 	<delete id="deleteBabyBook" parameterType="int">
 		delete from babybook where boardnum = #{boardnum}
 	</delete>
-	</select>
-	<!-- selectBabyBookListLoginNo  -->
-	<select id="selectBabyBookListLoginNo" parameterType="int" resultType="BabyBook">
-		SELECT BOARDNUM,
-			USERNO,
-			BABYNO,
-			TITLE, 
-			CONTENT, 
-			REGDATE,
-			ORIGINALFILE, 
-			SAVEDFILE FROM BABYBOOK
-			WHERE USERNO = #{userNo}
-	</select>
 	
 	<update id="updateBabyBook" parameterType="BabyBook">
 		update babybook set 
