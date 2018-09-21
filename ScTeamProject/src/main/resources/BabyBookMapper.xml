@@ -45,9 +45,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			ORIGINALFILE, 
 			SAVEDFILE FROM BABYBOOK 
 			WHERE BOARDNUM = #{boardnum}
+	</select>
 <<<<<<< HEAD
 =======
 	
+	<delete id="deleteBabyBook" parameterType="int">
+		delete from babybook where boardnum = #{boardnum}
+	</delete>
 	</select>
 	<!-- selectBabyBookListLoginNo  -->
 	<select id="selectBabyBookListLoginNo" parameterType="int" resultType="BabyBook">
@@ -60,9 +64,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			ORIGINALFILE, 
 			SAVEDFILE FROM BABYBOOK
 			WHERE USERNO = #{userNo}
->>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
 	</select>
 	
+	<update id="updateBabyBook" parameterType="BabyBook">
+		update babybook set 
+			content = #{content},
+			regdate = sysdate,
+			originalfile = #{originalfile},
+			savedfile = #{savedfile}
+		where 
+			boardnum = #{boardnum}
+	</update>
 	
 	<select id="selectListByMonth" parameterType="string" resultType="BabyBook">
 		SELECT 
