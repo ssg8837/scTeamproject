@@ -1,95 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 	<head>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-	$(function(){
-	
-	 $('#firstCity').on('change',function(){
-		var brtcCd = $('#firstCity').val();
-		$.ajax({
-				url:'SearchSecondCity',
-				method:'get',
-				data:{'brtcCd':brtcCd},
-				success:secondCityOutput
-			});
-		
-		}); 
-	
-	$('#btn').on('click',btnClick);
-	
-	});//$(function
-	
-	function btnClick(){
-		searchHospital(0);
-	};
-	
-	function secondCityOutput(resp){
-		var result = '<option selected disabled="disabled">시/군/구</option>';
-		$.each(resp,function(index,item){
-			result += '<option value="'+item.cityCode+'">'+item.cityName+'</option>';
-		});
-		
-		$('#secondCity').html(result);
-	}//secondCityOutput
-	
-	function hospitalOutput(resp){
-		var result = '<thead><tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr></thead>';
-			
-			result += '<tbody>';
-			$.each(resp.vhList,function(index,item){
-				result += '<tr onclick="javascript:sendHospital(';
-				result += "'"+item.orgAddr+"'"+')"><td>'+item.orgnm+'</td>';
-				result += '<td>'+item.orgTlno+'</td>';
-				result += '<td id="hospitalAddr">'+item.orgAddr+'</td></tr>';
-			});
-			result += '</tbody>';
-		
-		
-		$('#vaccineHospital').html(result);
-		
-		var paging="";
-		for(var i=0;i<((Number(resp.totalCount)+15-1)/15)-1;i++){
-			if(resp.page==i+1){
-				paging += '<b><a href="javascript:searchHospital('+i+')" style="color:#FFA600;">'+(i+1)+'</a></b>&nbsp;&nbsp;';
-			}else{
-				paging += '<a href="javascript:searchHospital('+i+')" style="color: #84B8FF;">'+(i+1)+'</a>&nbsp;&nbsp;';	
-			}
-			$('#paging').html(paging);
-		}
-		
-		window.scrollTo(0,0);
-	}
-	
-	function searchHospital(p){
-		var brtcCd = $('#firstCity').val();
-		var sggCd = $('#secondCity').val();
-		var page = p+1;
-		
-		if(sggCd==null){
-			alert('시/군/구 를 선택해 주세요');
-			return;
-		}
-		
-		$.ajax({
-			url:'Searchhospital',
-			method:'get',
-			data:{'brtcCd':brtcCd, 'sggCd':sggCd, 'page':page},
-			success:hospitalOutput
-		});
-	}
-	
-	function sendHospital(addr){
-		alert(addr);
-		
-		/* location.href='sendHospital?VaccineHospitalhospital='+addr; */
-	}; 
-
-</script>
-		
-		
 		<title>육아서포트페이지</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -99,16 +12,19 @@
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-		<link href="./resources/css/forVaccine/vaccine.css" rel="stylesheet">
-		
+		<link href="./resources/css/flea/flea.css" rel="stylesheet">
 	</head>
 	<body>
 	<form id='home' action='./' method='get'>
 		</form>
+
 		
         <c:if test='${sessionScope.loginId != null }'>
 		<input type="hidden" id="loginNo" value="${sessionScope.loginNo}">
+
 		</c:if>
+
+	
 	<section id="container">
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
@@ -160,6 +76,12 @@
 	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
         	</c:if>
+	        <li class="sub-menu">
+	            <a href="openNewBaby">
+	              <i class="fa fa-heart fa_left"></i>
+	              <span>아이 정보</span>
+	            </a>
+	          </li>
 	          <li class="sub-menu">
 	            <a href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
@@ -172,18 +94,12 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
-	         
 	          <li class="sub-menu">
-	            <a class="active" href="#">
+	            <a href="vaccineForm">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	            </a>
-	            <ul class="sub">
-              		<li class="active"><a href="vaccineForm">질병 및 예방접종 조회</a></li>
-             		<li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
-              	</ul>
+	              </a>
 	          </li>
-	          
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
 	              <i class="fa fa-hospital-o fa_left"></i>
@@ -191,7 +107,7 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="hospital_Test">
+	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
@@ -203,15 +119,15 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="flea_list">
 	              <i class="fa fa-edit fa_left"></i>
-	              <span>게시판</span>
+	              <span>벼룩시장</span>
 	              </a>
 	          </li>
           </ul>
@@ -223,72 +139,80 @@
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
-    <section id="main-content">
-      <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 국가예방접종 지정 의료기관</h3>
-        <div class="row mt">
-          <div class="col-lg-12">
-            <!-- <p>Place your content here.</p> -->      
-			<select style="height:33px;" size="1" id="firstCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
-				<option selected disabled="disabled">시/도</option>
-					<c:forEach var="list" items="${list}">
-				<option value="${list.cityCode}">${list.cityName}</option>
-				</c:forEach>
-			</select>
-              
-              &nbsp;
-              
-              <select style="height:33px;" size="1" id="secondCity" name="hidden-table-info_length" aria-controls="hidden-table-info">
-              	<option selected disabled="disabled">시/군/구</option>
-              </select>
-				
-				&nbsp;&nbsp;
-				<!-- <input id="btn" type="button" value="조회"> -->
-				<button id="btn" type="button" class="btn btn-info">조회</button>
-				
-				<br/><br/>
-				
-				<!-- <h4><i class="fa fa-angle-right"></i> Hover Table</h4> -->
-              <!-- <hr> -->
-              <table class="table table-hover" id="vaccineHospital">
-              	<tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr>
-              </table>
-              
-              
-
-				<div id="paging" class="paging"></div>
-				
-				<hr>
-				
-				<h4>어린이 국가예방접종 지정 의료기관이란?</h4>
-				<p>어린이 국가예방접종 사업에 참여하여 예방접종비용을 지원받을 수 있는 의료기관입니다.
-				</p>
-				<p>의료기관에 따라 접종 가능한 백신 종류가 다를 수 있으므로, 
-				보호자는 방문 전에 지정 의료기관에서 접종 가능한 백신종류를 확인 후 방문하시기 바랍니다.
-				</p>
-	
-			<!-- <div class="col-md-12 mt"> -->
-            
-            <!-- <div class="content-panel"> -->
-              
-                  
+	<section id="main-content">
+		<section class="wrapper site-min-height">
+			<h3><i class="fa fa-angle-right"></i> Flea Market</h3>
+			<div class="row mt">
+				<div class="col-lg-12">
+				<div class="funcBtn">
+					<button id="new">글작성</button>
+					<a class="flea_home" href="flea_list">첫 화면으로</a>
+				</div><br/> <!-- root값 -->
+			<c:if test="${empty boardList}">
+				<div>글이 없습니다.</div>
+			</c:if>
 			
-              
-  
-          </div>
-        </div>
-      </section>
-      <!-- /wrapper -->
+			<c:if test="${!empty boardList}">
+				<div class="board">
+					<div class="boardlabel" >
+						<span class="boardnum">게시번호</span>
+						<span class="usernick">이름</span>
+						<span class="boardtitle">제목</span>
+						<span class="boardhit">조회수</span>
+						<span class="boardreg">등록일</span>
+					</div>	
+					<hr>
+					<div class="boardlist">
+					<c:forEach var="board" items="${boardList}">
+						<p><a href="flea_read?fleaNum=${board.fleaNum}">
+						<span class="boardnum">${board.fleaNum}</span>
+						<span class="usernick">${board.userId}(${board.userNick})</span>
+						<span class="boardtitle">${board.fleaTitle}</span>
+						<span class="boardhit">${board.hitcount}</span>
+						<span class="boardreg">${board.regdate}</span>
+						</a></p>
+					</c:forEach>
+					</div>
+					<hr>
+					<!--네비게이터  -->
+					<div>
+						<p class="listbtn">
+						<a href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
+						<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
+					
+						<c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}"> 
+							<c:if test="${counter == navi.currentPage}"><b></c:if>
+								<a href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
+							<c:if test="${counter == navi.currentPage}"></b></c:if>
+						</c:forEach>
+						&nbsp;&nbsp;
+						<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
+						<a href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
+											
+						</p>
+					</div>
+					<!--검색버튼  -->
+					<div class="listbtn">
+						<form id="pagingForm" method="get" action="flea_list">
+							<input type="hidden" name="page" id="page" />
+							<input type="text"  name="searchText" value="${searchText}" />
+							<!--value="${searchText}"는 검색하더라도 사용자의 유지하기 위해서 서버에서 검색값을 가지고 있다가 다시 보내준다 -->
+							<input type="button" onclick="searchFormSubmit(1)" value="검색">
+						</form>
+					</div>
+				</div>
+			</c:if>
+				</div>
+			</div>
+		</section>
     </section>
+    <!-- /wrapper -->
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
    
     <!--footer end-->
   </section>
-	
-	   
-	    
 	    <script src="./resources/js/common/jquery.min.js"></script>
 	    <script src="./resources/js/common/bootstrap.min.js"></script>
 		<script src="./resources/js/common/jquery-ui-1.9.2.custom.min.js"></script>
@@ -299,9 +223,6 @@
 		  <!--common script for all pages-->
 		<script src="./resources/js/common/common-scripts.js"></script>
 		  <!--script for this page-->
-		<script src="./resources/js/util/check_byte.js"></script>
-		<script src="./resources/js/home/login_check.js"></script>
-	    <script src="./resources/js/home/bell.js"></script>
-  
+	    <script src="./resources/js/flea/flea.js"></script>
 	</body>
 </html>

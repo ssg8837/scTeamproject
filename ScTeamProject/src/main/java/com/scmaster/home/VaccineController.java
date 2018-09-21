@@ -20,7 +20,6 @@ import com.scmaster.mapper.DiseaseMapper;
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.mapper.VaccineMapper;
 import com.scmaster.vo.BS_Baby;
-import com.scmaster.vo.BS_User;
 import com.scmaster.vo.Disease;
 import com.scmaster.vo.Vaccine;
 
@@ -35,19 +34,20 @@ public class VaccineController {
 	public String vaccineTest(HttpSession session,Model model,
 								@RequestParam(value="babyNo", defaultValue="0") int babyNo){
 		
+		
 		//예방접종 정보 가지고 오기
 		DiseaseMapper diseaseMapper = sqlSession.getMapper(DiseaseMapper.class);
 		List<Disease> diseaseList = diseaseMapper.selectList();
-
+		
 		//아기 정보 가지고 오기
 		MainMapper mainMapper = sqlSession.getMapper(MainMapper.class);
 		int userno = (Integer)session.getAttribute("loginNo");
 		List<BS_Baby> babyList =  mainMapper.selectBabyList(userno);
-
+		
 		//예방접종+아기정보 
 		VaccineMapper vaccineMapper = sqlSession.getMapper(VaccineMapper.class);
 		List<Vaccine> vaccineList = vaccineMapper.selectList(babyNo); 
-		
+
 		//vaccine 테이블에 넣고 가지고 오기
 		List<Vaccine> vaccineList2 = vaccineMapper.selectList2(babyNo);
 		if(vaccineList2.size()==0) {
@@ -56,7 +56,7 @@ public class VaccineController {
 			}
 		}
 		List<Vaccine> vaccineList3 = vaccineMapper.selectList2(babyNo);
-
+		
 		//예방접종 권장일 처리
 		BS_Baby selectedBaby = mainMapper.selectBaby(babyNo);
 		
@@ -77,7 +77,7 @@ public class VaccineController {
 			vaccineList3.get(i).setVaccineDate(cal.get(Calendar.YEAR)+"년 "+(cal.get(Calendar.MONTH)+1)+"월 "+cal.get(Calendar.DATE)+"일");
 			
 			//예방접종 권장일 예외 사항들 처리
-			if(vaccineList3.get(i).getDiseaseName().equals("결핵(Tuberculosis) ")) {
+			if(vaccineList3.get(i).getDiseaseName().equals("결핵(Tuberculosis)")) {
 				vaccineList3.get(i).setVaccineDate("생후 4주 이내 1회 접종");
 			}
 			
@@ -90,13 +90,6 @@ public class VaccineController {
 		model.addAttribute("diseaseList", diseaseList);
 		model.addAttribute("vaccineList", vaccineList3);
 		model.addAttribute("babyNo", babyNo);
-		
-		
-		//프로필사진 불러오기
-		Object loginNo=httpSession.getAttribute("loginNo");
-		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
-		BS_User user=mapperM.myAccount((Integer)loginNo);
-		model.addAttribute("user",user);
 		
 		return "vaccineForm";
 	}

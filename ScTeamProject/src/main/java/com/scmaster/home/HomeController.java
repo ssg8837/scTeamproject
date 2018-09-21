@@ -1,6 +1,7 @@
 package com.scmaster.home;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.scmaster.mapper.MainMapper;
+import com.scmaster.vo.BS_Baby;
 import com.scmaster.vo.BS_User;
 
 //메인화면, 로그인, 회원가입, 회원정보수정(account) 관련 기능 이쪽 컨트롤러에 있습니다.
@@ -272,5 +274,83 @@ public class HomeController
 		}	
 		return result;
 	}
+
+
+	//아이정보 페이지(이동)
+	@RequestMapping(value = "/openNewBaby", method = RequestMethod.GET)
+	public String openNewBaby(Model model) 
+	{
+			Object loginNo= httpSession.getAttribute("loginNo");
+			if(loginNo!=null)
+			{
+				MainMapper mapper= sqlSession.getMapper(MainMapper.class);
+				
+				ArrayList<BS_Baby> babyList= mapper.selectBabyList((Integer)loginNo);
+				model.addAttribute("babyList", babyList);
+				
+				//프로필사진 불러오기(사이드바)
+				BS_User user=mapper.myAccount((Integer)loginNo);
+				model.addAttribute("user",user);
+			}
+		
+		return "newBaby";
+	}
+	//아이 나이 계산
+	@RequestMapping(value = "/babyAge", method = RequestMethod.GET)
+	@ResponseBody public int babyAge(int babyNo) 
+	{
+		System.out.println(babyNo);
+		
+		MainMapper mapper= sqlSession.getMapper(MainMapper.class);		
+		int babyAge = mapper.babyAge(babyNo);
+		
+		System.out.println(babyAge);
+		
+		return babyAge;
+	}
+	//아이정보 페이지(이동)
+	@RequestMapping(value = "/checkPattern", method = RequestMethod.GET)
+	public String checkPattern(int babyNo, Model model) 
+	{
+			Object loginNo= httpSession.getAttribute("loginNo");
+			if(loginNo!=null)
+			{
+				MainMapper mapper= sqlSession.getMapper(MainMapper.class);
+				
+				BS_Baby baby = mapper.selectBaby(babyNo);
+				model.addAttribute("baby", baby);
+				
+				//프로필사진 불러오기(사이드바)
+				BS_User user=mapper.myAccount((Integer)loginNo);
+				model.addAttribute("user",user);
+			}
+		
+		return "babyLifePattern";
+	}
+	//아이추가(기능)
+	@RequestMapping(value = "/insertNewBaby", method = RequestMethod.POST)
+	public String insertNewBaby(Model model,BS_Baby baby) 
+	{
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+		mapper.insertBaby(baby);
+		return openNewBaby(model);
+	}
+	/*
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(Model model, String userid, String userpwd) 
+	{
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+		HashMap<String, String> userMap=new HashMap<String,String>();
+		userMap.put("userId", userid);
+		userMap.put("userPwd",userpwd);
+		BS_User user=mapper.selectUser(userMap);
+		if(user!=null)
+		{
+			httpSession.setAttribute("loginId",user.getUserId());
+			httpSession.setAttribute("loginNo",user.getUserNo());
+		}
+		return home(model);
+	}
+	*/
 
 }

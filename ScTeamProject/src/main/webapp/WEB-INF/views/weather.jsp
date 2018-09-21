@@ -325,23 +325,9 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit">
-	          		<c:if test='${sessionScope.loginImg != null }'>
-		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
-		          	</c:if>
-		          	<c:if test='${sessionScope.loginImg == null }'>
-		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
-		          	</c:if>
-	          	</a></p>
+	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
-	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
-        		<li class="sub-menu">
-	            <a href="openNewBaby">
-	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이 정보</span>
-	            </a>
-	          </li>
 	          <li class="sub-menu">
 	            <a href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
@@ -355,14 +341,10 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="">
+	            <a href="vaccineForm">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	            </a>
-	           	<ul class="sub" style="display: block;">
-                    <li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
-                   <li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
-               	</ul>
+	              </a>
 	          </li>
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
@@ -371,19 +353,19 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a class="active" href="weather_Test">
+	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
 	          </li>
 	           <li class="sub-menu">
-	            <a href="babyBook">
+	            <a href="babyBookForm">
 	              <i class="fa fa-book fa_left"></i>
 	              <span>다이어리</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="openSNS">
+	            <a href="babyBookForm">
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>
@@ -408,10 +390,13 @@
         <h3><i class="fa fa-angle-right"></i> 오늘의 날씨</h3>
         <div class="row mt">
           <div class="col-lg-12">
-          	<div class="search" >
-          			<input type="text" value="${search}">
+          	<table>
+				<tr align="right">
+					<td><input type="text" class="search" value="${search}">
 					<input type="button" value="주소검색" class="locationSearch"></td>
-			</div>
+				</tr>
+			</table>
+			</br>
 				<div class="weather"></div>
             	
             	<div class="location"></div>
