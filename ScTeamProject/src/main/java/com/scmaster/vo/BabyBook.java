@@ -2,25 +2,20 @@ package com.scmaster.vo;
 
 public class BabyBook {
 	private int boardnum;		
-	private int userNo;	
-	private int babyNo;				
-	private String title;		
+	private int userNo;			
 	private String content;			
 	private String regdate;
 	private String originalfile;
 	private String savedfile;
 	
-	public BabyBook()
-	{
-		
+	public BabyBook() {
+		super();
 	}
-	
-	public BabyBook(int boardnum, int userNo, int babyNo, String title, String content, String regdate,
-			String originalfile, String savedfile) {
+
+	public BabyBook(int boardnum, int userNo, String content, String regdate, String originalfile, String savedfile) {
+		super();
 		this.boardnum = boardnum;
 		this.userNo = userNo;
-		this.babyNo = babyNo;
-		this.title = title;
 		this.content = content;
 		this.regdate = regdate;
 		this.originalfile = originalfile;
@@ -31,8 +26,8 @@ public class BabyBook {
 		return boardnum;
 	}
 
-	public void setBoardnum(int boardNum) {
-		this.boardnum = boardNum;
+	public void setBoardnum(int boardnum) {
+		this.boardnum = boardnum;
 	}
 
 	public int getUserNo() {
@@ -41,22 +36,6 @@ public class BabyBook {
 
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
-	}
-
-	public int getBabyNo() {
-		return babyNo;
-	}
-
-	public void setBabyNo(int babyNo) {
-		this.babyNo = babyNo;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getContent() {
@@ -93,11 +72,9 @@ public class BabyBook {
 
 	@Override
 	public String toString() {
-		return "BabyBook [boardnum=" + boardnum + ", userNo=" + userNo + ", babyNo=" + babyNo + ", title=" + title
-				+ ", content=" + content + ", regdate=" + regdate + ", originalfile=" + originalfile + ", savedfile="
-				+ savedfile + "]";
+		return "BabyBook [boardnum=" + boardnum + ", userNo=" + userNo + ", content=" + content + ", regdate=" + regdate
+				+ ", originalfile=" + originalfile + ", savedfile=" + savedfile + "]";
 	}
-<<<<<<< HEAD
 
 	public int getBabyNo() {
 		// TODO Auto-generated method stub
@@ -111,7 +88,5 @@ public class BabyBook {
 	
 	
 	
-=======
->>>>>>> parent of 90d42e1... Merge remote-tracking branch 'origin/leesa'
 		
 }

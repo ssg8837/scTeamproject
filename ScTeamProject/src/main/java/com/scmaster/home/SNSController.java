@@ -29,11 +29,8 @@ import com.scmaster.mapper.SNSMapper;
 import com.scmaster.vo.Bell;
 import com.scmaster.vo.Friend;
 import com.scmaster.vo.Likely;
-<<<<<<< HEAD
 import com.scmaster.vo.BS_User;
 import com.scmaster.vo.BabyBook;
-=======
->>>>>>> parent of 90d42e1... Merge remote-tracking branch 'origin/leesa'
 import com.scmaster.vo.MultiFiles;
 import com.scmaster.vo.SNS;
 import com.scmaster.vo.SNS_Reply;
@@ -105,11 +102,22 @@ public class SNSController {
 		
 		
 		model.addAttribute("snsList", snsList);
+		
+		//프로필사진 불러오기
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
 		return "snsMain";
 	}
 	@RequestMapping(value = "/openNewSns", method = RequestMethod.GET)
 	public String openNewSns(Model model) 
 	{
+		//프로필사진 불러오기
+		Object loginNo=httpSession.getAttribute("loginNo");
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
+		
 		return "newSns";
 	}
 	@RequestMapping(value = "/sns_OpenChoose", method = RequestMethod.POST)
@@ -277,11 +285,7 @@ public class SNSController {
 			reply.setUserNick(userNick);
 			count=snsMapper.insertReply(reply);
 		}
-<<<<<<< HEAD
 		return count;
-=======
-		return count;
->>>>>>> parent of 90d42e1... Merge remote-tracking branch 'origin/leesa'
 	}
 	
 	public String savedName(MultipartFile uploadfile) {

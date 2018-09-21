@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
 	Phantom by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
@@ -7,6 +8,24 @@
 /* Tiles */
 
 	body.is-preload .tiles article {
+=======
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
+
+/* Banner */
+
+	body.is-preload #banner:after {
+		opacity: 0.85;
+	}
+
+	body.is-preload #banner > .inner {
+		-moz-filter: none;
+		-webkit-filter: none;
+		-ms-filter: none;
+		filter: none;
+>>>>>>> refs/remotes/origin/leesa
 		-moz-transform: none;
 		-webkit-transform: none;
 		-ms-transform: none;

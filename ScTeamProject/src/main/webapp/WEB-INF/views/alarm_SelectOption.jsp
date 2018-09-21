@@ -45,7 +45,11 @@
 			        <p>종료시간: ${alarm.endTime}</p>
 			    </c:when>
 			    <c:when test="${alarm.alarmType eq 5}">
+<<<<<<< HEAD
 			        <p>할 일: 배소변 <c:if test="${alarm.alarmDetail eq 5}">(대변)</c:if><c:if test="${alarm.alarmDetail eq 6}">(소변)</c:if></p>
+=======
+			        <p>할 일: 모유 <c:if test="${alarm.alarmDetail eq 5}">(대변)</c:if><c:if test="${alarm.alarmDetail eq 6}">(소변)</c:if></p>
+>>>>>>> refs/remotes/origin/leesa
 			    </c:when>
 				<c:when test="${alarm.alarmType eq 6}">
 			        <p>할 일: 목욕</p>
