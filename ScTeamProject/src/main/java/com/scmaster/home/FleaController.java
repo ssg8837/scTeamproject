@@ -95,8 +95,8 @@ public class FleaController
 		int result=mapper.boardWrite(write);
 		System.out.println(result+"개 게시글 삽입 성공");
 		System.out.println(write.getUserNo());
-		int NewBoardNum=mapper.getNewBoardNum(write.getUserNo());
-		return "flea_read?fleaNum="+NewBoardNum;
+		
+		return "flea_read?fleaNum="+write.getUserNo();
 	}
 	
 	public String uploadfile(MultipartFile fleaSavedFile) {

@@ -202,10 +202,12 @@
 							</div>
 						<hr>	
 							<button id="golist">목록</button>
+							<button id="">신고</button>
 						<c:if test="${sessionScope.loginNo eq board.userNo}">
 						&nbsp;<button id="update">글수정</button>
 						&nbsp;<button id="delete">삭제</button>
 						</c:if>
+						
 					</div>		
 					</c:if>
 				</div>

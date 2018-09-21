@@ -54,6 +54,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				(userNo,fleaNum,fleaTitle,fleaText,flearegdate,fleaSavedFile)
 		VALUES
 			(#{userNo},fleaSeq.nextVal,#{fleaTitle},#{fleaText},sysdate,#{fleaSavedFile})
+		<selectKey resultType="int" keyProperty="fleaNum" order="AFTER">
+        	SELECT 
+				FLEASEQ.CURRVAL 
+			FROM 
+				FLEA 
+		</selectKey>        
   	</insert>
 	
 	<select id="getNewBoardNum" parameterType="int" resultType="int">
