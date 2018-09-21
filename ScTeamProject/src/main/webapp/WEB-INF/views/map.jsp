@@ -86,10 +86,14 @@
 	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
 <<<<<<< HEAD
+<<<<<<< HEAD
         		<li class="sub-menu">
 =======
 	           <li class="sub-menu">
 >>>>>>> refs/remotes/origin/dohyeon
+=======
+	           <li class="sub-menu">
+>>>>>>> refs/remotes/origin/mk
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
 	              <span>아이 정보</span>
@@ -108,6 +112,7 @@
 	              </a>
 	          </li>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	        	<li class="sub-menu">
                <a href="">
                  <i class="fa fa-medkit fa_left"></i>
@@ -119,6 +124,14 @@
                </ul>
              </li>
 =======
+=======
+	          <li class="sub-menu">
+	            <a href="vaccineForm">
+	              <i class="fa fa-medkit fa_left"></i>
+	              <span>예방접종</span>
+	              </a>
+	          </li>
+>>>>>>> refs/remotes/origin/mk
 	          <li class="sub-menu">
 	            <a href="vaccineForm">
 	              <i class="fa fa-medkit fa_left"></i>
@@ -177,6 +190,7 @@
 						<input id="hospitalTel" type="hidden" value="${hospital.phone}"/><!-- 예방접종 예방 병원 객채  -->
 =======
 						<input id="hospitalAddr" type="hidden" value="${hospitalAddr}"/><!-- 예방접종 예방 병원 객채  -->
+<<<<<<< HEAD
 						<input id="hospitalName" type="hidden" value="${hospitalName}"/><!-- 예방접종 예방 병원 객채  -->
 						<input id="hospitalTel" type="hidden" value="${hospitalTel}"/><!-- 예방접종 예방 병원 객채  -->
 						<!-- 병원선택 -->
@@ -194,8 +208,29 @@
 							<button id="getPostion">현재위치</button>
 						</div>		
 >>>>>>> refs/remotes/origin/dohyeon
+=======
+						<!-- 병원선택 -->
+						<div class="menubar">
+							<ul>
+								<li><a href="#" id="current">>병원분류</a>
+									<ul>
+										<li><a href="babiesHospital">소아과</a></li>
+										<li><a href="my_location">전체병원</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>										
+>>>>>>> refs/remotes/origin/mk
 						<!-- 지도 객채를 담을 div 태그  -->
+<<<<<<< HEAD
 						<div id="map"></div>
+=======
+						<div id="map">
+							<div class="reset_icon_wrap"><!-- 위치정보 초기화 -->
+								<i class="getPostion "></i>
+							</div>						
+						</div>
+>>>>>>> refs/remotes/origin/mk
 						<!-- 매뉴 태그들 -->
 						<div id="menu_wrap" class="bg_white">
 							<img class="sub_menu_icon" src=".resources/image/menu-button.png"/><!-- 리스트 접기 아이콘 -->
