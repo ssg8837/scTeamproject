@@ -19,6 +19,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.scmaster.mapper.HospitalMapper;
+import com.scmaster.mapper.MainMapper;
+import com.scmaster.vo.BS_User;
 import com.scmaster.vo.Hospital;
 
 @Controller
@@ -32,6 +34,15 @@ public class HospitalController {
 	@RequestMapping(value = "/hospital_Test", method = RequestMethod.GET)
 	public String hospital_Test(Model model) 
 	{
+		
+		Object loginNo=httpSession.getAttribute("loginNo");
+		if(loginNo != null) {
+		//프로필사진 불러오기
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
+		}
+		
 		return "map";
 	}
 	/*

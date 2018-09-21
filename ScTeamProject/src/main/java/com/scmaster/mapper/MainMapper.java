@@ -20,7 +20,6 @@ public interface MainMapper {
 	void deleteBaby(int babyNo);
 	
 	BS_Baby selectBaby(int babyNo);
-	public int babyAge(int babyNo);
 	
 	int countUser(String userId);
 	int selectUserById(String userId);

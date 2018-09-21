@@ -19,12 +19,23 @@
 		
 		var result = '<h4>'+diseaseName+'</h4>';
 			result += '<hr />';
-			result += '<input type="radio" id="checkN" class="vaccineCK" name="vaccineCK" value="N" checked="checked" onclick="javascript:deleteDate()"><span class="vaccineCK_check">미접종</span>';
-			result += '&nbsp;&nbsp;<input type="radio" id="checkY" class="vaccineCK" name="vaccineCK" value="Y" onclick="javascript:insertDate()"><span class="vaccineCK_check">접종</span> ';
-			result += '<br /><div id="forCheckdate"></div><br /> ';
-			result += '<p>메모</p><input id="memo" type="text"><br /><br />';
-			result += '<input id="registerbtn" type="button" value="확인" onclick="javascript:clickRegister()">';
-			result += '<input id="cancelbtn" type="button" value="취소" onclick="javascript:clickCancle()">';
+	         result += '<div class="switch">';
+	         result += '<input type="radio" id="checkN" class="vaccineCK switch-input" name="vaccineCK" value="N" checked="checked"><label for="checkN" class="switch-label switch-label-off" onclick="javascript:deleteDate()">미접종</label>';
+	         result += '<input type="radio" id="checkY" class="vaccineCK switch-input" name="vaccineCK" value="Y"><label for="checkY" class="switch-label switch-label-on" onclick="javascript:insertDate()">접종</label>';
+	         result += '<span class="switch-selection"></span>';
+	         result += '</div>';
+	         result += '<div id="forCheckdate"><p>접종일</p><input id="checkdate" type="date" disabled="disabled"></div><br /> ';
+
+	         result += '<p>메모</p><input id="memo" type="text"><br /><br />';
+	         /* 
+	         result += '<input id="registerbtn" type="button" value="확인" onclick="javascript:clickRegister()">';
+	         result += '<input id="cancelbtn" type="button" value="취소" onclick="javascript:clickCancle()">';
+	          */
+	         result += '<div class="modalBTN">';
+	         result += '<hr />';
+	         result += '<button id="registerbtn" type="button" class="btn btn-info" onclick="javascript:clickRegister()">확인</button>';
+	         result += '&nbsp&nbsp<button id="cancelbtn" type="button" class="btn btn-info" onclick="javascript:clickCancle()">취소</button>';
+	         result += '</div>';
 			result += '<input id="babyNo" type="hidden" value="'+babyNo+'">';
 			result += '<input id="diseaseNum" type="hidden" value="'+diseaseNum+'">';
 			result += '<input id="vaccineType" type="hidden" value="'+vaccineType+'">';
@@ -38,12 +49,14 @@
 	
 		
 		function insertDate(){
-			$('#forCheckdate').html('<br/ ><p>접종일</p><input id="checkdate" type="date">');
+			//$('#forCheckdate').html('<br/ ><p>접종일</p><input id="checkdate" type="date" style="width: 100%; border-radius: 10px; border: 1px solid rgba(0,0,0,0.5);">');
+			$('#checkdate').prop('disabled', false);
 		}
 		
 		
 		function deleteDate(){
-			$('#forCheckdate').html('');
+			//$('#forCheckdate').html('');
+			$('#checkdate').prop('disabled', true);
 		}
 	
 	
@@ -99,11 +112,15 @@
 		function diseaseDetailOutput(resp){
 			
 			var result = '<h4>'+resp.diseasename+'</h4><br>';
-				result += '<pre style="font-size: 12pt;" id="testcont"></pre>';
+				result += '<pre style="font-size: 12pt; background-color:white;" id="testcont"></pre>';
 		
 	
 			$('#diseaseDetailDiv').html(result);
 			$('#testcont').html(resp.diseasecontent);
+		}
+		
+		function closeModal(){
+			document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none';
 		}
 
 </script>
@@ -248,8 +265,10 @@
           <div class="col-lg-12">
             <!-- <p>아이를 선택해 주세요</p> -->
            
+           
+           
             <form id="searchForm" action="vaccineForm" method="get">
-				<select style="height:20px;" size="1" id="babyNo" name="babyNo" onchange="selectSubmit()">
+				<select style="height:33px;" size="1" id="babyNo" name="babyNo" onchange="selectSubmit()">
 					<option selected disabled="disabled">아이선택</option>
 					<c:forEach var="baby" items="${babyList}">
 						<option value="${baby.babyNo}" ${baby.babyNo == babyNo ? 'selected' : ''}>${baby.babyName}</option>
@@ -313,6 +332,7 @@
 					${vaccine.vaccineType}<br>
 					권장일: ${vaccine.vaccineDate}<br>
 					접종일: ${vaccine.checkDate}<br>
+					메모: ${vaccine.memo}<br>
 					국가예방접종
 				</a>
 				</td>
@@ -328,14 +348,14 @@
 			
 			<!-- 예방접종 등록 모달 -->
 			<div id="vaccineRegisterModalLight" class="white_content">
-				<button type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
+				<button style="border: 1px solid black" type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
 				 onclick = "document.getElementById('vaccineRegisterModalLight').style.display='none';document.getElementById('vaccineRegisterModalFade').style.display='none'">
 				&times;</button>
 				
-				<div id="vaccineRegisterDiv">
+				<div id="vaccineRegisterDiv" style="width: 100%; height: 400px; margin: auto; ">
 					
 				</div>
-			
+				
 				<!-- <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">닫기</a> -->
 			</div>
 		
@@ -344,10 +364,8 @@
 			
 			
 			<!-- diseaseContent 모달 -->
-			<div id="light" class="white_content">
-				<button type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
-				 onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
-				&times;</button>
+			<div id="light" class="white_content" onclick="closeModal()">
+				
 				
 				<div id="diseaseDetailDiv">
 					

@@ -110,6 +110,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE BS_ALARM SET ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMDETAIL=#{alarmDetail}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
 		WHERE ALARMNO = #{alarmNo}
 	</update>
+	<update id="updateAlarm_EndTimeNDetail" parameterType="BS_Alarm" >
+		UPDATE BS_ALARM SET BABYNO=#{babyNo}, ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMDETAIL=#{alarmDetail}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
+		WHERE ALARMNO = #{alarmNo}
+	</update>
 	<update id="updateAlarm_AmountNEndTime" parameterType="BS_Alarm" >
 		UPDATE BS_ALARM SET ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMAMOUNT=#{alarmAmount}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
 		WHERE ALARMNO = #{alarmNo}
