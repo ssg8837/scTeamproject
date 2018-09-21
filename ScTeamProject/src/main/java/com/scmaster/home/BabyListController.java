@@ -57,18 +57,6 @@ public class BabyListController {
 		return "redirect:/openNewBaby";
 	}
 	
-	//아이 나이 계산
-	@RequestMapping(value = "/babyAge", method = RequestMethod.GET)
-	@ResponseBody public int babyAge(int babyNo) {
-		//System.out.println(babyNo);
-		
-		MainMapper mapper= sqlSession.getMapper(MainMapper.class);		
-		int babyAge = mapper.babyAge(babyNo);
-		
-		//System.out.println(babyAge);
-		
-		return babyAge;
-	}
 	//아이생활기록(개별)으로 이동
 	@RequestMapping(value = "/checkPattern", method = RequestMethod.GET)
 	public String checkPattern(int babyNo, Model model) {

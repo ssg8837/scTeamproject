@@ -34,11 +34,14 @@ public class HospitalController {
 	@RequestMapping(value = "/hospital_Test", method = RequestMethod.GET)
 	public String hospital_Test(Model model) 
 	{
-		//프로필사진 불러오기
+		
 		Object loginNo=httpSession.getAttribute("loginNo");
+		if(loginNo != null) {
+		//프로필사진 불러오기
 		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
 		BS_User user=mapperM.myAccount((Integer)loginNo);
 		model.addAttribute("user",user);
+		}
 		
 		return "map";
 	}

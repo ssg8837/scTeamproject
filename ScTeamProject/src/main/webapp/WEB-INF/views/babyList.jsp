@@ -5,7 +5,7 @@
 	<head>		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-		<title>Home</title>
+		<title>아이정보</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">

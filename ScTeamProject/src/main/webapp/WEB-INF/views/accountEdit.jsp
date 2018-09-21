@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <html>
 	<head>
-		<title>Home</title>
+		<title>회원정보수정</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">

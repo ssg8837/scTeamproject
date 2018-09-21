@@ -44,7 +44,7 @@
 				var addr = "'" + item.orgAddr + "'";
 				var tel = "'" + item.orgTlno + "'";
 				
-				result +='<tr onclick="javascript:sendHospital('+name+','+addr+','+tel+');">';
+				result +='<tr style="cursor:pointer" onclick="javascript:sendHospital('+name+','+addr+','+tel+');">';
 				result += '<td>'+item.orgnm+'</td>';
 				result += '<td>'+item.orgTlno+'</td>';
 				result += '<td id="hospitalAddr">'+item.orgAddr+'</td></tr>';
@@ -93,7 +93,7 @@
 </script>
 		
 		
-		<title>육아서포트페이지</title>
+		<title>접수병원</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
