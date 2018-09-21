@@ -93,6 +93,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM BS_USER
 		WHERE USERID=#{userId}
 	</select>
+	<select id="selectImg" parameterType="Integer" resultType="Object">
+		SELECT USERSAVEDFILE
+		FROM BS_USER
+		WHERE USERNO=#{userNo}
+	</select>
+	
+	<select id="selectNick" parameterType="Integer" resultType="String">
+		SELECT USERNICK
+		FROM BS_USER
+		WHERE USERNO=#{userNo}
+	</select>
+	
+	<select id="selectBabyName" parameterType="Integer" resultType="String">
+		SELECT BABYNAME
+		FROM BS_BABY
+		WHERE BABYNO=#{babyNo}
+	</select>
 	
 	
 </mapper>

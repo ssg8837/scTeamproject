@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="SNS" type="com.scmaster.vo.SNS"></typeAlias>
 		<typeAlias alias="SNS_Reply" type="com.scmaster.vo.SNS_Reply"></typeAlias>
 		<typeAlias alias="Friend" type="com.scmaster.vo.Friend"></typeAlias>
+		<typeAlias alias="Likely" type="com.scmaster.vo.Likely"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
