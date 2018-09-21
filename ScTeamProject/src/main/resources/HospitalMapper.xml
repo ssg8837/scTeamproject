@@ -22,6 +22,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<delete id="deleteHspt">
-	 delete from hospital
+		delete from hospital
 	</delete>
+	
+	<select id="selectAllHspt" resultType="Hospital">
+		select * from hospital
+	</select>
 </mapper>

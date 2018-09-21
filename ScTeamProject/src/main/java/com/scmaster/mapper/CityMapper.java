@@ -7,4 +7,5 @@ public interface CityMapper {
 	public City selectCityNM(String cityName);
 	public City selectCityCode(String cityCode);
 	public int insertCity(City city);
+	public int deleteCity();
 }
