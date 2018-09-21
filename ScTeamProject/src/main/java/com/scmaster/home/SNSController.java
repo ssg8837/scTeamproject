@@ -26,14 +26,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.mapper.SNSMapper;
-<<<<<<< HEAD
 import com.scmaster.vo.Bell;
 import com.scmaster.vo.Friend;
 import com.scmaster.vo.Likely;
-=======
 import com.scmaster.vo.BS_User;
 import com.scmaster.vo.BabyBook;
->>>>>>> refs/remotes/origin/leesa
 import com.scmaster.vo.MultiFiles;
 import com.scmaster.vo.SNS;
 import com.scmaster.vo.SNS_Reply;
@@ -123,7 +120,6 @@ public class SNSController {
 		
 		return "newSns";
 	}
-<<<<<<< HEAD
 	@RequestMapping(value = "/sns_OpenChoose", method = RequestMethod.POST)
 	public String sns_OpenChoose(Model model,int snsNo) 
 	{
@@ -215,8 +211,6 @@ public class SNSController {
 		return snsMapper.selectCountLikely(snsNo);
 	}
 	
-=======
->>>>>>> refs/remotes/origin/leesa
 	@RequestMapping(value = "/insertNewSns", method = RequestMethod.POST)
 	public String insertNewSns(MultiFiles boardfiles,String content, boolean permission, MultipartFile fileSet,Model model,HttpServletRequest request) throws IllegalStateException, IOException
 	{
@@ -272,7 +266,6 @@ public class SNSController {
 			sns.setUserNick((String)httpSession.getAttribute("loginNick"));
 			snsMapper.insertSNS(sns);
 		}
-<<<<<<< HEAD
 		return openSNS( model) ;
 	}
 	
@@ -293,15 +286,6 @@ public class SNSController {
 			count=snsMapper.insertReply(reply);
 		}
 		return count;
-=======
-		
-		//프로필사진 불러오기
-		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
-		BS_User user=mapperM.myAccount((Integer)loginNo);
-		model.addAttribute("user",user);
-		
-		return openSNS(model);
->>>>>>> refs/remotes/origin/leesa
 	}
 	
 	public String savedName(MultipartFile uploadfile) {

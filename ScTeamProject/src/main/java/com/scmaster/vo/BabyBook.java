@@ -75,6 +75,16 @@ public class BabyBook {
 		return "BabyBook [boardnum=" + boardnum + ", userNo=" + userNo + ", content=" + content + ", regdate=" + regdate
 				+ ", originalfile=" + originalfile + ", savedfile=" + savedfile + "]";
 	}
+
+	public int getBabyNo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	
