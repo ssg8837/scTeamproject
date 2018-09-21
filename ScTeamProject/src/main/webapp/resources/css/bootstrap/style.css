@@ -251,11 +251,13 @@ ul.top-menu > li > .logout {
 }
 
 #sidebar .sub-menu > .sub li  {
+	border-left: 1px solid #FFD17D;
+	border-right: 1px solid #FFD17D;
     padding-left: 32px;
-    background-color: #e9d1b6;
 }
 
 #sidebar .sub-menu > .sub li:last-child {
+	border-bottom: 1px solid #FFD17D;
     padding-bottom: 10px;
 }
 
@@ -324,15 +326,17 @@ ul.sidebar-menu li ul.sub li a {
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
     color: #777;
+    background: none;
 }
 
 ul.sidebar-menu li ul.sub li a:hover {
-	color: white;
+	color: #ffd17d;
 	background: transparent;
 }
 
 ul.sidebar-menu li ul.sub li.active a {
-    color: #fff;
+	font-weight: bold;
+    color: #FFC04A;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;

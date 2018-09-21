@@ -216,9 +216,9 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="flea_list">
 	              <i class="fa fa-edit fa_left"></i>
-	              <span>게시판</span>
+	              <span>벼룩시장</span>
 	              </a>
 	          </li>
           </ul>
