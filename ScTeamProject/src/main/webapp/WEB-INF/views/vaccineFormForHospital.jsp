@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -302,6 +303,8 @@
 	</body>
 </html>
 =======
+=======
+>>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -341,6 +344,7 @@
 	
 	function hospitalOutput(resp){
 		var result = '<thead><tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr></thead>';
+<<<<<<< HEAD
 			result += '<tbody>';
 			
 			$.each(resp.vhList,function(index,item){
@@ -350,11 +354,22 @@
 				
 				result +='<tr style="cursor:pointer" onclick="javascript:sendHospital('+name+','+addr+','+tel+');">';
 				result += '<td>'+item.orgnm+'</td>';
+=======
+			
+			result += '<tbody>';
+			$.each(resp.vhList,function(index,item){
+				result += '<tr onclick="javascript:sendHospital(';
+				result += "'"+item.orgAddr+"'"+')"><td>'+item.orgnm+'</td>';
+>>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
 				result += '<td>'+item.orgTlno+'</td>';
 				result += '<td id="hospitalAddr">'+item.orgAddr+'</td></tr>';
 			});
 			result += '</tbody>';
+<<<<<<< HEAD
 			
+=======
+		
+>>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
 		
 		$('#vaccineHospital').html(result);
 		
@@ -377,7 +392,11 @@
 		var page = p+1;
 		
 		if(sggCd==null){
+<<<<<<< HEAD
 			alert('시/군/구 를 선택해주세요');
+=======
+			alert('시/군/구 를 선택해 주세요');
+>>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
 			return;
 		}
 		
@@ -389,15 +408,26 @@
 		});
 	}
 	
+<<<<<<< HEAD
 	function sendHospital(name, addr, tel){
 		console.log(name+",",+addr+","+tel);
 		location.href='sendHospital?address='+addr+'&name='+name+'&phone='+tel;
+=======
+	function sendHospital(addr){
+		alert(addr);
+		
+		/* location.href='sendHospital?VaccineHospitalhospital='+addr; */
+>>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
 	}; 
 
 </script>
 		
 		
+<<<<<<< HEAD
 		<title>접수병원</title>
+=======
+		<title>육아서포트페이지</title>
+>>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
@@ -464,6 +494,7 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
+<<<<<<< HEAD
 	          	<p class="centered"><a href="openAccountEdit">
 	          		<c:if test='${sessionScope.loginImg != null }'>
 		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
@@ -481,6 +512,11 @@
 	              <span>아이 정보</span>
 	            </a>
 	          </li>
+=======
+	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<h5 class="centered">${sessionScope.loginNick }</h5>
+        	</c:if>
+>>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
 	          <li class="sub-menu">
 	            <a href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
@@ -500,8 +536,13 @@
 	              <span>예방접종</span>
 	            </a>
 	            <ul class="sub">
+<<<<<<< HEAD
               		<li ><a href="vaccineForm">질병 및 예방접종 조회</a></li>
              		<li class="active"><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+=======
+              		<li class="active"><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+             		<li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+>>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
               	</ul>
 	          </li>
 	          
@@ -512,7 +553,11 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
+<<<<<<< HEAD
 	            <a href="weather_Test">
+=======
+	            <a href="hospital_Test">
+>>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
@@ -524,7 +569,11 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
+<<<<<<< HEAD
 	            <a href="openSNS">
+=======
+	            <a href="babyBookForm">
+>>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>
@@ -625,5 +674,9 @@
 	    <script src="./resources/js/home/bell.js"></script>
   
 	</body>
+<<<<<<< HEAD
 </html>
 >>>>>>> refs/remotes/origin/leesa
+=======
+</html>
+>>>>>>> parent of 08a44b0... Merge remote-tracking branch 'origin/gonayun'
