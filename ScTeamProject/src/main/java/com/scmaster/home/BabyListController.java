@@ -64,7 +64,11 @@ public class BabyListController {
 		//System.out.println(babyAge);
 		
 		return babyAge;
+<<<<<<< HEAD
 	}
+=======
+	}
+>>>>>>> parent of 90d42e1... Merge remote-tracking branch 'origin/leesa'
 	//아이생활기록(개별)으로 이동
 	@RequestMapping(value = "/checkPattern", method = RequestMethod.GET)
 	public String checkPattern(int babyNo, Model model) {

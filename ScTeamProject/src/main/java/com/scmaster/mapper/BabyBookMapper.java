@@ -22,7 +22,5 @@ public interface BabyBookMapper {
 	public int deleteBabyBook(int boardnum);
 
 	public int updateBabyBook(BabyBook babyBook);
-
-	public List<BabyBook> selectListByMonth(String smonth);
 	
 }

@@ -122,10 +122,16 @@ public class AlarmController {
 		BS_Alarm alarm = alarmMapper.selectAlarm(alarmNo);
 		model.addAttribute("alarm", alarm);
 		MainMapper mainMapper=sqlSession.getMapper(MainMapper.class);
+<<<<<<< HEAD
 		Object loginNo=httpSession.getAttribute("loginNo");
 		
 		model.addAttribute("babyName", mainMapper.selectBabyName(alarm.getBabyNo()));
 
+=======
+		Object loginNo=httpSession.getAttribute("loginNo");
+		
+		model.addAttribute("babyName", mainMapper.selectBabyName(alarm.getBabyNo()));
+>>>>>>> parent of 90d42e1... Merge remote-tracking branch 'origin/leesa'
 		//프로필사진 불러오기
 		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
 		BS_User user=mapperM.myAccount((Integer)loginNo);

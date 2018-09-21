@@ -5,12 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +18,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.scmaster.mapper.MainMapper;
-import com.scmaster.vo.BS_User;
 import com.scmaster.vo.City;
 import com.scmaster.vo.Hospital;
 import com.scmaster.vo.VaccineHospital;
@@ -30,9 +25,6 @@ import com.scmaster.vo.VaccineHospital;
 
 @Controller
 public class VaccineControllerForHospital{
-	
-	@Autowired SqlSession sqlSession;
-	@Autowired HttpSession httpSession;
 
 	private String getTagValue(String string, Element eElement) {
 		NodeList nlList =eElement.getElementsByTagName(string).item(0).getChildNodes();
@@ -72,12 +64,6 @@ public class VaccineControllerForHospital{
         }
 	    
 	    model.addAttribute("list", list);
-	    
-		//프로필사진 불러오기
-		Object loginNo=httpSession.getAttribute("loginNo");
-		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
-		BS_User user=mapperM.myAccount((Integer)loginNo);
-		model.addAttribute("user",user);
 	    
 		return "vaccineFormForHospital";
 	}
@@ -120,7 +106,7 @@ public class VaccineControllerForHospital{
 	//병원 검색 ㅠㅠ
 	@RequestMapping(value = "/Searchhospital", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> hopitalTest3(String brtcCd, String sggCd,
-															@RequestParam(value="page", defaultValue="1") String page												
+															@RequestParam(value="page", defaultValue="1") String page
 															) throws Exception{
 		
 		List<VaccineHospital> vhList = new ArrayList<VaccineHospital>();
@@ -166,24 +152,17 @@ public class VaccineControllerForHospital{
 		map.put("totalCount", totalCount);
 		map.put("vhList", vhList);
 	    map.put("page", Integer.parseInt(page));
-	   
+	
 	    return map;
 	}
 	
 	///도현씨 보세요 호엥ㅇ에에에에엥
 	@RequestMapping(value = "/sendHospital", method = RequestMethod.GET)
-	public String sendHospital(Hospital hospital,Model model){
+	public String sendHospital(String addr){
 		System.out.println("호에에엥에엥ㅇㅇ");
-		System.out.println(hospital);
-		
-		model.addAttribute("hospital", hospital);
-		
-		//프로필사진 불러오기
-  		Object loginNo=httpSession.getAttribute("loginNo");
-  		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
-  		BS_User user=mapperM.myAccount((Integer)loginNo);
-  		model.addAttribute("user",user);  
-	    return "map";
+		System.out.println(addr);
+	
+	    return "redirect:vaccineFormForHospital";
 	}
 	
 	

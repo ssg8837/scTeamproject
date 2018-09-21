@@ -1,25 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		
 		<script>
 			$(function(){
-				
-				$('#selectMonth').on('change', function(){
-					var month = $('#selectMonth').val();
-					
-					$.ajax({
-						url: 'selectBabyBookByMonth',
-						type: 'get',
-						data: {'smonth':month},
-						success: selectListOutput
-					});
-					
-				});
 				
 				$('#registerBabyBook').on('click',function(){
 					
@@ -37,34 +24,6 @@
 				
 				
 			});
-			
-			
-			function selectListOutput(resp){
-				var result = '';
-				
-				if(resp.length==0){
-					result += '<div style="width: 100%; height: 400px; margin: auto; text-align:center;">'
-					result += '<h3 style="margin-top: 200px;">작성된 다이어리가 없습니다.</h3>';
-					result += '</div>'
-					
-				}else{
-					$.each(resp,function(index, item){
-						var content = "'"+item.content+"'";
-						var regdate = "'"+item.regdate+"'";
-					
-						result += '<div class="col-lg-4 col-md-4 col-sm-4 mb" onclick="javascript:selectOne('+item.boardnum+','+content+','+regdate+')">';
-		             	result += '<div class="content-panel pn">';
-		             	result += '<div id="blog-bg" style="background-image: url(./getImage?boardnum='+item.boardnum+');"></div>';
-		             	result += '<div class="blog-text"><p>'+item.content+'</p></div>';
-		             	result += '<div class="blog-date">'+item.regdate+'</div></div></div>';
-					});
-					
-				}
-				
-					$('#listDiv').html(result);
-
-			}
-			
 			
 			function selectOne(boardnum, content, regdate){
 				var newContent = "'" + content + "'";
@@ -101,7 +60,7 @@
 				var result = '<form id="updateBabyBookForm" action="updateBabyBook" method="post" enctype="multipart/form-data" runat="server" onsubmit="return submitConFirm()">';
 					result += '<input type="hidden" value="'+${sessionScope.loginNo}+'" id="userNo" name="userNo">';
 					result += '<input type="hidden" value="'+boardnum+'" id="boardnum" name="boardnum">';
-					result += '<textarea id="content" name="content" rows="10" cols="75" style="resize: none;">'+content+'</textarea>';
+					result += '<textarea id="content" name="content" rows="10" cols="70" style="resize: none;">'+content+'</textarea>';
 					result += '<br><input type="file" id="imgInput" name="uploadfile"/><br/>';
 					result += '<div id="image_section" ></div>';
 					result += '<input type="submit" value="수정">';
@@ -109,7 +68,6 @@
 				
 				
 				$('#selectOneDiv').html(result);
-				
 			}
 			
 			function submitConFirm(){
@@ -119,15 +77,6 @@
 					return false;
 				}
 			}
-			
-			function closeModal(){
-				document.getElementById('selectOneLight').style.display='none';document.getElementById('selectOneFade').style.display='none';
-			}
-			
-			function closeResisterModal(){
-				document.getElementById('registerLight').style.display='none';document.getElementById('registerFade').style.display='none';
-			}
-			
 			
 		</script>
 		
@@ -281,30 +230,20 @@
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <section id="main-content">
-      
       <section class="wrapper site-min-height">
-        
         <h3><i class="fa fa-angle-right"></i> 다이어리</h3>
-        
-        <input style="height:33px; float: left;" type="month" id="selectMonth" >
-        &nbsp;&nbsp;&nbsp;<span style="font-size: 18px;"> * 날짜를 선택해주세요.</span>
-        <button style="float: right;" id="registerBabyBook" type="button" class="btn btn-info">작성</button>
-        <br>
-        <hr/>
-        
         <div class="row mt">
           <div class="col-lg-12">
             
             
-            <div id="listDiv" class="row">
+            <div class="row">
               
-				<c:if test="${empty list}">
-					<div style="width: 100%; height: 400px; margin: auto; text-align:center;">
-					<h3 style="margin-top: 200px;">작성된 다이어리가 없습니다.</h3>
-					</div>
-				</c:if>
+	          <div id="registerBabyBook" class="col-lg-4 col-md-4 col-sm-4 mb">
+                <div class="instagram-panel pn">
+                  <i class="fa fa-instagram fa-4x"></i>
+                </div>
+              </div>
               
-<<<<<<< HEAD
               
               <div class="col-lg-4 col-md-4 col-sm-4 mb">
                 <div class="content-panel pn">
@@ -377,86 +316,96 @@
               	<div class="col-lg-4 col-md-4 col-sm-4 mb" 
               	onclick="javascript:selectOne(${list.boardnum},'${list.content}','${list.regdate}')">
                 	<div class="content-panel pn">
-=======
-              	
-              	<c:if test="${not empty list}">
-              		
-              		<c:forEach var="list" items="${list}">
-              			<div class="col-lg-4 col-md-4 col-sm-4 mb" 
-              			onclick="javascript:selectOne(${list.boardnum},'${list.content}','${list.regdate}')">
-                		<div class="content-panel pn">
->>>>>>> refs/remotes/origin/leesa
                   		<div id="blog-bg" style="background-image: url(./getImage?boardnum=${list.boardnum});">
                   		</div>
                   		<div class="blog-text">
-                    	<p>${list.content}</p>
+                    		<p>${list.content}</p>
                   		</div>
-                  		<div class="blog-date">${list.regdate}</div>
-               	 		</div>
-              			</div>
-					 </c:forEach>
-              	
-              	</c:if>
-
+                  			<div class="blog-date">${list.regdate}</div>
+               	 	</div>
+              	</div>
+              
+              </c:forEach>
+            	  
               
             </div>
             
             
             <div id="registerLight" class="white_content">
-				<button type="button" style="border: 1px solid black" class="close close_link" data-dismiss="modal" aria-hidden="true"
-				 onclick = "closeResisterModal()">
+				<button type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
+				 onclick = "document.getElementById('registerLight').style.display='none';document.getElementById('registerFade').style.display='none'">
 				&times;</button>
 				
+				<%-- <div id="">
+					<form id="registerBabyBookForm" action="registerBabyBook" method="post" enctype="multipart/form-data" runat="server">
+						<input type="hidden" value="${sessionScope.loginNo}" id="userNo" name="userNo">
+						<!-- <input id="registerDate" type="date"><br> -->
+						<textarea id="content" name="content" rows="10" cols="70" style="resize: none;"></textarea>
+						<br>
+						<input type='file' id="imgInput" name="uploadfile"/><br/>
+	    				<div id="image_section" >
+	    				</div>
+						<input id="registerbtn" type="button" value="등록">
+					</form>
+				</div> --%>
 				
 				
-				
-				<form id="registerBabyBookForm" action="registerBabyBook" enctype="multipart/form-data" method="post" class="form-horizontal style-form">
+		
+        
+		      <section id="main-content">
+		      	<section class="wrapper">
+		        <div class="row mt">
+		          <div class="col-lg-12">
+		            <div class="form-panel">
+		              <form id="registerBabyBookForm" action="registerBabyBook" enctype="multipart/form-data" method="post" class="form-horizontal style-form">
 		                
 		                <input type="hidden" value="${sessionScope.loginNo}" id="userNo" name="userNo">
-		    			<!-- <input type="text" name="title"> -->
-		    			<br/>
-		    			<hr/>
-		    			<textarea id="content" name="content" rows="10" cols="100" style="resize: none; width:100%;"></textarea>
-		    			<br>
+		    			<textarea id="content" name="content" rows="10" cols="70" style="resize: none;"></textarea>
 		                
-		                <!-- <div  class="form-group last"> -->
-		                  <!-- <div class="col-md-9"> -->
+		                <div  class="form-group last">
+		                  <label class="control-label col-md-3">Image Upload</label>
+		                  <div class="col-md-9">
 		                    <div class="fileupload fileupload-new" data-provides="fileupload">
-		                      <!-- <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+		                      <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
 		                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
-		                      </div> -->
-		                      <br>
-		                      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 900px; max-height: 650px; line-height: 20px;"></div>
+		                      </div>
+		                      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
 		                      <div>
 		                        <span class="btn btn-theme02 btn-file">
 		                          <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select image</span>
-		                          <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-		                          <input type="file" id="imgInput" name="uploadfile" class="default"/>
+		                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+		                        <input type="file" id="imgInput" name="uploadfile" class="default" />
 		                        </span>
-		                        <!-- <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a> -->
+		                        <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
 		                      </div>
 		                    </div>
 		                    
-		                  <!-- </div> -->
-		                <!-- </div> -->
-		                <hr>
-		                <button id="registerbtn" type="button" class="btn btn-info">등록</button>
-		                &nbsp&nbsp<button id="" type="button" class="btn btn-info" onclick="closeResisterModal()">취소</button>
+		                  </div>
+		                  <input id="registerbtn" type="button" value="등록">
+		                </div>
 		              </form>
-				
-	
-		     
+		            </div>
+		            <!-- /form-panel -->
+		          </div>
+		          <!-- /col-lg-12 -->
+		        </div>
+		        <!-- row -->
+		      </section>
+		      <!-- /wrapper -->
+		    </section>
+		    <!-- /MAIN CONTENT -->
 
 			</div>
 		
         	<div id="registerFade" class="black_overlay"></div>
-       
+        	
+        	
         	
         	<div id="selectOneLight" class="white_content">
 				<button type="button" class="close close_link" data-dismiss="modal" aria-hidden="true"
 				 onclick = "document.getElementById('selectOneLight').style.display='none';document.getElementById('selectOneFade').style.display='none'">
 				&times;</button>
-				</br>
+				
 				<div id="selectOneDiv">
                 	
 				</div>
@@ -490,9 +439,6 @@
 			</div>
 
         	<div id="selectOneFade" class="black_overlay"></div>
-        	
-        	
-        	
             
           </div>
         </div>

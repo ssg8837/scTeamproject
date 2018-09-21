@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>병원지도</title>
+		<title>육아서포트페이지</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
@@ -87,7 +87,6 @@
         	</c:if>
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
         		<li class="sub-menu">
 =======
 	           <li class="sub-menu">
@@ -95,9 +94,6 @@
 =======
 	           <li class="sub-menu">
 >>>>>>> refs/remotes/origin/mk
-=======
-        		<li class="sub-menu">
->>>>>>> refs/remotes/origin/leesa
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
 	              <span>아이 정보</span>
@@ -130,7 +126,6 @@
 =======
 =======
 	          <li class="sub-menu">
-<<<<<<< HEAD
 	            <a href="vaccineForm">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
@@ -145,8 +140,6 @@
 	          </li>
 >>>>>>> refs/remotes/origin/dohyeon
 	          <li class="sub-menu">
-=======
->>>>>>> refs/remotes/origin/leesa
 	            <a class="active" href="hospital_Test">
 	              <i class="fa fa-hospital-o fa_left"></i>
 	              <span>병원찾기</span>
@@ -192,7 +185,6 @@
 				<div class="col-lg-12">
 					<div class="map_wrap"><!-- 지도 레이아웃을 위한 Wrapper  -->
 <<<<<<< HEAD
-<<<<<<< HEAD
 						<input id="hospitalAddr" type="hidden" value="${hospital.address}"/><!-- 예방접종 예방 병원 객채  -->
 						<input id="hospitalName" type="hidden" value="${hospital.name}"/><!-- 예방접종 예방 병원 객채  -->
 						<input id="hospitalTel" type="hidden" value="${hospital.phone}"/><!-- 예방접종 예방 병원 객채  -->
@@ -229,11 +221,6 @@
 							</ul>
 						</div>										
 >>>>>>> refs/remotes/origin/mk
-=======
-						<input id="hospitalAddr" type="hidden" value="${hospital.address}"/><!-- 예방접종 예방 병원 객채  -->
-						<input id="hospitalName" type="hidden" value="${hospital.name}"/><!-- 예방접종 예방 병원 객채  -->
-						<input id="hospitalTel" type="hidden" value="${hospital.phone}"/><!-- 예방접종 예방 병원 객채  -->
->>>>>>> refs/remotes/origin/leesa
 						<!-- 지도 객채를 담을 div 태그  -->
 <<<<<<< HEAD
 						<div id="map"></div>

@@ -1,7 +1,13 @@
 package com.scmaster.home;
+<<<<<<< HEAD
 
 import java.io.File;
 import java.util.Calendar;
+=======
+
+
+import java.io.File;
+>>>>>>> parent of 90d42e1... Merge remote-tracking branch 'origin/leesa'
 import java.util.List;
 import java.util.UUID;
 
@@ -40,19 +46,15 @@ public class BabyBookController {
 	@RequestMapping(value = "/babyBook", method = RequestMethod.GET)
 	public String joinForm(Model model) {
 		
-		Calendar today = Calendar.getInstance();
+		BabyBookMapper mapper = sqlSession.getMapper(BabyBookMapper.class);
+		List<BabyBook> list = mapper.selectList();
 		
-		String smonth;
-		if(today.get(Calendar.MONTH)+1>=10) {
-			smonth = today.get(Calendar.YEAR)+"-"+(today.get(Calendar.MONTH)+1);
-		}else{
-			smonth = today.get(Calendar.YEAR)+"-0"+(today.get(Calendar.MONTH)+1);
+		for(int i=0;i<list.size();i++) {
+			String s1 = list.get(i).getRegdate().substring(0,10);
+			list.get(i).setRegdate(s1);	
 		}
 		
-		BabyBookMapper mapper = sqlSession.getMapper(BabyBookMapper.class);
-		List<BabyBook> list = mapper.selectListByMonth(smonth);
-		
-		
+			
 		model.addAttribute("list", list);
 		
 		//프로필사진 불러오기
@@ -62,15 +64,6 @@ public class BabyBookController {
 		model.addAttribute("user",user);
 		
 		return "babyBook";
-	}
-	
-	@RequestMapping(value = "/selectBabyBookByMonth", method = RequestMethod.GET)
-	public @ResponseBody List<BabyBook> selectBabyBookByMonth(String smonth) {
-		
-		BabyBookMapper mapper = sqlSession.getMapper(BabyBookMapper.class);
-		List<BabyBook> list = mapper.selectListByMonth(smonth);
-		
-		return list;
 	}
 	
 	@RequestMapping(value = "/registerBabyBook", method = RequestMethod.POST)
