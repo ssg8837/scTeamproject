@@ -27,6 +27,5 @@ public interface MainMapper {
 	Object selectImg(int userNo);
 	String selectNick(int userNo);
 	String selectBabyName(int babyNo);
-	int babyAge(int babyNo);
 	
 }

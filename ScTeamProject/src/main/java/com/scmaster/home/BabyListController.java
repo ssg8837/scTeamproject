@@ -1,6 +1,9 @@
 package com.scmaster.home;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.scmaster.mapper.AlarmMapper;
 import com.scmaster.mapper.BabyListMapper;
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.vo.BS_Alarm;
@@ -53,6 +57,7 @@ public class BabyListController {
 		return "redirect:/openNewBaby";
 	}
 	
+<<<<<<< HEAD
 	//아이 나이 계산
 	@RequestMapping(value = "/babyAge", method = RequestMethod.GET)
 	@ResponseBody public int babyAge(int babyNo) {
@@ -65,6 +70,8 @@ public class BabyListController {
 		
 		return babyAge;
 	}
+=======
+>>>>>>> refs/remotes/origin/leesa
 	//아이생활기록(개별)으로 이동
 	@RequestMapping(value = "/checkPattern", method = RequestMethod.GET)
 	public String checkPattern(int babyNo, Model model) {

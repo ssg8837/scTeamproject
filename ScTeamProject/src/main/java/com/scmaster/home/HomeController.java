@@ -1,7 +1,10 @@
 package com.scmaster.home;
 
 import java.io.File;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> refs/remotes/origin/leesa
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -23,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.scmaster.mapper.MainMapper;
-import com.scmaster.vo.BS_Baby;
 import com.scmaster.vo.BS_User;
 
 //메인화면, 로그인, 회원가입, 회원정보수정(account) 관련 기능 이쪽 컨트롤러에 있습니다.
@@ -275,6 +277,7 @@ public class HomeController
 		return result;
 	}
 
+<<<<<<< HEAD
 
 	//아이정보 페이지(이동)
 	@RequestMapping(value = "/openNewBaby", method = RequestMethod.GET)
@@ -353,4 +356,6 @@ public class HomeController
 	}
 	*/
 
+=======
+>>>>>>> refs/remotes/origin/leesa
 }
