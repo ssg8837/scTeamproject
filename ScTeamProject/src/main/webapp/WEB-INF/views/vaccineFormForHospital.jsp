@@ -68,11 +68,6 @@
 		var sggCd = $('#secondCity').val();
 		var page = p+1;
 		
-		if(sggCd==null){
-			alert('시/군/구 를 선택해 주세요');
-			return;
-		}
-		
 		$.ajax({
 			url:'Searchhospital',
 			method:'get',

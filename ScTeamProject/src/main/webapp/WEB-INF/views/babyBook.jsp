@@ -412,6 +412,7 @@
 			
 			</div>
 
+<<<<<<< HEAD
         	<div id="selectOneFade" class="black_overlay"></div>
             
           </div>
@@ -438,6 +439,8 @@
 			
 			</div>
 
+=======
+>>>>>>> refs/remotes/origin/gonayun
         	<div id="selectOneFade" class="black_overlay"></div>
             
           </div>
