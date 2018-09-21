@@ -1,6 +1,10 @@
 
+REFERENCES 끝에 ON DELETE CASCADE 추가하면 자식레코드 딸려도 한 번에 삭제 가능
+-------------------------------------------------------------------------------
 select * from BS_USER;
 select * from BS_BABY;
+
+delete from BS_USER where userno=46
 
 DROP TABLE BS_USER;
 DROP TABLE BS_BABY;

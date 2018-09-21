@@ -3,8 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
-
 <html>
 	<head>
 		<title>육아서포트페이지</title>
@@ -20,6 +18,11 @@
 		
 	</head>
 	<body>
+	
+	<form class="selectForm" method="post">
+		<input name="selectNo" id="selectNo" type="hidden">
+  	</form>
+	
 	<form id='home' action='./' method='get'>
 		</form>
 		
@@ -74,9 +77,16 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit">
+	          		<c:if test='${sessionScope.loginImg != null }'>
+		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
+		          	</c:if>
+		          	<c:if test='${sessionScope.loginImg == null }'>
+		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
+		          	</c:if>
+	          	</a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
-	          	<div class="centered"><button class="active edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
+	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
         	  <li class="sub-menu">
 	            <a href="openNewBaby">
@@ -97,10 +107,14 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="vaccineForm">
+	            <a href="">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	              </a>
+	            </a>
+	           	<ul class="sub" style="display: block;">
+                    <li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+                   <li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+               	</ul>
 	          </li>
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
@@ -109,13 +123,13 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="hospital_Test">
+	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
 	          </li>
 	           <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="babyBook">
 	              <i class="fa fa-book fa_left"></i>
 	              <span>다이어리</span>
 	              </a>
@@ -167,16 +181,45 @@
               </c:if>
               <c:if test="${fn:length(snsList) !=0 }">
               
-              <c:forEach var="item" items="${snsList}">
+              <c:forEach var="item" items="${snsList}" varStatus="sta">
               
-				   <div class="col-lg-6 col-md-6 col-sm-6 mb">
+				   <div class="col-lg-12 col-md-12 col-sm-12 mb">
 	                <div class="content-panel pn">
+	                <div >
 	                <c:if test="${item.photoCount!=0 }">
 	                	<a class="prev" onclick="plusSlides(-1,${item.SNSNo })">&#10094;</a>
 						<a class="next" onclick="plusSlides(1,${item.SNSNo })">&#10095;</a>
-	                  <div id="sns-bg" class="bg_${item.SNSNo }" onclick="showImages(${item.SNSNo })" style="background: url(./getImageSns?fullname=${item.photo_1}) no-repeat center center; background-size:contain; min-height: 80%">
-		                  <div class="sns-title">${item.userNick }님이  ${item.writeDate}에 작성하신 글</div>
-						  
+						<c:if test="${likelyList[sta.index]==0 }"><div class="likely" ><a id="heart_${item.SNSNo }" class="fa red fa-heart-o" onclick="like(${item.SNSNo })"></a><span id="likelyNum_${item.SNSNo }">${item.likey }</span></div></c:if>
+						<c:if test="${likelyList[sta.index]==1 }"><div class="likely" ><a id="heart_${item.SNSNo }" class="fa red fa-heart" onclick="like(${item.SNSNo })"></a><span id="likelyNum_${item.SNSNo }">${item.likey }</span></div></c:if>
+						<div class="sns-title">
+							<div class="titleDiv">
+	                  		<div class="titleProfile">
+	                  		<c:if test="${item.userNo ne sessionScope.loginNo }">
+					          	<a href="javascript:sentFriend('${item.userNick }',${sessionScope.loginNo },${item.userNo })" style="color:yellow;">
+						          	<c:if test='${item.imgExist !=0 }'>
+						          	<img src="getUserImage?userNo=${item.userNo}" class="img-circle" width="35" height="35">
+						          	</c:if>
+						          	<c:if test='${item.imgExist !=1 }'>
+						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
+						          	</c:if>${item.userNick }
+					          	</a> 님이  ${item.writeDate}에 작성하신 글
+					          	</c:if>
+					          	<c:if test="${item.userNo eq sessionScope.loginNo }">
+					          	<a href="javascript:modifySns('${item.SNSNo }')" style="color:white;">
+						          	<c:if test='${item.imgExist !=0 }'>
+						          	<img src="getUserImage?userNo=${item.userNo}" class="img-circle" width="35" height="35">
+						          	</c:if>
+						          	<c:if test='${item.imgExist !=1 }'>
+						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
+						          	</c:if>${item.userNick } 님이  ${item.writeDate}에 작성하신 글
+						          	</a>
+					          	</c:if>
+	                  		</div>
+	                  		</div>
+						
+						
+						</div>
+	                  <div id="sns-bg" class="bg_${item.SNSNo }" onclick="showImages(${item.SNSNo })" style="background: url(./getImageSns?fullname=${item.photo_1}) no-repeat center center; background-size:contain; min-height: 200px">
 						  <input type="hidden" id="count_${item.SNSNo }" value="${item.photoCount }">
 						  <input type="hidden" id="countNow_${item.SNSNo }" value="1">
 						  <input type="hidden" id="photo_1_${item.SNSNo }" value="${item.photo_1 }">
@@ -190,10 +233,53 @@
 	                    <div class="sns-title">${item.userNo }</div>
 	                  </div>
 	                  </c:if>
-	                  
+	                  </div>
 	                  <div class="blog-text">
 	                    <p>${item.content } </p>
 	                  </div>
+	                  <c:forEach var="rply" items="${item.replyList}" varStatus="stax">
+	                  	
+					        <div class="replyDiv">
+	                  		<c:if test="${rply.userNo ne sessionScope.loginNo }">
+	                  		<div class="replyProfile">
+					          	<a href="javascript:sentFriend('${rply.userNick }',${sessionScope.loginNo },${rply.userNo })">
+						          	<c:if test='${rply.imgExist !=0 }'>
+						          	<img src="getUserImage?userNo=${rply.userNo}" class="img-circle" width="35" height="35">
+						          	</c:if>
+						          	<c:if test='${rply.imgExist !=1 }'>
+						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
+						          	</c:if>
+					          	<br>${rply.userNick }
+	                  		</a>
+		                  		</div>
+	                  		<div class="replyContent">
+	                  		<p>${rply.content }</p></div>
+	                  		</c:if>
+	                  			
+	                  		<c:if test="${rply.userNo eq sessionScope.loginNo }">
+	                  		<div class="replyProfile">
+	                  			<a href="javascript:modifyRelpy(${rply.rplyNo })">
+						          	<c:if test='${rply.imgExist !=0 }'>
+						          	<img src="getUserImage?userNo=${rply.userNo}" class="img-circle" width="35" height="35">
+						          	</c:if>
+						          	<c:if test='${rply.imgExist !=1 }'>
+						          	<img src="./resources/image/anonymous.png" class="img-circle" width="35" height="35">
+						          	</c:if>
+					          	<br>${rply.userNick }</a>
+					          	</div>
+		                  		<div class="replyContent">
+	                  			<p><a href="javascript:modifyRelpy(${rply.rplyNo })">
+		                  			${rply.content }
+		                  		</a></p>
+		                  		</div>
+	                  		</c:if>
+	                  		</div>
+	                  </c:forEach>
+	                  <div class="inputReply">
+	                    <textarea id="inputReply_${item.SNSNo }"  style="width:100%; resize:none;"></textarea><br>
+	                    <div class="reply_div"> <button type="button" class="btn btn-round btn-info" onclick="insertContent(${item.SNSNo });" id="replyButton_${item.SNSNo }">댓글 달기</button></div>
+	                  </div>
+	                  
 	                </div>
 	             </div>
 				</c:forEach>

@@ -1,3 +1,17 @@
+
+//아이삭제
+function deleteBaby(babyNo){
+	var con_test = confirm("정말로 삭제하시겠습니까?");
+	
+	if(con_test == true){
+		location.href="deleteBaby?babyNo="+babyNo;
+	}
+	else if(con_test == false){
+		location.reload();
+	}	
+}
+
+
 //param : pStartDate - 시작일
 //param : pEndDate  - 마지막일
 // Update. 2014.11.07. 변수명 변경 : strGapDT->strTermCnt

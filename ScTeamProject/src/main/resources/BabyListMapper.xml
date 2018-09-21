@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.scmaster.mapper.BabyListMapper">
+
+	<select id="date" resultType="Integer" parameterType="HashMap">
+		SELECT TRUNC(MONTHS_BETWEEN(#{dayMain},#{dayBefore}))
+		FROM dual
+	</select>
+
+	<!-- 하루 모유 횟수, 시간 : alarmamount는 횟수, endtime은 시간(분) -->
+	<select id="selectMilkCount" resultType="BS_Alarm" parameterType="Integer"> 
+		SELECT BABYNO, ALARMTYPE, COUNT(ALARMTYPE) AS "ALARMAMOUNT", TO_CHAR(ALARMTIME,'YYYY-MM-DD') AS "ALARMTIME", SUM((ENDTIME-ALARMTIME)*24*60) AS "ENDTIME"
+		FROM BS_ALARM
+		GROUP BY BABYNO, ALARMTYPE, TO_CHAR(ALARMTIME,'YYYY-MM-DD')
+		HAVING ALARMTYPE=1 and BABYNO=#{babyNo} and TO_CHAR(ALARMTIME,'YYYY-MM-DD') > to_char(SYSDATE - 7, 'YYYY-MM-DD')
+		ORDER BY ALARMTIME ASC
+	</select>
+	
+	<!-- 하루 젖병량, 시간 -->
+	<select id="selectBottleAmount" resultType="BS_Alarm" parameterType="Integer"> 
+		SELECT BABYNO, ALARMTYPE, SUM(ALARMAMOUNT) AS "ALARMAMOUNT", TO_CHAR(ALARMTIME,'YYYY-MM-DD') AS "ALARMTIME", SUM((ENDTIME-ALARMTIME)*24*60) AS "ENDTIME"
+		FROM BS_ALARM
+		GROUP BY BABYNO, ALARMTYPE, ALARMAMOUNT, TO_CHAR(ALARMTIME,'YYYY-MM-DD')
+		HAVING ALARMTYPE=2 and BABYNO=#{babyNo} and TO_CHAR(ALARMTIME,'YYYY-MM-DD') > to_char(SYSDATE - 7, 'YYYY-MM-DD')
+		ORDER BY ALARMTIME ASC
+	</select>
+	
+	<!-- 하루 이유식량, 시간 -->
+	<select id="selectFoodAmount" resultType="BS_Alarm" parameterType="Integer"> 
+		SELECT BABYNO, ALARMTYPE, SUM(ALARMAMOUNT) AS "ALARMAMOUNT", TO_CHAR(ALARMTIME,'YYYY-MM-DD') AS "ALARMTIME", SUM((ENDTIME-ALARMTIME)*24*60) AS "ENDTIME"
+		FROM BS_ALARM
+		GROUP BY BABYNO, ALARMTYPE, TO_CHAR(ALARMTIME,'YYYY-MM-DD')
+		HAVING ALARMTYPE=3 and BABYNO=#{babyNo} and TO_CHAR(ALARMTIME,'YYYY-MM-DD') > to_char(SYSDATE - 7, 'YYYY-MM-DD')
+		ORDER BY ALARMTIME ASC
+	</select>
+	
+	<!-- 하루 배소변 횟수 -->
+	<select id="selectPeeCount" resultType="BS_Alarm" parameterType="Integer"> 
+		SELECT BABYNO, ALARMTYPE, COUNT(ALARMDETAIL) AS "ALARMAMOUNT", TO_CHAR(ALARMTIME,'YYYY-MM-DD') AS "ALARMTIME"
+		FROM BS_ALARM
+		GROUP BY BABYNO, ALARMTYPE, TO_CHAR(ALARMTIME,'YYYY-MM-DD')
+		HAVING ALARMTYPE=5 and BABYNO=#{babyNo} and TO_CHAR(ALARMTIME,'YYYY-MM-DD') > to_char(SYSDATE - 7, 'YYYY-MM-DD')
+		ORDER BY ALARMTIME ASC
+	</select>
+	
+	<!-- 하루 목욕 횟수 -->
+	<select id="selectShowerCount" resultType="BS_Alarm" parameterType="Integer"> 
+		SELECT BABYNO, ALARMTYPE, COUNT(ALARMTYPE) AS "ALARMAMOUNT", TO_CHAR(ALARMTIME,'YYYY-MM-DD') AS "ALARMTIME"
+		FROM BS_ALARM
+		GROUP BY BABYNO, ALARMTYPE, TO_CHAR(ALARMTIME,'YYYY-MM-DD')
+		HAVING ALARMTYPE=6 and BABYNO=#{babyNo} and TO_CHAR(ALARMTIME,'YYYY-MM-DD') > to_char(SYSDATE - 7, 'YYYY-MM-DD')
+		ORDER BY ALARMTIME ASC
+	</select>
+	
+	<!-- 하루 수면 횟수, 시간 -->
+	<select id="selectSleepCount" resultType="BS_Alarm" parameterType="Integer"> 
+		SELECT BABYNO, ALARMTYPE, COUNT(ALARMTYPE) AS "ALARMAMOUNT", TO_CHAR(ALARMTIME,'YYYY-MM-DD') AS "ALARMTIME", SUM((ENDTIME-ALARMTIME)*24) AS "ENDTIME"
+		FROM BS_ALARM
+		GROUP BY BABYNO, ALARMTYPE, TO_CHAR(ALARMTIME,'YYYY-MM-DD')
+		HAVING ALARMTYPE=7 and BABYNO=#{babyNo} and TO_CHAR(ALARMTIME,'YYYY-MM-DD') > to_char(SYSDATE - 7, 'YYYY-MM-DD')
+		ORDER BY ALARMTIME ASC
+	</select>
+	
+</mapper>

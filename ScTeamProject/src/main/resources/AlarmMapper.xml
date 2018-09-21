@@ -7,12 +7,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.scmaster.mapper.AlarmMapper">
 
 	<select id="selectBabyAlarmList" resultType="BS_Alarm" parameterType="Integer"> 
-		SELECT ALARMNO, BABYNO, USERNO, ALARMTITLE, ALARMTYPE, ALARMDETAIL, ALARMAMOUNT, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME", TO_DATE(ENDTIME,'YYYY-MM-DD HH24:MI') AS "ENDTIME"
+		SELECT ALARMNO, BABYNO, USERNO, ALARMTITLE, ALARMTYPE, ALARMDETAIL, ALARMAMOUNT, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME", TO_CHAR(ENDTIME,'YYYY-MM-DD HH24:MI') AS "ENDTIME"
 		FROM BS_ALARM
 		WHERE BABYNO=#{babyNo}
+		ORDER BY ALARMTIME ASC
 	</select>
 	
-	<!-- 기타, 목욕 -->
+	<!--목욕 -->
 	<insert id="insertAlarm" parameterType="BS_Alarm" >
 		INSERT INTO BS_ALARM (ALARMNO, BABYNO, USERNO, ALARMTITLE, ALARMTYPE, ALARMTIME)
 		VALUES (BS_ALARMSEQ.NEXTVAL,
@@ -37,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
-	<!-- 수면 (시간기록) -->
+	<!-- 기타, 수면 (시간기록) -->
 	<insert id="insertAlarm_EndTime" parameterType="BS_Alarm" >
 		INSERT INTO BS_ALARM (ALARMNO, BABYNO, USERNO, ALARMTITLE, ALARMTYPE, ALARMTIME, ENDTIME)
 		VALUES (BS_ALARMSEQ.NEXTVAL,
@@ -45,6 +46,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{userNo},
 		#{alarmTitle},
 		#{alarmType},
+		TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'),
+		TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
+		)
+	</insert>
+	
+	<!-- 모유(시간기록 + 디테일) -->
+	<insert id="insertAlarm_EndTimeNDetail" parameterType="BS_Alarm" >
+		INSERT INTO BS_ALARM (ALARMNO, BABYNO, USERNO, ALARMTITLE, ALARMTYPE, ALARMDETAIL, ALARMTIME, ENDTIME)
+		VALUES (BS_ALARMSEQ.NEXTVAL,
+		#{babyNo},
+		#{userNo},
+		#{alarmTitle},
+		#{alarmType},
+		#{alarmDetail},
 		TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'),
 		TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
 		)
@@ -80,23 +95,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<update id="updateAlarm" parameterType="BS_Alarm" >
-		UPDATE BS_ALARM SET BABYNO=#{babyNo}, ALARMTITLE=#{alarmTitle},ALARMTYPE=#{alarmType}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI')
+		UPDATE BS_ALARM SET ALARMTITLE=#{alarmTitle},ALARMTYPE=#{alarmType}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI')
 		WHERE ALARMNO = #{alarmNo}
 	</update>
 	<update id="updateAlarm_Detail" parameterType="BS_Alarm" >
-		UPDATE BS_ALARM SET BABYNO=#{babyNo}, ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMDETAIL=#{alarmDetail}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI')
+		UPDATE BS_ALARM SET ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMDETAIL=#{alarmDetail}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI')
 		WHERE ALARMNO = #{alarmNo}
 	</update>
 	<update id="updateAlarm_EndTime" parameterType="BS_Alarm" >
-		UPDATE BS_ALARM SET BABYNO=#{babyNo}, ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
+		UPDATE BS_ALARM SET ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
+		WHERE ALARMNO = #{alarmNo}
+	</update>
+	<update id="updateAlarm_EndTimeNDetail" parameterType="BS_Alarm" >
+		UPDATE BS_ALARM SET ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMDETAIL=#{alarmDetail}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
 		WHERE ALARMNO = #{alarmNo}
 	</update>
 	<update id="updateAlarm_AmountNEndTime" parameterType="BS_Alarm" >
-		UPDATE BS_ALARM SET BABYNO=#{babyNo}, ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMAMOUNT=#{alarmAmount}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
+		UPDATE BS_ALARM SET ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMAMOUNT=#{alarmAmount}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
 		WHERE ALARMNO = #{alarmNo}
 	</update>
 	<update id="updateAlarm_All" parameterType="BS_Alarm" >
-		UPDATE BS_ALARM SET BABYNO=#{babyNo}, ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMDETAIL=#{alarmDetail}, ALARMAMOUNT=#{alarmAmount}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
+		UPDATE BS_ALARM SET ALARMTITLE=#{alarmTitle}, ALARMTYPE=#{alarmType}, ALARMDETAIL=#{alarmDetail}, ALARMAMOUNT=#{alarmAmount}, ALARMTIME=TO_DATE(#{alarmTime},'YYYY-MM-DD HH24:MI'), ENDTIME=TO_DATE(#{endTime},'YYYY-MM-DD HH24:MI')
 		WHERE ALARMNO = #{alarmNo}
 	</update>
 	
@@ -105,13 +124,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	 
 	<select id="selectAlarm" parameterType="BS_Alarm" resultType="BS_Alarm">
-		SELECT ALARMNO, BABYNO, USERNO, ALARMTITLE, ALARMTYPE, ALARMDETAIL, ALARMAMOUNT, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME", TO_DATE(ENDTIME,'YYYY-MM-DD HH24:MI') AS "ENDTIME"
+		SELECT ALARMNO, BABYNO, USERNO, ALARMTITLE, ALARMTYPE, ALARMDETAIL, ALARMAMOUNT, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME", TO_CHAR(ENDTIME,'YYYY-MM-DD HH24:MI') AS "ENDTIME"
 		FROM BS_ALARM
 		WHERE ALARMNO = #{alarmNo}
 	</select>
 	
 	<select id="selectAlarmList" parameterType="Integer" resultType="BS_Alarm">
-		SELECT ALARMNO, BABYNO, USERNO, BABYNAME AS ALARMTITLE, ALARMTYPE, ALARMDETAIL, ALARMAMOUNT, TO_CHAR(ALARMTIME,'AM HH:MI') AS "ALARMTIME" ,TO_CHAR(ENDTIME,'AM HH:MI') AS "ENDTIME"
+		SELECT ALARMNO, BABYNO, USERNO, BABYNAME AS ALARMTITLE, ALARMTYPE, ALARMDETAIL, ALARMAMOUNT, TO_CHAR(ALARMTIME,'YYYY-MM-DD HH24:MI') AS "ALARMTIME" ,TO_CHAR(ENDTIME,'YYYY-MM-DD HH24:MI') AS "ENDTIME"
 		FROM BS_ALARM NATURAL JOIN BS_BABY
 		WHERE ((USERNO = #{userNo}) AND (TO_CHAR(ALARMTIME,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')))
 		ORDER BY ALARMTIME

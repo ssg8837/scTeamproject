@@ -7,11 +7,9 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,8 +19,8 @@ import com.scmaster.mapper.AlarmMapper;
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.vo.BS_Alarm;
 import com.scmaster.vo.BS_Baby;
+import com.scmaster.vo.BS_User;
 import com.scmaster.vo.Cal_Event;
-import com.scmaster.vo.KeyboardVO;
 
 @Controller
 public class AlarmController {
@@ -31,36 +29,15 @@ public class AlarmController {
 	@Autowired SqlSession sqlSession;
 	@Autowired HttpSession httpSession;
 	
-	/*
+
 	@RequestMapping(value = "/alarm_OpenCalendar", method = RequestMethod.GET)
 	public String alarm_OpenCalendar(Model model) 
 	{
-		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
-		MainMapper mainMapper=sqlSession.getMapper(MainMapper.class);
+		//프로필사진 불러오기
 		Object loginNo=httpSession.getAttribute("loginNo");
-		ArrayList<BS_Alarm> alarmList= new ArrayList<BS_Alarm>();
-		ArrayList<String> nameList =new ArrayList<String>();
-		if(loginNo!=null)
-		{
-			ArrayList<BS_Baby> babyList=mainMapper.selectBabyList((Integer)loginNo);
-			for(BS_Baby item : babyList)	
-			{
-				int babyNum=item.getBabyNo();
-				alarmList.addAll(alarmMapper.selectBabyAlarmList(babyNum));
-			}
-			for(BS_Alarm item : alarmList)
-			{
-				nameList.add(mainMapper.selectBaby(item.getBabyNo()).getBabyName());
-			}
-		}
-		model.addAttribute("alarmList", alarmList);
-		model.addAttribute("nameList", nameList);
-		return "calendar";
-	}
-	*/
-	@RequestMapping(value = "/alarm_OpenCalendar", method = RequestMethod.GET)
-	public String alarm_OpenCalendar() 
-	{
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
 		
 		return "calendar";
 	}
@@ -83,6 +60,12 @@ public class AlarmController {
 		}
 		model.addAttribute("noList", noList);
 		model.addAttribute("nameList", nameList);
+		
+		//프로필사진 불러오기
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
+		
 		return "newAlarm";
 	}
 	
@@ -93,8 +76,11 @@ public class AlarmController {
 		int type=alarm.getAlarmType();
 		switch(type)
 		{
-		//모유,젖병,유축 (시간기록,양,디테일 필요)
+		//모유
 		case 1:
+			alarmMapper.insertAlarm_EndTimeNDetail(alarm);
+			break;
+		//젖병,유축 (시간기록,양,디테일 필요)
 		case 2:
 		case 4:
 			alarmMapper.insertAlarm_All(alarm);
@@ -107,16 +93,18 @@ public class AlarmController {
 		case 5:
 			alarmMapper.insertAlarm_Detail(alarm);
 			break;
-		//수면 (시간기록 필요)
-		case 7:
-			alarmMapper.insertAlarm_EndTime(alarm);
-			break;
-		//기타, 목욕
+		//목욕, 디폴트
+		case 6:
 		default :
 			alarmMapper.insertAlarm(alarm);
 			break;
+		//기타, 수면 (시간기록 필요)
+		case 0:
+		case 7:	
+			alarmMapper.insertAlarm_EndTime(alarm);
+			break;
 		}
-		return alarm_OpenCalendar();
+		return alarm_OpenCalendar(model);
 	}
 	
 	@RequestMapping(value = "/alarm_OpenChoose", method = RequestMethod.POST)
@@ -135,32 +123,28 @@ public class AlarmController {
 		model.addAttribute("alarm", alarm);
 		MainMapper mainMapper=sqlSession.getMapper(MainMapper.class);
 		Object loginNo=httpSession.getAttribute("loginNo");
-		ArrayList<Integer> noList= new ArrayList<Integer>();
-		ArrayList<String> nameList= new ArrayList<String>();
-		if(loginNo!=null)
-		{
-			ArrayList<BS_Baby> babyList=mainMapper.selectBabyList((Integer)loginNo);
-			for(BS_Baby item : babyList)	
-			{
-				noList.add(item.getBabyNo());
-				nameList.add(item.getBabyName());
-			}
-		}
-		model.addAttribute("noList", noList);
-		model.addAttribute("nameList", nameList);
+		
+		model.addAttribute("babyName", mainMapper.selectBabyName(alarm.getBabyNo()));
+		//프로필사진 불러오기
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
+				
 		return "modifyAlarm";
 	}
 	
 	@RequestMapping(value = "/alarm_UpdateAlarm", method = RequestMethod.POST)
 	public String alarm_UpdateAlarm(Model model, BS_Alarm alarm) 
 	{
-		System.out.println(alarm);
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		int type=alarm.getAlarmType();
 		switch(type)
 		{
-		//모유,젖병,유축 (시간기록,양,디테일 필요)
+		//모유
 		case 1:
+			alarmMapper.updateAlarm_EndTimeNDetail(alarm);
+			break;
+		//젖병,유축 (시간기록,양,디테일 필요)
 		case 2:
 		case 4:
 			alarmMapper.updateAlarm_All(alarm);
@@ -173,16 +157,18 @@ public class AlarmController {
 		case 5:
 			alarmMapper.updateAlarm_Detail(alarm);
 			break;
-		//수면 (시간기록 필요)
-		case 7:
-			alarmMapper.updateAlarm_EndTime(alarm);
-			break;
-		//기타, 목욕
+		//목욕, 디폴트
+		case 6:
 		default :
 			alarmMapper.updateAlarm(alarm);
 			break;
+		//기타, 수면 (시간기록 필요)
+		case 0:
+		case 7:
+			alarmMapper.updateAlarm_EndTime(alarm);
+			break;
 		}
-		return alarm_OpenCalendar();
+		return alarm_OpenCalendar(model);
 	}
 	
 	//alarm_Delete
@@ -191,17 +177,9 @@ public class AlarmController {
 	{
 		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
 		alarmMapper.deleteAlarm(alarmNo);
-		return alarm_OpenCalendar();
+		return alarm_OpenCalendar(model);
 	}
 	
-	@RequestMapping(value = "/alarm_load",method = RequestMethod.POST)
-	public @ResponseBody ArrayList<BS_Alarm> alarm_load(int loginNo)
-	{
-		AlarmMapper alarmMapper=sqlSession.getMapper(AlarmMapper.class);
-		ArrayList<BS_Alarm> alarmList;
-		alarmList=alarmMapper.selectAlarmList(loginNo);
-		return alarmList;
-	}
 	
 	@RequestMapping(value = "/alarm_calenderLoad",method = RequestMethod.POST, produces = "text/html;charset=utf8")
 	public @ResponseBody String alarm_calenderLoad()
@@ -231,12 +209,20 @@ public class AlarmController {
     	            {
     	            case 1:
     	            	str+="모유 : ";
-    	            	str+=item.getAlarmAmount();
-    	            	str+="ml";
+    	            	if(item.getAlarmDetail()==1) {
+    	            		str+="왼쪽";
+    	            	}else if(item.getAlarmDetail()==2) {
+    	            		str+="오른쪽";
+    	            	};	
     	            	event.setColor("#4286f4");
     	            	break;
     	            case 2:
     	            	str+="젖병 : ";
+    	            	if(item.getAlarmDetail()==3) {
+    	            		str+="모유";
+    	            	}else if(item.getAlarmDetail()==4) {
+    	            		str+="분유";
+    	            	};
     	            	str+=item.getAlarmAmount();
     	            	str+="ml";
     	            	event.setColor("#3aff85");
@@ -249,12 +235,21 @@ public class AlarmController {
     	            	break;
     	            case 4:
     	            	str+="유축 : ";
+    	            	if(item.getAlarmDetail()==1) {
+    	            		str+="왼쪽";
+    	            	}else if(item.getAlarmDetail()==2) {
+    	            		str+="오른쪽";
+    	            	};
     	            	str+=item.getAlarmAmount();
     	            	str+="ml";
     	            	event.setColor("#ffe0c9");
     	            	break;
     	            case 5:
-    	            	str+="배소변";
+    	            	if(item.getAlarmDetail()==5) {
+    	            		str+="배변";
+    	            	}else if(item.getAlarmDetail()==6) {
+    	            		str+="소변";
+    	            	}
     	            	event.setColor("#996416");
     	            	break;
     	            case 6:

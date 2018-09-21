@@ -1,9 +1,10 @@
 #sns-bg {
 	background: no-repeat center top;
-	margin-top: -15px;
+	margin-top: 0px;
 	background-attachment: relative;
 	background-position: center center;
 	width: 100%;
+    height: 100px;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -41,6 +42,7 @@
 	margin-right: 8px;
 	margin-top: 15px;
 	font-size: 12px;
+	min-height: 50px;
 }
 
 .sns_button{
@@ -48,6 +50,12 @@
 	padding-top: 25px;
 	margin: auto;
 	width: 50%;
+
+}
+.reply_div{
+
+	margin: auto;
+text-align: center;
 
 }
 .sns_button button
@@ -64,13 +72,13 @@
 .prev, .next {
   cursor: pointer;
   position: absolute;
-  top: 35%;
+  top: 80px;
   width: auto;
   margin-top: -22px;
   padding: 16px;
-  color: white;
+  color: black;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 96px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
 }
@@ -79,4 +87,63 @@
 .next {
   right: 0;
   border-radius: 3px 0 0 3px;
+}
+
+.likely
+{
+cursor: pointer;
+  position: absolute;
+  top: 230px;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+.red
+{
+  color: red;
+}
+.content-panel
+{
+	height:auto;
+}
+
+.replyDiv
+{
+	display:inline-block;
+	width:100%;
+}
+
+.replyProfile
+{
+	display:inline-block;
+	text-align:center;
+	width:20%;
+	height:40;
+}
+.replyContent
+{
+	top:10%;
+	display:inline-block;
+	width:75%;
+}
+.titleDiv
+{
+	display:inline-block;
+	width:100%;
+}
+
+.titleProfile
+{
+	display:inline-block;
+	text-align:center;
+	height:40;
+}
+.titleContent
+{
+	display:inline-block;
 }

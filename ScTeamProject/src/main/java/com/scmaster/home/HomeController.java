@@ -1,13 +1,10 @@
 package com.scmaster.home;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,9 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.vo.BS_Baby;
 import com.scmaster.vo.BS_User;
-import com.scmaster.vo.BabyBook;
 
-//메인화면, 로그인, 회원가입, 회원정보수정, 아이추가 기능 이쪽 컨트롤러에 있습니다.
+//메인화면, 로그인, 회원가입, 회원정보수정(account) 관련 기능 이쪽 컨트롤러에 있습니다.
 
 @Controller
 public class HomeController 
@@ -40,9 +36,9 @@ public class HomeController
 	
 	private static final String UPLOADPATH = "C://FileRepo//profilePic"; //프로필사진 저장용
 	
+	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) 
-	{
+	public String home(Model model) {
 		Object loginNo=httpSession.getAttribute("loginNo");
 		
 		if(loginNo != null ) {
@@ -55,39 +51,15 @@ public class HomeController
 		return "home";
 	}
 	
-	//로그인 페이지(이동)
+	//회원가입+로그인 페이지(이동)
 	@RequestMapping(value = "/openLogin", method = RequestMethod.GET)
-	public String openLogin() 
-	{
+	public String openLogin() {
 		return "login";
 	}
-	//AJax용 코드
-	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html;charset=utf8")
-	public @ResponseBody String login( String userid, String userpwd) 
-	{
-		//response.setContentType("text/html; charset=UTF-8");
-		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
-		HashMap<String, String> userMap=new HashMap<String,String>();
-		userMap.put("userId", userid);
-		userMap.put("userPwd",userpwd);
-		BS_User user=mapper.selectUser(userMap);
-		if(user!=null)
-		{
-			httpSession.setAttribute("loginId",user.getUserId());
-			httpSession.setAttribute("loginNo",user.getUserNo());
-			httpSession.setAttribute("loginNick",user.getUserNick());
-			if(user.getUserOriginalFile()!=null)
-			{
-				httpSession.setAttribute("loginImg","No Image");
-			}
-			return "로그인 완료되었습니다.";
-		}
-		return "로그인에 실패하였습니다. 아이디나 비밀번호를 확인해주세요.";
-	}
+	
 	//회원가입(기능)
 	@RequestMapping(value = "/insertNewAccount", method = RequestMethod.POST)
-	public @ResponseBody String insertNewAccount(BS_User user) 
-	{
+	public @ResponseBody String insertNewAccount(BS_User user) {
 		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
 		if(mapper.countUser(user.getUserId())!=0)
 			return "false";
@@ -113,13 +85,58 @@ public class HomeController
 			
 		return savedName;
 	}
+
+	//로그인-AJax용 코드
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html;charset=utf8")
+	public @ResponseBody String login( String userid, String userpwd) {
+		//response.setContentType("text/html; charset=UTF-8");
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+		HashMap<String, String> userMap=new HashMap<String,String>();
+		userMap.put("userId", userid);
+		userMap.put("userPwd",userpwd);
+		BS_User user=mapper.selectUser(userMap);
+		if(user!=null)
+		{
+			httpSession.setAttribute("loginId",user.getUserId());
+			httpSession.setAttribute("loginNo",user.getUserNo());
+			httpSession.setAttribute("loginNick",user.getUserNick());
+			if(user.getUserOriginalFile()!=null)
+			{
+				httpSession.setAttribute("loginImg","No Image");
+			}
+			return "로그인 완료되었습니다.";
+		}
+		return "로그인에 실패하였습니다. 아이디나 비밀번호를 확인해주세요.";
+	}
+	/*
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(Model model, String userid, String userpwd) 
+	{
+		MainMapper mapper=sqlSession.getMapper(MainMapper.class);
+		HashMap<String, String> userMap=new HashMap<String,String>();
+		userMap.put("userId", userid);
+		userMap.put("userPwd",userpwd);
+		BS_User user=mapper.selectUser(userMap);
+		if(user!=null)
+		{
+			httpSession.setAttribute("loginId",user.getUserId());
+			httpSession.setAttribute("loginNo",user.getUserNo());
+		}
+		return home(model);
+	}
+	*/
 	//로그아웃(기능)
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(Model model) 
-	{
+	public String logout(Model model) {
 		httpSession.invalidate();
 		return "home";
 	}
+
+	
+	
+	/*---------------------------------------------------------------------------------------------------------------------*/
+	
+	
 	
 	//회원정보 수정페이지(이동)
 	@RequestMapping(value = "/openAccountEdit", method = RequestMethod.GET)
@@ -257,6 +274,7 @@ public class HomeController
 		}	
 		return result;
 	}
+
 
 	//아이정보 페이지(이동)
 	@RequestMapping(value = "/openNewBaby", method = RequestMethod.GET)

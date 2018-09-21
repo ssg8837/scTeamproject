@@ -70,9 +70,16 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit"><img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit">
+	          		<c:if test='${sessionScope.loginImg != null }'>
+		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
+		          	</c:if>
+		          	<c:if test='${sessionScope.loginImg == null }'>
+		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
+		          	</c:if>
+	          	</a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
-	          	<div class="centered"><button class="active edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
+	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
         	<li class="sub-menu">
 	            <a href="openNewBaby">
@@ -91,17 +98,16 @@
 	              <i class="fa fa-calendar fa_left"></i>
 	              <span>생활기록</span>
 	              </a>
-	              <ul class="sub">
-		              <li class="active">
-		                <a href="javascript:window.location.href=window.location.href">일정 수정</a>
-		              </li>
-	              </ul>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="vaccineForm">
+	            <a href="">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	              </a>
+	            </a>
+	           	<ul class="sub" style="display: block;">
+                    <li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+                   <li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+               	</ul>
 	          </li>
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
@@ -110,19 +116,19 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="hospital_Test">
+	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
 	              </a>
 	          </li>
 	           <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="babyBook">
 	              <i class="fa fa-book fa_left"></i>
 	              <span>다이어리</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
 	              <span>SNS</span>
 	              </a>
@@ -144,36 +150,122 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 생활 기록 달력 알림 수정</h3>
+        <h3><i class="fa fa-angle-right"></i> 생활 기록 수정</h3>
         <div class="row mt">
           <div class="col-lg-12">
           <form id="alarmform" action='alarm_UpdateAlarm' method='post'>
 			<input type='hidden' name='alarmNo' value='${alarm.alarmNo }'>
-			<div class='input-group col-xs-4'>
-				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
-				
-				<c:forEach var='val' items='${noList }' varStatus='sta'>
-				<c:if test='${val == alarm.babyNo }'>
-					<option value='${val }' selected='selected'> ${nameList[sta.index] } </option>
-				</c:if>
-				<c:if test='${val != alarm.babyNo }'>
-					<option value='${val }'> ${nameList[sta.index] } </option>
-				</c:if>
-				</c:forEach>
-				</select>
+			<div class='input-group col-xs-10'>
+				<span class="input-group-addon">아기</span>
+				<input class="form-control"  type="text" value='${babyName}' readonly>
 			</div>
-			<div class='input-group col-xs-4'>
+			<div class='input-group col-xs-10'>
+				<input type="hidden" id="alarmType" name="alarmType" value='${alarm.alarmType }'>
 				<span class="input-group-addon">할일</span>
-				<input class="form-control " id="alarmTitle" name="alarmTitle"  type="text" value='${alarm.alarmTitle }'>
+				<c:if test='${alarm.alarmType eq 1}'>
+					<input class="form-control"  type="text" value='모유' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 2}'>
+					<input class="form-control"  type="text" value='젖병' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 3}'>
+					<input class="form-control"  type="text" value='이유식' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 4}'>
+					<input class="form-control"  type="text" value='유축' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 5}'>
+					<input class="form-control"  type="text" value='배소변' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 6}'>
+					<input class="form-control"  type="text" value='목욕' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 7}'>
+					<input class="form-control"  type="text" value='수면' readonly>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 0}'>
+					<input class="form-control"  type="text" value='기타' readonly>
+				</c:if>
 			</div>
-			<div class="input-group date form_datetime col-xs-4 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
+				<c:if test='${alarm.alarmType eq 1}'>
+					<div id="detail" class="input-group col-xs-10">
+					<span class="input-group-addon">방향</span>
+						<select class="form-control" id="alarmDetail" name="alarmDetail">
+							<c:if test='${alarm.alarmDetail eq 1 }'>
+							<option value="1" selected>왼쪽</option>
+							<option value="2">오른쪽</option>
+							</c:if>
+							<c:if test='${alarm.alarmDetail eq 2 }'>
+							<option value="1">왼쪽</option>
+							<option value="2" selected>오른쪽</option>
+							</c:if>
+						</select>
+					</div>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 2}'>
+					<div id="detail" class="input-group col-xs-10"><span class="input-group-addon">수유 타입</span>
+					<select class="form-control" id="alarmDetail" name="alarmDetail">
+					<c:if test='${alarm.alarmDetail eq 3 }'>
+						<option value="3" selected>모유</option>
+						<option value="4">분유</option>
+					</c:if>
+					<c:if test='${alarm.alarmDetail eq 4 }'>
+						<option value="3">모유</option>
+						<option value="4" selected>분유</option>
+					</c:if>
+					</select></div>
+					<div id="amount" class="input-group col-xs-10">
+					<span class="input-group-addon">양(ml)</span>
+					<input class="form-control " id="alarmAmount" name="alarmAmount" type="number" value="${alarm.alarmAmount }"></div>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 3}'>
+					<div id="amount" class="input-group col-xs-10">
+					<span class="input-group-addon">양(ml)</span>
+					<input class="form-control " id="alarmAmount" name="alarmAmount" type="number" value="${alarm.alarmAmount }"></div>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 4}'>
+					<c:if test='${alarm.alarmDetail eq 1 }'>
+						<option value="1" selected>왼쪽</option>
+						<option value="2">오른쪽</option>
+					</c:if>
+					<c:if test='${alarm.alarmDetail eq 2 }'>
+						<option value="1">왼쪽</option>
+						<option value="2" selected>오른쪽</option>
+					</c:if>
+					<div id="amount" class="input-group col-xs-10">
+					<span class="input-group-addon">양(ml)</span>
+					<input class="form-control " id="alarmAmount" name="alarmAmount" type="number" value="${alarm.alarmAmount }"></div>
+				</c:if>
+				<c:if test='${alarm.alarmType eq 5}'>
+					<div id="detail" class="input-group col-xs-10"><span class="input-group-addon">배소변 분류</span>
+					<select class="form-control" id="alarmDetail" name="alarmDetail">
+					<c:if test='${alarm.alarmDetail eq 5 }'>
+						<option value="5" selected>배변</option>
+						<option value="6">소변</option>
+					</c:if>
+					<c:if test='${alarm.alarmDetail eq 6 }'>
+						<option value="5">배변</option>
+						<option value="6" selected>소변</option>
+					</c:if>
+					</select></div>
+				</c:if>
+			<div class="input-group date form_datetime col-xs-10 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
 			<span class="input-group-addon">일시</span>
                     	<input class="form-control " type="text" name="alarmTime" value="${alarm.alarmTime }" readonly>
                     
 					<span class="input-group-addon"><span class="fa fa-calendar"></span></span>	
 			</div>
-          	 <br/>
+			<c:if test="${alarm.alarmType eq 1 or alarm.alarmType eq 2 or alarm.alarmType eq 3 or alarm.alarmType eq 4 or alarm.alarmType eq 7}">
+			<div class="input-group date form_datetime col-xs-10 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
+			<span class="input-group-addon">종료시간</span><input class="form-control " type="text" name="endTime" value="${alarm.endTime }" readonly>
+			<span class="input-group-addon"><span class="fa fa-calendar"></span></span></div>
+			</c:if>
 			<!-- http://jsonobject.tistory.com/181 -->
+			<div class="input-group col-xs-10">
+				<span class="input-group-addon">메모</span>
+				<input class="form-control " id="alarmTitle" name="alarmTitle" type="text" value="${alarm.alarmTitle }">
+			</div>
+          	 <br/>
 			<button class='btn btn-primary' type='button' onclick="javascript:alarm_check();" style="margin: 0 auto;">알림 수정</button>
 		</form>
           </div>

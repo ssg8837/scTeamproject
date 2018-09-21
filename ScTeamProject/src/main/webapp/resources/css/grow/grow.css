@@ -1,15 +1,13 @@
-html, body{
+body{
 	margin: 0;
-	padding: 0;
-	
-	width: 100%;
-	height: 100%;
 }
 div{
 	margin: 0;
 	padding: 0;
 }
-
+::-webkit-scrollbar {
+	display:none;
+}
 /* ------------------------------------------------------------------------------------- */
 
 /*본문 div*/
@@ -17,7 +15,6 @@ div{
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	margin: 0;
 }
 
 /* 사이드바(시트/차트 버튼) */
@@ -57,7 +54,7 @@ div{
 
 /*차트 div*/
 .grow_chart{
-	margin: auto;
+	margin: 0 auto;
 	width: 100%;
 	min-width: 600px;
 	height: 100%;
@@ -69,10 +66,10 @@ div{
 
 /*아이정보조회란(시트)*/
 .grow_sheet{
-	margin-top: 0 ;
+	margin-top: 0;
 	margin-bottom: 0;
 	margin-left: 100px;
-	margin-right: 200px;
+	margin-right: 20px;
 	padding: 2em;
 	text-align: left;
 }
@@ -114,8 +111,8 @@ div{
 }
 /*테이블*/
 .grow_sheetData{
-	min-height: 300px;
-	border: 1px solid #a0b3b0;
+	min-height: 340px;
+	border: 1px solid #f0ad4e;
 	border-radius: 10px;
 }
 .grow_sheetTable{
@@ -159,10 +156,7 @@ div{
 
 /*아이선택버튼 div*/
 .grow_selectBabyDiv{
-	margin-top: 0 ;
-	margin-bottom: 0;
-	margin-left: 100px;
-	margin-right: 210px;
+	margin-right: 40px;
 }
 .grow_selectBabyDiv button{
 	margin-right: 1em;
@@ -187,7 +181,7 @@ div{
 	margin-top: 0 ;
 	margin-bottom: 0;
 	margin-left: 100px;
-	margin-right: 210px;
+	margin-right: 40px;
 	
 	display: none;
 	position: relative; 
@@ -208,10 +202,20 @@ div{
 
 /*아이정보입력란*/
 .grow_insertDiv{
-	padding-top: 1.3em;
+	display: none;
+	margin-top: 0 ;
+	margin-bottom: 0;
+	margin-left: 120px;
+	margin-right: 40px;
+	padding: 2em;
+
+	text-align: center;
+	border: 1px solid #f0ad4e;
+	border-radius: 10px;
+/* 	padding-top: 1.3em;
 	margin-left: -200px;
 	width: 200px;
-	float: left;
+	float: left; */
 }
 /*최근갱신일 표시란*/
 .grow_checkRegdate{
@@ -224,7 +228,8 @@ div{
 /*input 디자인*/
 .grow_insertDiv input{
 	margin-bottom: 1em;
-	width: 150px;
+	width: 50%;
+	min-width: 150px;
 	height: 30px;
 	padding: 5px 10px;
 	background: none;
@@ -241,6 +246,8 @@ div{
 /*select 디자인*/
 .grow_insertDiv select{
 	margin-bottom: 1em;
+	width: 50%;
+	min-width: 150px;
 	height: 30px;
 	padding: 5px 10px;
 	background: none;
@@ -257,8 +264,9 @@ div{
 }
 /*아이정보입력버튼*/
 .grow_insertDiv button{
-	width: 150px;
-	margin-bottom: 1em;
+	width: 54%;
+	min-width: 150px;
+	margin-top: 1em;
 	padding: 5px 15px;
 	background: #ffe0a6;
 	color: #9b797b;
@@ -273,3 +281,4 @@ div{
 	color: #f2eeee;
 	outline: none;
 }
+

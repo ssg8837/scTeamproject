@@ -19,57 +19,19 @@ $(
 					var html_front='<ul class="dropdown-menu extended notification">';
 					html_front+='<div class="notify-arrow notify-arrow-yellow"></div><li><p class="yellow">You have ';
 					
-					/*
-					 * 
-              <li>
-                <a href="index.html#">
-                  <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                  Server Overloaded.
-                  <span class="small italic">4 mins.</span>
-                  </a>
-              </li>
-              <li>
-                <a href="index.html#">See all notifications</a>
-              </li>
-            </ul>
-					 * */
 					$.each(data,function(index,item){
-						var alarmType=item.alarmType;
+						var type=item.type;
 						var str="";
-	    	            switch(alarmType)
+	    	            switch(type)
 	    	            {
 	    	            case 1:
-	    	            	str+="모유 : ";
-	    	            	str+=item.alarmAmount;
-	    	            	str+="ml";
+							htmlStr+='<li><a href="javascript:acceptApply('+item.sender+','+item.receiver+')">'+item.str+'</a></li>'
 	    	            	break;
 	    	            case 2:
-	    	            	str+="젖병 : ";
-	    	            	str+=item.alarmAmount;
-	    	            	str+="ml";
-	    	            	break;
-	    	            case 3:
-	    	            	str+="이유식 : ";
-	    	            	str+=item.alarmAmount;
-	    	            	str+="ml";
-	    	            	break;
-	    	            case 4:
-	    	            	str+="유축 : ";
-	    	            	str+=item.alarmAmount;
-	    	            	str+="ml";
-	    	            	break;
-	    	            case 5:
-	    	            	str+="배소변";
-	    	            	break;
-	    	            case 6:
-	    	            	str+="수면";
-	    	            	break;
-	    	            case 7:
-	    	            	str+="목욕";
+	    	            	htmlStr+='<li><a href="javascript:acceptDeny('+item.sender+','+item.receiver+')">'+item.str+'</a></li>'
 	    	            	break;
 	    	            }
 						
-						htmlStr+='<li><a href="#">'+str+" ["+item.alarmTime+"] "+item.alarmTitle+'</a></li>'
 						count++;
 					});
 					$('#bg-warning').text(count);
@@ -90,3 +52,52 @@ $(
 		}
 	}
 );
+
+function acceptApply(sender, receiver)
+{
+	if(confirm("친구 신청을 수락하시겠습니까?"))
+	{
+		$.ajax({
+			url:"./acceptFriend",
+			type:"POST",
+			data:{"sender" : sender,
+				"receiver" : receiver
+			},
+			success:function(data){
+				alert("친구 신청을 수락하셨습니다.");
+				location.reload();
+			}
+		});
+	}
+	else
+	{
+		if(confirm("친구 신청을 거절하시겠습니까? \n 아니오를 누르면 보류됩니다."))
+		{
+			$.ajax({
+				url:"./denyFriend",
+				type:"POST",
+				data:{"sender" : sender,
+					"receiver" : receiver
+				},
+				success:function(data){
+					alert("친구 신청을 거절하셨습니다.");
+					location.reload();
+				}
+			});
+		}
+	}
+}
+
+function acceptDeny(sender, receiver)
+{
+	$.ajax({
+		url:"./acceptDeny",
+		type:"POST",
+		data:{"sender" : sender,
+			"receiver" : receiver
+		},
+		success:function(data){
+			location.reload();
+		}
+	});
+}

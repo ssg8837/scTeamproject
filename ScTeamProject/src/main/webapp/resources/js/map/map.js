@@ -2,32 +2,61 @@
 		// 맵을 생성합니다. 
 		createMap();
 		
-		if(hospitalAddr!=""){
-			selectedHospital(hospitalAddr);
+		if(hospital !=null ){
+			console.log('예방병원 객채받음');
+			console.log(hospital);
+			selectedHospital(hospital.Addr);
 		}else{
 			//접속위체의 좌표값을 통해 초기 병원 정보를 가져옵니다.
+			console.log('초기화');
 			init();
 		}
-		
-		resetPostion.addEventListener("click",init)
-		.addEventListener("hover",resetAnimation)
-	
+		resetPosition.addEventListener('click',init)
+		var sidebarOn=true;
+		var sub_menu=document.querySelector('#menu_wrap')
+		sub_menu_icon.addEventListener('click',function(){
+			  if (sidebarOn) {
+				  sub_menu.style.width="35px";
+				  sub_menu.style.minHeight="35px";
+			      jQuery('#menu_wrap > ul').hide();
+			      jQuery('#menu_wrap > div').hide();
+			      jQuery('#menu_wrap > form').hide();
+			      jQuery("#menu_wrap").addClass("submenu-closed");
+			      sidebarOn=false;
+			    } else {
+			    	sub_menu.style.width="240px";
+			    	sub_menu.style.height="370px";
+			    	jQuery('#menu_wrap > ul').show();
+			    	jQuery('#menu_wrap > div').show();
+			    	jQuery('#menu_wrap > form').show();
+			    	jQuery("#menu_wrap").removeClass("submenu-closed");
+			      sidebarOn=true;
+			    }
+		})
 		
 	});//DOMContentLoaded 완료시 javascript 로드
 	
-	//예방접종 페이지에서 주소가 넘어왔는지 확인
-	var hospitalAddr = document.querySelector("#hospitalAddr").value;
+	//예방접종 페이지에서 객체가 넘어왔는지 확인
+	if(document.querySelector('#hospitalName').value || document.querySelector('#hospitalTel').value || document.querySelector('#hospitalAddr').value){
+		var hospital = {
+				Name: document.querySelector('#hospitalName').value,
+				Tel: document.querySelector('#hospitalTel').value,
+				Addr:document.querySelector('#hospitalAddr').value
+		}
+	}
 	// 지도를 담을 자료형
 	var map='';
-	//위치정보용 마커
+	// 위치정보용 마커
 	var marker
+	// 위치정보 
 	var positioninfo
 	// 마커를 담을 배열입니다
 	var markers = [];
+	// 현재좌표 갱신 객체선언
+	var resetPosition=document.querySelector('#getPostion');
 	// 좌료를 담을 자료형 선언
 	var lat ='',lon='';
-	// 현재좌표 갱신 객체선언
-	var resetPostion=document.querySelector('.getPostion');
+	var sub_menu_icon=document.querySelector('.sub_menu_icon');
 	// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 	var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	
@@ -87,10 +116,6 @@
 		}
 	};
 	
-	function resetAnimation(){
-		resetPostion.sytle.size="32px";
-		resetPostion.style.color="orange";
-	}
 	
 	//비동기로 서버에 병원정보 요청하는 함수
 	function getHostpital(lat,lon){
@@ -175,7 +200,7 @@
 		var geocoder = new daum.maps.services.Geocoder();
 		
 		// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-	
+		console.log(keyword);
 		geocoder.addressSearch(keyword, function(result, status) {
 			console.log(result);
 			// 정상적으로 검색이 완료됐으면 
@@ -186,7 +211,40 @@
 				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				map.setCenter(coords);
 		            
-				getHostpital(result[0].y, result[0].x);
+				if(hospitalAddr!=""){
+					// 마커가 표시될 위치입니다 
+					var markerPosition  = new daum.maps.LatLng(result[0].y, result[0].x); 
+					// 마커를 생성합니다
+					var	selectedmarker = new daum.maps.Marker({
+						position: markerPosition,
+						clickable: true 
+					});
+					// 마커가 지도 위에 표시되도록 설정합니다
+					selectedmarker.setMap(map);
+					
+					var message	='<div style="padding:5px;">';
+						message +='<div>'+"병 원이름 : "+hospital.Name+'</div>'
+						message +='<div>'+"전화 번호 : "+hospital.Tel+'</div>'
+						message +='<div>'+"병원 주소 : "+hospital.Addr+'</div>'
+						message +='</div>'
+					
+					var iwContent = message, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+						iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+					// 인포윈도우를 생성합니다
+					var infowindow = new daum.maps.InfoWindow({
+						content : iwContent,
+						removable : iwRemoveable
+					});
+
+					// 마커에 클릭이벤트를 등록합니다
+					daum.maps.event.addListener(selectedmarker, 'click', function() {
+					// 마커 위에 인포윈도우를 표시합니다
+					infowindow.open(map, selectedmarker);  
+					});
+				}else{
+					getHostpital(result[0].y, result[0].x);
+				}
 		            
 			} else if(result.length==0){
 				alert("찾을수 없는 장소입니다. 상세하게 입력해주세요")
@@ -307,17 +365,18 @@
 
 		// 지도 위에 표시되고 있는 마커를 모두 제거합니다
 		function removeMarkers() {
-		    for ( var i = 0; i < markers.length; i++ ) {
-		        markers[i].setMap(null);
-		    }   
-		    markers = [];
+			if(markers!==undefined){
+				for ( var i = 0; i < markers.length; i++ ) {
+		    		markers[i].setMap(null);
+		    	}   
+		    	markers = [];
+			}
 		}
 
 		// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
 		function displayPagination(pagination) {
 		    var paginationEl = document.querySelector('#pagination'),
-		        fragment = document.createDocumentFragment(),
-		        i; 
+		        fragment = document.createDocumentFragment(),i; 
 
 		    // 기존에 추가된 페이지번호를 삭제합니다
 		    while (paginationEl.hasChildNodes()) {
@@ -359,3 +418,4 @@
 		        el.removeChild (el.lastChild);
 		    }
 		}
+	
