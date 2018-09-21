@@ -58,6 +58,7 @@ hr{
 }
 .board > .boardlabel {
 	display:table-header-group; 
+	vertical-align:middle;
 	text-align: center;
 	background-color: gray;
 	color: white;

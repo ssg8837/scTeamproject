@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.scmaster.mapper.FleaMapper;
@@ -67,10 +68,14 @@ public class FleaController
 	@RequestMapping(value = "/flea_read", method = RequestMethod.GET)
 	public String boardRead(int fleaNum, Model model) {
 		System.out.println(fleaNum+"게시글 ");
-		Flea board=selectOne(fleaNum);
-		model.addAttribute("board", board);
+		model.addAttribute("board", boardRead(fleaNum));
 		
 		return "flea_market_read_write";
+	}
+	
+	public Flea boardRead(int fleaNum) {
+		Flea board=selectOne(fleaNum);
+		return board;
 	}
 	
 	public Flea selectOne(int fleaNum) {
@@ -87,16 +92,15 @@ public class FleaController
 	}
 	
 	@RequestMapping(value = "/flea_write", method = RequestMethod.POST)
-	public String boardWrite(Flea write, MultipartFile fleaSavedFile) {
-		System.out.println("들어는 왔니?");
+	public String boardWrite(Flea write, MultipartFile fleaSavedFile,Model model) {
 		write.setFleaSavedFile(uploadfile(fleaSavedFile));
-		
+		System.out.println(write.toString());
 		FleaMapper mapper=sqlSession.getMapper(FleaMapper.class);
 		int result=mapper.boardWrite(write);
-		System.out.println(result+"개 게시글 삽입 성공");
-		System.out.println(write.getUserNo());
+		System.out.println(write.getFleaNum()+"게시글"+result+"개 게시글 삽입 성공");
+		model.addAttribute("board", boardRead(write.getFleaNum()));
 		
-		return "flea_read?fleaNum="+write.getUserNo();
+		return "flea_market_read_write";
 	}
 	
 	public String uploadfile(MultipartFile fleaSavedFile) {

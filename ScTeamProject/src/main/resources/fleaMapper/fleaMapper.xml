@@ -49,27 +49,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	</select>
   	
   	<insert id="boardWrite" parameterType="Flea">
+		<selectKey resultType="int" keyProperty="fleaNum" order="AFTER" >
+        	SELECT 
+        		fleaseq.currval as fleaNum 
+        	FROM FLEA 
+        	WHERE ROWNUM = 1
+		</selectKey>        
 		INSERT INTO 
 			FLEA
 				(userNo,fleaNum,fleaTitle,fleaText,flearegdate,fleaSavedFile)
 		VALUES
-			(#{userNo},fleaSeq.nextVal,#{fleaTitle},#{fleaText},sysdate,#{fleaSavedFile})
-		<selectKey resultType="int" keyProperty="fleaNum" order="AFTER">
-        	SELECT 
-				FLEASEQ.CURRVAL 
-			FROM 
-				FLEA 
-		</selectKey>        
+			(#{userNo},fleaseq.nextval,#{fleaTitle},#{fleaText},sysdate,#{fleaSavedFile})
   	</insert>
-	
-	<select id="getNewBoardNum" parameterType="int" resultType="int">
-		SELECT 
-			FLEASEQ.CURRVAL 
-		FROM 
-			FLEA 
-		WHERE 
-			USERNO=#{userNo}			
-	</select>
 	
   	<update id="updateHits" parameterType="int"> 
  		UPDATE 
