@@ -80,8 +80,8 @@
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
-        	  <li class="sub-menu">
-	            <a class="active" href="openNewBaby">
+        		<li class="sub-menu">
+	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
 	              <span>아이 정보</span>
 	            </a>
@@ -98,16 +98,18 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
+	         
 	          <li class="sub-menu">
-	            <a href="">
+	            <a href="#">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
 	            </a>
-	           	<ul class="sub" style="display: block;">
-                    <li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
-                   <li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
-               	</ul>
+	            <ul class="sub">
+              		<li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+             		<li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+              	</ul>
 	          </li>
+	          
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
 	              <i class="fa fa-hospital-o fa_left"></i>
@@ -133,9 +135,9 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBookForm">
+	            <a href="flea_list">
 	              <i class="fa fa-edit fa_left"></i>
-	              <span>게시판</span>
+	              <span>벼룩시장</span>
 	              </a>
 	          </li>
           </ul>

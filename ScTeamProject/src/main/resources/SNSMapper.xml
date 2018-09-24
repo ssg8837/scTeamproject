@@ -144,4 +144,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE RPLYNO = #{rplyNo}
 	</update>
 	
+	<select id="checkSingo" parameterType="Singo" resultType="int">
+		SELECT count(userNo)
+		FROM SINGO
+		WHERE SNSNO =#{SNSNo} AND USERNO=#{userNo}
+	</select>
+	
+	<insert id="insertSingo" parameterType="Singo">
+		INSERT INTO SINGO(SNSNO, USERNO) VALUES (#{SNSNo}, #{userNo})
+	</insert>
+	
 </mapper>

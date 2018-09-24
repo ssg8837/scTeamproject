@@ -44,7 +44,7 @@ function like(nowNo)
             success:function(data){
             	$(heart).removeClass('fa-heart-o');
         		$(heart).addClass('fa-heart');
-        		$("#likelyNum_"+nowNo).text(data);
+        		$("#likelyNum_"+nowNo).text(" "+data);
         		
             }
         });
@@ -59,11 +59,23 @@ function like(nowNo)
             success:function(data){
         		$(heart).removeClass('fa-heart');
         		$(heart).addClass('fa-heart-o');
-        		$("#likelyNum_"+nowNo).text(data);	
+        		$("#likelyNum_"+nowNo).text(" "+data);	
         		
             }
         });
 	}
+}
+
+function singo(nowNo)
+{
+	$.ajax({
+        url:'./singoSns',
+        type:"POST",
+        data:{nowNo: nowNo},
+        success:function(data){
+        	alert(data);	
+        }
+    });
 }
 
 function insertContent(nowNo)

@@ -7,6 +7,7 @@ import com.scmaster.vo.Friend;
 import com.scmaster.vo.Likely;
 import com.scmaster.vo.SNS;
 import com.scmaster.vo.SNS_Reply;
+import com.scmaster.vo.Singo;
 
 public interface SNSMapper {
 	ArrayList<SNS> selectPublicSNS();
@@ -33,4 +34,6 @@ public interface SNSMapper {
 	SNS_Reply selectReplyByRplyNo(int rplyNo);
 	void deleteReplyByRplyNo(int rplyNo);
 	void updateReply(SNS_Reply reply);
+	int checkSingo(Singo singo);
+	void insertSingo(Singo singo);
 }

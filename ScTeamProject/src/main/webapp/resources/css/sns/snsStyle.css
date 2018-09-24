@@ -30,9 +30,8 @@
 	border-radius: 100%;
 }
 .sns-title {
-	background: rgba(0,0,0,1);
+	background: #fffce6;
 	padding: 6px;
-	color: white;
 	font-weight: 700;
 	display: block;
 	text-align:center
@@ -40,7 +39,7 @@
 .blog-text {
 	margin-left: 8px;
 	margin-right: 8px;
-	margin-top: 15px;
+	margin-top: 50px;
 	font-size: 12px;
 	min-height: 50px;
 }
@@ -72,13 +71,13 @@ text-align: center;
 .prev, .next {
   cursor: pointer;
   position: absolute;
-  top: 80px;
+  top: 120px;
   width: auto;
   margin-top: -22px;
   padding: 16px;
   color: black;
   font-weight: bold;
-  font-size: 96px;
+  font-size: 32px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
 }
@@ -93,7 +92,7 @@ text-align: center;
 {
 cursor: pointer;
   position: absolute;
-  top: 230px;
+  top: 280px;
   width: auto;
   margin-top: -22px;
   padding: 16px;
@@ -103,9 +102,29 @@ cursor: pointer;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
 }
+
+.singo
+{
+	cursor: pointer;
+  position: absolute;
+  top: 280px;
+  width: auto;
+  margin-top: -22px;
+  right: 15px;
+  padding: 16px;
+  color: black;
+  font-weight: bold;
+  font-size: 12px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
 .red
 {
   color: red;
+}
+.black{
+	color : black;
 }
 .content-panel
 {
@@ -146,4 +165,9 @@ cursor: pointer;
 .titleContent
 {
 	display:inline-block;
+}
+
+.snsList .mb
+{
+	margin-left:25%;
 }

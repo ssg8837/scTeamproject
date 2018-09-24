@@ -171,7 +171,7 @@
 										<img src="./resources/assets/images/pic04.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="landing.html" class="link">중고거래게시판</a></h3>
+										<h3><a href="flea_list" class="link">중고거래게시판</a></h3>
 										<p>필요한 육아물품이 있으신가요?<br/>다른 부모님들로부터 구매하시는 건 어떠신가요?</p>
 									</header>
 								</article>

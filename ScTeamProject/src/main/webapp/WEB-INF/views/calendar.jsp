@@ -86,7 +86,7 @@
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
-        	  <li class="sub-menu">
+        		<li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
 	              <span>아이 정보</span>

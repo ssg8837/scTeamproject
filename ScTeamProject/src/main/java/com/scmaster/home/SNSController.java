@@ -32,6 +32,7 @@ import com.scmaster.vo.Likely;
 import com.scmaster.vo.MultiFiles;
 import com.scmaster.vo.SNS;
 import com.scmaster.vo.SNS_Reply;
+import com.scmaster.vo.Singo;
 
 @Controller
 public class SNSController {
@@ -404,4 +405,31 @@ public class SNSController {
 			return openSNS(model);
 		}
 		
+		@RequestMapping(value = "/singoSns",method =RequestMethod.POST, produces ="application/text; charset=utf8")
+		public @ResponseBody String singoSns (int nowNo)
+		{
+			String result;
+			SNSMapper snsMapper=sqlSession.getMapper(SNSMapper.class);
+			Object loginNo=httpSession.getAttribute("loginNo");
+			if(loginNo!=null)
+			{
+				Singo singo=new Singo(nowNo,(Integer)loginNo);
+				if(snsMapper.checkSingo(singo)==0)
+				{
+					snsMapper.insertSingo(singo);
+					result="신고 완료";
+				}
+				else
+				{
+					result="이미 신고된 게시물입니다.";
+				}
+				
+			}
+			else
+			{
+				return "로그인을 해주세요.";
+			}
+			
+			return result;
+		}
 }
