@@ -144,11 +144,12 @@
 			<h3><i class="fa fa-angle-right"></i> Flea Market</h3>
 			<div class="row mt">
 				<div class="col-lg-12">
+					<!-- 보드 객체가 없다면 글쓰기 -->
 					<c:if test="${empty board}">
 						<div class="funcBtn">
 							<button id="golist">목록</button>
 						</div>
-							<form id="Flea" class="writeFlea" name="write" action="flea_write" method="post"  enctype="multipart/form-data">
+							<form id="Flea" class="writeFlea" action="flea_write" method="post"  enctype="multipart/form-data">
 								<input type="hidden" id="userNo" name="userNo" value="${sessionScope.loginNo}" readonly/>
 								
 								<div class="userAddr">
@@ -175,12 +176,13 @@
 									<p><textarea id="fleaText" name="fleaText"></textarea></p>
 								</div>
 								<div class="fleaSavedFile">
-									<label for="fleaSavedFile" class="filelabel">파일 업로드</label>
-									<!-- <input type="file" id="fleaSavedFile" name="fleaSavedFile"/> -->
+									<span class="filelabel">파일 업로드</span>
+									<input type="file" name="fleaSavedFile" multiple/>
 								</div>
 									<button type="button" id="submitBtn">글 작성</button>
 							</form>
 					</c:if>
+					<!-- board 객채가 있을 경우에는 보드 읽기  -->
 					<c:if test="${!empty board}">
 						<div class="content">
 							<input id="fleaNum" type="hidden" value="${board.fleaNum}"/>
@@ -201,14 +203,43 @@
 								</p>	
 							</div>
 						<hr>	
-							<button id="golist">목록</button>
+						<div class="btn_filed">
+							<button id="golist">목록</button>&nbsp;
 							<button id="">신고</button>
+						<!-- 세션의 사용자와 보드의 사용자 같다면 버튼 보여주기 -->	
 						<c:if test="${sessionScope.loginNo eq board.userNo}">
 						&nbsp;<button id="update">글수정</button>
 						&nbsp;<button id="delete">삭제</button>
 						</c:if>
+						</div>
+						<!--리플 쓰기 필드  -->
+						<div class="flearelpy">
+						<div class="wirteReply"> 
+							<label for="replytext">리플</label>
+							<form id="replytext" action="reply_write" method="POST">	
+								<input name="userNo" type="hidden" value="${sessionScope.loginNo}"/>
+								<input name="fleaNum"type="hidden" value="${board.fleaNum}"/>
+								<textarea id="replyText" name="replyText"></textarea>
+							</form>					
+							<button id="reply_submit" type="button">등록</button>
+						</div>
+						<div><!--리플 읽기 필드  -->
+							<c:if test="${!empty replylist}">
+								<hr>
+								<c:forEach var="reply" items="${replylist}">
+								<div class="reply_feild" data-replyno="${reply.replyNum}">
+								<span class="userNick">${reply.userId}(${reply.userNick})</span>
+								<span class="replyText">${reply.replyText}</span>
+								<span class="replyReg">${reply.replyregdate}</span>
+								<span id="reply_delete_Btn">x</span>
+								<hr>
+								</div>
+								</c:forEach>
+							</c:if>
+						</div>
+						</div>
+					</div>	
 						
-					</div>		
 					</c:if>
 				</div>
 			</div>
@@ -231,7 +262,6 @@
 		  <!--common script for all pages-->
 		<script src="./resources/js/common/common-scripts.js"></script>
 		  <!--script for this page-->
-	    <script src="./resources/js/vue-v2.5.13.js"></script>
 	    <script src="./resources/js/flea/flea.js"></script>
 	</body>
 </html>

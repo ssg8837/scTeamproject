@@ -17,6 +17,7 @@ hitcount number default 0
 );
 
 create table flea_reply(
+userNo INTEGER constraint flea_reply_user_fk references BS_USER(USERNO) on delete cascade,
 fleaNum number constraint flea_reply_fk references flea(fleaNum) on delete cascade,
 replynum number constraint flea_reply_pk primary key,
 REPLYText VARCHAR2(2000),

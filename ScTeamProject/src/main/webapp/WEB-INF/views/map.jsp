@@ -154,8 +154,8 @@
 							<ul>
 								<li><a href="#" id="current">>병원분류</a>
 									<ul>
-										<li><a href="babiesHospital">소아과</a></li>
-										<li><a href="my_location">전체병원</a></li>
+										<li id="hospital_baby">소아과</li>
+										<li id="allHospital">전체병원</li>
 									</ul>
 								</li>
 							</ul>

@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded',function(){
 	var deleteBtn= document.querySelector("#delete");
 	var fleaNum= document.querySelector("#fleaNum");
 	var submitBtn=document.querySelector("#submitBtn");
+	var reply_submit=document.querySelector("#reply_submit");
+	var replyText=document.querySelector("#replyText");
+	var reply_delete_Btn=document.querySelector("#reply_delete_Btn");
 	var xhttp;
 	
 	function searchFormSubmit(currentPage) {
@@ -53,46 +56,47 @@ document.addEventListener('DOMContentLoaded',function(){
 	}
 	
 	function update(){
-		
 		var update;
-				
-		function flea_ajax(result){
-			xhttp = new XMLHttpRequest();
-			xhttp.open("GET", "flea_read?fleaNum"+fleaNum.value, true);
-			xhttp.send();
-		}
+		var url="flea_read?fleaNum="+fleaNum.value;
+
+		xhttp = new XMLHttpRequest();
+		xhttp.open("GET",url , true);
+		xhttp.send();
 		
-					update+='<form class="writeFlea" name="Flea" action="flea_update" method="post" enctype="multipart/form-data">';
-					update+='<input type="hidden" id="userNo" name="userNo" value="'+document.querySelector("#userNo").value+'"/>';
-					update+='<div class="userAddr">';
-					update+='<label for="userAddr" class="Addrlabel">주소</label>';
-					update+='<input type="text" id="userAddr" name="userAddr" value="'+document.querySelector("#userAddr").value+'"/>';
-					update+='</div>';
-					update+='<div class="userPhone">'; 
-					update+='<label for="userPhone" class="Phonelabel">연락처</label>';
-					update+='<input type="text" id="userPhone" name="userPhone" value="'+document.querySelector("#userPhone").value+'"/>'; 
-					update+='</div>';
-					update+='<div class="userPhone">';
-					update+='<label for="userEmail" class="Emaillabel">Email</label>';
-					update+='<input type="text" id="userEmail" name="userEmail" value="'+document.querySelector("#userEmail").value+'"/>';
-					update+='</div>';
-					update+='<div class="writetitle">';
-					update+='<label for="fleaTitle" class="titlelabel">제목</label>';
-					update+='<input type="text" id="fleaTitle" name="fleaTitle" value="'+document.querySelector("#fleaTitle").value+'"/>';
-					update+='</div>';
-					update+='<div class="textfield">';
-					update+='<p><textarea id="fleaText" name="fleaText">'+document.querySelector("#fleaText").value+'</textarea></p>';
-					update+='</div>';
-					update+='<div class="fleaSavedFile">';
-					update+='<label for="fleaSavedFile" class="filelabel">파일 업로드</label>';
-					update+='<input type="file" id="fleaSavedFile" name="fleaSavedFile" value="'+document.querySelector("#fleaSavedFile").value+'"/>';
-					update+='</div>';
-					update+='<button type="button" id="submitBtn">글 수정</button>';
-					update+='</form>';
-					update+='&nbsp;<button id="golist">목록</button>';
+		xhttp.onreadystatechange = function flea_ajax(result){
 			
-					document.querySelector(".content").innerHTML=update;
+			update+='<form class="writeFlea" name="Flea" action="flea_update" method="post" enctype="multipart/form-data">';
+			update+='<input type="hidden" id="userNo" name="userNo" value="'+xhttp.responseText.userId+'" readonly/>';
+			update+='<div class="userAddr">';
+			update+='<label for="userAddr" class="Addrlabel">주소</label>';
+			update+='<input type="text" id="userAddr" name="userAddr" value="'+xhttp.responseText.userAddr+'"/>';
+			update+='</div>';
+			update+='<div class="userPhone">'; 
+			update+='<label for="userPhone" class="Phonelabel">연락처</label>';
+			update+='<input type="text" id="userPhone" name="userPhone" value="'+xhttp.responseText.userPhone+'"/>'; 
+			update+='</div>';
+			update+='<div class="userPhone">';
+			update+='<label for="userEmail" class="Emaillabel">Email</label>';
+			update+='<input type="text" id="userEmail" name="userEmail" value="'+xhttp.responseText.userEmail+'"/>';
+			update+='</div>';
+			update+='<div class="writetitle">';
+			update+='<label for="fleaTitle" class="titlelabel">제목</label>';
+			update+='<input type="text" id="fleaTitle" name="fleaTitle" value="'+xhttp.responseText.fleaTitle+'"/>';
+			update+='</div>';
+			update+='<div class="textfield">';
+			update+='<p><textarea id="fleaText" name="fleaText">'+xhttp.responseText.fleaText+'</textarea></p>';
+			update+='</div>';
+			update+='<div class="fleaSavedFile">';
+			update+='<label for="fleaSavedFile" class="filelabel">파일 업로드</label>';
+			update+='<input type="file" id="fleaSavedFile" name="fleaSavedFile" value="'+xhttp.responseText.fleaSavedFile+'"/>';
+			update+='</div>';
+			update+='</form>';
+			update+='<div class="btn_field">';
+			update+='<button type="button" id="submitBtn">수정하기</button>&nbsp;<button id="golist">목록</button>';
+			update+='</div>';
 			
+			document.querySelector(".content").innerHTML=update;
+		}
 	};
 
 	if(newBtn){
@@ -134,6 +138,25 @@ document.addEventListener('DOMContentLoaded',function(){
 			}
 		});
 	};
+	
+	/*reaply*/
+	if(reply_submit){
+		reply_submit.addEventListener('click',function(){
+			if(replyText.length<0){
+				alert("값을 입력해주세요");
+				replyText.focus();
+				return false;
+			}
+			document.querySelector("#replytext").submit();
+		});
+	}
+	
+	if(reply_delete_Btn){
+		reply_delete_Btn.addEventListener('click',function(){
+			var reply_feild=document.querySelector(".reply_feild");
+			location.href="flea_reply_delete?replyNum="+reply_feild.getAttribute('data-replyno');
+		})
+	}
 	
 });
 

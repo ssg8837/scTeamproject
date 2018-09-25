@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   				rownum num, b.* 
 			FROM 
 				(SELECT 
-					f.userNo, bs.USERID, bs.USERNICK, bs.USERPHONE, bs.USEREMAIL, bs.userAddr, f.fleaNum, f.fleaTitle, f.fleaText,  to_char(f.FLEAREGDATE,'yyyy-mm-dd') as REGDATE, f.FLEASAVEDFILE
+					f.userNo, bs.USERID, bs.USERNICK, bs.USERPHONE, bs.USEREMAIL, bs.userAddr, f.fleaNum, f.fleaTitle, f.fleaText,  to_char(f.FLEAREGDATE,'yyyy-mm-dd') as REGDATE, f.hitcount, f.FLEASAVEDFILE
 				FROM 
 					Flea f,BS_USER bs  
 				WHERE
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   	<select id="selectOne" parameterType="int" resultType="Flea">
 		SELECT 
-			f.userNo, bs.USERID, bs.USERNICK, bs.userAddr, bs.USERPHONE, bs.USEREMAIL, f.fleaNum, f.fleaTitle, f.fleaText,  to_char(f.FLEAREGDATE,'yyyy-mm-dd') as REGDATE, f.FLEASAVEDFILE
+			f.userNo, bs.USERID, bs.USERNICK, bs.userAddr, bs.USERPHONE, bs.USEREMAIL, f.fleaNum, f.fleaTitle, f.fleaText,  to_char(f.FLEAREGDATE,'yyyy-mm-dd') as REGDATE,f.hitcount, f.FLEASAVEDFILE
 		FROM 
 			Flea f,BS_USER bs  
 		WHERE
@@ -74,6 +74,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	<update id="updateBoard" parameterType="Flea"> 
   		 UPDATE 
   			FLEA
+  		SET 
+  			userNo=#{userNo}, fleaTitle=#{fleaTitle}, fleaText=#{fleaText},fleaSavedFile=#{fleaSavedFile}
+  		WHERE 
+  			fleaNum=#{fleaNum}
   	</update>
 
   	<delete id="deleteBoard" parameterType="int"> 
