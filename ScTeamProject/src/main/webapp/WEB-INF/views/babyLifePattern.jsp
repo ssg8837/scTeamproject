@@ -12,7 +12,7 @@
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-		
+	
 	</head>
 	<body>
 	<form id='home' action='./' method='get'>
@@ -71,7 +71,7 @@
         	<c:if test='${sessionScope.loginId != null }'>
 	          	<p class="centered"><a href="openAccountEdit">
 	          		<c:if test='${sessionScope.loginImg != null }'>
-		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
+		          	<img src="getUserImage?userNo=${sessionScope.loginNo}" class="img-circle" width="80" height="80">
 		          	</c:if>
 		          	<c:if test='${sessionScope.loginImg == null }'>
 		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">

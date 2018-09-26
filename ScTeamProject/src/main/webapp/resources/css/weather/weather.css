@@ -42,7 +42,7 @@
 	.row mt {
 		margin: 0, auto;
 	} */
-		img {
+	/* img {
     width: 250px;
    	height:auto;
 	}
@@ -52,10 +52,9 @@
     z-index:1;
 }
 #main-content:after {
-    background-image:url('../../image/weather.jpg');
     background-position: center;
     background-size: cover;
-    background-color : rgba(0, 0, 0, 0.3);
+    background-color : rgba(255, 255, 255, 0.3);
     top:0;
     left:0;
     position:absolute;
@@ -64,16 +63,60 @@
     content:"";
     width:100%;
     height:100%;
-}    /* opacity:0.5!important;
-    filter:alpha(opacity=50); */
-    .weathertable {width: 100%; height: 100%;}
+}    
+	opacity:0.5!important;
+    filter:alpha(opacity=50);
+    
+    .weatherlife {width: 50%; float: right;}
+	.weatherresult {width: 50%; float: left;}
+	.weatherlife th, td {width: 50%;}
+    .weathertable {width: 100%; margin: 0;}
 	.weathertable th {font-size: 25px; text-align: center;} 
 	.weathertable tr{color:black; font-size: 25px; text-align: center;}
 	.weathertable div {font-size: small; text-align: center;}
-	.weatherimg{width: 34%; background-color: rgba(0,0,0, 0.5); color:white;}
-	.weathertemp{width: 33%; background-color: rgba(0,0,0, 0.5); color:white;}
-	.weathercloud{width: 33%; background-color: rgba(0,0,0, 0.5); color:white;}
+	.weatherimg{background-color: rgba(0,255,0, 0.5); color:white;}
+	.weathertemp{background-color: rgba(0,255,0, 0.5); color:white;}
+	.weathercloud{background-color: rgba(0,255,0, 0.5); color:white;}
 	.weatherlow{background-color:rgba(0,0,255, 0.5); color:white;}
 	.weatherheight{background-color:rgba(255,0,0, 0.5); color:white;}
-	.weatheradd{background-color: rgba(0,0,0, 0.5); color:white;}
-	.weathertime{background-color: rgba(0,0,0, 0.5); color:white;}
+	.weatheradd{background-color: rgba(0,255,0, 0.5); color:white;}
+	.weathertime{background-color: rgba(0,255,0, 0.5); color:white;}
+	.search{float: right;}
+	.search button{float: right;} */
+	#weather_img {
+    width: 250px;
+   	height:auto;
+	}
+	
+#main-content {
+    position:relative;
+    z-index:1;
+}
+#main-content:after {
+    background-position: center;
+    background-size: cover;
+    background-color : rgba(255, 255, 255, 0.3);
+    top:0;
+    left:0;
+    position:absolute;
+    background-size:100%;
+    z-index:-1;
+    content:"";
+    width:100%;
+    height:100%;
+}    
+	/* opacity:0.5!important;
+    filter:alpha(opacity=50); */
+    .weathertable {width: 100%; height: 100%; margin: 0;}
+	.weathertable th {font-size: 25px; text-align: center;} 
+	.weathertable tr{color:black; font-size: 25px; text-align: center;}
+	.weathertable div {font-size: small; text-align: center;}
+	.weatherimg{width: 34%; background-color: rgba(0,255,0, 0.5); color:white;}
+	.weathertemp{width: 33%; background-color: rgba(0,255,0, 0.5); color:white;}
+	.weathercloud{width: 33%; background-color: rgba(0,255,0, 0.5); color:white;}
+	.weatherlow{background-color:rgba(0,0,255, 0.8); color:white;}
+	.weatherheight{background-color:rgba(255,0,0, 0.8); color:white;}
+	.weatheradd{background-color: rgba(0,255,0, 0.5); color:white;}
+	.weathertime{background-color: rgba(0,255,0, 0.5); color:white;}
+	.search{float: right;}
+	.search button{float: right;}

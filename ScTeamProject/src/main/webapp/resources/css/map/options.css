@@ -18,6 +18,7 @@
 
 .menubar li:hover ul {
 	display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
+	cursor: pointer;
 }
 
 .reset_icon_wrap{

@@ -65,62 +65,44 @@
         MAIN SIDEBAR MENU
         *********************************************************************************************************************************************************** -->
     <!--sidebar start-->
-    <aside>
+   <aside>
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
-        	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit">
-		          	<c:if test='${sessionScope.loginImg != null }'>
-		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
-		          	</c:if>
-		          	<c:if test='${sessionScope.loginImg == null }'>
-		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
-		          	</c:if>
-	          	</a></p>
-	          	<h5 class="centered">${sessionScope.loginNick }</h5>
-	          	<div class="centered"><button class="active edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
-        	</c:if>
-        	  <li class="sub-menu">
-	            <a href="#">
-	              <i class="fa fa-heart fa_left"></i>
-	              <span>회원 정보</span>
-	            </a>
+	          <li class="sub-menu">
+	            <a href="admin_member">
+	              <i class="fa fa-calendar fa_left"></i>
+	              <span>회원정보</span>
+	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="#">
-	              <i class="fa fa-users fa_left"></i>
+	            <a href="admin_sns">
+	              <i class="fa fa-calendar fa_left"></i>
 	              <span>SNS</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
 	            <a href="#">
-	              <i class="fa fa-edit fa_left"></i>
+	              <i class="fa fa-calendar fa_left"></i>
 	              <span>게시판</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="#">
-	              <i class="fa fa-edit fa_left"></i>
-	              <span>병원 데이터</span>
+	            <a href="admin_hospital">
+	              <i class="fa fa-medkit fa_left"></i>
+	              <span>병원 및 지역코드</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="#">
-	              <i class="fa fa-edit fa_left"></i>
-	              <span>질병 데이터</span>
+	            <a href="admin_vaccine">
+	              <i class="fa fa-hospital-o fa_left"></i>
+	              <span>질병정보</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="#">
-	              <i class="fa fa-edit fa_left"></i>
-	              <span>지역코드 데이터</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="#">
-	              <i class="fa fa-edit fa_left"></i>
-	              <span>표준성장 데이터</span>
+	            <a href="admin_babygrow">
+	              <i class="fa fa-umbrella fa_left"></i>
+	              <span>표준성장도표</span>
 	              </a>
 	          </li>
           </ul>
@@ -134,10 +116,11 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
+        <h3><i class="fa fa-angle-right"></i> Admin Page </h3>
         <div class="row mt">
           <div class="col-lg-12">
-            <p>Place your content here.</p>
+            <p>관리자 페이지</p>
+	  
           </div>
         </div>
       </section>

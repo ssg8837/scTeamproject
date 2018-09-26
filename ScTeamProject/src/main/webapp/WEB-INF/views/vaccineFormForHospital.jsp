@@ -152,8 +152,16 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
+	          	<p class="centered"><a href="openAccountEdit">
+	          		<c:if test='${sessionScope.loginImg != null }'>
+		          	<img src="getUserImage?userNo=${sessionScope.loginNo}" class="img-circle" width="80" height="80">
+		          	</c:if>
+		          	<c:if test='${sessionScope.loginImg == null }'>
+		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
+		          	</c:if>
+	          	</a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
+	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
 	          <li class="sub-menu">
 	            <a href="gotoGrow">
@@ -174,8 +182,8 @@
 	              <span>예방접종</span>
 	            </a>
 	            <ul class="sub">
-              		<li class="active"><a href="vaccineForm">질병 및 예방접종 조회</a></li>
-             		<li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
+              		<li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+             		<li class="active"><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
               	</ul>
 	          </li>
 	          

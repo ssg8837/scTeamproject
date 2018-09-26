@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>병원지도</title>
+		<title>육아서포트페이지</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
@@ -13,9 +13,7 @@
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
 		<link href="./resources/css/map/map.css" rel="stylesheet">
-
-
-
+		<link href="./resources/css/map/options.css" rel="stylesheet">
 	</head>
 	<body>
 	<form id='home' action='./' method='get'>
@@ -78,7 +76,7 @@
         	<c:if test='${sessionScope.loginId != null }'>
 	          	<p class="centered"><a href="openAccountEdit">
 	          		<c:if test='${sessionScope.loginImg != null }'>
-		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
+		          	<img src="getUserImage?userNo=${sessionScope.loginNo}" class="img-circle" width="80" height="80">
 		          	</c:if>
 		          	<c:if test='${sessionScope.loginImg == null }'>
 		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
@@ -87,7 +85,7 @@
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
-        		<li class="sub-menu">
+	           <li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
 	              <span>아이 정보</span>
@@ -105,18 +103,12 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
-	         
 	          <li class="sub-menu">
-	            <a href="#">
+	            <a href="vaccineForm">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	            </a>
-	            <ul class="sub">
-              		<li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
-             		<li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
-              	</ul>
+	              </a>
 	          </li>
-	          
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
 	              <i class="fa fa-hospital-o fa_left"></i>
@@ -162,21 +154,31 @@
 			<div class="row mt">
 				<div class="col-lg-12">
 					<div class="map_wrap"><!-- 지도 레이아웃을 위한 Wrapper  -->
-						<input id="hospitalAddr" type="hidden" value="${hospital.address}"/><!-- 예방접종 예방 병원 객채  -->
-						<input id="hospitalName" type="hidden" value="${hospital.name}"/><!-- 예방접종 예방 병원 객채  -->
-						<input id="hospitalTel" type="hidden" value="${hospital.phone}"/><!-- 예방접종 예방 병원 객채  -->
+						<input id="hospitalAddr" type="hidden" value="${hospitalAddr}"/><!-- 예방접종 예방 병원 객채  -->
+						<input id="hospitalName" type="hidden" value="${hospitalName}"/><!-- 예방접종 예방 병원 객채  -->
+						<input id="hospitalTel" type="hidden" value="${hospitalTel}"/><!-- 예방접종 예방 병원 객채  -->
+						<!-- 병원선택 -->
+						<div class="menubar">
+							<ul>
+								<li><a href="#" id="current">>병원분류</a>
+									<ul>
+										<li id="hospital_baby">소아과</li>
+										<li id="allHospital">전체병원</li>
+									</ul>
+								</li>
+							</ul>
+						</div>										
+						<div class="reset_icon_wrap"><!-- 위치정보 초기화 -->
+							<button id="getPostion">현재위치</button>
+						</div>		
 						<!-- 지도 객채를 담을 div 태그  -->
-						<div id="map">
-							<div class="reset_icon_wrap"><!-- 위치정보 초기화 -->
-								<img class="getPostion "src="./resources/image/map/gps-fixed-indicator.png">
-							</div>						
-						</div>
+						<div id="map"></div>
 						<!-- 매뉴 태그들 -->
 						<div id="menu_wrap" class="bg_white">
+							<img class="sub_menu_icon" src="./resources/image/menu-button.png"/><!-- 리스트 접기 아이콘 -->
 	        				<div class="option"><!-- 검색창  -->
-								<i class="sub_menu_icon" data-placement="right" data-original-title="Toggle Navigation"></i><!-- 리스트 접기 아이콘 -->
 	            				<div><!-- 검색창 양식 폼 -->
-	                				<form onsubmit="searchPlaces(); return false;">
+	                				<form id="searchform" onsubmit="searchPlaces(); return false;">
 	                    			키워드 : <input type="text" placeholder="원하시는 병원의 구주소나 신주소를 입력해주세요" id="keyword" value="삼성동" size="15"> 
 	                    			<button type="submit">검색하기</button> 
 									</form>

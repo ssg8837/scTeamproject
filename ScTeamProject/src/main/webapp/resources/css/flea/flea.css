@@ -58,6 +58,7 @@ hr{
 }
 .board > .boardlabel {
 	display:table-header-group; 
+	vertical-align:middle;
 	text-align: center;
 	background-color: gray;
 	color: white;
@@ -93,4 +94,53 @@ hr{
 	margin: 0 auto;
 	display: table;
 	width: 80%;
+}
+
+.btn_filed{
+	margin: 0 auto;
+	width: 80%;
+	text-align: center;
+}
+/*
+리플 필드
+  */
+#replyText{
+	width: 100%;
+	height: auto;
+	resize:none;
+}
+.reply_feild{
+	text-align: center;
+}
+.reply_feild span{
+	display: inline-block;
+}
+.userNick{
+	width: 20%;
+}
+.textfeild{
+	width: 60%;
+	border-left: solid 1px;
+	border-right: solid 1px;
+}
+.replyReg{
+	width: 18%;
+}
+#reply_delete_Btn{
+	text-align:right;
+	border: 1px black solid;
+}
+#reply_delete_Btn:hover {
+	cursor:pointer;
+}
+.replyText #updateReply{
+	position: inherit;
+}
+#updateReply{
+	width:30px;
+	text-align:center;
+	border: 1px black solid;
+}
+#updateReply:hover {
+	cursor:pointer;
 }

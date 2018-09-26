@@ -111,5 +111,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE BABYNO=#{babyNo}
 	</select>
 	
-	
+	<!-- 회원 목록 가져오기 -->
+	<select id="selectUserAdmin" parameterType="BS_User" resultType="BS_User">
+		SELECT *
+		FROM BS_User
+		<if test="userNo != 0">where userNo like '%' || #{userNo} || '%'</if>
+		ORDER BY USERNO
+	</select>
+	<!-- 회원 총원 가져오기 -->
+	<select id="getTotal_user" parameterType="BS_User" resultType="int">
+		SELECT count(*)
+		FROM BS_User 
+		<if test="userNo != 0">where userNo like '%' || #{userNo} || '%'</if>
+	</select>
+	<!-- 관리자 유저 삭제 -->
+	<delete id="deleteUserAdmin" parameterType="int">
+		DELETE FROM BS_User WHERE USERNO = #{userNo}
+	</delete>
 </mapper>

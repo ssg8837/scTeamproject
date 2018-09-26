@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,9 @@ import com.scmaster.vo.VaccineHospital;
 @Controller
 public class VaccineControllerForHospital{
 
+	@Autowired SqlSession sqlSession;
+	@Autowired HttpSession httpSession;
+	
 	private String getTagValue(String string, Element eElement) {
 		NodeList nlList =eElement.getElementsByTagName(string).item(0).getChildNodes();
 		Node nValue =(Node) nlList.item(0);
@@ -38,6 +44,8 @@ public class VaccineControllerForHospital{
 	@RequestMapping(value = "/vaccineFormForHospital", method = RequestMethod.GET)
 	public String vaccineFormForHospital(Model model) throws Exception{
 		
+		Object loginNo= httpSession.getAttribute("loginNo");
+		model.addAttribute("userNo", (Integer)loginNo);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	    DocumentBuilder dBuilder =dbFactory.newDocumentBuilder();
 	    org.w3c.dom.Document doc = dBuilder.parse("https://nip.cdc.go.kr/irapi/rest/getCondBrtcCd.do?serviceKey=PSBYfvxvFrIVh4PnMZ6HDIwOlEcDc7K3NAbmJ5PAOSOB9BLTWfXOZdYAw65Qecliwnk4vJMfIw8kAjwA%2B2UEsw%3D%3D");

@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -21,11 +23,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.mapper.SNSMapper;
+import com.scmaster.util.PageNavigator;
+import com.scmaster.vo.AdminSNS;
 import com.scmaster.vo.Bell;
 import com.scmaster.vo.Friend;
 import com.scmaster.vo.Likely;
@@ -39,7 +44,8 @@ public class SNSController {
 
 	@Autowired SqlSession sqlSession;
 	@Autowired HttpSession httpSession;
-
+	final int countPerPage = 10;
+	final int pagePerGroup = 10;
 	private static final String UPLOADPATH = "C://FileRepo//SNS";
 	
 	@RequestMapping(value = "/openSNS", method = RequestMethod.GET)
@@ -431,5 +437,67 @@ public class SNSController {
 			}
 			
 			return result;
+		}
+		
+		//관리자 신고된 SNS 목록보기
+	@RequestMapping(value = "/admin_sns", method = RequestMethod.GET)
+	public String admin_sns(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+		Userlist(model, page);
+
+		return "adminSNS";
+	}
+
+	// 관리자 SNS 신고자 목록보기
+	@RequestMapping(value = "/admin_SingoUser", method = RequestMethod.GET)
+	public String admin_SingoUser(Model model, String SNSNo) {
+		int snsno = Integer.parseInt(SNSNo);
+		SNSMapper mapper = sqlSession.getMapper(SNSMapper.class);
+
+		List<Singo> singo = new ArrayList<Singo>();
+		singo = mapper.selectSingoUserNo(snsno);
+
+		if (singo != null) {
+
+			model.addAttribute("singo", singo);
+			model.addAttribute("SNSNo", SNSNo);
+		}
+		return "adminSingoUser";
+	}
+
+	// 관리자 SNS 내용 확인
+	@RequestMapping(value = "/adminsns_OpenChoose", method = RequestMethod.GET)
+	public String adminsns_OpenChoose(Model model, int SNSNo) {
+		SNSMapper snsMapper = sqlSession.getMapper(SNSMapper.class);
+		SNS sns = snsMapper.selectSNSbySnsNo(SNSNo);
+		model.addAttribute("sns", sns);
+		return "adminsns_OpenChoose";
+	}
+
+	// 관리자 회원 검색 리스트
+	public void Userlist(Model model, int page) {
+		SNSMapper mapper = sqlSession.getMapper(SNSMapper.class);
+		// 페이징 처리할 중복제거 한 신고된 SNS 총 갯수
+		int total = mapper.getTotal_SNSAdmin();
+		PageNavigator nav = new PageNavigator(countPerPage, pagePerGroup, page, total);
+		RowBounds rb = new RowBounds(nav.getStartRecord(), nav.getCountPerPage());
+
+		List<AdminSNS> adminSNS = new ArrayList<AdminSNS>();
+
+		adminSNS = mapper.getTotal_SNSAdminSingo(rb);
+		if (adminSNS != null) {
+
+			model.addAttribute("adminSNS", adminSNS);
+			model.addAttribute("nav", nav);
+		}
+	}
+	//관리자 sns_Delete
+		@RequestMapping(value = "/adminsns_Delete", method = RequestMethod.POST)
+		public String adminsns_Delete(Model model, @RequestParam(value = "page", defaultValue = "1") int page, int selectNo) 
+		{
+			SNSMapper snsMapper=sqlSession.getMapper(SNSMapper.class);
+			snsMapper.deleteSns(selectNo);
+			snsMapper.deleteReplyBySnsNo(selectNo);
+			Userlist(model, page);
+			return "adminSNS";
 		}
 }

@@ -2,6 +2,9 @@ package com.scmaster.mapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 
 import com.scmaster.vo.BS_Baby;
 import com.scmaster.vo.BS_User;
@@ -28,5 +31,9 @@ public interface MainMapper {
 	Object selectImg(int userNo);
 	String selectNick(int userNo);
 	String selectBabyName(int babyNo);
+	
+	public List<BS_User> selectUserAdmin(RowBounds rb, BS_User search); //회원 정보 가져오기
+	public int getTotal_user(BS_User search); //회원 총원 가져오기
+	public int deleteUserAdmin(int userNo); //관리자 유저 삭제
 	
 }

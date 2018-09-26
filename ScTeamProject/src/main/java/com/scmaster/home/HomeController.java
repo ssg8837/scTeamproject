@@ -3,10 +3,12 @@ package com.scmaster.home;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -19,11 +21,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.scmaster.mapper.MainMapper;
-import com.scmaster.vo.BS_Baby;
+import com.scmaster.util.PageNavigator;
 import com.scmaster.vo.BS_User;
 
 //메인화면, 로그인, 회원가입, 회원정보수정(account) 관련 기능 이쪽 컨트롤러에 있습니다.
@@ -33,7 +36,8 @@ public class HomeController
 {
 	@Autowired SqlSession sqlSession;
 	@Autowired HttpSession httpSession;
-	
+	final int countPerPage = 10;
+	final int pagePerGroup = 10;
 	private static final String UPLOADPATH = "C://FileRepo//profilePic"; //프로필사진 저장용
 	
 	//메인화면
@@ -275,5 +279,48 @@ public class HomeController
 		return result;
 	}
 
+	//관리자 페이지 보기
+		@RequestMapping(value = "/admin", method = RequestMethod.GET)
+		public String admin() 
+		{	
+			return "admin";
+		}
+		//관리자 회원 목록 보기
+		@RequestMapping(value = "/admin_member", method = RequestMethod.GET)
+		public String admin_member(Model model, BS_User search, @RequestParam(value="page", defaultValue="1") int page) 
+		{
+			Userlist(model, page, search);
+			
+			return "adminMember";
+		}
+		//관리자 회원 삭제
+		@RequestMapping(value = "/admin_memberDel", method = RequestMethod.GET)
+		public String admin_memberDel(int userNo, Model model, BS_User search, @RequestParam(value="page", defaultValue="1") int page) 
+		{
+			MainMapper mapper = sqlSession.getMapper(MainMapper.class);
+			mapper.deleteUserAdmin(userNo);
+			Userlist(model, page, search);
+			
+			return "adminMember";
+		}
+		//관리자 회원 검색 리스트
+		public void Userlist(Model model, int page, BS_User search) {
 
+			  MainMapper mapper = sqlSession.getMapper(MainMapper.class);
+		      int total = mapper.getTotal_user(search);
+		      PageNavigator nav = new PageNavigator(countPerPage, pagePerGroup, page, total);
+		      RowBounds rb = new RowBounds(nav.getStartRecord(), nav.getCountPerPage());
+		      
+		      List<BS_User> User = new ArrayList<BS_User>();
+
+		      User = mapper.selectUserAdmin(rb, search);
+		      if (search.getUserNo() == 0) {
+		    	  model.addAttribute("search", "");
+			 } else model.addAttribute("search", search.getUserNo());
+		      
+		      if (User != null) {
+		         model.addAttribute("user", User);
+		         model.addAttribute("nav", nav);
+		      }
+		}
 }

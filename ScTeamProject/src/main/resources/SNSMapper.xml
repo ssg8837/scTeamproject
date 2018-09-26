@@ -153,5 +153,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertSingo" parameterType="Singo">
 		INSERT INTO SINGO(SNSNO, USERNO) VALUES (#{SNSNo}, #{userNo})
 	</insert>
+	<!-- 신고된 SNS 신고 횟수 + SNSNO + 신고된 USERNO + SNS작성일 가져오기  -->
+	<select id="getTotal_SNSAdminSingo" resultType="AdminSNS">
+		select i.snsno, count(i.snsno) as count, 
+		s.userno, writedate 
+		from singo i, sns s 
+		GROUP BY  i.snsno, s.snsno, s.userno, writedate having i.snsno=s.snsno 
+		ORDER BY  count(snsno) desc, snsno
+	</select>
+	<!-- 신고된 SNS 총 갯수 가져오기 -->
+	<select id="getTotal_SNSAdmin" resultType="int">
+		select sum(count(distinct snsno)) from singo GROUP BY  snsno
+	</select>
 	
+	<!-- 신고한 SNS의 USERNO 가져오기 -->
+	<select id="selectSingoUserNo" resultType="Singo" parameterType="int">
+		select * from singo where snsno=#{SNSNo}
+	</select>
 </mapper>

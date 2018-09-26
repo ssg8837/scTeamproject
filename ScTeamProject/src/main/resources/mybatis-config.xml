@@ -27,6 +27,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="Friend" type="com.scmaster.vo.Friend"></typeAlias>
 		<typeAlias alias="Likely" type="com.scmaster.vo.Likely"></typeAlias>
 		<typeAlias alias="Singo" type="com.scmaster.vo.Singo"></typeAlias>
+		<typeAlias alias="AdminSNS" type="com.scmaster.vo.AdminSNS"></typeAlias>
+		<typeAlias alias="Flea" type="com.scmaster.vo.Flea"></typeAlias>
+		<typeAlias alias="FleaReply" type="com.scmaster.vo.FleaReply"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
@@ -40,5 +43,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="DiseaseMapper.xml" />
 		<mapper resource="BabyBookMapper.xml" />
 		<mapper resource="SNSMapper.xml" />
+		<mapper resource="fleaMapper/fleaMapper.xml" />
+		<mapper resource="fleaMapper/fleaReplyMapper.xml" />
 	</mappers>
 </configuration>

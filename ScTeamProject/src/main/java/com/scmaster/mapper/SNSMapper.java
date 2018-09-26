@@ -2,7 +2,11 @@ package com.scmaster.mapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
+
+import com.scmaster.vo.AdminSNS;
 import com.scmaster.vo.Friend;
 import com.scmaster.vo.Likely;
 import com.scmaster.vo.SNS;
@@ -36,4 +40,7 @@ public interface SNSMapper {
 	void updateReply(SNS_Reply reply);
 	int checkSingo(Singo singo);
 	void insertSingo(Singo singo);
+	public List<AdminSNS> getTotal_SNSAdminSingo(RowBounds rb); // 신고된 SNS 신고 횟수 + SNSNO + 신고된 USERNO + SNS작성일 가져오기
+	public int getTotal_SNSAdmin(); //신고된 SNS 총 갯수 가져오기
+	public List<Singo> selectSingoUserNo(int SNSNo); //신고한 SNS의 USERNO 가져오기
 }

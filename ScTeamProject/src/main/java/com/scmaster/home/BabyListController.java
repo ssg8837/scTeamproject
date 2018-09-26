@@ -41,8 +41,8 @@ public class BabyListController {
 			model.addAttribute("babyList", babyList);
 				
 			//프로필사진 불러오기(사이드바)
-			BS_User user=mapper.myAccount((Integer)loginNo);
-			model.addAttribute("user",user);
+			//BS_User user=mapper.myAccount((Integer)loginNo);
+			model.addAttribute("userNo",(Integer)loginNo);
 		}
 		
 		return "babyList";

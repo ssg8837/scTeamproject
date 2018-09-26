@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   				rownum num, b.* 
 			FROM 
 				(SELECT 
-					f.userNo, bs.USERID, bs.USERNICK, bs.USERPHONE, bs.USEREMAIL, bs.userAddr, f.fleaNum, f.fleaTitle, f.fleaText,  to_char(f.FLEAREGDATE,'yyyy-mm-dd') as REGDATE, f.FLEASAVEDFILE
+					f.userNo, bs.USERID, bs.USERNICK, bs.USERPHONE, bs.USEREMAIL, bs.userAddr, f.fleaNum, f.fleaTitle, f.fleaText,  to_char(f.FLEAREGDATE,'yyyy-mm-dd') as REGDATE, f.hitcount, f.FLEASAVEDFILE
 				FROM 
 					Flea f,BS_USER bs  
 				WHERE
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   	<select id="selectOne" parameterType="int" resultType="Flea">
 		SELECT 
-			f.userNo, bs.USERID, bs.USERNICK, bs.userAddr, bs.USERPHONE, bs.USEREMAIL, f.fleaNum, f.fleaTitle, f.fleaText,  to_char(f.FLEAREGDATE,'yyyy-mm-dd') as REGDATE, f.FLEASAVEDFILE
+			f.userNo, bs.USERID, bs.USERNICK, bs.userAddr, bs.USERPHONE, bs.USEREMAIL, f.fleaNum, f.fleaTitle, f.fleaText,  to_char(f.FLEAREGDATE,'yyyy-mm-dd') as REGDATE,f.hitcount, f.FLEASAVEDFILE
 		FROM 
 			Flea f,BS_USER bs  
 		WHERE
@@ -49,21 +49,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	</select>
   	
   	<insert id="boardWrite" parameterType="Flea">
+		<selectKey resultType="int" keyProperty="fleaNum" order="AFTER" >
+        	SELECT 
+        		fleaseq.currval as fleaNum 
+        	FROM FLEA 
+        	WHERE ROWNUM = 1
+		</selectKey>        
 		INSERT INTO 
 			FLEA
 				(userNo,fleaNum,fleaTitle,fleaText,flearegdate,fleaSavedFile)
 		VALUES
-			(#{userNo},fleaSeq.nextVal,#{fleaTitle},#{fleaText},sysdate,#{fleaSavedFile})
+			(#{userNo},fleaseq.nextval,#{fleaTitle},#{fleaText},sysdate,#{fleaSavedFile})
   	</insert>
-	
-	<select id="getNewBoardNum" parameterType="int" resultType="int">
-		SELECT 
-			FLEASEQ.CURRVAL 
-		FROM 
-			FLEA 
-		WHERE 
-			USERNO=#{userNo}			
-	</select>
 	
   	<update id="updateHits" parameterType="int"> 
  		UPDATE 
@@ -77,6 +74,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	<update id="updateBoard" parameterType="Flea"> 
   		 UPDATE 
   			FLEA
+  		SET 
+  			userNo=#{userNo}, fleaTitle=#{fleaTitle}, fleaText=#{fleaText},fleaSavedFile=#{fleaSavedFile}
+  		WHERE 
+  			fleaNum=#{fleaNum}
   	</update>
 
   	<delete id="deleteBoard" parameterType="int"> 
@@ -84,5 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		 	FLEA
   		 WHERE
   		 	FLEANUM=#{fleaNum}
+  		 and
+  		 	USERNO=#{loginNo}
   	</delete>
 </mapper>

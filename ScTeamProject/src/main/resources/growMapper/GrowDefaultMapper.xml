@@ -33,4 +33,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from grow_default
 	where gender='M' and age >=24
 	</select>	
+	<!-- 관리자 표준성장도표 입력 -->
+	<insert id="insertDefaultValue" parameterType="Grow_Default">
+	INSERT INTO GROW_DEFAULT (GENDER, AGE, HEIGHT, WEIGHT_A, HEAD
+		<if test="#{bmi} != null">
+	    	, BMI) VALUES (#{gender}, #{age}, #{height}, #{weight_a}, #{head}, #{bmi})
+	  	</if>
+	  	<if test="#{bmi} == null">
+	    	) VALUES (#{gender}, #{age}, #{height}, #{weight_a}, #{head})
+	  	</if>
+	</insert>
+	<!-- 관리자 표준성장도표 삭제 -->
+	<delete id="deleteDefaultValue" parameterType="Grow_Default">
+	DELETE from GROW_DEFAULT where gender=#{gender} and age=#{age}
+	</delete>
 </mapper>

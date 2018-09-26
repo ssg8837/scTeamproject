@@ -143,8 +143,8 @@
 									<span class="image">
 										<img src="./resources/assets/images/pic01.jpg" alt="" />
 									</span>
-									<header class="major">
-										<h3><a href="weather_Test" class="link">기상확인</a></h3>
+									<header class="major"><!-- weather_Test -->
+										<h3><a href="admin" class="link">기상확인</a></h3>
 										<p>아이를 데리고 외출해도 괜찮은 날씨인지 걱정되시나요?<br/>이곳에서 오늘의 날씨정보를 지역별로 확인하실 수 있습니다.</p>
 									</header>
 								</article>

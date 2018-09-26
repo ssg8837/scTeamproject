@@ -63,9 +63,9 @@ public class GrowController {
 			List<Grow_Default> maleBMI=mapperGD.showDefaultValueMaleBMI();
 			
 			//사용자 프로필 사진 가져오기
-			BS_User user=mapperM.myAccount((Integer)loginNo);
+			//BS_User user=mapperM.myAccount((Integer)loginNo);
 			
-			model.addAttribute("user",user);
+			model.addAttribute("userNo",(Integer)loginNo);
 			model.addAttribute("female", female);	
 			model.addAttribute("male", male);
 			model.addAttribute("femaleBMI", femaleBMI);	
@@ -266,4 +266,37 @@ public class GrowController {
 		}
 	}
 	
+	@RequestMapping(value = "/admin_babygrow", method = RequestMethod.GET)
+	public String admin_babygrow() 
+	{
+		return "adminBabygrow";
+	}
+	
+	@RequestMapping(value = "/babygrow_input", method = {RequestMethod.GET , RequestMethod.POST}, produces = "text/html;charset=utf8")
+	@ResponseBody public String babygrow_input(Grow_Default grow) 
+	{
+		//표준성장도표 입력
+		GrowDefaultMapper mapperG = session.getMapper(GrowDefaultMapper.class);
+		int result = mapperG.insertDefaultValue(grow);
+		
+		if (result != 1) {
+			return "입력실패";
+		}
+		
+		return "입력성공";
+	}
+	
+	@RequestMapping(value = "/babygrow_del", method = {RequestMethod.GET , RequestMethod.POST}, produces = "text/html;charset=utf8")
+	@ResponseBody public String babygrow_del(Grow_Default grow) 
+	{
+		//표준성장도표 삭제
+		GrowDefaultMapper mapperG = session.getMapper(GrowDefaultMapper.class);
+		int result = mapperG.deleteDefaultValue(grow);
+		
+		if (result != 1) {
+			return "삭제실패";
+		}
+		
+		return "삭제성공";
+	}
 }

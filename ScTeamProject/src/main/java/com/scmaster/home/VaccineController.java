@@ -85,7 +85,8 @@ public class VaccineController {
 				vaccineList3.get(i).setVaccineDate("매년");
 			}
 		}
-		
+		Object loginNo= httpSession.getAttribute("loginNo");
+		model.addAttribute("userNo", (Integer)loginNo);
 		model.addAttribute("babyList", babyList);
 		model.addAttribute("diseaseList", diseaseList);
 		model.addAttribute("vaccineList", vaccineList3);
@@ -137,4 +138,37 @@ public class VaccineController {
 		return "ok";
 	}
 	
+	@RequestMapping(value = "/admin_vaccine", method = RequestMethod.GET)
+	public String admin_vaccine(Model model) 
+	{
+		return "adminVaccine";
+	}
+	
+	@RequestMapping(value = "/adminvaccine_input", method = {RequestMethod.GET , RequestMethod.POST}, produces = "text/html;charset=utf8")
+	@ResponseBody public String adminvaccine_input(Disease disease) 
+	{
+		//질병 입력
+		DiseaseMapper mapper = sqlSession.getMapper(DiseaseMapper.class);
+		int result = mapper.insertDisease(disease);
+		
+		if (result != 1) {
+			return "입력실패";
+		}
+		
+		return "입력성공";
+	}
+	
+	@RequestMapping(value = "/adminvaccine_del", method = {RequestMethod.GET , RequestMethod.POST}, produces = "text/html;charset=utf8")
+	@ResponseBody public String adminvaccine_del(int diseasenum) 
+	{
+		//질병 삭제
+		DiseaseMapper mapper = sqlSession.getMapper(DiseaseMapper.class);
+		int result = mapper.deleteDisease(diseasenum);
+		
+		if (result != 1) {
+			return "삭제실패";
+		}
+		
+		return "삭제성공";
+	}
 }

@@ -10,4 +10,7 @@ public interface GrowDefaultMapper {
 	public List<Grow_Default> showDefaultValueMale();		//표준값 -남아 
 	public List<Grow_Default> showDefaultValueFemaleBMI();	//표준값 -여아 (BMI) 
 	public List<Grow_Default> showDefaultValueMaleBMI();	//표준값 -남아  (BMI)
+	public int insertDefaultValue(Grow_Default grow); //표준값 입력
+	public int deleteDefaultValue(Grow_Default grow); //표준값 삭제
+
 }
