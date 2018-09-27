@@ -34,10 +34,6 @@ public class AlarmController {
 	public String alarm_OpenCalendar(Model model) 
 	{
 		//프로필사진 불러오기
-		Object loginNo=httpSession.getAttribute("loginNo");
-		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
-		//BS_User user=mapperM.myAccount((Integer)loginNo);
-		//model.addAttribute("userNo",(Integer)loginNo);
 		
 		return "calendar";
 	}
@@ -61,10 +57,6 @@ public class AlarmController {
 		model.addAttribute("noList", noList);
 		model.addAttribute("nameList", nameList);
 		
-		//프로필사진 불러오기
-		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
-		BS_User user=mapperM.myAccount((Integer)loginNo);
-		model.addAttribute("user",user);
 		
 		return "newAlarm";
 	}
@@ -125,10 +117,6 @@ public class AlarmController {
 		Object loginNo=httpSession.getAttribute("loginNo");
 		
 		model.addAttribute("babyName", mainMapper.selectBabyName(alarm.getBabyNo()));
-		//프로필사진 불러오기
-		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
-		BS_User user=mapperM.myAccount((Integer)loginNo);
-		model.addAttribute("user",user);
 				
 		return "modifyAlarm";
 	}

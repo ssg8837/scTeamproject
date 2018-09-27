@@ -62,10 +62,7 @@ public class GrowController {
 			List<Grow_Default> femaleBMI=mapperGD.showDefaultValueFemaleBMI();
 			List<Grow_Default> maleBMI=mapperGD.showDefaultValueMaleBMI();
 			
-			//사용자 프로필 사진 가져오기
-			//BS_User user=mapperM.myAccount((Integer)loginNo);
 			
-			model.addAttribute("userNo",(Integer)loginNo);
 			model.addAttribute("female", female);	
 			model.addAttribute("male", male);
 			model.addAttribute("femaleBMI", femaleBMI);	

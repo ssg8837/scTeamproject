@@ -77,9 +77,12 @@ function login()
 				success:function(data)
 				{
 					if(data=="로그인 완료되었습니다."){
-	                	$(location).attr('href', './');
+	                		$(location).attr('href', './');
+	                	
 					}else if(data=="로그인에 실패하였습니다. 아이디나 비밀번호를 확인해주세요."){
 						alert(data);
+					}else if(data=="manager"){
+						$(location).attr('href', './admin');
 					}
 					
 				}		

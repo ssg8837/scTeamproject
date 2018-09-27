@@ -40,9 +40,6 @@ public class BabyListController {
 			ArrayList<BS_Baby> babyList= mapper.selectBabyList((Integer)loginNo);
 			model.addAttribute("babyList", babyList);
 				
-			//프로필사진 불러오기(사이드바)
-			//BS_User user=mapper.myAccount((Integer)loginNo);
-			model.addAttribute("userNo",(Integer)loginNo);
 		}
 		
 		return "babyList";
@@ -96,8 +93,6 @@ public class BabyListController {
 				model.addAttribute("sleep", sleep);
 				
 				//프로필사진 불러오기(사이드바)
-				BS_User user=mapper.myAccount((Integer)loginNo);
-				model.addAttribute("user",user);
 			}
 		
 		return "babyLifePattern";

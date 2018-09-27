@@ -51,11 +51,6 @@ public class BabyBookController {
 			
 		model.addAttribute("list", list);
 		
-		//프로필사진 불러오기
-		Object loginNo=httpSession.getAttribute("loginNo");
-		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
-		BS_User user=mapperM.myAccount((Integer)loginNo);
-		model.addAttribute("user",user);
 		
 		return "babyBook";
 	}

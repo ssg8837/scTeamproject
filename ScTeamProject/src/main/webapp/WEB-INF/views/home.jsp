@@ -71,7 +71,7 @@
 								<h1>育児は意気地</h1>
 							</header>
 							<div class="content">
-								<p>영유아 자녀를 둔 부모님들의<br />
+								<p>영유아 자녀를 둔 부모님들의<br/>
 								육아를 도와주는 웹페이지입니다.</p>
 								<ul class="actions">
 									<li><a href="#one" class="button next scrolly">Get Started</a></li>
@@ -90,8 +90,8 @@
 										<img src="./resources/assets/images/pic01.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="openNewBaby" class="link">아이정보</a></h3>
-										<p>먼저 아이를 등록해주세요.<br/>이곳에서 7일간의 아이의 생활기록을<br>그래프로 확인하실 수 있습니다.</p>
+										<h3><a href="openAccountEdit" class="link">회원정보</a></h3>
+										<p>회원정보수정이 필요하신가요?<br/>로그인 후 이곳에서 프로필사진을 비롯한<br/>회원정보를 수정하실 수 있습니다.</p>
 									</header>
 								</article>
 								<article>
@@ -99,13 +99,22 @@
 										<img src="./resources/assets/images/pic02.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="gotoGrow" class="link">성장기록</a></h3>
-										<p>아이의 성장과정을 기록해주세요.<br/>이곳에서 내 아이와 또래 아이들의 성장을<br>표와 그래프로 확인하실 수 있습니다.</p>
+										<h3><a href="openNewBaby" class="link">아이정보</a></h3>
+										<p>먼저 아이를 등록해주세요.<br/>이곳에서 7일간의 아이의 생활기록을 그래프로 확인하실 수 있습니다.</p>
 									</header>
 								</article>
 								<article>
 									<span class="image">
 										<img src="./resources/assets/images/pic03.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="gotoGrow" class="link">성장기록</a></h3>
+										<p>아이의 성장과정을 기록해주세요.<br/>이곳에서 내 아이와 또래 아이들의 성장을 표와 그래프로 확인하실 수 있습니다.</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="./resources/assets/images/pic04.jpg" alt="" />
 									</span>
 									<header class="major">
 										<h3><a href="alarm_OpenCalendar" class="link">생활기록</a></h3>
@@ -114,43 +123,7 @@
 								</article>
 								<article>
 									<span class="image">
-										<img src="./resources/assets/images/pic04.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="vaccineForm" class="link">질병 및 예방접종 조회</a></h3>
-										<p>예방접종 정보를 확인하세요.<br/>아이가 이미 맞은 예방접종은 따로 표시하실 수 있습니다.</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="./resources/assets/images/pic05.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="vaccineFormForHospital" class="link">국가예방접종 의료기관</a></h3>
-										<p>예방접종이 가능한 병원을 찾아보세요.<br/>이곳에서 지역별로 예방접종 가능 병원을 확인하실 수 있습니다.</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="./resources/assets/images/pic06.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="hospital_Test" class="link">병원찾기</a></h3>
-										<p>집 근처 병원을 찾고 계시나요?<br/>이곳에서 근처에 있는 병원 정보를 확인하실 수 있습니다.</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="./resources/assets/images/pic01.jpg" alt="" />
-									</span>
-									<header class="major"><!-- weather_Test -->
-										<h3><a href="admin" class="link">기상확인</a></h3>
-										<p>아이를 데리고 외출해도 괜찮은 날씨인지 걱정되시나요?<br/>이곳에서 오늘의 날씨정보를 지역별로 확인하실 수 있습니다.</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="./resources/assets/images/pic02.jpg" alt="" />
+										<img src="./resources/assets/images/pic03.jpg" alt="" />
 									</span>
 									<header class="major">
 										<h3><a href="babyBook" class="link">육아일기</a></h3>
@@ -159,20 +132,47 @@
 								</article>
 								<article>
 									<span class="image">
-										<img src="./resources/assets/images/pic03.jpg" alt="" />
+										<img src="./resources/assets/images/pic04.jpg" alt="" />
 									</span>
 									<header class="major">
 										<h3><a href="openSNS" class="link">SNS</a></h3>
-										<p>육아 정보가 필요하신가요?<br/>SNS를 통해 다른 부모님들과 교류하세요!</p>
+										<p>육아 정보가 필요하신가요? SNS를 통해 다른 부모님들과 교류하세요!</p>
 									</header>
 								</article>
 								<article>
 									<span class="image">
-										<img src="./resources/assets/images/pic04.jpg" alt="" />
+										<img src="./resources/assets/images/pic05.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="flea_list" class="link">중고거래게시판</a></h3>
-										<p>필요한 육아물품이 있으신가요?<br/>다른 부모님들로부터 구매하시는 건 어떠신가요?</p>
+										<h3><a href="vaccineForm" class="link">질병 및 예방접종 조회</a></h3>
+										<p>예방접종 정보를 확인하세요.<br/>아이가 이미 맞은 예방접종은 따로 표시하실 수 있습니다.</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="./resources/assets/images/pic06.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="vaccineFormForHospital" class="link">국가예방접종 의료기관</a></h3>
+										<p>예방접종이 가능한 병원을 찾아보세요.<br/>이곳에서 지역별 예방접종 가능 병원을 확인하실 수 있습니다.</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="./resources/assets/images/pic01.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="hospital_Test" class="link">병원찾기</a></h3>
+										<p>집 근처 병원을 찾고 계시나요?<br/>이곳에서 근처에 있는 병원 정보를 확인하실 수 있습니다.</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="./resources/assets/images/pic02.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="weather_Test" class="link">기상확인</a></h3>
+										<p>아이를 데리고 외출해도 괜찮은 날씨인지 걱정되시나요?<br/>이곳에서 오늘의 날씨정보를 지역별로 확인하실 수 있습니다.</p>
 									</header>
 								</article>
 							</section>
@@ -182,13 +182,6 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<div class="inner" style="text-align: center;">
-							<ul class="icons">
-								<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							</ul>
 							<ul class="copyright">
 								<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
 							</ul>

@@ -43,14 +43,6 @@ public class HomeController
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		Object loginNo=httpSession.getAttribute("loginNo");
-		
-		if(loginNo != null ) {
-			MainMapper mapper=sqlSession.getMapper(MainMapper.class);
-			
-			BS_User user=mapper.myAccount((Integer)loginNo);
-			model.addAttribute("user",user);
-		}
 		
 		return "home";
 	}
@@ -103,10 +95,14 @@ public class HomeController
 		{
 			httpSession.setAttribute("loginId",user.getUserId());
 			httpSession.setAttribute("loginNo",user.getUserNo());
-			httpSession.setAttribute("loginNick",user.getUserNick());
+			httpSession.setAttribute("loginNick",user.getUserNick());//loginType
+			httpSession.setAttribute("loginType",user.getUserType());
 			if(user.getUserOriginalFile()!=null)
 			{
 				httpSession.setAttribute("loginImg","No Image");
+			}
+			if(user.getUserType().equals("m")){
+				return "manager";
 			}
 			return "로그인 완료되었습니다.";
 		}

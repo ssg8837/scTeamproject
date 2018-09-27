@@ -22,7 +22,38 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.scmaster.home" />
+	<context:component-scan base-package="com.scmaster.interceptor" />
 	
+	<beans:bean id="LoginCheckInterceptor" class="com.scmaster.interceptor.LoginCheckInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/vaccineForm"/>
+			<mapping path="/vaccineFormForHospital"/>
+			<mapping path="/openNewBaby"/>
+			<mapping path="/gotoGrow"/>
+			<mapping path="/alarm_OpenCalendar"/>
+			<mapping path="/babyBook"/>
+			<mapping path="/openSNS"/>
+			<mapping path="/accountEdit"/>
+			
+			<beans:ref bean="LoginCheckInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	
+	<beans:bean id="ManagerCheckInterceptor" class="com.scmaster.interceptor.ManagerCheckInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin"/>
+			<mapping path="/admin_member"/>
+			<mapping path="/admin_hospital"/>
+			<mapping path="/admin_sns"/>
+			<mapping path="/admin_vaccine"/>
+			<mapping path="/admin_babygrow"/>
+			
+			<beans:ref bean="ManagerCheckInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 	
 </beans:beans>
