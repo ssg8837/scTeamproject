@@ -82,6 +82,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{babyBlood})
 	</insert>
 	
+	<!-- 아이삭제 -->
+	<delete id="deleteBaby" parameterType="Integer">
+	   	DELETE FROM BS_BABY
+	   	WHERE BABYNO = #{babyNo}
+   </delete>
+	
+
+	
 	<select id='countUser' parameterType="String" resultType="Integer">
 		SELECT COUNT(USERID)
 		FROM BS_USER

@@ -42,6 +42,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="growMapper/GrowDefaultMapper.xml" />
 		<mapper resource="DiseaseMapper.xml" />
 		<mapper resource="BabyBookMapper.xml" />
+		<mapper resource="BabyListMapper.xml" />
 		<mapper resource="SNSMapper.xml" />
 		<mapper resource="fleaMapper/fleaMapper.xml" />
 		<mapper resource="fleaMapper/fleaReplyMapper.xml" />
