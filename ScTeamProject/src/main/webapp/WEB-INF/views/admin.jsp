@@ -96,12 +96,6 @@
 	          <li class="sub-menu">
 	            <a href="#">
 	              <i class="fa fa-edit fa_left"></i>
-	              <span>게시판</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="#">
-	              <i class="fa fa-edit fa_left"></i>
 	              <span>병원 데이터</span>
 	              </a>
 	          </li>

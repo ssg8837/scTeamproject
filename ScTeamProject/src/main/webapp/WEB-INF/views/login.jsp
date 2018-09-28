@@ -26,6 +26,7 @@
 			<div class="loginImgDiv hidden-md-down">
 			  <div class="loginImgContainer">
 			    <div id="slides">
+			      <img src="./resources/image/login/main.png" />
 			      <img src="./resources/image/login/babyData.png" />
 			      <img src="./resources/image/login/babyData02.png" />
 			      <img src="./resources/image/login/babyData03.png" />

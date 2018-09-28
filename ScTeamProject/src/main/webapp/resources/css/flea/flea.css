@@ -1,0 +1,146 @@
+@charset "UTF-8";
+hr{
+	margin-top:5px;
+	margin-bottom:3px;
+}
+
+.funcBtn{
+	margin: 0 auto;
+	width: 80%
+}
+
+#new{
+	text-align: left;	
+}
+
+.flea_home{
+	text-align: right;
+	}
+	
+/* 게시판 쓰기  */
+.writeFlea{
+	margin: 0 auto;
+	width: 80%;
+}
+
+.writeFlea label{
+	display :inline-block;
+	background-color: gray;
+	color: white;
+	width: 10%;
+	margin: 0 auto;
+}
+
+.writeFlea input[type="text"]{
+	margin: 0 auto;
+	width: 90%;
+}
+
+#fleaText{
+	width:100%;
+	height:300px; 
+	resize: none;
+}
+
+.fleaSavedFile > #fleaSavedFile{
+	display: inline;
+} 
+/* 테이블 컬럼 */
+.board {
+	margin: 0 auto;
+	display: table;
+	width: 80%;
+	text-align: center;
+}
+.board span{
+	display: inline-block;
+	text-align: center;
+}
+.board > .boardlabel {
+	display:table-header-group; 
+	vertical-align:middle;
+	text-align: center;
+	background-color: gray;
+	color: white;
+	height:30px;
+}
+
+.board > .boardlist{
+	display: table-row-group;
+	text-align: center;
+}
+/* 테이블 셀*/
+.boardnum{
+	width:10%;
+}
+
+.usernick{
+	width:15%;
+}
+
+.boardtitle{
+	width:45%
+}
+
+.boardhit{
+	width: 10%;
+}
+
+.boardreg{
+	width: 10%
+}
+
+.content{
+	margin: 0 auto;
+	display: table;
+	width: 80%;
+}
+
+.btn_filed{
+	margin: 0 auto;
+	width: 80%;
+	text-align: center;
+}
+/*
+리플 필드
+  */
+#replyText{
+	width: 100%;
+	height: auto;
+	resize:none;
+}
+.reply_feild{
+	text-align: center;
+}
+.reply_feild span{
+	display: inline-block;
+}
+.userNick{
+	width: 20%;
+}
+.textfeild{
+	width: 60%;
+	border-left: solid 1px;
+	border-right: solid 1px;
+}
+.replyReg{
+	width: 18%;
+}
+#reply_delete_Btn{
+	text-align:right;
+	border: 1px black solid;
+}
+#reply_delete_Btn:hover {
+	cursor:pointer;
+}
+.replyText #updateReply{
+	position: inherit;
+}
+#updateReply{
+	width:30px;
+	text-align:center;
+	border: 1px black solid;
+}
+#updateReply:hover {
+	cursor:pointer;
+}

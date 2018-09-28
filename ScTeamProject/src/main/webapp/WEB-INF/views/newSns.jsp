@@ -101,6 +101,23 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
+	            <a href="babyBook">
+	              <i class="fa fa-book fa_left"></i>
+	              <span>육아일기</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a class="active" href="openSNS">
+	              <i class="fa fa-users fa_left"></i>
+	              <span>SNS</span>
+	              </a>
+	              <ul class="sub">
+		              <li class="active">
+						<a href="javascript:window.location.href=window.location.href">새 글 작성</a>
+		              </li>
+	              </ul>
+	          </li>
+	          <li class="sub-menu">
 	            <a href="">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
@@ -120,29 +137,6 @@
 	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
-	              </a>
-	          </li>
-	           <li class="sub-menu">
-	            <a href="babyBook">
-	              <i class="fa fa-book fa_left"></i>
-	              <span>다이어리</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a class="active" href="openSNS">
-	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
-	              </a>
-	              <ul class="sub">
-		              <li class="active">
-						<a href="javascript:window.location.href=window.location.href">새 글 작성</a>
-		              </li>
-	              </ul>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="babyBookForm">
-	              <i class="fa fa-edit fa_left"></i>
-	              <span>게시판</span>
 	              </a>
 	          </li>
           </ul>

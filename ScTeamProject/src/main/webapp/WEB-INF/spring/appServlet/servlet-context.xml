@@ -34,6 +34,7 @@
 			<mapping path="/alarm_OpenCalendar"/>
 			<mapping path="/babyBook"/>
 			<mapping path="/openSNS"/>
+			<mapping path="/accountEdit"/>
 			
 			<beans:ref bean="LoginCheckInterceptor"/>
 		</interceptor>

@@ -1,9 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 	<head>
-		<title>생활기록</title>
+		<title>육아서포트페이지</title>
 		<!-- 부트스트랩 -->
 	    <link href="./resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	    <link href="./resources/css/bootstrap/bootstrap.theme.min.css" rel="stylesheet">
@@ -12,16 +12,19 @@
 		<link href="./resources/css/bootstrap/style.css" rel="stylesheet">
 		<link href="./resources/css/bootstrap/style-responsive.css" rel="stylesheet">
 		<link href="./resources/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-	    <link href="./resources/css/bootstrap/bootstrap-datetimepicker.css" rel="stylesheet">
-		
+		<link href="./resources/css/flea/flea.css" rel="stylesheet">
 	</head>
 	<body>
 	<form id='home' action='./' method='get'>
 		</form>
+
 		
         <c:if test='${sessionScope.loginId != null }'>
 		<input type="hidden" id="loginNo" value="${sessionScope.loginNo}">
+
 		</c:if>
+
+	
 	<section id="container">
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
@@ -70,18 +73,10 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit">
-	          		<c:if test='${sessionScope.loginImg != null }'>
-		          	<img src="getUserImage?userNo=${user.userNo}" class="img-circle" width="80" height="80">
-		          	</c:if>
-		          	<c:if test='${sessionScope.loginImg == null }'>
-		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
-		          	</c:if>
-	          	</a></p>
+	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
-	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
-        	<li class="sub-menu">
+	        <li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
 	              <span>아이 정보</span>
@@ -94,32 +89,16 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a class="active" href="alarm_OpenCalendar">
+	            <a href="alarm_OpenCalendar">
 	              <i class="fa fa-calendar fa_left"></i>
 	              <span>생활기록</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="babyBook">
-	              <i class="fa fa-book fa_left"></i>
-	              <span>육아일기</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="openSNS">
-	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="">
+	            <a href="vaccineForm">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
-	            </a>
-	           	<ul class="sub" style="display: block;">
-                    <li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
-                   <li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
-               	</ul>
+	              </a>
 	          </li>
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
@@ -133,6 +112,24 @@
 	              <span>기상확인</span>
 	              </a>
 	          </li>
+	           <li class="sub-menu">
+	            <a href="babyBook">
+	              <i class="fa fa-book fa_left"></i>
+	              <span>다이어리</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="openSNS">
+	              <i class="fa fa-users fa_left"></i>
+	              <span>SNS</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="flea_list">
+	              <i class="fa fa-edit fa_left"></i>
+	              <span>벼룩시장</span>
+	              </a>
+	          </li>
           </ul>
         <!-- sidebar menu end-->
       </div>
@@ -142,54 +139,80 @@
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
-    <section id="main-content">
-      <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 생활 기록 수정</h3>
-        <div class="row mt">
-          <div class="col-lg-12">
-          <form id="alarmform" action='alarm_UpdateAlarm' method='post'>
-			<input type='hidden' name='alarmNo' value='${alarm.alarmNo }'>
-			<div class='input-group col-xs-10'>
-				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
-				
-				<c:forEach var='val' items='${noList }' varStatus='sta'>
-				<c:if test='${val == alarm.babyNo }'>
-					<option value='${val }' selected='selected'> ${nameList[sta.index] } </option>
-				</c:if>
-				<c:if test='${val != alarm.babyNo }'>
-					<option value='${val }'> ${nameList[sta.index] } </option>
-				</c:if>
-				</c:forEach>
-				</select>
+	<section id="main-content">
+		<section class="wrapper site-min-height">
+			<h3><i class="fa fa-angle-right"></i> Flea Market</h3>
+			<div class="row mt">
+				<div class="col-lg-12">
+				<div class="funcBtn">
+					<button id="new">글작성</button>
+					<a class="flea_home" href="flea_list">첫 화면으로</a>
+				</div><br/> <!-- root값 -->
+			<c:if test="${empty boardList}">
+				<div>글이 없습니다.</div>
+			</c:if>
+			
+			<c:if test="${!empty boardList}">
+				<div class="board">
+					<div class="boardlabel" >
+						<span class="boardnum">게시번호</span>
+						<span class="usernick">이름</span>
+						<span class="boardtitle">제목</span>
+						<span class="boardhit">조회수</span>
+						<span class="boardreg">등록일</span>
+					</div>	
+					<hr>
+					<div class="boardlist">
+					<c:forEach var="board" items="${boardList}">
+						<p><a href="flea_read?fleaNum=${board.fleaNum}">
+						<span class="boardnum">${board.fleaNum}</span>
+						<span class="usernick">${board.userId}(${board.userNick})</span>
+						<span class="boardtitle">${board.fleaTitle}</span>
+						<span class="boardhit">${board.hitcount}</span>
+						<span class="boardreg">${board.regdate}</span>
+						</a></p>
+					</c:forEach>
+					</div>
+					<hr>
+					<!--네비게이터  -->
+					<div>
+						<p class="listbtn">
+						<a href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
+						<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
+					
+						<c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}"> 
+							<c:if test="${counter == navi.currentPage}"><b></c:if>
+								<a href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
+							<c:if test="${counter == navi.currentPage}"></b></c:if>
+						</c:forEach>
+						&nbsp;&nbsp;
+						<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
+						<a href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
+											
+						</p>
+					</div>
+					<!--검색버튼  -->
+					<div class="listbtn">
+						<form id="pagingForm" method="get" action="flea_list">
+							<input type="hidden" name="page" id="page" />
+							<input type="text"  name="searchText" value="${searchText}" />
+							<!--value="${searchText}"는 검색하더라도 사용자의 유지하기 위해서 서버에서 검색값을 가지고 있다가 다시 보내준다 -->
+							<input type="button" onclick="searchFormSubmit(1)" value="검색">
+						</form>
+					</div>
+				</div>
+			</c:if>
+				</div>
 			</div>
-			<div class='input-group col-xs-10'>
-				<span class="input-group-addon">할일</span>
-				<input class="form-control " id="alarmTitle" name="alarmTitle"  type="text" value='${alarm.alarmTitle }'>
-			</div>
-			<div class="input-group date form_datetime col-xs-10 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
-			<span class="input-group-addon">일시</span>
-                    	<input class="form-control " type="text" name="alarmTime" value="${alarm.alarmTime }" readonly>
-                    
-					<span class="input-group-addon"><span class="fa fa-calendar"></span></span>	
-			</div>
-          	 <br/>
-			<!-- http://jsonobject.tistory.com/181 -->
-			<button class='btn btn-primary' type='button' onclick="javascript:alarm_check();" style="margin: 0 auto;">알림 수정</button>
-		</form>
-          </div>
-        </div>
-      </section>
-      <!-- /wrapper -->
+		</section>
     </section>
+    <!-- /wrapper -->
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
    
     <!--footer end-->
   </section>
-	
-	   
-	    
 	    <script src="./resources/js/common/jquery.min.js"></script>
 	    <script src="./resources/js/common/bootstrap.min.js"></script>
 		<script src="./resources/js/common/jquery-ui-1.9.2.custom.min.js"></script>
@@ -197,16 +220,9 @@
 		<script class="include" type="text/javascript" src="./resources/js/common/jquery.dcjqaccordion.2.7.js"></script>
 		<script src="./resources/js/common/jquery.scrollTo.min.js"></script>
 		<script src="./resources/js/common/jquery.nicescroll.js" type="text/javascript"></script>
-	    <script src="./resources/js/common/moment.min.js"></script>
 		  <!--common script for all pages-->
 		<script src="./resources/js/common/common-scripts.js"></script>
 		  <!--script for this page-->
-		<script src="./resources/js/util/check_byte.js"></script>
-	    <script src="./resources/js/home/bell.js"></script>
-	    <script src="./resources/js/util/bootstrap-datetimepicker.js"></script>
-	    <script src="./resources/js/util/bootstrap-datetimepicker.ko.js"></script>
-	    <script src="./resources/js/util/datetimepicker.js"></script>
-	    <script src="./resources/js/alarm/alarm_check.js"></script>
-  
+	    <script src="./resources/js/flea/flea.js"></script>
 	</body>
 </html>

@@ -189,7 +189,18 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
-	         
+	         <li class="sub-menu">
+	            <a href="babyBook">
+	              <i class="fa fa-book fa_left"></i>
+	              <span>육아일기</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="openSNS">
+	              <i class="fa fa-users fa_left"></i>
+	              <span>SNS</span>
+	              </a>
+	          </li>
 	          <li class="sub-menu">
 	            <a class="active" href="#">
 	              <i class="fa fa-medkit fa_left"></i>
@@ -200,7 +211,6 @@
              		<li class="active"><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
               	</ul>
 	          </li>
-	          
 	          <li class="sub-menu">
 	            <a href="hospital_Test">
 	              <i class="fa fa-hospital-o fa_left"></i>
@@ -211,24 +221,6 @@
 	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
-	              </a>
-	          </li>
-	           <li class="sub-menu">
-	            <a href="babyBook">
-	              <i class="fa fa-book fa_left"></i>
-	              <span>다이어리</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="openSNS">
-	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="babyBookForm">
-	              <i class="fa fa-edit fa_left"></i>
-	              <span>게시판</span>
 	              </a>
 	          </li>
           </ul>

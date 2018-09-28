@@ -54,8 +54,14 @@
 					
 						result += '<div class="col-lg-4 col-md-4 col-sm-4 mb" onclick="javascript:selectOne('+item.boardnum+','+content+','+regdate+')">';
 		             	result += '<div class="content-panel pn">';
-		             	result += '<div id="blog-bg" style="background-image: url(./getImage?boardnum='+item.boardnum+');"></div>';
-		             	result += '<div class="blog-text"><p>'+item.content+'</p></div>';
+		             	result += '<div id="blog-bg" style="background-image: url(./getImage?boardnum='+item.boardnum+');">';
+						result += '</div>';
+		             	/* 
+		             	result += '<div id="blog-bg">';
+						result += '<img src="./getImage?boardnum='+item.boardnum+'">';
+						result += '</div>'; 
+		             	 */
+						result += '<div class="blog-text"><p>'+item.content+'</p></div>';
 		             	result += '<div class="blog-date">'+item.regdate+'</div></div></div>';
 					});
 					
@@ -71,9 +77,15 @@
 				var result = '<div>';
 					result += '<div id="blog-bg" style="background-image: url(./getImage?boardnum='+boardnum+');">';
 					result += '</div>';
+					/*  
+					result += '<div id="blog-bg">';
+					result += '<img src="./getImage?boardnum='+boardnum+'">';
+					result += '</div>'; 
+					 */
 					result += '<div class="blog-text">';
 					result += '<p>'+content+'</p>';
-					result += '<p>'+regdate+'</p>';
+					result += '<hr>';
+					result += '<p align="right">'+regdate+'</p>';
 					result += '</div>';
 					result += '<input type="button" value="수정" onclick="javascript:updateBabyBook('+boardnum+','+newContent+');">';
 					result += '<input type="button" value="삭제" onclick="javascript:deleteBabyBook('+boardnum+');">';
@@ -230,7 +242,18 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
-	         
+	          <li class="sub-menu">
+	            <a href="babyBook">
+	              <i class="fa fa-book fa_left"></i>
+	              <span>육아일기</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="openSNS">
+	              <i class="fa fa-users fa_left"></i>
+	              <span>SNS</span>
+	              </a>
+	          </li>
 	          <li class="sub-menu">
 	            <a href="#">
 	              <i class="fa fa-medkit fa_left"></i>
@@ -254,24 +277,6 @@
 	              <span>기상확인</span>
 	              </a>
 	          </li>
-	           <li class="sub-menu">
-	            <a href="babyBook">
-	              <i class="fa fa-book fa_left"></i>
-	              <span>다이어리</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="openSNS">
-	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="babyBookForm">
-	              <i class="fa fa-edit fa_left"></i>
-	              <span>게시판</span>
-	              </a>
-	          </li>
           </ul>
         <!-- sidebar menu end-->
       </div>
@@ -284,7 +289,7 @@
       
       <section class="wrapper site-min-height">
         
-        <h3><i class="fa fa-angle-right"></i> 다이어리</h3>
+        <h3><i class="fa fa-angle-right"></i> 육아일기</h3>
         
         <input style="height:33px; float: left;" type="month" id="selectMonth" >
         &nbsp;&nbsp;&nbsp;<span style="font-size: 18px;"> * 날짜를 선택해주세요.</span>
@@ -306,18 +311,26 @@
               
               	
               	<c:if test="${not empty list}">
-              		
+        
               		<c:forEach var="list" items="${list}">
-              			<div class="col-lg-4 col-md-4 col-sm-4 mb" 
-              			onclick="javascript:selectOne(${list.boardnum},'${list.content}','${list.regdate}')">
-                		<div class="content-panel pn">
-                  		<div id="blog-bg" style="background-image: url(./getImage?boardnum=${list.boardnum});">
-                  		</div>
-                  		<div class="blog-text">
-                    	<p>${list.content}</p>
-                  		</div>
-                  		<div class="blog-date">${list.regdate}</div>
-               	 		</div>
+              			<div class="col-lg-4 col-md-4 col-sm-4 mb" onclick="javascript:selectOne(${list.boardnum},'${list.content}','${list.regdate}')">
+	                		<div class="content-panel pn">
+	                  		
+	                  		<div id="blog-bg" style="background-image: url(./getImage?boardnum=${list.boardnum});">
+	                  		</div>
+	                  		
+	                  		<%-- 
+	                  		<div id="blog-bg">
+	              				<img alt="" src="getImage?boardnum=${list.boardnum}">
+	                  		</div>
+	                  		 --%>
+	                  		
+	                  		<div class="blog-text">
+	                    	<p>${list.content}</p>
+	                  		</div>
+	                  		
+	                  		<div class="blog-date">${list.regdate}</div>
+	               	 		</div>
               			</div>
 					 </c:forEach>
               	
@@ -328,7 +341,7 @@
             
             
             <div id="registerLight" class="white_content">
-				<button type="button" style="border: 1px solid black" class="close close_link" data-dismiss="modal" aria-hidden="true"
+				<button type="button" style="border: 1px solid black; margin-bottom: 1em;" class="close close_link" data-dismiss="modal" aria-hidden="true"
 				 onclick = "closeResisterModal()">
 				&times;</button>
 				
@@ -382,6 +395,7 @@
 				 onclick = "document.getElementById('selectOneLight').style.display='none';document.getElementById('selectOneFade').style.display='none'">
 				&times;</button>
 				</br>
+				<hr>
 				<div id="selectOneDiv">
                 	
 				</div>
