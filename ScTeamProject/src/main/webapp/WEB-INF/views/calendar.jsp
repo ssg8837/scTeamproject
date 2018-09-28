@@ -104,7 +104,18 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
-	         
+	          <li class="sub-menu">
+	            <a href="openSNS">
+	              <i class="fa fa-users fa_left"></i>
+	              <span>SNS</span>
+	              </a>
+	          </li>
+	           <li class="sub-menu">
+	            <a href="babyBook">
+	              <i class="fa fa-book fa_left"></i>
+	              <span>다이어리</span>
+	              </a>
+	          </li>
 	          <li class="sub-menu">
 	            <a href="#">
 	              <i class="fa fa-medkit fa_left"></i>
@@ -126,24 +137,6 @@
 	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
-	              </a>
-	          </li>
-	           <li class="sub-menu">
-	            <a href="babyBook">
-	              <i class="fa fa-book fa_left"></i>
-	              <span>다이어리</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="openSNS">
-	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="flea_list">
-	              <i class="fa fa-edit fa_left"></i>
-	              <span>벼룩시장</span>
 	              </a>
 	          </li>
           </ul>
