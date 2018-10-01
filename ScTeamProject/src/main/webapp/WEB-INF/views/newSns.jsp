@@ -221,7 +221,7 @@
                   </div>
                   <div class="form-group ">
                     <label for="permission" class="control-label col-lg-2">전체공개</label>
-	                  <input id="permission" name="permission" type="checkbox" checked="" data-toggle="switch" />
+	                  <input id="permission" name="permission" type="checkbox" checked="checked" data-toggle="switch" />
                 	
                   </div>
                   <div class="form-group">

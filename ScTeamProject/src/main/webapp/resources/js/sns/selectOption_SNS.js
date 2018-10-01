@@ -1,7 +1,7 @@
  function goSubmit(selectNo) 
 {
 	$( "#selectNo", opener.document ).val(selectNo)
-	$( ".selectForm", opener.document ).attr("action", "sns_openUpdate");
+	$( ".selectForm", opener.document ).attr("action", "sns_OpenUpdate");
 
 	$( ".selectForm", opener.document ).submit();
 	self.close();

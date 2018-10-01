@@ -260,7 +260,7 @@ public class SNSController {
 			sns.setUserNick((String)httpSession.getAttribute("loginNick"));
 			snsMapper.insertSNS(sns);
 		}
-		return openSNS( model) ;
+		return "redirect:openSNS";
 	}
 	
 	@RequestMapping(value = "/insertNewReply", method = RequestMethod.POST)
@@ -367,7 +367,7 @@ public class SNSController {
 		SNSMapper snsMapper=sqlSession.getMapper(SNSMapper.class);
 		snsMapper.deleteSns(selectNo);
 		snsMapper.deleteReplyBySnsNo(selectNo);
-		return openSNS(model);
+		return "redirect:openSNS";
 	}
 	
 	@RequestMapping(value = "/updateNewSns", method = RequestMethod.POST)
@@ -390,7 +390,7 @@ public class SNSController {
 			}
 			snsMapper.updateSNS(sns);
 		}
-		return openSNS(model);
+		return "redirect:openSNS";
 	}
 	
 		@RequestMapping(value = "/reply_Delete", method = RequestMethod.POST)
@@ -398,7 +398,7 @@ public class SNSController {
 		{
 			SNSMapper snsMapper=sqlSession.getMapper(SNSMapper.class);
 			snsMapper.deleteReplyByRplyNo(selectNo);
-			return openSNS(model);
+			return "redirect:openSNS";
 		}
 		@RequestMapping(value = "/reply_Update", method = RequestMethod.POST)
 		public String reply_Update(Model model, int selectNo, String content) 
@@ -408,7 +408,7 @@ public class SNSController {
 			reply.setRplyNo(selectNo);
 			reply.setContent(content);
 			snsMapper.updateReply(reply);
-			return openSNS(model);
+			return "redirect:openSNS";
 		}
 		
 		@RequestMapping(value = "/singoSns",method =RequestMethod.POST, produces ="application/text; charset=utf8")

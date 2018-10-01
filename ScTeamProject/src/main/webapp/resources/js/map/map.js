@@ -24,8 +24,8 @@
 		var sidebarOn=true;
 		function sidebar_animation(){
 			  if (sidebarOn) {
-				  sub_menu.style.width="35px";
-				  sub_menu.style.height="35px";
+				  sub_menu.style.width="30px";
+				  sub_menu.style.height="30px";
 			      jQuery('#menu_wrap > ul').hide();
 			      jQuery('#menu_wrap > div').hide();
 			      jQuery('#menu_wrap > form').hide();
@@ -255,6 +255,7 @@
 		
 		// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 		console.log(keyword);
+		
 		geocoder.addressSearch(keyword, function(result, status) {
 			console.log(result);
 			// 정상적으로 검색이 완료됐으면 
@@ -265,7 +266,7 @@
 				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				map.setCenter(coords);
 		            
-				if(hospitalAddr!=null){
+				if(hospital!=null){
 					// 마커가 표시될 위치입니다 
 					var markerPosition  = new daum.maps.LatLng(result[0].y, result[0].x); 
 					// 마커를 생성합니다
@@ -281,6 +282,7 @@
 						message +='<div>'+"전화 번호 : "+hospital.Tel+'</div>'
 						message +='<div>'+"병원 주소 : "+hospital.Addr+'</div>'
 						message +='</div>'
+							
 					
 					var iwContent = message, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 						iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다

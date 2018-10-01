@@ -246,13 +246,13 @@
 				</c:if>
 			<div class="input-group date form_datetime col-xs-10 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
 			<span class="input-group-addon">일시</span>
-                    	<input class="form-control " type="text" name="alarmTime" value="${alarm.alarmTime }" readonly>
+                    	<input class="form-control " type="text" name="alarmTime" id="alarmTime" value="${alarm.alarmTime }" readonly>
                     
 					<span class="input-group-addon"><span class="fa fa-calendar"></span></span>	
 			</div>
 			<c:if test="${alarm.alarmType eq 1 or alarm.alarmType eq 2 or alarm.alarmType eq 3 or alarm.alarmType eq 4 or alarm.alarmType eq 7}">
 			<div class="input-group date form_datetime col-xs-10 data-date-format="yyyy.mm.dd/hh:ii" data-link-field="dtp_input1">
-			<span class="input-group-addon">종료시간</span><input class="form-control " type="text" name="endTime" value="${alarm.endTime }" readonly>
+			<span class="input-group-addon">종료시간</span><input class="form-control " type="text" name="endTime" id="endTime" value="${alarm.endTime }" readonly>
 			<span class="input-group-addon"><span class="fa fa-calendar"></span></span></div>
 			</c:if>
 			<!-- http://jsonobject.tistory.com/181 -->
@@ -261,7 +261,7 @@
 				<input class="form-control " id="alarmTitle" name="alarmTitle" type="text" value="${alarm.alarmTitle }">
 			</div>
           	 <br/>
-			<button class='btn btn-primary' type='button' onclick="javascript:alarm_check();" style="margin: 0 auto;">알림 수정</button>
+			<button class='btn btn-primary' type='submit' style="margin: 0 auto;">알림 수정</button>
 		</form>
           </div>
         </div>

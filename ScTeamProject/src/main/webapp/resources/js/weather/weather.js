@@ -33,10 +33,9 @@
 	    
 		//검색버튼의 이벤트를 감지하여 날씨정보를 얻어오는 이벤트와 함수
 		$(".locationSearch").on('click', function() {
-			var search = $('.search').val();
+			var search = $('.weather_search').val();
 			
 			//주소 입력 받은 것을 위도 경도 변환 function
-			
 			addressSearch(search , changedAddr);
 			function changedAddr(result, status) {
 				if (status === daum.maps.services.Status.OK) {
@@ -44,7 +43,6 @@
 					var lon = result[0].x;
 					
 					coord2Address(lat,lon,returnAddr);
-					 
 					function returnAddr(result, status) {//주소변환 결과값 리턴 함수
 			    			if (status === daum.maps.services.Status.OK) {
 			    				var searchAddr = result[0].address.address_name;
@@ -217,7 +215,7 @@
 					result += "<table class='weathertable' border='0'><tr>";
 					result += "<th class='weathertime' colspan='6'>"  + msg + "</th></tr>";
 					result += "<th class='weatheradd' colspan='6'>"  + data.location + "</th></tr>";
-					result += "<tr><td class='weatherimg' colspan='2'><img src='" + data.weather + "'></td>";
+					result += "<tr><td class='weatherimg' colspan='2'><img id='weather_img' src='" + data.weather + "'></td>";
 					result += "<th class='weathertemp' colspan='2'>"  + data.temperature + "℃<div>temperature</div></th>";
 					result += "<th class='weathercloud' colspan='2'>" + data.cloud + "%<div>cloud</div></th></tr>";
 					result += "<tr><th class='weatherlow' colspan='3'>"  + data.temperature_min + "℃<div>low</div></th>";

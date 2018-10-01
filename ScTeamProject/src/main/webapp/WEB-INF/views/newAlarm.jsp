@@ -15,10 +15,7 @@
 	    <link href="./resources/css/bootstrap/bootstrap-datetimepicker.css" rel="stylesheet">
 		
 	</head>
-	<body>
-	<form id='home' action='./' method='get'>
-		</form>
-		
+	<body>		
         <c:if test='${sessionScope.loginId != null }'>
 		<input type="hidden" id="loginNo" value="${sessionScope.loginNo}">
 		</c:if>
@@ -148,10 +145,10 @@
         <h3><i class="fa fa-angle-right"></i> 생활 기록 입력</h3>
         <div class="row mt">
           <div class="col-lg-12">
-          <form id="alarmform" action='alarm_insertNewAlarm' method='post'>
+          <form id="alarmform">
 			<input type="hidden" value="${sessionScope.loginNo}" id="userNo" name="userNo">
 			<div class='input-group col-xs-10'>
-				<span class="input-group-addon">아기</span><select class="form-control" name=babyNo>
+				<span class="input-group-addon">아기</span><select class="form-control" name="babyNo" id="babyNo">
 				
 				<c:forEach var='val' items='${noList }' varStatus='sta'>
 					<option value='${val }'> ${nameList[sta.index] } </option>
@@ -186,7 +183,7 @@
 			</div>
 			<br/>
 			<!-- http://jsonobject.tistory.com/181 -->
-			<button class='btn btn-primary' type='button' onclick="javascript:alarm_check();" style="margin: 0 auto;">알림 등록</button>
+			<button class='btn btn-primary' type='button' onclick="javascript:alarm_check();" style="margin: 0 auto;">일정 추가</button>
 		</form>
           </div>
         </div>

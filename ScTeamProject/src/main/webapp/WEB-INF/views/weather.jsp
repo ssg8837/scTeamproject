@@ -69,7 +69,7 @@
         *********************************************************************************************************************************************************** -->
     <!--sidebar start-->
     <aside>
-     <div id="sidebar" class="nav-collapse ">
+      <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
@@ -84,7 +84,7 @@
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
-        		<li class="sub-menu">
+        	  <li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
 	              <span>아이 정보</span>
@@ -102,18 +102,7 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
-	          <li class="sub-menu">
-	            <a href="openSNS">
-	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
-	              </a>
-	          </li>
-	           <li class="sub-menu">
-	            <a href="babyBook">
-	              <i class="fa fa-book fa_left"></i>
-	              <span>다이어리</span>
-	              </a>
-	          </li>
+	         
 	          <li class="sub-menu">
 	            <a href="#">
 	              <i class="fa fa-medkit fa_left"></i>
@@ -137,6 +126,18 @@
 	              <span>기상확인</span>
 	              </a>
 	          </li>
+	           <li class="sub-menu">
+	            <a href="babyBook">
+	              <i class="fa fa-book fa_left"></i>
+	              <span>다이어리</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="openSNS">
+	              <i class="fa fa-users fa_left"></i>
+	              <span>SNS</span>
+	              </a>
+	          </li>
           </ul>
         <!-- sidebar menu end-->
       </div>
@@ -152,7 +153,7 @@
         <div class="row mt">
           <div class="col-lg-12">
           	<div class="search" style="padding-right: 15px;">
-          		<input type="text"value="${search}">
+          		<input type="text" class="weather_search" value="${search}">
           		<input type="button" value="주소검색" class="locationSearch">
           	</div><br/>
           	
@@ -191,6 +192,7 @@
 		<script src="./resources/js/util/check_byte.js"></script>
 		<script src="./resources/js/home/login_check.js"></script>
 	    <script src="./resources/js/home/bell.js"></script>
+	    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e2f3241393e98d4d475a38553e4f353&libraries=services,clusterer,drawing"></script>
   
 	</body>
 </html>

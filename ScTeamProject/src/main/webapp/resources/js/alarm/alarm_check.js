@@ -1,21 +1,49 @@
 function alarm_check()
 {
+	var alarmNo = $('#alarmNo').val();
+	var babyNo = $('#babyNo').val();
+	var userNo = $('#userNo').val();
 	var alarmTitle=$('#alarmTitle').val();
+	var alarmType=$('#alarmType').val();
+	var alarmDetail=$('#alarmDetail').val();
+	var alarmAmount = $('#alarmAmount').val();
+	var alarmTime = $('#nowAlarm').val();
+	var endTime =$('#endTime').val();
 	
-	var titleSize=getByteLength(alarmTitle);
-	if(titleSize>100||titleSize<=0)
-	{
-		alert("메모는 한글자 이상 100바이트(한글은 3바이트, 영어는 1바이트) 미만입니다.");
-		var alarmType=$('#alarmType').val();
-		
-	}
-	else
-	{
-
-		$('#alarmform').submit();
-
-	}
+	$.ajax({
+		url : 'alarm_insertNewAlarm',
+		method : 'POST',
+		data:{
+			'alarmNo':alarmNo,
+			'babyNo':babyNo,
+			'userNo':userNo,
+			'alarmTitle':alarmTitle,
+			'alarmType':alarmType,
+			'alarmDetail':alarmDetail,
+			'alarmAmount':alarmAmount,
+			'alarmTime':alarmTime,
+			'endTime':endTime
+		},
+		success(){
+			$(location).attr('href', './alarm_OpenCalendar');
+		}
+	});
+	
+	//$('#alarmform').submit();
+	//alarm_insertNewAlarm = action, post
+	/*
+		private int alarmNo;
+		private int babyNo;
+		private int userNo;
+		private String alarmTitle;		//메모
+		private int alarmType;			//카테고리 분류
+		private int alarmDetail;		//카테고리 세부 분류
+		private int alarmAmount;		//양 (모유 젖병 이유식 유축)
+		private String alarmTime;		//기록시작시간
+		private String endTime;			//기록종료시간
+	*/
 }
+
 
 $(document).ready(changeSelect());
 
@@ -43,7 +71,7 @@ function changeSelect()
 		detail+='<select class="form-control" id="alarmDetail" name="alarmDetail"><option value="1">왼쪽</option><option value="2">오른쪽</option></select>';
 		end+='<div class="input-group date form_datetime_end col-xs-10 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">';
 		end+='<span class="input-group-addon">종료시간</span>';
-		end+='<input class="form-control " type="text" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
+		end+='<input class="form-control " type="text" id="endTime" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
 		end+='<span class="input-group-addon"><span class="fa fa-calendar"></span></span></div>';
 		$("#timesSpan").text("시작시간");
 		$("#detail").html(detail);
@@ -59,7 +87,7 @@ function changeSelect()
 		amount+='<input class="form-control " id="alarmAmount" name="alarmAmount"  type="number" value="0">';
 		end+='<div class="input-group date form_datetime_end col-xs-10 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">';
 		end+='<span class="input-group-addon">종료시간</span>';
-		end+='<input class="form-control " type="text" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
+		end+='<input class="form-control " type="text" id="endTime" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
 		end+='<span class="input-group-addon"><span class="fa fa-calendar"></span></span></div>';
 		$("#timesSpan").text("시작시간");
 		$("#detail").html(detail);
@@ -73,7 +101,7 @@ function changeSelect()
 		amount+='<input class="form-control " id="alarmAmount" name="alarmAmount"  type="number" value="0">';
 		end+='<div class="input-group date form_datetime_end col-xs-10 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">';
 		end+='<span class="input-group-addon">종료시간</span>';
-		end+='<input class="form-control " type="text" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
+		end+='<input class="form-control " type="text" id="endTime" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
 		end+='<span class="input-group-addon"><span class="fa fa-calendar"></span></span></div>';
 		$("#timesSpan").text("시작시간");
 		$("#detail").html(detail);
@@ -89,7 +117,7 @@ function changeSelect()
 		amount+='<input class="form-control " id="alarmAmount" name="alarmAmount"  type="number" value="0">';
 		end+='<div class="input-group date form_datetime_end col-xs-10 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">';
 		end+='<span class="input-group-addon">종료시간</span>';
-		end+='<input class="form-control " type="text" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
+		end+='<input class="form-control " type="text" id="endTime"  name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
 		end+='<span class="input-group-addon"><span class="fa fa-calendar"></span></span></div>';
 		$("#timesSpan").text("시작시간");
 		$("#detail").html(detail);
@@ -117,7 +145,7 @@ function changeSelect()
 	case "7" :
 		end+='<div class="input-group date form_datetime_end col-xs-10 data-date-format="yyyy.mm.dd/hh:ii:00" data-link-field="dtp_input1">';
 		end+='<span class="input-group-addon">종료시간</span>';
-		end+='<input class="form-control " type="text" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
+		end+='<input class="form-control " type="text" id="endTime" name="endTime" value="'+$("#nowAlarm").val()+'" readonly>';
 		end+='<span class="input-group-addon"><span class="fa fa-calendar"></span></span></div>';
 		$("#timesSpan").text("시작시간");
 		$("#detail").html(detail);
