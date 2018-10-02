@@ -286,13 +286,12 @@ public class WeatherController {
 		address = addressCode(address);
 		System.out.println(address);
 
-		String add[] = weather.getLocation().split(" ");
-		
+		String add[] = address.split(" ");
 		CityMapper cmapper = sqlSession.getMapper(CityMapper.class);
 		City city = new City();
 		if (add.length > 1) {
-			city = cmapper.selectCityName(add[1]);
 			System.out.println(add[1]);
+			city = cmapper.selectCityName(add[1]);
 		} else city = cmapper.selectCityNM(weather.getLocation());
 		//주소를 DB에서 검색해서 지역코드로 변환
 		System.out.println(city);
@@ -351,8 +350,14 @@ public class WeatherController {
 			}
 			if (add.length > 2) {
 				for (int i = 2; i < add.length; i++) {
-					address += " " + add[i];
-				}
+					if (address.indexOf("고양시") > -1 || address.indexOf("성남시") > -1 || address.indexOf("수원시") > -1 || address.indexOf("안산시") > -1
+							|| address.indexOf("안양시") > -1 || address.indexOf("용인시") > -1 || address.indexOf("청주시") > -1 || address.indexOf("포항시") > -1) {
+						if (i==2) {
+							address += add[i];
+						}	
+						else address += " " + add[i];
+					} else address += " " + add[i];
+				}					
 			}
 		} else {
 			if (add[0].contains("서울") || add[0].contains("서울시") || add[0].contains("서울특별시")) {

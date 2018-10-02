@@ -24,8 +24,8 @@
 		var sidebarOn=true;
 		function sidebar_animation(){
 			  if (sidebarOn) {
-				  sub_menu.style.width="30px";
-				  sub_menu.style.height="30px";
+				  sub_menu.style.width="35px";
+				  sub_menu.style.height="35px";
 			      jQuery('#menu_wrap > ul').hide();
 			      jQuery('#menu_wrap > div').hide();
 			      jQuery('#menu_wrap > form').hide();
@@ -53,6 +53,8 @@
 				Addr:document.querySelector('#hospitalAddr').value
 		}
 	}
+	//중복실행 방지
+	var isRun = false;
 	// 지도를 담을 자료형
 	var map='';
 	// 위치정보용 마커
@@ -139,6 +141,11 @@
 	
 	//비동기로 서버에 병원정보 요청하는 함수
 	function getHostpital(lat,lon){
+		if (isRun == true) {
+			return;
+		}
+		isRun = true;
+		
 		$.ajax({
 			url:"hospital_myLocation",
 			type:"get",
@@ -155,6 +162,7 @@
 				result += "<div>거리 : " + data[i].distance + "km</div>";
 				result += "<div>운영시간 : " + data[i].time + "</div>";
 				result += "</p>";
+				isRun  = false;
 			}
 				document.querySelector('#placesList').innerHTML=result;
 					
@@ -173,6 +181,10 @@
 	
 	//비동기로 서버에 병원정보 요청하는 함수
 	function getBabiesHostpital(lat,lon){
+		if (isRun == true) {
+			return;
+		}
+		isRun = true;
 		$.ajax({
 			url:"hospital_baby",
 			type:"get",
@@ -189,6 +201,7 @@
 				result += "<div>거리 : " + data[i].distance + "km</div>";
 				result += "<div>운영시간 : " + data[i].time + "</div>";
 				result += "</p>";
+				isRun  = false;
 			}
 				document.querySelector('#placesList').innerHTML=result;
 					

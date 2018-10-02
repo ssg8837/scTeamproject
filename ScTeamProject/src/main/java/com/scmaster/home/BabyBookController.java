@@ -1,7 +1,7 @@
 package com.scmaster.home;
 
-
 import java.io.File;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,19 +40,36 @@ public class BabyBookController {
 	@RequestMapping(value = "/babyBook", method = RequestMethod.GET)
 	public String joinForm(Model model) {
 		
-		BabyBookMapper mapper = sqlSession.getMapper(BabyBookMapper.class);
-		List<BabyBook> list = mapper.selectList();
+		Calendar today = Calendar.getInstance();
 		
-		for(int i=0;i<list.size();i++) {
-			String s1 = list.get(i).getRegdate().substring(0,10);
-			list.get(i).setRegdate(s1);	
+		String smonth;
+		if(today.get(Calendar.MONTH)+1>=10) {
+			smonth = today.get(Calendar.YEAR)+"-"+(today.get(Calendar.MONTH)+1);
+		}else{
+			smonth = today.get(Calendar.YEAR)+"-0"+(today.get(Calendar.MONTH)+1);
 		}
 		
-			
+		BabyBookMapper mapper = sqlSession.getMapper(BabyBookMapper.class);
+		List<BabyBook> list = mapper.selectListByMonth(smonth);
+		
 		model.addAttribute("list", list);
 		
+		//프로필사진 불러오기
+		Object loginNo=httpSession.getAttribute("loginNo");
+		MainMapper mapperM=sqlSession.getMapper(MainMapper.class);
+		BS_User user=mapperM.myAccount((Integer)loginNo);
+		model.addAttribute("user",user);
 		
 		return "babyBook";
+	}
+	
+	@RequestMapping(value = "/selectBabyBookByMonth", method = RequestMethod.GET)
+	public @ResponseBody List<BabyBook> selectBabyBookByMonth(String smonth) {
+		
+		BabyBookMapper mapper = sqlSession.getMapper(BabyBookMapper.class);
+		List<BabyBook> list = mapper.selectListByMonth(smonth);
+		
+		return list;
 	}
 	
 	@RequestMapping(value = "/registerBabyBook", method = RequestMethod.POST)

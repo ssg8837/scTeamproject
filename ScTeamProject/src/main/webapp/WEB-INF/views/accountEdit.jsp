@@ -157,7 +157,7 @@
 		          	<!-- 프로필 사진 -->
 		       	  	<div id="image_section">
 		       	  		<c:if test='${sessionScope.loginImg != null }'>
-			          	<img src="getUserImage?userNo=${user.userNo}">
+			          	<img src="getUserImage?userNo=${sessionScope.loginNo}">
 			          	</c:if>
 			          	<c:if test='${sessionScope.loginImg == null }'>
 			          	<img src="./resources/image/anonymous.png">

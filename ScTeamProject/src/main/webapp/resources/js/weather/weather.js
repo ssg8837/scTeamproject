@@ -34,7 +34,12 @@
 		//검색버튼의 이벤트를 감지하여 날씨정보를 얻어오는 이벤트와 함수
 		$(".locationSearch").on('click', function() {
 			var search = $('.weather_search').val();
-			
+			if ((search.indexOf("고양시") > -1 || search.indexOf("성남시") > -1 || search.indexOf("수원시") > -1 || search.indexOf("안산시") > -1
+					|| search.indexOf("안양시") > -1 || search.indexOf("용인시") > -1 || search.indexOf("청주시") > -1 || search.indexOf("포항시") > -1)
+					&& search.indexOf("구") < 0) {
+					alert("구까지 입력해주세요");
+					return;
+			}
 			//주소 입력 받은 것을 위도 경도 변환 function
 			addressSearch(search , changedAddr);
 			function changedAddr(result, status) {

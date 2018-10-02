@@ -178,7 +178,7 @@
               
               <c:forEach var="item" items="${snsList}" varStatus="sta">
               
-				   <div class="col-lg-6 col-md-6 col-sm-6 mb">
+				   <div class="col-lg-8 col-md-8 col-sm-8 mb">
 	                <div class="content-panel pn">
 	                <div >
 	                <c:if test="${item.photoCount!=0 }">
