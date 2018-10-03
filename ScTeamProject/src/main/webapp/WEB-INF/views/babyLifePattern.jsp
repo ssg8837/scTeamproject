@@ -300,7 +300,7 @@
 			                ticks: {
 			                    beginAtZero: true,
 			                    fontSize: 9,
-			                    stepSize: 1
+			                    stepSize: 10
 			                }
 			              }]
 			        },	    

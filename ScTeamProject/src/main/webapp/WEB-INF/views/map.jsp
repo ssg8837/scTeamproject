@@ -153,9 +153,9 @@
 			<div class="row mt">
 				<div class="col-lg-12">
 					<div class="map_wrap"><!-- 지도 레이아웃을 위한 Wrapper  -->
-						<input id="hospitalAddr" type="hidden" value="${hospitalAddr}"/><!-- 예방접종 예방 병원 객채  -->
-						<input id="hospitalName" type="hidden" value="${hospitalName}"/><!-- 예방접종 예방 병원 객채  -->
-						<input id="hospitalTel" type="hidden" value="${hospitalTel}"/><!-- 예방접종 예방 병원 객채  -->
+						<input id="hospitalAddr" type="hidden" value="${hospital.address}"/><!-- 예방접종 예방 병원 객채  -->
+						<input id="hospitalName" type="hidden" value="${hospital.name}"/><!-- 예방접종 예방 병원 객채  -->
+						<input id="hospitalTel" type="hidden" value="${hospital.phone}"/><!-- 예방접종 예방 병원 객채  -->
 						<!-- 병원선택 -->
 						<div class="menubar">
 							<ul>

@@ -37,16 +37,20 @@
 	
 	function hospitalOutput(resp){
 		var result = '<thead><tr><th>병/의원명</th><th>전화번호</th><th>주소</th></tr></thead>';
-			
 			result += '<tbody>';
+			
 			$.each(resp.vhList,function(index,item){
-				result += '<tr onclick="javascript:sendHospital(';
-				result += "'"+item.orgAddr+"'"+')"><td>'+item.orgnm+'</td>';
+				var name = "'" + item.orgnm + "'";
+				var addr = "'" + item.orgAddr + "'";
+				var tel = "'" + item.orgTlno + "'";
+				
+				result +='<tr onclick="javascript:sendHospital('+name+','+addr+','+tel+');">';
+				result += '<td>'+item.orgnm+'</td>';
 				result += '<td>'+item.orgTlno+'</td>';
 				result += '<td id="hospitalAddr">'+item.orgAddr+'</td></tr>';
 			});
 			result += '</tbody>';
-		
+			
 		
 		$('#vaccineHospital').html(result);
 		
@@ -68,6 +72,11 @@
 		var sggCd = $('#secondCity').val();
 		var page = p+1;
 		
+		if(sggCd==null){
+			alert('시/군/구 를 선택해주세요');
+			return;
+		}
+		
 		$.ajax({
 			url:'Searchhospital',
 			method:'get',
@@ -76,10 +85,9 @@
 		});
 	}
 	
-	function sendHospital(addr){
-		alert(addr);
+	function sendHospital(name, addr, tel){
 		
-		/* location.href='sendHospital?VaccineHospitalhospital='+addr; */
+		location.href='sendHospital?orgnm='+name+'&orgTlno='+tel+'&orgAddr='+addr;
 	}; 
 
 </script>
@@ -152,23 +160,9 @@
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
-	          	<p class="centered"><a href="openAccountEdit">
-	          		<c:if test='${sessionScope.loginImg != null }'>
-		          	<img src="getUserImage?userNo=${sessionScope.loginNo}" class="img-circle" width="80" height="80">
-		          	</c:if>
-		          	<c:if test='${sessionScope.loginImg == null }'>
-		          	<img src="./resources/image/anonymous.png" class="img-circle" width="80" height="80">
-		          	</c:if>
-	          	</a></p>
+	          	<p class="centered"><a href="profile.html"><img src="./resources/image/anonymous.png" class="img-circle" width="80"></a></p>
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
-	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
-        		<li class="sub-menu">
-	            <a href="openNewBaby">
-	              <i class="fa fa-heart fa_left"></i>
-	              <span>아이 정보</span>
-	            </a>
-	          </li>
 	          <li class="sub-menu">
 	            <a href="gotoGrow">
 	              <i class="fa fa-bar-chart fa_left"></i>
@@ -181,25 +175,14 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
+	         
 	          <li class="sub-menu">
-	            <a href="openSNS">
-	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
-	              </a>
-	          </li>
-	           <li class="sub-menu">
-	            <a href="babyBook">
-	              <i class="fa fa-book fa_left"></i>
-	              <span>다이어리</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="#">
+	            <a class="active" href="#">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>예방접종</span>
 	            </a>
 	            <ul class="sub">
-              		<li><a href="vaccineForm">질병 및 예방접종 조회</a></li>
+              		<li class="active"><a href="vaccineForm">질병 및 예방접종 조회</a></li>
              		<li><a href="vaccineFormForHospital">국가예방접종 의료기관</a></li>
               	</ul>
 	          </li>
@@ -211,9 +194,27 @@
 	              </a>
 	          </li>
 	          <li class="sub-menu">
-	            <a href="weather_Test">
+	            <a href="hospital_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
+	              </a>
+	          </li>
+	           <li class="sub-menu">
+	            <a href="babyBook">
+	              <i class="fa fa-book fa_left"></i>
+	              <span>다이어리</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="babyBookForm">
+	              <i class="fa fa-users fa_left"></i>
+	              <span>SNS</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="babyBookForm">
+	              <i class="fa fa-edit fa_left"></i>
+	              <span>게시판</span>
 	              </a>
 	          </li>
           </ul>

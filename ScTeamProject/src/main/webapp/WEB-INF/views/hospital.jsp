@@ -35,7 +35,7 @@
 					$('.location').html(result);
 				},
 				error:function(request,status,error){
-			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			        //alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 				}
 				});
 			});
@@ -66,7 +66,7 @@
 					$('.hospitals').html(result);
 				},
 				error:function(data){
-					alert('컨트롤러 통신 에러');
+					//alert('컨트롤러 통신 에러');
 				}
 			});
 		});

@@ -204,7 +204,7 @@
 
 		  <!--script for this page-->
 		<script src="./resources/js/util/check_byte.js"></script>
-	    <script src="./resources/js/home/bell.js"></script>
+	   
 	    
 	    <script src="./resources/assets/js/jquery.scrolly.min.js"></script>
 		<script src="./resources/assets/js/jquery.scrollex.min.js"></script>

@@ -164,13 +164,19 @@ public class VaccineControllerForHospital{
 	    return map;
 	}
 	
+	
 	///도현씨 보세요 호엥ㅇ에에에에엥
 	@RequestMapping(value = "/sendHospital", method = RequestMethod.GET)
-	public String sendHospital(String addr){
+	public String sendHospital(String orgAddr, String orgnm, String orgTlno,Model model){
+		Hospital hospital =new Hospital();
+		hospital.setAddress(orgAddr);
+		hospital.setName(orgnm);
+		hospital.setPhone(orgTlno);
 		System.out.println("호에에엥에엥ㅇㅇ");
-		System.out.println(addr);
-	
-	    return "redirect:vaccineFormForHospital";
+		System.out.println(hospital);
+		
+		model.addAttribute("hospital", hospital);
+	    return "map";
 	}
 	
 	

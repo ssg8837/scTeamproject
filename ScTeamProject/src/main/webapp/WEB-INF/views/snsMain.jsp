@@ -163,7 +163,7 @@
              
               <!--  Blog Panel -->
               <c:if test="${fn:length(snsList) ==0 }">
-	              <div class="col-lg-6 col-md-6 col-sm-6 mb">
+	              <div class="col-lg-8 col-md-8 col-sm-8 mb">
 	                <div class="content-panel pn">
 	                  <div id="sns-bg">
 	                    <div class="sns-title">올라온 글이 없습니다.</div>

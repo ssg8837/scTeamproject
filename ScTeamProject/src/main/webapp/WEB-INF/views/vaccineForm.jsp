@@ -19,12 +19,22 @@
 		
 		var result = '<h4>'+diseaseName+'</h4>';
 			result += '<hr />';
-			result += '<input type="radio" id="checkN" class="vaccineCK" name="vaccineCK" value="N" checked="checked" onclick="javascript:deleteDate()"><span class="vaccineCK_check">미접종</span>';
-			result += '&nbsp;&nbsp;<input type="radio" id="checkY" class="vaccineCK" name="vaccineCK" value="Y" onclick="javascript:insertDate()"><span class="vaccineCK_check">접종</span> ';
-			result += '<br /><div id="forCheckdate"></div><br /> ';
-			result += '<p>메모</p><input id="memo" type="text"><br /><br />';
-			result += '<input id="registerbtn" type="button" value="확인" onclick="javascript:clickRegister()">';
-			result += '<input id="cancelbtn" type="button" value="취소" onclick="javascript:clickCancle()">';
+			
+	         result += '<div class="switch">';
+	         result += '<input type="radio" id="checkN" class="vaccineCK switch-input" name="vaccineCK" value="N" checked="checked"><label for="checkN" class="switch-label switch-label-off" onclick="javascript:deleteDate()">미접종</label>';
+	         result += '<input type="radio" id="checkY" class="vaccineCK switch-input" name="vaccineCK" value="Y"><label for="checkY" class="switch-label switch-label-on" onclick="javascript:insertDate()">접종</label>';
+	         result += '<span class="switch-selection"></span>';
+	         result += '</div>';
+	         result += '<div id="forCheckdate"><p>접종일</p><input id="checkdate" type="date" disabled="disabled"></div><br /> ';
+
+	         result += '<p>메모</p><input id="memo" type="text"><br /><br />';
+	         
+	         result += '<div class="modalBTN">';
+	         result += '<button id="registerbtn" type="button" class="btn btn-info" onclick="javascript:clickRegister()">확인</button>';
+	         result += '&nbsp&nbsp<button id="cancelbtn" type="button" class="btn btn-info" onclick="javascript:clickCancle()">취소</button>';
+	         result += '</div>';
+			
+			
 			result += '<input id="babyNo" type="hidden" value="'+babyNo+'">';
 			result += '<input id="diseaseNum" type="hidden" value="'+diseaseNum+'">';
 			result += '<input id="vaccineType" type="hidden" value="'+vaccineType+'">';

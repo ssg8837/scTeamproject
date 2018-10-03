@@ -252,7 +252,11 @@ public class AlarmController {
     	            	event.setColor("#9e80ad");
     	            	break;
     	            }
-    	            event.setTitle(str+" [ "+(mainMapper.selectBaby(item.getBabyNo()).getBabyName())+" ] "+item.getAlarmTitle());
+    	            String title=item.getAlarmTitle();
+    	            if(title!=null)
+    	            	event.setTitle(str+" [ "+(mainMapper.selectBaby(item.getBabyNo()).getBabyName())+" ] "+item.getAlarmTitle());
+    	            else
+    	            	event.setTitle(str+" [ "+(mainMapper.selectBaby(item.getBabyNo()).getBabyName())+" ] ");
     	            event.setStart(item.getAlarmTime());
     	            event.setId(Integer.toString(item.getAlarmNo()));
     	            events.add(event);
