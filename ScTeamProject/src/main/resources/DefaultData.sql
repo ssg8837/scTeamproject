@@ -14,128 +14,127 @@ INSERT INTO BS_BABY VALUES(1,0,'F','2017-01-01','김이나','A');
 /* INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES (); */
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01',         51,        3.5,     34.2,       0,    NULL, '2015-08-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01',         51,        3.5,     34.2,       0,    NULL, '2015-08-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       54.8,        4.8,     37.2,       1,    NULL, '2015-09-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       54.8,        4.8,     37.2,       1,    NULL, '2015-09-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       59.1,        5.9,     39.6,       2,   16.89, '2015-10-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       59.1,        5.9,     39.6,       2,   16.89, '2015-10-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       61.2,        6.8,     40.9,       3,    NULL, '2015-11-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       61.2,        6.8,     40.9,       3,    NULL, '2015-11-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         64,        7.1,       42,       4,    NULL, '2015-12-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         64,        7.1,       42,       4,    NULL, '2015-12-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         66,          8,     43.5,       5,    NULL, '2016-01-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         66,          8,     43.5,       5,    NULL, '2016-01-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       68.9,        8.2,     43.9,       6,    NULL, '2016-02-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       68.9,        8.2,     43.9,       6,    NULL, '2016-02-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       69.9,        8.5,     44.4,       7,    NULL, '2016-03-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       69.9,        8.5,     44.4,       7,    NULL, '2016-03-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         71,        9.1,     44.8,       8,    NULL, '2016-04-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         71,        9.1,     44.8,       8,    NULL, '2016-04-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       72.8,        9.3,     45.2,       9,    NULL, '2016-05-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       72.8,        9.3,     45.2,       9,    NULL, '2016-05-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       74.1,        9.5,       46,      10,    NULL, '2016-06-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       74.1,        9.5,       46,      10,    NULL, '2016-06-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       75.1,       10.2,     46.5,      11,    NULL, '2016-07-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       75.1,       10.2,     46.5,      11,    NULL, '2016-07-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       76.5,       10.5,     46.9,      12,    NULL, '2016-08-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       76.5,       10.5,     46.9,      12,    NULL, '2016-08-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       77.3,       10.6,       47,      13,    NULL, '2016-09-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       77.3,       10.6,       47,      13,    NULL, '2016-09-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       78.5,       10.7,     47.2,      14,    NULL, '2016-10-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       78.5,       10.7,     47.2,      14,    NULL, '2016-10-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         80,       10.7,     47.5,      15,    NULL, '2016-11-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         80,       10.7,     47.5,      15,    NULL, '2016-11-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       81.2,       10.9,     47.6,      16,    NULL, '2016-12-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       81.2,       10.9,     47.6,      16,    NULL, '2016-12-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         82,         11,     47.7,      17,    NULL, '2017-01-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         82,         11,     47.7,      17,    NULL, '2017-01-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       83.4,       11.4,     47.9,      18,    NULL, '2017-02-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       83.4,       11.4,     47.9,      18,    NULL, '2017-02-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       84.9,       11.6,       48,      19,    NULL, '2017-03-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       84.9,       11.6,       48,      19,    NULL, '2017-03-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         85,       11.8,     48.2,      20,    NULL, '2017-04-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         85,       11.8,     48.2,      20,    NULL, '2017-04-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       86.1,       11.9,     48.3,      21,    NULL, '2017-05-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       86.1,       11.9,     48.3,      21,    NULL, '2017-05-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       87.6,       12.3,     48.5,      22,    NULL, '2017-06-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       87.6,       12.3,     48.5,      22,    NULL, '2017-06-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       88.3,       12.5,     48.7,      23,    NULL, '2017-07-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       88.3,       12.5,     48.7,      23,    NULL, '2017-07-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       89.1,       12.8,     48.9,      24,   16.12, '2017-08-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       89.1,       12.8,     48.9,      24,   16.12, '2017-08-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       90.2,       13.1,       49,      25,    16.1, '2017-09-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       90.2,       13.1,       49,      25,    16.1, '2017-09-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       91.1,       13.4,     49.1,      26,   16.15, '2017-10-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       91.1,       13.4,     49.1,      26,   16.15, '2017-10-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         92,       13.6,     49.2,      27,   16.07, '2017-11-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         92,       13.6,     49.2,      27,   16.07, '2017-11-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         94,       13.8,     49.3,      28,   15.62, '2017-12-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         94,       13.8,     49.3,      28,   15.62, '2017-12-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         95,       13.8,     49.3,      29,   15.29, '2018-01-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         95,       13.8,     49.3,      29,   15.29, '2018-01-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       95.6,       13.9,     49.4,      30,   15.21, '2018-02-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       95.6,       13.9,     49.4,      30,   15.21, '2018-02-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         96,         14,       50,      31,   15.19, '2018-03-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         96,         14,       50,      31,   15.19, '2018-03-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       96.5,       14.2,     50.3,      32,   15.25, '2018-04-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       96.5,       14.2,     50.3,      32,   15.25, '2018-04-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',       97.1,       14.5,     50.5,      33,   15.38, '2018-05-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',       97.1,       14.5,     50.5,      33,   15.38, '2018-05-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         98,         15,       51,      34,   15.62, '2018-06-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         98,         15,       51,      34,   15.62, '2018-06-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',         99,         16,       51.5,      35,   15.62, '2018-07-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',         99,         16,       51.5,    35,   15.62, '2018-07-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',        110,         18,       52,      36,   14.88, '2018-08-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',        110,         18,       52,      36,   14.88, '2018-08-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',        111,         18,     52.2,      37,   14.61, '2018-09-01 00:00:00.0');
-INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(41,      0, '김하나',      'F',          '2015-08-01 00:00:00.0',        112,       18.1,     52.3,      38,   14.43, '2018-10-01 00:00:00.0');
+(41,      0, '김하나',      'F',          '2015-08-01  ',        111,         18,     52.2,      37,   14.61, '2018-09-01  ');
 
 
 
 
 
+
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',         40,         3,     30,        0,    NULL, '2017-01-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',         40,         3,     30,        0,    NULL, '2017-01-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       41.2,       3.4,     30.2,      1,    NULL, '2017-02-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       41.2,       3.4,     30.2,      1,    NULL, '2017-02-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       42.5,       4.6,     30.3,      2,    NULL, '2017-03-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       42.5,       4.6,     30.3,      2,    NULL, '2017-03-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       43.7,       5.8,     30.5,      3,    NULL, '2017-04-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       43.7,       5.8,     30.5,      3,    NULL, '2017-04-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       44.5,       6.9,     30.7,      4,    NULL, '2017-05-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       44.5,       6.9,     30.7,      4,    NULL, '2017-05-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       45.3,       7.3,     30.9,      5,    NULL, '2017-06-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       45.3,       7.3,     30.9,      5,    NULL, '2017-06-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       46.1,       8.5,     31.1,      6,    NULL, '2017-07-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       46.1,       8.5,     31.1,      6,    NULL, '2017-07-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       47.6,       9.8,     31.3,      7,   NULL, '2017-08-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       47.6,       9.8,     31.3,      7,   NULL, '2017-08-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       48.2,       10.1,    31.5,      8,    NULL, '2017-09-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       48.2,       10.1,    31.5,      8,    NULL, '2017-09-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       49.6,       11.4,    31.6,      9,   NULL, '2017-10-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       49.6,       11.4,    31.6,      9,   NULL, '2017-10-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       50.4,       12.6,    31.8,      10,  NULL, '2017-11-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       50.4,       12.6,    31.8,      10,  NULL, '2017-11-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       51.3,       13.8,    32,        11,   NULL, '2017-12-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       51.3,       13.8,    32,        11,   NULL, '2017-12-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       52.8,       14.8,    32.2,      12,   NULL, '2018-01-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       52.8,       14.8,    32.2,      12,   NULL, '2018-01-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       53.4,       15.9,    32.3,      13,   NULL, '2018-02-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       53.4,       15.9,    32.3,      13,   NULL, '2018-02-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       54.9,       16,      32.4,      14,   NULL, '2018-03-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       54.9,       16,      32.4,      14,   NULL, '2018-03-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       55.2,       17.2,    32.6,      15,   NULL, '2018-04-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       55.2,       17.2,    32.6,      15,   NULL, '2018-04-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       56.4,       18.5,    32.8,      16,   NULL, '2018-05-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       56.4,       18.5,    32.8,      16,   NULL, '2018-05-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       57.3,       20,      32.9,      17,   NULL, '2018-06-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       57.3,       20,      32.9,      17,   NULL, '2018-06-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       58.9,       21.2,    33,        18,   NULL, '2018-07-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       58.9,       21.2,    33,        18,   NULL, '2018-07-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       59.3,       22.6,    33.2,      19,   NULL, '2018-08-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       59.3,       22.6,    33.2,      19,   NULL, '2018-08-01  ');
 INSERT INTO GROW (BABYNO,USERNO,BABYNAME,BABYGENDER,BABYBIRTH,GROWHEIGHT,GROWWEIGHT,GROWHEAD,BABYAGE,GROWBMI,GROWREGDATE) VALUES
-(42,      0, '김이나',      'F',          '2017-01-01 00:00:00.0',       60.8,       23.1,    33.3,      20,   NULL, '2018-09-01 00:00:00.0');
+(42,      0, '김이나',      'F',          '2017-01-01  ',       60.8,       23.1,    33.3,      20,   NULL, '2018-09-01  ');
 

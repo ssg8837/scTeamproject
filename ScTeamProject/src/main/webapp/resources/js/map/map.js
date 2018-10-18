@@ -6,44 +6,59 @@
 			console.log('예방병원 객채받음');
 			console.log(hospital);
 			selectedHospital(hospital.Addr);
+			sub_menu.style.width="32px";
+			sub_menu.style.height="32px";
+			jQuery('#menu_wrap > ul').hide();
+			jQuery('#menu_wrap > div').hide();
+			jQuery('#menu_wrap > form').hide();
 		}else{
 			//접속위체의 좌표값을 통해 초기 병원 정보를 가져옵니다.
 			console.log('초기화');
 			init();
 		}
+		//현재위치 정보 버튼 클릭 이벤트
 		resetPosition.addEventListener('click',init)
-		
-		
-		var sub_menu=document.querySelector('#menu_wrap')
+		//서브 메뉴 클릭 이벤트
 		sub_menu_icon.addEventListener('click',sidebar_animation);
-		
+		//카테고리 클릭 이벤트 
 		allHospital.addEventListener('click',init);
 		babiesHospital.addEventListener('click',init_baby);
 		
 		//sidebar 애니메이션
-		var sidebarOn=true;
+		var sidebarOn=false;
 		function sidebar_animation(){
-			  if (sidebarOn) {
-				  sub_menu.style.width="35px";
-				  sub_menu.style.height="35px";
-			      jQuery('#menu_wrap > ul').hide();
-			      jQuery('#menu_wrap > div').hide();
-			      jQuery('#menu_wrap > form').hide();
-			      jQuery("#menu_wrap").addClass("submenu-closed");
-			      sidebarOn=false;
-			    } else {
-			    	sub_menu.style.width="240px";
-			    	sub_menu.style.height="370px";
-			    	jQuery('#menu_wrap > ul').show();
-			    	jQuery('#menu_wrap > div').show();
-			    	jQuery('#menu_wrap > form').show();
-			    	jQuery("#menu_wrap").removeClass("submenu-closed");
-			      sidebarOn=true;
-			    }
+			if (sidebarOn) {
+				sub_menu.style.width="32px";
+				sub_menu.style.height="32px";
+				jQuery('#menu_wrap > ul').hide();
+				jQuery('#menu_wrap > div').hide();
+				jQuery('#menu_wrap > form').hide();
+				jQuery("#menu_wrap").addClass("submenu-closed");
+				sidebarOn=false;
+			} else {
+				sub_menu.style.width="240px";
+				sub_menu.style.height="370px";
+				jQuery('#menu_wrap > ul').show();
+				jQuery('#menu_wrap > div').show();
+				jQuery('#menu_wrap > form').show();
+				jQuery("#menu_wrap").removeClass("submenu-closed");
+				sidebarOn=true;
+			}
 		}
-	
+		//지역변경 시 
+		daum.maps.event.addListener(map, 'maptypeid_changed', function() {
+			jQuery('#loading').show(); 
+		});
+		//로딩완료 시
+		/*daum.maps.event.addListener(map, 'tilesloaded', function() {
+			jQuery('#loading').hide(); 
+		});*/
+		daum.maps.event.addListener(map, 'bounds_changed', function() {
+			jQuery('#loading').hide(); 
+		});
 		
 	});//DOMContentLoaded 완료시 javascript 로드
+	
 	
 	//예방접종 페이지에서 객체가 넘어왔는지 확인
 	if(document.querySelector('#hospitalName').value || document.querySelector('#hospitalTel').value || document.querySelector('#hospitalAddr').value){
@@ -53,6 +68,9 @@
 				Addr:document.querySelector('#hospitalAddr').value
 		}
 	}
+	//메뉴 객체
+	var sub_menu=document.querySelector('#menu_wrap')
+	var sub_menu_icon=document.querySelector('.sub_menu_icon');
 	//중복실행 방지
 	var isRun = false;
 	// 지도를 담을 자료형
@@ -67,7 +85,6 @@
 	var resetPosition=document.querySelector('#getPostion');
 	// 좌료를 담을 자료형 선언
 	var lat ='',lon='';
-	var sub_menu_icon=document.querySelector('.sub_menu_icon');
 	// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 	var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	//아동 병원
@@ -96,6 +113,7 @@
 	//현재 위치정보 얻어오는 함수+병원정보 불러오는 함수
 	function init(){
 		myLocation(function (position){
+			jQuery('#loading').show(); 
 			getHostpital(position.coords.latitude,position.coords.longitude);
 			console.log(lat+","+lon);
 		})
@@ -104,6 +122,7 @@
 	//현재 위치정보 얻어오는 함수+아동 병원정보 불러오는 함수
 	function init_baby(){
 		myLocation(function (position){
+			jQuery('#loading').show(); 
 			getBabiesHostpital(position.coords.latitude,position.coords.longitude);
 			console.log(lat+","+lon);
 		})
@@ -111,6 +130,7 @@
 	
 	//현재 위치정보 콜백 함수
 	function myLocation(result){
+		jQuery('#loading').show(); 
 		removeMarker();
 		//html5의 navigator.geolocation을 이용하여 위치정보 얻어옵니다.
 		if (navigator.geolocation) { //위치정보 얻어오기에 성공시
@@ -145,6 +165,7 @@
 			return;
 		}
 		isRun = true;
+		jQuery('#loading').show();
 		
 		$.ajax({
 			url:"hospital_myLocation",
@@ -164,6 +185,7 @@
 				result += "</p>";
 				isRun  = false;
 			}
+				jQuery('#loading').show();
 				document.querySelector('#placesList').innerHTML=result;
 					
 				displayPlaces(data);
@@ -171,10 +193,11 @@
 	 			displayPagination(pagination);
 	 			
 	 			console.log(data);
+	 			jQuery('#loading').hide();
 		
 			},error:function(request,status,error){
-					/*alert("통신에러.")
-			        console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);*/ // 실패 시 처리
+					myLocation;
+			        console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 			}
 		});
 	}
@@ -185,6 +208,7 @@
 			return;
 		}
 		isRun = true;
+		jQuery('#loading').show();
 		$.ajax({
 			url:"hospital_baby",
 			type:"get",
@@ -210,10 +234,12 @@
 	 			displayPagination(pagination);
 	 			
 	 			console.log(data);
+	 			
+	 			jQuery('#loading').hide();
 		
 			},error:function(request,status,error){
-					/*alert("통신에러.")
-			        console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);*/ // 실패 시 처리
+				myLocation;
+			        console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 			}
 		});
 	}
@@ -259,6 +285,7 @@
 			alert('키워드를 입력해주세요!');
 			return false;
 		}
+		
 		transtoCrood(keyword);
 	}
 	
@@ -273,7 +300,7 @@
 			console.log(result);
 			// 정상적으로 검색이 완료됐으면 
 			if (status === daum.maps.services.Status.OK && result.length!=0) {
-
+				
 				var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 		           
 				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
@@ -312,11 +339,13 @@
 					infowindow.open(map, selectedmarker);  
 					});
 				}else{
+					jQuery('#loading').show();
 					getHostpital(result[0].y, result[0].x);
 				}
 		            
 			} else if(result.length==0){
 				alert("찾을수 없는 장소입니다. 상세하게 입력해주세요")
+				jQuery('#loading').hide();
 			}
 		});    
 		
@@ -325,12 +354,12 @@
 		
 	//넘겨받은 주소를 통해 지도에 위치정보를 표시합니다.
 	function selectedHospital(hospitalAddr){
+		jQuery('#loading').show();
 		transtoCrood(hospitalAddr);
 	}
 		
 	// 검색 결과 목록과 마커를 표출하는 함수입니다
 	function displayPlaces(data) {
-
 		var listEl = document.querySelector('#placesList'), 
 			menuEl = document.querySelector('#menu_wrap'),
 			fragment = document.createDocumentFragment(), 

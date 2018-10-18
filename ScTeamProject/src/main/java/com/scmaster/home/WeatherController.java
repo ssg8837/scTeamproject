@@ -290,8 +290,8 @@ public class WeatherController {
 		CityMapper cmapper = sqlSession.getMapper(CityMapper.class);
 		City city = new City();
 		if (add.length > 1) {
-			System.out.println(add[1]);
-			city = cmapper.selectCityName(add[1]);
+			System.out.println(add[0]+" "+add[1]);
+			city = cmapper.selectCityName(add[0]+" "+add[1]);
 		} else city = cmapper.selectCityNM(weather.getLocation());
 		//주소를 DB에서 검색해서 지역코드로 변환
 		System.out.println(city);

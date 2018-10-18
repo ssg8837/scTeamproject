@@ -83,16 +83,10 @@
 	          <li class="sub-menu">
 	            <a href="admin_sns">
 	              <i class="fa fa-calendar fa_left"></i>
-	              <span>SNS</span>
+	              <span>Baby+</span>
 	              </a>
 	          </li>
-	          <li class="sub-menu">
-	            <a href="#">
-	              <i class="fa fa-calendar fa_left"></i>
-	              <span>게시판</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
+	         	          <li class="sub-menu">
 	            <a href="admin_hospital">
 	              <i class="fa fa-medkit fa_left"></i>
 	              <span>병원 및 지역코드</span>

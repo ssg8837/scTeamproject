@@ -10,12 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.scmaster.mapper.AlarmMapper;
 import com.scmaster.mapper.MainMapper;
 import com.scmaster.mapper.SNSMapper;
-import com.scmaster.vo.BS_Alarm;
-import com.scmaster.vo.BS_Baby;
-import com.scmaster.vo.Bell;
 import com.scmaster.vo.Friend;
 import com.scmaster.vo.Kakao_Request;
 
@@ -27,7 +23,7 @@ public class KakaoController {
 	@RequestMapping(value = "/keyboard", method = RequestMethod.GET)
 	public String keyboard() {
 
-
+		System.out.println("ls");
 	    JSONObject jobjBtn = new JSONObject();
 	    jobjBtn.put("type", "text");
 

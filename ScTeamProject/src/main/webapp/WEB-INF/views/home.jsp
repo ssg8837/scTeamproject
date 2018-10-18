@@ -135,7 +135,7 @@
 										<img src="./resources/assets/images/pic04.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="openSNS" class="link">SNS</a></h3>
+										<h3><a href="openSNS" class="link">Baby+</a></h3>
 										<p>육아 정보가 필요하신가요? SNS를 통해 다른 부모님들과 교류하세요!</p>
 									</header>
 								</article>

@@ -83,13 +83,7 @@
 	          <li class="sub-menu">
 	            <a href="admin_sns">
 	              <i class="fa fa-calendar fa_left"></i>
-	              <span>SNS</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="#">
-	              <i class="fa fa-calendar fa_left"></i>
-	              <span>게시판</span>
+	              <span>Baby+</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">

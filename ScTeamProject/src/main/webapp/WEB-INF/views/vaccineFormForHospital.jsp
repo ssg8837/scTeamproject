@@ -44,7 +44,7 @@
 				var addr = "'" + item.orgAddr + "'";
 				var tel = "'" + item.orgTlno + "'";
 				
-				result +='<tr onclick="javascript:sendHospital('+name+','+addr+','+tel+');">';
+				result +='<tr style="cursor:pointer" onclick="javascript:sendHospital('+name+','+addr+','+tel+');">';
 				result += '<td>'+item.orgnm+'</td>';
 				result += '<td>'+item.orgTlno+'</td>';
 				result += '<td id="hospitalAddr">'+item.orgAddr+'</td></tr>';
@@ -175,6 +175,18 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
+	          <li class="sub-menu">
+	            <a href="babyBookForm">
+	              <i class="fa fa-users fa_left"></i>
+	              <span>Baby+</span>
+	              </a>
+	          </li>
+	         <li class="sub-menu">
+	            <a href="babyBook">
+	              <i class="fa fa-book fa_left"></i>
+	              <span>다이어리</span>
+	              </a>
+	          </li>
 	         
 	          <li class="sub-menu">
 	            <a class="active" href="#">
@@ -199,24 +211,8 @@
 	              <span>기상확인</span>
 	              </a>
 	          </li>
-	           <li class="sub-menu">
-	            <a href="babyBook">
-	              <i class="fa fa-book fa_left"></i>
-	              <span>다이어리</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="babyBookForm">
-	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
-	              </a>
-	          </li>
-	          <li class="sub-menu">
-	            <a href="babyBookForm">
-	              <i class="fa fa-edit fa_left"></i>
-	              <span>게시판</span>
-	              </a>
-	          </li>
+
+
           </ul>
         <!-- sidebar menu end-->
       </div>

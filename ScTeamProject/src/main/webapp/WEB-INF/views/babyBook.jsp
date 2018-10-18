@@ -245,7 +245,7 @@
 	          <li class="sub-menu">
 	            <a href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
+	              <span>Baby+</span>
 	              </a>
 	          </li>
 	          <li class="sub-menu">
@@ -289,7 +289,7 @@
       
       <section class="wrapper site-min-height">
         
-        <h3><i class="fa fa-angle-right"></i> 육아일기</h3>
+        <h3><i class="fa fa-angle-right"></i> 다이어리</h3>
         
         <input style="height:33px; float: left;" type="month" id="selectMonth" >
         &nbsp;&nbsp;&nbsp;<span style="font-size: 18px;"> * 날짜를 선택해주세요.</span>

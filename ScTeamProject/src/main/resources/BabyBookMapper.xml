@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM 
 			BABYBOOK
 		where userno = #{userno}
-		ORDER BY BOARDNUM
+		ORDER BY BOARDNUM desc
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="BabyBook">
@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE 
 				TO_CHAR(REGDATE, 'YYYY-MM') = #{smonth}
 			ORDER BY 
-				BOARDNUM
+				BOARDNUM desc
 	</select>
 	
 </mapper>

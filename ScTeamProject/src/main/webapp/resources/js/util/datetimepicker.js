@@ -14,7 +14,7 @@ $(function()
 	var rest=min%5;
 	if(rest!=0)
 	{
-		min=min+5-rest;
+		min=min-rest;
 	}
 	
 	var str=year+"-"+month+"-"+day+" "+hour+":"+min;

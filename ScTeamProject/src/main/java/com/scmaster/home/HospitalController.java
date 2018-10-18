@@ -183,8 +183,8 @@ public class HospitalController {
 	       hsptmapper.insertHspt(hspts.get(j));
 	    }
 	    return "성공";
-	}
-	
+	   	}
+
 	@RequestMapping(value = "/hospital_delete", method = RequestMethod.GET, produces = "text/html;charset=utf8")
 	public @ResponseBody String hospital_delete() 
 	{
@@ -231,9 +231,9 @@ public class HospitalController {
 					Element eElement = (Element) nNode;
 					String hpid = getTagValue("hpid", eElement);
 					String distance = getTagValue("distance", eElement);
-					/*if (Double.parseDouble(distance) > 3.0) {
+					if (Double.parseDouble(distance) > 15.0) {
 			               continue;
-			        }*/
+			        }
 					String address = getTagValue("dutyAddr", eElement);
 					String name = getTagValue("dutyName", eElement);
 					String divNam = getTagValue("dutyDivName", eElement);
@@ -280,7 +280,7 @@ public class HospitalController {
 			        }
 					distanceKiloMeter = distance(lat, lon, hlat, hlon);
 					hsptAll.get(i).setDistance(distanceKiloMeter+"");
-					if (distanceKiloMeter < 1.0) {
+					if (distanceKiloMeter < 5.0) {
 						hp.add(hsptAll.get(i));
 					}
 				}
@@ -345,9 +345,9 @@ public class HospitalController {
 					Element eElement = (Element) nNode;
 					String hpid = getTagValue("hpid", eElement);
 					String distance = getTagValue("distance", eElement);
-					/*if (Double.parseDouble(distance) > 5.0) {
+					if (Double.parseDouble(distance) > 30.0) {
 			               continue;
-			        }*/
+			        }
 					String address = getTagValue("dutyAddr", eElement);
 					String divNam = getTagValue("dutyDivName", eElement);
 					if (!divNam.equals("종합병원") && !divNam.equals("병원") && !divNam.equals("의원")) {
@@ -355,7 +355,7 @@ public class HospitalController {
 		            }
 					String name = getTagValue("dutyName", eElement);
 		            if (divNam.equals("병원") || divNam.equals("의원")) {
-		            	if (!name.contains("아동") || !name.contains("소아")) {
+		            	if (!name.contains("아동") && !name.contains("소아")) {
 		            		continue;
 		            	}
 		            }
@@ -389,7 +389,7 @@ public class HospitalController {
 				List<Hospital> hp = new ArrayList<Hospital>();
 				double distanceKiloMeter, hlat, hlon;
 				String divNam, name;
-				System.out.println("DB병원개수"+hsptAll.size());
+				System.out.println("소아DB병원개수"+hsptAll.size());
 				for (int i = 0; i < hsptAll.size(); i++) {
 					hlat = Double.parseDouble(hsptAll.get(i).getLatitude());
 					hlon = Double.parseDouble(hsptAll.get(i).getLongitude());
@@ -399,19 +399,20 @@ public class HospitalController {
 		            }
 					name = hsptAll.get(i).getName();
 		            if (divNam.equals("병원") || divNam.equals("의원")) {
-		            	if (!name.contains("아동") || !name.contains("소아")) {
+		            	if (!name.contains("아동") && !name.contains("소아")) {
 		            		continue;
 		            	}
 		            }
 					distanceKiloMeter = distance(lat, lon, hlat, hlon);
 					hsptAll.get(i).setDistance(distanceKiloMeter+"");
-					if (distanceKiloMeter < 3.0) {
+					if (distanceKiloMeter < 30.0) {
 						hp.add(hsptAll.get(i));
 					}
 				}
 				Collections.shuffle(hp);
-				for (int i = 0; i < 15; i++) {
+				for (int i = 0; i < hp.size(); i++) {
 					System.out.println(hp.get(i));
+					
 				}
 				for (int i = hp.size()-1; i > 0; i--) {
 					for (int j = 0; j < i; j++) {

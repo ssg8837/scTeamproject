@@ -35,6 +35,7 @@
 			<mapping path="/babyBook"/>
 			<mapping path="/openSNS"/>
 			<mapping path="/accountEdit"/>
+			<mapping path="/openAccountEdit"/>
 			
 			<beans:ref bean="LoginCheckInterceptor"/>
 		</interceptor>

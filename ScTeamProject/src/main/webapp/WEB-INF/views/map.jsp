@@ -106,7 +106,7 @@
 	          <li class="sub-menu">
 	            <a href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
+	              <span>Baby+</span>
 	              </a>
 	          </li>
 	           <li class="sub-menu">
@@ -171,7 +171,9 @@
 							<button id="getPostion">현재위치</button>
 						</div>		
 						<!-- 지도 객채를 담을 div 태그  -->
-						<div id="map"></div>
+						<div id="map">
+						<div id="loading"><img id="loading-image" src="./resources/image/loading.gif" alt="Loading..." /></div>
+						</div>
 						<!-- 매뉴 태그들 -->
 						<div id="menu_wrap" class="bg_white">
 							<img class="sub_menu_icon" src="./resources/image/menu-button.png"/><!-- 리스트 접기 아이콘 -->

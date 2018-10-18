@@ -69,7 +69,7 @@
         *********************************************************************************************************************************************************** -->
     <!--sidebar start-->
     <aside>
-       <div id="sidebar" class="nav-collapse ">
+      <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
        	 <ul class="sidebar-menu" id="nav-accordion">
         	<c:if test='${sessionScope.loginId != null }'>
@@ -84,7 +84,7 @@
 	          	<h5 class="centered">${sessionScope.loginNick }</h5>
 	          	<div class="centered"><button class="edit" onclick="location.href='openAccountEdit'">회원정보수정</button></div>
         	</c:if>
-        		<li class="sub-menu">
+        	  <li class="sub-menu">
 	            <a href="openNewBaby">
 	              <i class="fa fa-heart fa_left"></i>
 	              <span>아이 정보</span>
@@ -102,18 +102,7 @@
 	              <span>생활기록</span>
 	              </a>
 	          </li>
-	          <li class="sub-menu">
-	            <a href="openSNS">
-	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
-	              </a>
-	          </li>
-	           <li class="sub-menu">
-	            <a href="babyBook">
-	              <i class="fa fa-book fa_left"></i>
-	              <span>다이어리</span>
-	              </a>
-	          </li>
+	         
 	          <li class="sub-menu">
 	            <a href="#">
 	              <i class="fa fa-medkit fa_left"></i>
@@ -135,6 +124,18 @@
 	            <a href="weather_Test">
 	              <i class="fa fa-umbrella fa_left"></i>
 	              <span>기상확인</span>
+	              </a>
+	          </li>
+	           <li class="sub-menu">
+	            <a href="babyBook">
+	              <i class="fa fa-book fa_left"></i>
+	              <span>다이어리</span>
+	              </a>
+	          </li>
+	          <li class="sub-menu">
+	            <a href="openSNS">
+	              <i class="fa fa-users fa_left"></i>
+	              <span>SNS</span>
 	              </a>
 	          </li>
           </ul>
@@ -165,6 +166,7 @@
 			</table>
 			 --%>
 			</br>
+				<img id="weather_load" src="./resources/image/loading.gif">
 				<div class="weather"></div>
           </div>
         </div>

@@ -103,7 +103,7 @@ v<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	          <li class="sub-menu">
 	            <a href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
+	              <span>Baby+</span>
 	              </a>
 	          </li>
 	           <li class="sub-menu">

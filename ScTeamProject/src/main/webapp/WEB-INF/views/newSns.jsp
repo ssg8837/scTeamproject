@@ -103,7 +103,7 @@
 	          <li class="sub-menu">
 	            <a href="openSNS">
 	              <i class="fa fa-users fa_left"></i>
-	              <span>SNS</span>
+	              <span>Baby+</span>
 	              </a>
 	          </li>
 	           <li class="sub-menu">
